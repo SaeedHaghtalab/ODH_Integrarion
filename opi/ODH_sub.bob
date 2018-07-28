@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<display version="2.0.0">
+  <name>Display</name>
+  <width>210</width>
+  <height>190</height>
+  <widget type="group" version="2.0.0">
+    <name>ODH $(R)</name>
+    <width>210</width>
+    <height>190</height>
+    <font>
+      <font family="Source Sans Pro" style="BOLD" size="16.0">
+      </font>
+    </font>
+    <widget type="led" version="2.0.0">
+      <name>LED_LA</name>
+      <pv_name>$(P)-$(R):LA</pv_name>
+      <x>16</x>
+      <y>47</y>
+      <off_color>
+        <color name="Grid" red="169" green="169" blue="169">
+        </color>
+      </off_color>
+      <on_color>
+        <color name="MAJOR" red="252" green="13" blue="27">
+        </color>
+      </on_color>
+    </widget>
+    <widget type="led" version="2.0.0">
+      <name>LED_LB</name>
+      <pv_name>$(P)-$(R):LB</pv_name>
+      <x>16</x>
+      <y>69</y>
+      <off_color>
+        <color name="Grid" red="169" green="169" blue="169">
+        </color>
+      </off_color>
+      <on_color>
+        <color name="MAJOR" red="252" green="13" blue="27">
+        </color>
+      </on_color>
+    </widget>
+    <widget type="led" version="2.0.0">
+      <name>LED_OK</name>
+      <pv_name>$(P)-$(R):OK</pv_name>
+      <x>16</x>
+      <y>91</y>
+      <off_color>
+        <color name="Grid" red="169" green="169" blue="169">
+        </color>
+      </off_color>
+      <on_color>
+        <color name="MAJOR" red="252" green="13" blue="27">
+        </color>
+      </on_color>
+    </widget>
+    <widget type="led" version="2.0.0">
+      <name>LED_WARNING</name>
+      <pv_name>$(P)-$(R):Warning</pv_name>
+      <x>16</x>
+      <y>113</y>
+      <off_color>
+        <color name="Grid" red="169" green="169" blue="169">
+        </color>
+      </off_color>
+      <on_color>
+        <color name="MAJOR" red="252" green="13" blue="27">
+        </color>
+      </on_color>
+    </widget>
+    <widget type="led" version="2.0.0">
+      <name>LED_ALARM</name>
+      <pv_name>$(P)-$(R):Alarm</pv_name>
+      <x>16</x>
+      <y>135</y>
+      <off_color>
+        <color name="Grid" red="169" green="169" blue="169">
+        </color>
+      </off_color>
+      <on_color>
+        <color name="MAJOR" red="252" green="13" blue="27">
+        </color>
+      </on_color>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LB_LA</name>
+      <text>Level A</text>
+      <x>59</x>
+      <y>47</y>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LB_LB</name>
+      <text>Level B</text>
+      <x>59</x>
+      <y>69</y>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LB_OK</name>
+      <text>OK</text>
+      <x>59</x>
+      <y>91</y>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LB_WARNING</name>
+      <text>Warning</text>
+      <x>59</x>
+      <y>113</y>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LB_ALARM</name>
+      <text>Alarm</text>
+      <x>59</x>
+      <y>135</y>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_O2Level</name>
+      <pv_name>$(P)-$(R):O2Level</pv_name>
+      <x>111</x>
+      <y>11</y>
+      <width>40</width>
+      <precision>2</precision>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LB_O2LEVEL</name>
+      <text>O2 Level</text>
+      <x>11</x>
+      <y>11</y>
+      <width>90</width>
+    </widget>
+    <widget type="polyline" version="2.0.0">
+      <name>Polyline_1</name>
+      <x>1</x>
+      <y>37</y>
+      <width>167</width>
+      <height>5</height>
+      <line_color>
+        <color name="WHITE" red="255" green="255" blue="255">
+        </color>
+      </line_color>
+      <points>
+        <point x="0.0" y="0.0">
+        </point>
+        <point x="167.0" y="0.0">
+        </point>
+      </points>
+    </widget>
+  </widget>
+</display>

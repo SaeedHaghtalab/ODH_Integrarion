@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<display version="2.0.0">
+  <name>Display</name>
+  <width>1372</width>
+  <height>908</height>
+  <widget type="rectangle" version="2.0.0">
+    <name>Header Bar</name>
+    <width>1372</width>
+    <height>50</height>
+    <line_width>0</line_width>
+    <line_color>
+      <color red="0" green="0" blue="255" alpha="0">
+      </color>
+    </line_color>
+    <background_color>
+      <color name="PRIMARY-HEADER-BACKGROUND" red="151" green="188" blue="202">
+      </color>
+    </background_color>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>LB_HeaderBar</name>
+    <text>OXYGEN DEFICIENCY MONITOR</text>
+    <width>1372</width>
+    <height>50</height>
+    <font>
+      <font name="Header 1" family="Source Sans Pro" style="BOLD_ITALIC" size="36.0">
+      </font>
+    </font>
+    <horizontal_alignment>1</horizontal_alignment>
+    <vertical_alignment>1</vertical_alignment>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>group.HeCompBuilding</name>
+    <macros>
+      <P>HCB-ACH:ODH-O2iM</P>
+    </macros>
+    <x>10</x>
+    <y>70</y>
+    <width>656</width>
+    <height>828</height>
+    <style>3</style>
+    <font>
+      <font family="Source Sans Pro" style="BOLD" size="16.0">
+      </font>
+    </font>
+    <widget type="rectangle" version="2.0.0">
+      <name>group.HeCompBuilding.border</name>
+      <width>656</width>
+      <height>828</height>
+      <line_width>0</line_width>
+      <line_color>
+        <color name="GROUP-BORDER" red="150" green="155" blue="151">
+        </color>
+      </line_color>
+      <background_color>
+        <color name="GROUP-BORDER" red="150" green="155" blue="151">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>group.HeCompBuilding.background</name>
+      <x>5</x>
+      <y>40</y>
+      <width>646</width>
+      <height>783</height>
+      <line_width>0</line_width>
+      <line_color>
+        <color name="PRIMARY-GROUP-BORDER" red="151" green="188" blue="202">
+        </color>
+      </line_color>
+      <background_color>
+        <color name="GROUP-BACKGROUND" red="200" green="205" blue="201">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_1</name>
+      <file>ODH_sub.bob</file>
+      <macros>
+        <R>1</R>
+      </macros>
+      <x>10</x>
+      <y>50</y>
+      <width>212</width>
+      <height>192</height>
+      <resize>2</resize>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_2</name>
+      <file>ODH_sub.bob</file>
+      <macros>
+        <R>2</R>
+      </macros>
+      <x>10</x>
+      <y>242</y>
+      <width>212</width>
+      <height>192</height>
+      <resize>2</resize>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_3</name>
+      <file>ODH_sub.bob</file>
+      <macros>
+        <R>3</R>
+      </macros>
+      <x>10</x>
+      <y>434</y>
+      <width>212</width>
+      <height>192</height>
+      <resize>2</resize>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_4</name>
+      <file>ODH_sub.bob</file>
+      <macros>
+        <R>4</R>
+      </macros>
+      <x>10</x>
+      <y>626</y>
+      <width>212</width>
+      <height>192</height>
+      <resize>2</resize>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_5</name>
+      <file>ODH_sub.bob</file>
+      <macros>
+        <R>5</R>
+      </macros>
+      <x>222</x>
+      <y>50</y>
+      <width>212</width>
+      <height>192</height>
+      <resize>2</resize>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_6</name>
+      <file>ODH_sub.bob</file>
+      <macros>
+        <P>HCB-TCH:ODH-O2iM</P>
+        <R>6</R>
+      </macros>
+      <x>222</x>
+      <y>242</y>
+      <width>212</width>
+      <height>192</height>
+      <resize>2</resize>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_7</name>
+      <file>ODH_sub.bob</file>
+      <macros>
+        <P>HCB-TCH:ODH-O2iM</P>
+        <R>7</R>
+      </macros>
+      <x>222</x>
+      <y>434</y>
+      <width>212</width>
+      <height>192</height>
+      <resize>2</resize>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_8</name>
+      <file>ODH_sub.bob</file>
+      <macros>
+        <P>HCB-TCH:ODH-O2iM</P>
+        <R>8</R>
+      </macros>
+      <x>222</x>
+      <y>626</y>
+      <width>212</width>
+      <height>192</height>
+      <resize>2</resize>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_9</name>
+      <file>ODH_sub.bob</file>
+      <macros>
+        <P>HCB-TCH:ODH-O2iM</P>
+        <R>9</R>
+      </macros>
+      <x>434</x>
+      <y>50</y>
+      <width>212</width>
+      <height>192</height>
+      <resize>2</resize>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_10</name>
+      <file>ODH_sub.bob</file>
+      <macros>
+        <P>HCB-HPGS:ODH-O2iM</P>
+        <R>10</R>
+      </macros>
+      <x>434</x>
+      <y>242</y>
+      <width>212</width>
+      <height>192</height>
+      <resize>2</resize>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_11</name>
+      <file>ODH_sub.bob</file>
+      <macros>
+        <P>HCB-HPGS:ODH-O2iM</P>
+        <R>11</R>
+      </macros>
+      <x>434</x>
+      <y>434</y>
+      <width>212</width>
+      <height>192</height>
+      <resize>2</resize>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_12</name>
+      <file>ODH_sub.bob</file>
+      <macros>
+        <P>HCB-DogSh:ODH-O2iM</P>
+        <R>12</R>
+      </macros>
+      <x>434</x>
+      <y>626</y>
+      <width>212</width>
+      <height>192</height>
+      <resize>2</resize>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LB_HeCompBuilding</name>
+      <text>Helium Compressor Building
+</text>
+      <width>656</width>
+      <height>40</height>
+      <font>
+        <font name="Header 2" family="Source Sans Pro" style="BOLD_ITALIC" size="21.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GRAY-TEXT" red="255" green="255" blue="255">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="GROUP-BACKGROUND" red="200" green="205" blue="201">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>group.CXBuilding</name>
+    <macros>
+      <P>CXB-CXH:ODH-O2iM</P>
+    </macros>
+    <x>676</x>
+    <y>70</y>
+    <width>444</width>
+    <height>828</height>
+    <style>3</style>
+    <font>
+      <font family="Source Sans Pro" style="BOLD" size="16.0">
+      </font>
+    </font>
+    <widget type="rectangle" version="2.0.0">
+      <name>group.CXBuilding.border</name>
+      <width>444</width>
+      <height>828</height>
+      <line_width>0</line_width>
+      <line_color>
+        <color name="GROUP-BORDER" red="150" green="155" blue="151">
+        </color>
+      </line_color>
+      <background_color>
+        <color name="GROUP-BORDER" red="150" green="155" blue="151">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>group.CXBuilding.background</name>
+      <x>5</x>
+      <y>40</y>
+      <width>434</width>
+      <height>783</height>
+      <line_width>0</line_width>
+      <line_color>
+        <color name="PRIMARY-GROUP-BORDER" red="151" green="188" blue="202">
+        </color>
+      </line_color>
+      <background_color>
+        <color name="GROUP-BACKGROUND" red="200" green="205" blue="201">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_13</name>
+      <file>ODH_sub.bob</file>
+      <macros>
+        <R>13</R>
+      </macros>
+      <x>10</x>
+      <y>50</y>
+      <width>212</width>
+      <height>192</height>
+      <resize>2</resize>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_14</name>
+      <file>ODH_sub.bob</file>
+      <macros>
+        <R>14</R>
+      </macros>
+      <x>10</x>
+      <y>242</y>
+      <width>212</width>
+      <height>192</height>
+      <resize>2</resize>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_15</name>
+      <file>ODH_sub.bob</file>
+      <macros>
+        <R>15</R>
+      </macros>
+      <x>10</x>
+      <y>434</y>
+      <width>212</width>
+      <height>192</height>
+      <resize>2</resize>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_16</name>
+      <file>ODH_sub.bob</file>
+      <macros>
+        <R>16</R>
+      </macros>
+      <x>10</x>
+      <y>626</y>
+      <width>212</width>
+      <height>192</height>
+      <resize>2</resize>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_17</name>
+      <file>ODH_sub.bob</file>
+      <macros>
+        <R>17</R>
+      </macros>
+      <x>222</x>
+      <y>50</y>
+      <width>212</width>
+      <height>192</height>
+      <resize>2</resize>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_18</name>
+      <file>ODH_sub.bob</file>
+      <macros>
+        <R>18</R>
+      </macros>
+      <x>222</x>
+      <y>242</y>
+      <width>212</width>
+      <height>192</height>
+      <resize>2</resize>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_19</name>
+      <file>ODH_sub.bob</file>
+      <macros>
+        <R>19</R>
+      </macros>
+      <x>222</x>
+      <y>434</y>
+      <width>212</width>
+      <height>192</height>
+      <resize>2</resize>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LB_CXBuilding</name>
+      <text>ColdBox Building</text>
+      <width>444</width>
+      <height>40</height>
+      <font>
+        <font name="Header 2" family="Source Sans Pro" style="BOLD_ITALIC" size="21.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GRAY-TEXT" red="255" green="255" blue="255">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="GROUP-BACKGROUND" red="200" green="205" blue="201">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>group.CTLGallery</name>
+    <macros>
+      <P>CTLG-CS:ODH-O2iM</P>
+    </macros>
+    <x>1130</x>
+    <y>70</y>
+    <width>232</width>
+    <height>828</height>
+    <style>3</style>
+    <font>
+      <font family="Source Sans Pro" style="BOLD" size="16.0">
+      </font>
+    </font>
+    <widget type="rectangle" version="2.0.0">
+      <name>group.CTLGallery.border</name>
+      <width>232</width>
+      <height>828</height>
+      <line_width>0</line_width>
+      <line_color>
+        <color name="GROUP-BORDER" red="150" green="155" blue="151">
+        </color>
+      </line_color>
+      <background_color>
+        <color name="GROUP-BORDER" red="150" green="155" blue="151">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="rectangle" version="2.0.0">
+      <name>group.CTLGallery.background</name>
+      <x>5</x>
+      <y>40</y>
+      <width>222</width>
+      <height>783</height>
+      <line_width>0</line_width>
+      <line_color>
+        <color name="PRIMARY-GROUP-BORDER" red="151" green="188" blue="202">
+        </color>
+      </line_color>
+      <background_color>
+        <color name="GROUP-BACKGROUND" red="200" green="205" blue="201">
+        </color>
+      </background_color>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_20</name>
+      <file>ODH_sub.bob</file>
+      <macros>
+        <R>20</R>
+      </macros>
+      <x>10</x>
+      <y>50</y>
+      <width>212</width>
+      <height>192</height>
+      <resize>2</resize>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_21</name>
+      <file>ODH_sub.bob</file>
+      <macros>
+        <R>21</R>
+      </macros>
+      <x>10</x>
+      <y>242</y>
+      <width>212</width>
+      <height>192</height>
+      <resize>2</resize>
+    </widget>
+    <widget type="embedded" version="2.0.0">
+      <name>Embedded Display_22</name>
+      <file>ODH_sub.bob</file>
+      <macros>
+        <R>22</R>
+      </macros>
+      <x>10</x>
+      <y>434</y>
+      <width>212</width>
+      <height>192</height>
+      <resize>2</resize>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LB_CTLGallery</name>
+      <text>CTL Gallery</text>
+      <width>232</width>
+      <height>40</height>
+      <font>
+        <font name="Header 2" family="Source Sans Pro" style="BOLD_ITALIC" size="21.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GRAY-TEXT" red="255" green="255" blue="255">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="GROUP-BACKGROUND" red="200" green="205" blue="201">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+  </widget>
+</display>
