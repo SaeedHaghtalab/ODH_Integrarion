@@ -1,0 +1,2648 @@
+record(stringin, "KG-GTA:ODH-PLC-01:ModVersionR") {
+	field(DISP, "1")
+	field(VAL,  "$(MODVERSION=N/A)")
+	field(PINI, "YES")
+}
+
+#########################################################
+########## EPICS <-> PLC connection management ##########
+#########################################################
+record(asyn, "KG-GTA:ODH-PLC-01:iAsyn") {
+	field(DTYP,	"asynRecordDevice")
+	field(PORT,	"$(PLCNAME)")
+}
+record(bi, "KG-GTA:ODH-PLC-01:ModbusConnectedR") {
+	field(DESC,	"Shows if the MODBUS channel connected")
+	field(INP,	"KG-GTA:ODH-PLC-01:iAsyn.CNCT CP")
+	field(ONAM,	"Connected")
+	field(ZNAM,	"Disconnected")
+	field(ZSV,      "MAJOR")
+	field(FLNK,	"KG-GTA:ODH-PLC-01:CommsHashToPLCS")
+}
+record(bi, "KG-GTA:ODH-PLC-01:S7ConnectedR") {
+	field(DESC,	"Shows if the S7 channel is connected")
+	field(SCAN,	"I/O Intr")
+	field(DTYP,	"S7plc stat")
+	field(INP,	"@$(PLCNAME)")
+	field(ONAM,	"Connected")
+	field(ZNAM,	"Disconnected")
+	field(ZSV,      "MAJOR")
+}
+record(calcout, "KG-GTA:ODH-PLC-01:iCalcConn") {
+	field(INPA,	"KG-GTA:ODH-PLC-01:S7ConnectedR CP")
+	field(INPB,	"KG-GTA:ODH-PLC-01:ModbusConnectedR CP")
+	field(CALC,	"A && B")
+	field(OUT,	"KG-GTA:ODH-PLC-01:ConnectedR PP")
+}
+record(bi, "KG-GTA:ODH-PLC-01:ConnectedR") {
+	field(DESC,	"Shows if the PLC is connected")
+	field(ONAM,	"Connected")
+	field(ZNAM,	"Disconnected")
+	field(ZSV,      "MAJOR")
+}
+record(bi, "KG-GTA:ODH-PLC-01:PLCHashCorrectR") {
+	field(DESC,	"Shows if the comms hash is correct")
+	field(ONAM,	"Correct")
+	field(ZNAM,	"Incorrect")
+	field(ZSV,      "MAJOR")
+}
+record(bi, "KG-GTA:ODH-PLC-01:AliveR") {
+	alias("KG-GTA:ODH-PLC-01:CommsOK")
+	field(DESC,	"Shows if the PLC is sending heartbeats")
+	field(ONAM,	"Alive")
+	field(ZNAM,	"Not responding")
+	field(ZSV,      "MAJOR")
+}
+record(calcout, "KG-GTA:ODH-PLC-01:iCheckHash") {
+	field(INPA,	"KG-GTA:ODH-PLC-01:iCommsHashToPLC")
+	field(INPB,	"KG-GTA:ODH-PLC-01:CommsHashFromPLCR")
+	field(CALC,	"A = B")
+	field(OOPT,	"On Change")
+	field(OUT,	"KG-GTA:ODH-PLC-01:PLCHashCorrectR PP")
+}
+record(bi, "KG-GTA:ODH-PLC-01:iOne") {
+	field(DISP,	"1")
+	field(PINI,	"YES")
+	field(VAL,	"1")
+}
+record(bo, "KG-GTA:ODH-PLC-01:iGotHeartbeat") {
+	field(DOL,	"KG-GTA:ODH-PLC-01:iOne")
+	field(OMSL,	"closed_loop")
+	field(OUT,	"KG-GTA:ODH-PLC-01:iKickAlive PP")
+}
+record(bo, "KG-GTA:ODH-PLC-01:iKickAlive") {
+	field(HIGH,	"5")
+	field(OUT,	"KG-GTA:ODH-PLC-01:AliveR PP")
+}
+
+########################################################
+########## EPICS -> PLC comms management data ##########
+########################################################
+record(ao, "KG-GTA:ODH-PLC-01:iCommsHashToPLC") {
+	field(DISP,	"1")
+	field(PINI,	"YES")
+	field(VAL,	"-123123578")
+}
+record(ao, "KG-GTA:ODH-PLC-01:CommsHashToPLCS") {
+	field(DESC,	"Sends comms hash to PLC")
+	field(SCAN,	"1 second")
+	field(DTYP,	"asynInt32")
+	field(OUT,	"@asyn($(PLCNAME)write, 0, 100)INT32_BE")
+	field(OMSL,	"closed_loop")
+	field(DOL,	"KG-GTA:ODH-PLC-01:iCommsHashToPLC")
+	field(DISV,	"0")
+	field(SDIS,	"KG-GTA:ODH-PLC-01:ModbusConnectedR")
+}
+record(calc, "KG-GTA:ODH-PLC-01:iHeartbeatToPLC") {
+	field(SCAN,	"1 second")
+	field(INPA,	"KG-GTA:ODH-PLC-01:iHeartbeatToPLC.VAL")
+	field(CALC,	"(A >= 32000)? 0 : A + 1")
+	field(FLNK,	"KG-GTA:ODH-PLC-01:HeartbeatToPLCS")
+	field(DISV,	"0")
+	field(SDIS,	"KG-GTA:ODH-PLC-01:ModbusConnectedR")
+}
+record(ao, "KG-GTA:ODH-PLC-01:HeartbeatToPLCS") {
+	field(DESC,	"Sends heartbeat to PLC")
+	field(DTYP,	"asynInt32")
+	field(OUT,	"@asyn($(PLCNAME)write, 2, 100)")
+	field(OMSL,	"closed_loop")
+	field(DOL,	"KG-GTA:ODH-PLC-01:iHeartbeatToPLC.VAL")
+	field(OIF,	"Full")
+	field(DRVL,	"0")
+	field(DRVH,	"32000")
+	field(DISV,	"0")
+	field(SDIS,	"KG-GTA:ODH-PLC-01:ModbusConnectedR")
+}
+
+########################################################
+########## PLC -> EPICS comms management data ##########
+########################################################
+record(ai, "KG-GTA:ODH-PLC-01:CommsHashFromPLCR") {
+	field(DESC,	"Comms hash from PLC")
+	field(SCAN,	"I/O Intr")
+	field(DTYP,	"S7plc")
+	field(INP,	"@$(PLCNAME)/0 T=INT32")
+	field(FLNK,	"KG-GTA:ODH-PLC-01:iCheckHash")
+}
+record(ai, "KG-GTA:ODH-PLC-01:HeartbeatFromPLCR") {
+	field(DESC,	"Heartbeat from PLC")
+	field(SCAN,	"I/O Intr")
+	field(DTYP,	"S7plc")
+	field(INP,	"@$(PLCNAME)/4 T=INT16")
+	field(FLNK,	"KG-GTA:ODH-PLC-01:iGotHeartbeat")
+	field(DISS,	"INVALID")
+	field(DISV,	"0")
+	field(SDIS,	"KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+}
+
+
+##########
+########## CXB-CXH:ODH-O2iM-19 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+###################################### Target Systems ########################################
+##############################  ODG Detection System   ##############################
+##                         CTLG-CS:ODH ODH - Oxigen Detector
+##
+############################ Version: 1.0             ######################################
+#Author:	Miklos Boros
+#Date:		08-01-2018
+#Version:  v1.0
+
+
+
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## CXB-CXH:ODH-O2iM-19 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",             PV_DESC="Real time O2 level")
+record(ai, "CXB-CXH:ODH-O2iM-19:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/20 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Real time O2 level")
+}
+
+#<<<--- add_major_alarm("Alarm","ODH Alarm",     PV_DESC="ODH alarm",                PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "CXB-CXH:ODH-O2iM-19:Alarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/24 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH alarm")
+	field(ONAM, "NominalState")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("OK",                        PV_DESC="ODH OK",                   PV_ONAM="OK",               PV_ZNAM="NOTOK")
+record(bi, "CXB-CXH:ODH-O2iM-19:OK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/24 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH OK")
+	field(ONAM, "OK")
+	field(ZNAM, "NOTOK")
+}
+
+#<<<--- add_minor_alarm("Warning","ODH Warning", PV_DESC="ODH warning",              PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "CXB-CXH:ODH-O2iM-19:Warning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/24 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH warning")
+	field(ONAM, "NominalState")
+	field(OSV,  "MINOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("LA",                        PV_DESC="LevelA",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-19:LA")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/24 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelA")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("LB",                        PV_DESC="LevelB",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-19:LB")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/24 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelB")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+
+
+
+
+##########
+########## CXB-CXH:ODH-O2iM-18 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+###################################### Target Systems ########################################
+##############################  ODG Detection System   ##############################
+##                         CTLG-CS:ODH ODH - Oxigen Detector
+##
+############################ Version: 1.0             ######################################
+#Author:	Miklos Boros
+#Date:		08-01-2018
+#Version:  v1.0
+
+
+
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## CXB-CXH:ODH-O2iM-18 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",             PV_DESC="Real time O2 level")
+record(ai, "CXB-CXH:ODH-O2iM-18:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/26 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Real time O2 level")
+}
+
+#<<<--- add_major_alarm("Alarm","ODH Alarm",     PV_DESC="ODH alarm",                PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "CXB-CXH:ODH-O2iM-18:Alarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/30 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH alarm")
+	field(ONAM, "NominalState")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("OK",                        PV_DESC="ODH OK",                   PV_ONAM="OK",               PV_ZNAM="NOTOK")
+record(bi, "CXB-CXH:ODH-O2iM-18:OK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/30 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH OK")
+	field(ONAM, "OK")
+	field(ZNAM, "NOTOK")
+}
+
+#<<<--- add_minor_alarm("Warning","ODH Warning", PV_DESC="ODH warning",              PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "CXB-CXH:ODH-O2iM-18:Warning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/30 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH warning")
+	field(ONAM, "NominalState")
+	field(OSV,  "MINOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("LA",                        PV_DESC="LevelA",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-18:LA")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/30 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelA")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("LB",                        PV_DESC="LevelB",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-18:LB")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/30 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelB")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+
+
+
+
+##########
+########## CXB-CXH:ODH-O2iM-17 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+###################################### Target Systems ########################################
+##############################  ODG Detection System   ##############################
+##                         CTLG-CS:ODH ODH - Oxigen Detector
+##
+############################ Version: 1.0             ######################################
+#Author:	Miklos Boros
+#Date:		08-01-2018
+#Version:  v1.0
+
+
+
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## CXB-CXH:ODH-O2iM-17 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",             PV_DESC="Real time O2 level")
+record(ai, "CXB-CXH:ODH-O2iM-17:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/32 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Real time O2 level")
+}
+
+#<<<--- add_major_alarm("Alarm","ODH Alarm",     PV_DESC="ODH alarm",                PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "CXB-CXH:ODH-O2iM-17:Alarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/36 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH alarm")
+	field(ONAM, "NominalState")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("OK",                        PV_DESC="ODH OK",                   PV_ONAM="OK",               PV_ZNAM="NOTOK")
+record(bi, "CXB-CXH:ODH-O2iM-17:OK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/36 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH OK")
+	field(ONAM, "OK")
+	field(ZNAM, "NOTOK")
+}
+
+#<<<--- add_minor_alarm("Warning","ODH Warning", PV_DESC="ODH warning",              PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "CXB-CXH:ODH-O2iM-17:Warning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/36 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH warning")
+	field(ONAM, "NominalState")
+	field(OSV,  "MINOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("LA",                        PV_DESC="LevelA",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-17:LA")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/36 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelA")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("LB",                        PV_DESC="LevelB",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-17:LB")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/36 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelB")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+
+
+
+
+##########
+########## CXB-CXH:ODH-O2iM-16 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+###################################### Target Systems ########################################
+##############################  ODG Detection System   ##############################
+##                         CTLG-CS:ODH ODH - Oxigen Detector
+##
+############################ Version: 1.0             ######################################
+#Author:	Miklos Boros
+#Date:		08-01-2018
+#Version:  v1.0
+
+
+
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## CXB-CXH:ODH-O2iM-16 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",             PV_DESC="Real time O2 level")
+record(ai, "CXB-CXH:ODH-O2iM-16:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/38 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Real time O2 level")
+}
+
+#<<<--- add_major_alarm("Alarm","ODH Alarm",     PV_DESC="ODH alarm",                PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "CXB-CXH:ODH-O2iM-16:Alarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/42 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH alarm")
+	field(ONAM, "NominalState")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("OK",                        PV_DESC="ODH OK",                   PV_ONAM="OK",               PV_ZNAM="NOTOK")
+record(bi, "CXB-CXH:ODH-O2iM-16:OK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/42 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH OK")
+	field(ONAM, "OK")
+	field(ZNAM, "NOTOK")
+}
+
+#<<<--- add_minor_alarm("Warning","ODH Warning", PV_DESC="ODH warning",              PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "CXB-CXH:ODH-O2iM-16:Warning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/42 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH warning")
+	field(ONAM, "NominalState")
+	field(OSV,  "MINOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("LA",                        PV_DESC="LevelA",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-16:LA")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/42 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelA")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("LB",                        PV_DESC="LevelB",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-16:LB")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/42 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelB")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+
+
+
+
+##########
+########## CXB-CXH:ODH-O2iM-15 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+###################################### Target Systems ########################################
+##############################  ODG Detection System   ##############################
+##                         CTLG-CS:ODH ODH - Oxigen Detector
+##
+############################ Version: 1.0             ######################################
+#Author:	Miklos Boros
+#Date:		08-01-2018
+#Version:  v1.0
+
+
+
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## CXB-CXH:ODH-O2iM-15 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",             PV_DESC="Real time O2 level")
+record(ai, "CXB-CXH:ODH-O2iM-15:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/44 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Real time O2 level")
+}
+
+#<<<--- add_major_alarm("Alarm","ODH Alarm",     PV_DESC="ODH alarm",                PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "CXB-CXH:ODH-O2iM-15:Alarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/48 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH alarm")
+	field(ONAM, "NominalState")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("OK",                        PV_DESC="ODH OK",                   PV_ONAM="OK",               PV_ZNAM="NOTOK")
+record(bi, "CXB-CXH:ODH-O2iM-15:OK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/48 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH OK")
+	field(ONAM, "OK")
+	field(ZNAM, "NOTOK")
+}
+
+#<<<--- add_minor_alarm("Warning","ODH Warning", PV_DESC="ODH warning",              PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "CXB-CXH:ODH-O2iM-15:Warning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/48 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH warning")
+	field(ONAM, "NominalState")
+	field(OSV,  "MINOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("LA",                        PV_DESC="LevelA",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-15:LA")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/48 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelA")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("LB",                        PV_DESC="LevelB",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-15:LB")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/48 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelB")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+
+
+
+
+##########
+########## CXB-CXH:ODH-O2iM-14 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+###################################### Target Systems ########################################
+##############################  ODG Detection System   ##############################
+##                         CTLG-CS:ODH ODH - Oxigen Detector
+##
+############################ Version: 1.0             ######################################
+#Author:	Miklos Boros
+#Date:		08-01-2018
+#Version:  v1.0
+
+
+
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## CXB-CXH:ODH-O2iM-14 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",             PV_DESC="Real time O2 level")
+record(ai, "CXB-CXH:ODH-O2iM-14:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/50 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Real time O2 level")
+}
+
+#<<<--- add_major_alarm("Alarm","ODH Alarm",     PV_DESC="ODH alarm",                PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "CXB-CXH:ODH-O2iM-14:Alarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/54 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH alarm")
+	field(ONAM, "NominalState")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("OK",                        PV_DESC="ODH OK",                   PV_ONAM="OK",               PV_ZNAM="NOTOK")
+record(bi, "CXB-CXH:ODH-O2iM-14:OK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/54 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH OK")
+	field(ONAM, "OK")
+	field(ZNAM, "NOTOK")
+}
+
+#<<<--- add_minor_alarm("Warning","ODH Warning", PV_DESC="ODH warning",              PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "CXB-CXH:ODH-O2iM-14:Warning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/54 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH warning")
+	field(ONAM, "NominalState")
+	field(OSV,  "MINOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("LA",                        PV_DESC="LevelA",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-14:LA")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/54 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelA")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("LB",                        PV_DESC="LevelB",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-14:LB")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/54 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelB")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+
+
+
+
+##########
+########## CXB-CXH:ODH-O2iM-13 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+###################################### Target Systems ########################################
+##############################  ODG Detection System   ##############################
+##                         CTLG-CS:ODH ODH - Oxigen Detector
+##
+############################ Version: 1.0             ######################################
+#Author:	Miklos Boros
+#Date:		08-01-2018
+#Version:  v1.0
+
+
+
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## CXB-CXH:ODH-O2iM-13 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",             PV_DESC="Real time O2 level")
+record(ai, "CXB-CXH:ODH-O2iM-13:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/56 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Real time O2 level")
+}
+
+#<<<--- add_major_alarm("Alarm","ODH Alarm",     PV_DESC="ODH alarm",                PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "CXB-CXH:ODH-O2iM-13:Alarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/60 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH alarm")
+	field(ONAM, "NominalState")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("OK",                        PV_DESC="ODH OK",                   PV_ONAM="OK",               PV_ZNAM="NOTOK")
+record(bi, "CXB-CXH:ODH-O2iM-13:OK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/60 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH OK")
+	field(ONAM, "OK")
+	field(ZNAM, "NOTOK")
+}
+
+#<<<--- add_minor_alarm("Warning","ODH Warning", PV_DESC="ODH warning",              PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "CXB-CXH:ODH-O2iM-13:Warning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/60 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH warning")
+	field(ONAM, "NominalState")
+	field(OSV,  "MINOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("LA",                        PV_DESC="LevelA",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-13:LA")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/60 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelA")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("LB",                        PV_DESC="LevelB",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-13:LB")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/60 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelB")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+
+
+
+
+##########
+########## HCB-DogSh:ODH-O2iM-12 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+###################################### Target Systems ########################################
+##############################  ODG Detection System   ##############################
+##                         CTLG-CS:ODH ODH - Oxigen Detector
+##
+############################ Version: 1.0             ######################################
+#Author:	Miklos Boros
+#Date:		08-01-2018
+#Version:  v1.0
+
+
+
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-DogSh:ODH-O2iM-12 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",             PV_DESC="Real time O2 level")
+record(ai, "HCB-DogSh:ODH-O2iM-12:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/62 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Real time O2 level")
+}
+
+#<<<--- add_major_alarm("Alarm","ODH Alarm",     PV_DESC="ODH alarm",                PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "HCB-DogSh:ODH-O2iM-12:Alarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/66 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH alarm")
+	field(ONAM, "NominalState")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("OK",                        PV_DESC="ODH OK",                   PV_ONAM="OK",               PV_ZNAM="NOTOK")
+record(bi, "HCB-DogSh:ODH-O2iM-12:OK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/66 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH OK")
+	field(ONAM, "OK")
+	field(ZNAM, "NOTOK")
+}
+
+#<<<--- add_minor_alarm("Warning","ODH Warning", PV_DESC="ODH warning",              PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "HCB-DogSh:ODH-O2iM-12:Warning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/66 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH warning")
+	field(ONAM, "NominalState")
+	field(OSV,  "MINOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("LA",                        PV_DESC="LevelA",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "HCB-DogSh:ODH-O2iM-12:LA")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/66 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelA")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("LB",                        PV_DESC="LevelB",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "HCB-DogSh:ODH-O2iM-12:LB")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/66 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelB")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+
+
+
+
+##########
+########## HCB-HPGS:ODH-O2iM-10 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+###################################### Target Systems ########################################
+##############################  ODG Detection System   ##############################
+##                         CTLG-CS:ODH ODH - Oxigen Detector
+##
+############################ Version: 1.0             ######################################
+#Author:	Miklos Boros
+#Date:		08-01-2018
+#Version:  v1.0
+
+
+
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-HPGS:ODH-O2iM-10 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",             PV_DESC="Real time O2 level")
+record(ai, "HCB-HPGS:ODH-O2iM-10:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/68 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Real time O2 level")
+}
+
+#<<<--- add_major_alarm("Alarm","ODH Alarm",     PV_DESC="ODH alarm",                PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "HCB-HPGS:ODH-O2iM-10:Alarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/72 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH alarm")
+	field(ONAM, "NominalState")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("OK",                        PV_DESC="ODH OK",                   PV_ONAM="OK",               PV_ZNAM="NOTOK")
+record(bi, "HCB-HPGS:ODH-O2iM-10:OK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/72 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH OK")
+	field(ONAM, "OK")
+	field(ZNAM, "NOTOK")
+}
+
+#<<<--- add_minor_alarm("Warning","ODH Warning", PV_DESC="ODH warning",              PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "HCB-HPGS:ODH-O2iM-10:Warning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/72 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH warning")
+	field(ONAM, "NominalState")
+	field(OSV,  "MINOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("LA",                        PV_DESC="LevelA",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "HCB-HPGS:ODH-O2iM-10:LA")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/72 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelA")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("LB",                        PV_DESC="LevelB",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "HCB-HPGS:ODH-O2iM-10:LB")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/72 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelB")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+
+
+
+
+##########
+########## HCB-HPGS:ODH-O2iM-11 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+###################################### Target Systems ########################################
+##############################  ODG Detection System   ##############################
+##                         CTLG-CS:ODH ODH - Oxigen Detector
+##
+############################ Version: 1.0             ######################################
+#Author:	Miklos Boros
+#Date:		08-01-2018
+#Version:  v1.0
+
+
+
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-HPGS:ODH-O2iM-11 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",             PV_DESC="Real time O2 level")
+record(ai, "HCB-HPGS:ODH-O2iM-11:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/74 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Real time O2 level")
+}
+
+#<<<--- add_major_alarm("Alarm","ODH Alarm",     PV_DESC="ODH alarm",                PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "HCB-HPGS:ODH-O2iM-11:Alarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/78 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH alarm")
+	field(ONAM, "NominalState")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("OK",                        PV_DESC="ODH OK",                   PV_ONAM="OK",               PV_ZNAM="NOTOK")
+record(bi, "HCB-HPGS:ODH-O2iM-11:OK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/78 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH OK")
+	field(ONAM, "OK")
+	field(ZNAM, "NOTOK")
+}
+
+#<<<--- add_minor_alarm("Warning","ODH Warning", PV_DESC="ODH warning",              PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "HCB-HPGS:ODH-O2iM-11:Warning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/78 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH warning")
+	field(ONAM, "NominalState")
+	field(OSV,  "MINOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("LA",                        PV_DESC="LevelA",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "HCB-HPGS:ODH-O2iM-11:LA")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/78 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelA")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("LB",                        PV_DESC="LevelB",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "HCB-HPGS:ODH-O2iM-11:LB")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/78 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelB")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+
+
+
+
+##########
+########## HCB-TCH:ODH-O2iM-9 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+###################################### Target Systems ########################################
+##############################  ODG Detection System   ##############################
+##                         CTLG-CS:ODH ODH - Oxigen Detector
+##
+############################ Version: 1.0             ######################################
+#Author:	Miklos Boros
+#Date:		08-01-2018
+#Version:  v1.0
+
+
+
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-TCH:ODH-O2iM-9 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",             PV_DESC="Real time O2 level")
+record(ai, "HCB-TCH:ODH-O2iM-9:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/80 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Real time O2 level")
+}
+
+#<<<--- add_major_alarm("Alarm","ODH Alarm",     PV_DESC="ODH alarm",                PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "HCB-TCH:ODH-O2iM-9:Alarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/84 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH alarm")
+	field(ONAM, "NominalState")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("OK",                        PV_DESC="ODH OK",                   PV_ONAM="OK",               PV_ZNAM="NOTOK")
+record(bi, "HCB-TCH:ODH-O2iM-9:OK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/84 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH OK")
+	field(ONAM, "OK")
+	field(ZNAM, "NOTOK")
+}
+
+#<<<--- add_minor_alarm("Warning","ODH Warning", PV_DESC="ODH warning",              PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "HCB-TCH:ODH-O2iM-9:Warning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/84 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH warning")
+	field(ONAM, "NominalState")
+	field(OSV,  "MINOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("LA",                        PV_DESC="LevelA",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "HCB-TCH:ODH-O2iM-9:LA")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/84 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelA")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("LB",                        PV_DESC="LevelB",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "HCB-TCH:ODH-O2iM-9:LB")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/84 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelB")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+
+
+
+
+##########
+########## HCB-TCH:ODH-O2iM-8 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+###################################### Target Systems ########################################
+##############################  ODG Detection System   ##############################
+##                         CTLG-CS:ODH ODH - Oxigen Detector
+##
+############################ Version: 1.0             ######################################
+#Author:	Miklos Boros
+#Date:		08-01-2018
+#Version:  v1.0
+
+
+
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-TCH:ODH-O2iM-8 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",             PV_DESC="Real time O2 level")
+record(ai, "HCB-TCH:ODH-O2iM-8:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/86 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Real time O2 level")
+}
+
+#<<<--- add_major_alarm("Alarm","ODH Alarm",     PV_DESC="ODH alarm",                PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "HCB-TCH:ODH-O2iM-8:Alarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/90 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH alarm")
+	field(ONAM, "NominalState")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("OK",                        PV_DESC="ODH OK",                   PV_ONAM="OK",               PV_ZNAM="NOTOK")
+record(bi, "HCB-TCH:ODH-O2iM-8:OK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/90 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH OK")
+	field(ONAM, "OK")
+	field(ZNAM, "NOTOK")
+}
+
+#<<<--- add_minor_alarm("Warning","ODH Warning", PV_DESC="ODH warning",              PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "HCB-TCH:ODH-O2iM-8:Warning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/90 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH warning")
+	field(ONAM, "NominalState")
+	field(OSV,  "MINOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("LA",                        PV_DESC="LevelA",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "HCB-TCH:ODH-O2iM-8:LA")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/90 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelA")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("LB",                        PV_DESC="LevelB",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "HCB-TCH:ODH-O2iM-8:LB")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/90 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelB")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+
+
+
+
+##########
+########## HCB-TCH:ODH-O2iM-7 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+###################################### Target Systems ########################################
+##############################  ODG Detection System   ##############################
+##                         CTLG-CS:ODH ODH - Oxigen Detector
+##
+############################ Version: 1.0             ######################################
+#Author:	Miklos Boros
+#Date:		08-01-2018
+#Version:  v1.0
+
+
+
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-TCH:ODH-O2iM-7 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",             PV_DESC="Real time O2 level")
+record(ai, "HCB-TCH:ODH-O2iM-7:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/92 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Real time O2 level")
+}
+
+#<<<--- add_major_alarm("Alarm","ODH Alarm",     PV_DESC="ODH alarm",                PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "HCB-TCH:ODH-O2iM-7:Alarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/96 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH alarm")
+	field(ONAM, "NominalState")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("OK",                        PV_DESC="ODH OK",                   PV_ONAM="OK",               PV_ZNAM="NOTOK")
+record(bi, "HCB-TCH:ODH-O2iM-7:OK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/96 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH OK")
+	field(ONAM, "OK")
+	field(ZNAM, "NOTOK")
+}
+
+#<<<--- add_minor_alarm("Warning","ODH Warning", PV_DESC="ODH warning",              PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "HCB-TCH:ODH-O2iM-7:Warning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/96 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH warning")
+	field(ONAM, "NominalState")
+	field(OSV,  "MINOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("LA",                        PV_DESC="LevelA",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "HCB-TCH:ODH-O2iM-7:LA")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/96 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelA")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("LB",                        PV_DESC="LevelB",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "HCB-TCH:ODH-O2iM-7:LB")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/96 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelB")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+
+
+
+
+##########
+########## HCB-TCH:ODH-O2iM-6 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+###################################### Target Systems ########################################
+##############################  ODG Detection System   ##############################
+##                         CTLG-CS:ODH ODH - Oxigen Detector
+##
+############################ Version: 1.0             ######################################
+#Author:	Miklos Boros
+#Date:		08-01-2018
+#Version:  v1.0
+
+
+
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-TCH:ODH-O2iM-6 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",             PV_DESC="Real time O2 level")
+record(ai, "HCB-TCH:ODH-O2iM-6:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/98 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Real time O2 level")
+}
+
+#<<<--- add_major_alarm("Alarm","ODH Alarm",     PV_DESC="ODH alarm",                PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "HCB-TCH:ODH-O2iM-6:Alarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/102 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH alarm")
+	field(ONAM, "NominalState")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("OK",                        PV_DESC="ODH OK",                   PV_ONAM="OK",               PV_ZNAM="NOTOK")
+record(bi, "HCB-TCH:ODH-O2iM-6:OK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/102 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH OK")
+	field(ONAM, "OK")
+	field(ZNAM, "NOTOK")
+}
+
+#<<<--- add_minor_alarm("Warning","ODH Warning", PV_DESC="ODH warning",              PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "HCB-TCH:ODH-O2iM-6:Warning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/102 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH warning")
+	field(ONAM, "NominalState")
+	field(OSV,  "MINOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("LA",                        PV_DESC="LevelA",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "HCB-TCH:ODH-O2iM-6:LA")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/102 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelA")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("LB",                        PV_DESC="LevelB",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "HCB-TCH:ODH-O2iM-6:LB")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/102 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelB")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+
+
+
+
+##########
+########## HCB-ACH:ODH-O2iM-5 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+###################################### Target Systems ########################################
+##############################  ODG Detection System   ##############################
+##                         CTLG-CS:ODH ODH - Oxigen Detector
+##
+############################ Version: 1.0             ######################################
+#Author:	Miklos Boros
+#Date:		08-01-2018
+#Version:  v1.0
+
+
+
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-ACH:ODH-O2iM-5 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",             PV_DESC="Real time O2 level")
+record(ai, "HCB-ACH:ODH-O2iM-5:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/104 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Real time O2 level")
+}
+
+#<<<--- add_major_alarm("Alarm","ODH Alarm",     PV_DESC="ODH alarm",                PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "HCB-ACH:ODH-O2iM-5:Alarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/108 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH alarm")
+	field(ONAM, "NominalState")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("OK",                        PV_DESC="ODH OK",                   PV_ONAM="OK",               PV_ZNAM="NOTOK")
+record(bi, "HCB-ACH:ODH-O2iM-5:OK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/108 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH OK")
+	field(ONAM, "OK")
+	field(ZNAM, "NOTOK")
+}
+
+#<<<--- add_minor_alarm("Warning","ODH Warning", PV_DESC="ODH warning",              PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "HCB-ACH:ODH-O2iM-5:Warning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/108 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH warning")
+	field(ONAM, "NominalState")
+	field(OSV,  "MINOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("LA",                        PV_DESC="LevelA",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-O2iM-5:LA")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/108 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelA")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("LB",                        PV_DESC="LevelB",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-O2iM-5:LB")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/108 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelB")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+
+
+
+
+##########
+########## HCB-ACH:ODH-O2iM-4 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+###################################### Target Systems ########################################
+##############################  ODG Detection System   ##############################
+##                         CTLG-CS:ODH ODH - Oxigen Detector
+##
+############################ Version: 1.0             ######################################
+#Author:	Miklos Boros
+#Date:		08-01-2018
+#Version:  v1.0
+
+
+
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-ACH:ODH-O2iM-4 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",             PV_DESC="Real time O2 level")
+record(ai, "HCB-ACH:ODH-O2iM-4:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/110 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Real time O2 level")
+}
+
+#<<<--- add_major_alarm("Alarm","ODH Alarm",     PV_DESC="ODH alarm",                PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "HCB-ACH:ODH-O2iM-4:Alarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/114 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH alarm")
+	field(ONAM, "NominalState")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("OK",                        PV_DESC="ODH OK",                   PV_ONAM="OK",               PV_ZNAM="NOTOK")
+record(bi, "HCB-ACH:ODH-O2iM-4:OK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/114 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH OK")
+	field(ONAM, "OK")
+	field(ZNAM, "NOTOK")
+}
+
+#<<<--- add_minor_alarm("Warning","ODH Warning", PV_DESC="ODH warning",              PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "HCB-ACH:ODH-O2iM-4:Warning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/114 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH warning")
+	field(ONAM, "NominalState")
+	field(OSV,  "MINOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("LA",                        PV_DESC="LevelA",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-O2iM-4:LA")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/114 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelA")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("LB",                        PV_DESC="LevelB",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-O2iM-4:LB")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/114 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelB")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+
+
+
+
+##########
+########## HCB-ACH:ODH-O2iM-3 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+###################################### Target Systems ########################################
+##############################  ODG Detection System   ##############################
+##                         CTLG-CS:ODH ODH - Oxigen Detector
+##
+############################ Version: 1.0             ######################################
+#Author:	Miklos Boros
+#Date:		08-01-2018
+#Version:  v1.0
+
+
+
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-ACH:ODH-O2iM-3 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",             PV_DESC="Real time O2 level")
+record(ai, "HCB-ACH:ODH-O2iM-3:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/116 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Real time O2 level")
+}
+
+#<<<--- add_major_alarm("Alarm","ODH Alarm",     PV_DESC="ODH alarm",                PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "HCB-ACH:ODH-O2iM-3:Alarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/120 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH alarm")
+	field(ONAM, "NominalState")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("OK",                        PV_DESC="ODH OK",                   PV_ONAM="OK",               PV_ZNAM="NOTOK")
+record(bi, "HCB-ACH:ODH-O2iM-3:OK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/120 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH OK")
+	field(ONAM, "OK")
+	field(ZNAM, "NOTOK")
+}
+
+#<<<--- add_minor_alarm("Warning","ODH Warning", PV_DESC="ODH warning",              PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "HCB-ACH:ODH-O2iM-3:Warning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/120 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH warning")
+	field(ONAM, "NominalState")
+	field(OSV,  "MINOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("LA",                        PV_DESC="LevelA",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-O2iM-3:LA")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/120 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelA")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("LB",                        PV_DESC="LevelB",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-O2iM-3:LB")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/120 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelB")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+
+
+
+
+##########
+########## HCB-ACH:ODH-O2iM-2 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+###################################### Target Systems ########################################
+##############################  ODG Detection System   ##############################
+##                         CTLG-CS:ODH ODH - Oxigen Detector
+##
+############################ Version: 1.0             ######################################
+#Author:	Miklos Boros
+#Date:		08-01-2018
+#Version:  v1.0
+
+
+
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-ACH:ODH-O2iM-2 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",             PV_DESC="Real time O2 level")
+record(ai, "HCB-ACH:ODH-O2iM-2:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/122 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Real time O2 level")
+}
+
+#<<<--- add_major_alarm("Alarm","ODH Alarm",     PV_DESC="ODH alarm",                PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "HCB-ACH:ODH-O2iM-2:Alarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/126 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH alarm")
+	field(ONAM, "NominalState")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("OK",                        PV_DESC="ODH OK",                   PV_ONAM="OK",               PV_ZNAM="NOTOK")
+record(bi, "HCB-ACH:ODH-O2iM-2:OK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/126 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH OK")
+	field(ONAM, "OK")
+	field(ZNAM, "NOTOK")
+}
+
+#<<<--- add_minor_alarm("Warning","ODH Warning", PV_DESC="ODH warning",              PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "HCB-ACH:ODH-O2iM-2:Warning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/126 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH warning")
+	field(ONAM, "NominalState")
+	field(OSV,  "MINOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("LA",                        PV_DESC="LevelA",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-O2iM-2:LA")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/126 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelA")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("LB",                        PV_DESC="LevelB",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-O2iM-2:LB")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/126 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelB")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+
+
+
+
+##########
+########## HCB-ACH:ODH-O2iM-1 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+###################################### Target Systems ########################################
+##############################  ODG Detection System   ##############################
+##                         CTLG-CS:ODH ODH - Oxigen Detector
+##
+############################ Version: 1.0             ######################################
+#Author:	Miklos Boros
+#Date:		08-01-2018
+#Version:  v1.0
+
+
+
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-ACH:ODH-O2iM-1 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",             PV_DESC="Real time O2 level")
+record(ai, "HCB-ACH:ODH-O2iM-1:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/128 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Real time O2 level")
+}
+
+#<<<--- add_major_alarm("Alarm","ODH Alarm",     PV_DESC="ODH alarm",                PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "HCB-ACH:ODH-O2iM-1:Alarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/132 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH alarm")
+	field(ONAM, "NominalState")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("OK",                        PV_DESC="ODH OK",                   PV_ONAM="OK",               PV_ZNAM="NOTOK")
+record(bi, "HCB-ACH:ODH-O2iM-1:OK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/132 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH OK")
+	field(ONAM, "OK")
+	field(ZNAM, "NOTOK")
+}
+
+#<<<--- add_minor_alarm("Warning","ODH Warning", PV_DESC="ODH warning",              PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "HCB-ACH:ODH-O2iM-1:Warning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/132 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH warning")
+	field(ONAM, "NominalState")
+	field(OSV,  "MINOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("LA",                        PV_DESC="LevelA",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-O2iM-1:LA")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/132 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelA")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("LB",                        PV_DESC="LevelB",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-O2iM-1:LB")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/132 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelB")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+
+
+
+
+##########
+########## CTLG-CS:ODH-O2iM-22 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+###################################### Target Systems ########################################
+##############################  ODG Detection System   ##############################
+##                         CTLG-CS:ODH ODH - Oxigen Detector
+##
+############################ Version: 1.0             ######################################
+#Author:	Miklos Boros
+#Date:		08-01-2018
+#Version:  v1.0
+
+
+
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## CTLG-CS:ODH-O2iM-22 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",             PV_DESC="Real time O2 level")
+record(ai, "CTLG-CS:ODH-O2iM-22:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/134 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Real time O2 level")
+}
+
+#<<<--- add_major_alarm("Alarm","ODH Alarm",     PV_DESC="ODH alarm",                PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "CTLG-CS:ODH-O2iM-22:Alarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/138 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH alarm")
+	field(ONAM, "NominalState")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("OK",                        PV_DESC="ODH OK",                   PV_ONAM="OK",               PV_ZNAM="NOTOK")
+record(bi, "CTLG-CS:ODH-O2iM-22:OK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/138 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH OK")
+	field(ONAM, "OK")
+	field(ZNAM, "NOTOK")
+}
+
+#<<<--- add_minor_alarm("Warning","ODH Warning", PV_DESC="ODH warning",              PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "CTLG-CS:ODH-O2iM-22:Warning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/138 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH warning")
+	field(ONAM, "NominalState")
+	field(OSV,  "MINOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("LA",                        PV_DESC="LevelA",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "CTLG-CS:ODH-O2iM-22:LA")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/138 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelA")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("LB",                        PV_DESC="LevelB",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "CTLG-CS:ODH-O2iM-22:LB")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/138 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelB")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+
+
+
+
+##########
+########## CTLG-CS:ODH-O2iM-21 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+###################################### Target Systems ########################################
+##############################  ODG Detection System   ##############################
+##                         CTLG-CS:ODH ODH - Oxigen Detector
+##
+############################ Version: 1.0             ######################################
+#Author:	Miklos Boros
+#Date:		08-01-2018
+#Version:  v1.0
+
+
+
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## CTLG-CS:ODH-O2iM-21 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",             PV_DESC="Real time O2 level")
+record(ai, "CTLG-CS:ODH-O2iM-21:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/140 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Real time O2 level")
+}
+
+#<<<--- add_major_alarm("Alarm","ODH Alarm",     PV_DESC="ODH alarm",                PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "CTLG-CS:ODH-O2iM-21:Alarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/144 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH alarm")
+	field(ONAM, "NominalState")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("OK",                        PV_DESC="ODH OK",                   PV_ONAM="OK",               PV_ZNAM="NOTOK")
+record(bi, "CTLG-CS:ODH-O2iM-21:OK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/144 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH OK")
+	field(ONAM, "OK")
+	field(ZNAM, "NOTOK")
+}
+
+#<<<--- add_minor_alarm("Warning","ODH Warning", PV_DESC="ODH warning",              PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "CTLG-CS:ODH-O2iM-21:Warning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/144 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH warning")
+	field(ONAM, "NominalState")
+	field(OSV,  "MINOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("LA",                        PV_DESC="LevelA",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "CTLG-CS:ODH-O2iM-21:LA")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/144 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelA")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("LB",                        PV_DESC="LevelB",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "CTLG-CS:ODH-O2iM-21:LB")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/144 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelB")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+
+
+
+
+##########
+########## CTLG-CS:ODH-O2iM-20 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+###################################### Target Systems ########################################
+##############################  ODG Detection System   ##############################
+##                         CTLG-CS:ODH ODH - Oxigen Detector
+##
+############################ Version: 1.0             ######################################
+#Author:	Miklos Boros
+#Date:		08-01-2018
+#Version:  v1.0
+
+
+
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## CTLG-CS:ODH-O2iM-20 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",             PV_DESC="Real time O2 level")
+record(ai, "CTLG-CS:ODH-O2iM-20:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/146 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Real time O2 level")
+}
+
+#<<<--- add_major_alarm("Alarm","ODH Alarm",     PV_DESC="ODH alarm",                PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "CTLG-CS:ODH-O2iM-20:Alarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/150 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH alarm")
+	field(ONAM, "NominalState")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("OK",                        PV_DESC="ODH OK",                   PV_ONAM="OK",               PV_ZNAM="NOTOK")
+record(bi, "CTLG-CS:ODH-O2iM-20:OK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/150 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH OK")
+	field(ONAM, "OK")
+	field(ZNAM, "NOTOK")
+}
+
+#<<<--- add_minor_alarm("Warning","ODH Warning", PV_DESC="ODH warning",              PV_ONAM="NominalState",     PV_ZNAM="Tripped")
+record(bi, "CTLG-CS:ODH-O2iM-20:Warning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/150 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH warning")
+	field(ONAM, "NominalState")
+	field(OSV,  "MINOR")
+	field(ZNAM, "Tripped")
+}
+
+#<<<--- add_digital("LA",                        PV_DESC="LevelA",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "CTLG-CS:ODH-O2iM-20:LA")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/150 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelA")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("LB",                        PV_DESC="LevelB",                   PV_ONAM="True",             PV_ZNAM="False")
+record(bi, "CTLG-CS:ODH-O2iM-20:LB")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/150 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "LevelB")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+
+
+
+
+record(fanout, "KG-GTA:ODH-PLC-01:UploadParametersS") {
+}
