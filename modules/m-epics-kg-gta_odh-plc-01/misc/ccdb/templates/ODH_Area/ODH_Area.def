@@ -1,0 +1,9 @@
+############################ ODH Detection System   ##############################
+############################
+#  STATUS BLOCK
+############################ 
+define_status_block()
+
+add_digital("Alarm",                           PV_DESC="Alarm devices are On in the building",            PV_ONAM="True",    PV_ZNAM="False")
+add_digital("WarmUp",                          PV_DESC="All monitors finished WarmedUp process",          PV_ONAM="True",    PV_ZNAM="False")
+add_major_alarm("ConnLost", "Lost Connection", PV_DESC="At least 2 monitors lost communication",          PV_ONAM="True",    PV_ZNAM="False")

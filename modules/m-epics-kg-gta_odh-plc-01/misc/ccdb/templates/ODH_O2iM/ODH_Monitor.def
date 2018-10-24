@@ -1,0 +1,15 @@
+############################ ODH Detection System   ##############################
+############################
+#  STATUS BLOCK
+############################ 
+define_status_block()
+
+add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
+add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")

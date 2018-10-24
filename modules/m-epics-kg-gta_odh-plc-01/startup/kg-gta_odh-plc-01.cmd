@@ -1,7 +1,3 @@
-# @field PLCNAME
-# @type STRING
-# asyn port name for the PLC
-
 # @field IPADDR
 # @type STRING
 # PLC IP address
@@ -21,11 +17,11 @@
 # @runtime YES
 
 # Call the EEE module responsible for configuring IOC to PLC comms configuration
-epicsEnvSet("$(PLCNAME)_CONFIGURE_MODBUS_READ", "#")
-requireSnippet(s7plc-comms.cmd, "PLCNAME=$(PLCNAME), IPADDR=$(IPADDR), S7DRVPORT=2000, MODBUSDRVPORT=502, INSIZE=152, OUTSIZE=0, BIGENDIAN=1, RECVTIMEOUT=$(RECVTIMEOUT)")
+epicsEnvSet("kg-gta_odh-plc-01_CONFIGURE_MODBUS_READ", "#")
+requireSnippet(s7plc-comms.cmd, "PLCNAME=kg-gta_odh-plc-01, IPADDR=$(IPADDR), S7DRVPORT=2000, MODBUSDRVPORT=502, INSIZE=162, OUTSIZE=0, BIGENDIAN=1, RECVTIMEOUT=$(RECVTIMEOUT)")
 
 # Load plc interface database
-dbLoadRecords("kg-gta_odh-plc-01.db", "PLCNAME=$(PLCNAME), MODVERSION=$(REQUIRE_kg-gta_odh-plc-01_VERSION)")
+dbLoadRecords("kg-gta_odh-plc-01.db", "PLCNAME=kg-gta_odh-plc-01, MODVERSION=$(REQUIRE_kg-gta_odh-plc-01_VERSION)")
 
 # Configure autosave
 # Number of sequenced backup files to write
@@ -41,4 +37,4 @@ set_savefile_path("$(SAVEFILE_DIR)", "")
 set_pass0_restoreFile("kg-gta_odh-plc-01.sav")
 
 # Create monitor set
-create_monitor_set("kg-gta_odh-plc-01.req", 1, "")
+doAfterIocInit("create_monitor_set('kg-gta_odh-plc-01.req', 1, '')")
