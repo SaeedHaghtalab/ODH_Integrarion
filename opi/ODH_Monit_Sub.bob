@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<display version="2.0.0">
+  <name>Display</name>
+  <width>490</width>
+  <height>40</height>
+  <widget type="textupdate" version="2.0.0">
+    <name>Text Update_O2Level</name>
+    <pv_name>$(P)-$(R):O2Level</pv_name>
+    <x>93</x>
+    <y>4</y>
+    <width>55</width>
+    <precision>2</precision>
+    <wrap_words>false</wrap_words>
+  </widget>
+  <widget type="led" version="2.0.0">
+    <name>LED_LA</name>
+    <pv_name>$(P)-$(R):ODHWarning</pv_name>
+    <x>200</x>
+    <y>4</y>
+    <off_color>
+      <color name="Grid" red="169" green="169" blue="169">
+      </color>
+    </off_color>
+    <on_color>
+      <color name="MINOR" red="252" green="242" blue="17">
+      </color>
+    </on_color>
+  </widget>
+  <widget type="led" version="2.0.0">
+    <name>LED_LB</name>
+    <pv_name>$(P)-$(R):ODHAlarm</pv_name>
+    <x>287</x>
+    <y>4</y>
+    <off_color>
+      <color name="Grid" red="169" green="169" blue="169">
+      </color>
+    </off_color>
+    <on_color>
+      <color name="MAJOR" red="252" green="13" blue="27">
+      </color>
+    </on_color>
+  </widget>
+  <widget type="led" version="2.0.0">
+    <name>LED_OK</name>
+    <pv_name>$(P)-$(R):MonitHealthy</pv_name>
+    <x>374</x>
+    <y>4</y>
+    <off_color>
+      <color name="LED-RED-ON" red="255" green="60" blue="46">
+      </color>
+    </off_color>
+    <on_color>
+      <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+      </color>
+    </on_color>
+  </widget>
+  <widget type="led" version="2.0.0">
+    <name>LED_OK_1</name>
+    <pv_name>$(P)-$(R):Maint</pv_name>
+    <x>461</x>
+    <y>4</y>
+    <off_color>
+      <color name="Grid" red="169" green="169" blue="169">
+      </color>
+    </off_color>
+    <on_color>
+      <color name="MINOR" red="252" green="242" blue="17">
+      </color>
+    </on_color>
+  </widget>
+  <widget type="action_button" version="3.0.0">
+    <name>Action Button</name>
+    <actions>
+      <action type="open_display">
+        <file>ODH_Expert_Monit.bob</file>
+        <macros>
+          <P>$(P)-$(R)</P>
+          <R>$(R)</R>
+        </macros>
+        <target>standalone</target>
+        <description>ODH $(R)</description>
+      </action>
+    </actions>
+    <x>10</x>
+    <y>4</y>
+    <width>60</width>
+    <height>20</height>
+    <tooltip>$(actions)</tooltip>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label</name>
+    <text>%</text>
+    <x>153</x>
+    <y>4</y>
+    <width>14</width>
+    <height>21</height>
+    <auto_size>true</auto_size>
+  </widget>
+</display>

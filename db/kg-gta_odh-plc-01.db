@@ -1,0 +1,5181 @@
+
+record(stringin, "KG-GTA:ODH-PLC-01:ModVersionR") {
+	field(DISP, "1")
+	field(VAL,  "$(MODVERSION=N/A)")
+	field(PINI, "YES")
+}
+
+#########################################################
+########## EPICS <-> PLC connection management ##########
+#########################################################
+record(asyn, "KG-GTA:ODH-PLC-01:iAsyn") {
+	field(DTYP,	"asynRecordDevice")
+	field(PORT,	"$(PLCNAME)")
+}
+record(bi, "KG-GTA:ODH-PLC-01:ModbusConnectedR") {
+	field(DESC,	"Shows if the MODBUS channel connected")
+	field(INP,	"KG-GTA:ODH-PLC-01:iAsyn.CNCT CP")
+	field(ONAM,	"Connected")
+	field(ZNAM,	"Disconnected")
+	field(ZSV,      "MAJOR")
+	field(FLNK,	"KG-GTA:ODH-PLC-01:CommsHashToPLCS")
+}
+record(bi, "KG-GTA:ODH-PLC-01:S7ConnectedR") {
+	field(DESC,	"Shows if the S7 channel is connected")
+	field(SCAN,	"I/O Intr")
+	field(DTYP,	"S7plc stat")
+	field(INP,	"@$(PLCNAME)")
+	field(ONAM,	"Connected")
+	field(ZNAM,	"Disconnected")
+	field(ZSV,      "MAJOR")
+}
+record(calcout, "KG-GTA:ODH-PLC-01:iCalcConn") {
+	field(INPA,	"KG-GTA:ODH-PLC-01:S7ConnectedR CP")
+	field(INPB,	"KG-GTA:ODH-PLC-01:ModbusConnectedR CP")
+	field(CALC,	"A && B")
+	field(OUT,	"KG-GTA:ODH-PLC-01:ConnectedR PP")
+}
+record(bi, "KG-GTA:ODH-PLC-01:ConnectedR") {
+	field(DESC,	"Shows if the PLC is connected")
+	field(ONAM,	"Connected")
+	field(ZNAM,	"Disconnected")
+	field(ZSV,      "MAJOR")
+}
+record(bi, "KG-GTA:ODH-PLC-01:PLCHashCorrectR") {
+	field(DESC,	"Shows if the comms hash is correct")
+	field(ONAM,	"Correct")
+	field(ZNAM,	"Incorrect")
+	field(ZSV,      "MAJOR")
+}
+record(bi, "KG-GTA:ODH-PLC-01:AliveR") {
+	alias("KG-GTA:ODH-PLC-01:CommsOK")
+	field(DESC,	"Shows if the PLC is sending heartbeats")
+	field(ONAM,	"Alive")
+	field(ZNAM,	"Not responding")
+	field(ZSV,      "MAJOR")
+}
+record(calcout, "KG-GTA:ODH-PLC-01:iCheckHash") {
+	field(INPA,	"KG-GTA:ODH-PLC-01:iCommsHashToPLC")
+	field(INPB,	"KG-GTA:ODH-PLC-01:CommsHashFromPLCR")
+	field(CALC,	"A = B")
+	field(OOPT,	"On Change")
+	field(OUT,	"KG-GTA:ODH-PLC-01:PLCHashCorrectR PP")
+}
+record(bi, "KG-GTA:ODH-PLC-01:iOne") {
+	field(DISP,	"1")
+	field(PINI,	"YES")
+	field(VAL,	"1")
+}
+record(bo, "KG-GTA:ODH-PLC-01:iGotHeartbeat") {
+	field(DOL,	"KG-GTA:ODH-PLC-01:iOne")
+	field(OMSL,	"closed_loop")
+	field(OUT,	"KG-GTA:ODH-PLC-01:iKickAlive PP")
+}
+record(bo, "KG-GTA:ODH-PLC-01:iKickAlive") {
+	field(HIGH,	"5")
+	field(OUT,	"KG-GTA:ODH-PLC-01:AliveR PP")
+}
+
+########################################################
+########## EPICS -> PLC comms management data ##########
+########################################################
+record(ao, "KG-GTA:ODH-PLC-01:iCommsHashToPLC") {
+	field(DISP,	"1")
+	field(PINI,	"YES")
+	field(VAL,	"718980072")
+}
+record(ao, "KG-GTA:ODH-PLC-01:CommsHashToPLCS") {
+	field(DESC,	"Sends comms hash to PLC")
+	field(SCAN,	"1 second")
+	field(DTYP,	"asynInt32")
+	field(OUT,	"@asyn($(PLCNAME)write, 0, 100)INT32_BE")
+	field(OMSL,	"closed_loop")
+	field(DOL,	"KG-GTA:ODH-PLC-01:iCommsHashToPLC")
+	field(DISV,	"0")
+	field(SDIS,	"KG-GTA:ODH-PLC-01:ModbusConnectedR")
+}
+record(calc, "KG-GTA:ODH-PLC-01:iHeartbeatToPLC") {
+	field(SCAN,	"1 second")
+	field(INPA,	"KG-GTA:ODH-PLC-01:iHeartbeatToPLC.VAL")
+	field(CALC,	"(A >= 32000)? 0 : A + 1")
+	field(FLNK,	"KG-GTA:ODH-PLC-01:HeartbeatToPLCS")
+	field(DISV,	"0")
+	field(SDIS,	"KG-GTA:ODH-PLC-01:ModbusConnectedR")
+}
+record(ao, "KG-GTA:ODH-PLC-01:HeartbeatToPLCS") {
+	field(DESC,	"Sends heartbeat to PLC")
+	field(DTYP,	"asynInt32")
+	field(OUT,	"@asyn($(PLCNAME)write, 2, 100)")
+	field(OMSL,	"closed_loop")
+	field(DOL,	"KG-GTA:ODH-PLC-01:iHeartbeatToPLC.VAL")
+	field(OIF,	"Full")
+	field(DRVL,	"0")
+	field(DRVH,	"32000")
+	field(DISV,	"0")
+	field(SDIS,	"KG-GTA:ODH-PLC-01:ModbusConnectedR")
+}
+
+########################################################
+########## PLC -> EPICS comms management data ##########
+########################################################
+record(ai, "KG-GTA:ODH-PLC-01:CommsHashFromPLCR") {
+	field(DESC,	"Comms hash from PLC")
+	field(SCAN,	"I/O Intr")
+	field(DTYP,	"S7plc")
+	field(INP,	"@$(PLCNAME)/0 T=INT32")
+	field(FLNK,	"KG-GTA:ODH-PLC-01:iCheckHash")
+}
+record(ai, "KG-GTA:ODH-PLC-01:HeartbeatFromPLCR") {
+	field(DESC,	"Heartbeat from PLC")
+	field(SCAN,	"I/O Intr")
+	field(DTYP,	"S7plc")
+	field(INP,	"@$(PLCNAME)/4 T=INT16")
+	field(FLNK,	"KG-GTA:ODH-PLC-01:iGotHeartbeat")
+	field(DISS,	"INVALID")
+	field(DISV,	"0")
+	field(SDIS,	"KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+}
+
+
+##########
+########## KG-GTA:ODH-PLC-01 ##########
+##########
+########## StatusWordsLength: 10
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## KG-GTA:ODH-PLC-01 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("SW_Checksum",  "DWORD", PV_DESC="Standard blocks checksum")
+record(ai, "KG-GTA:ODH-PLC-01:SW_Checksum")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/20 T=UINT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Standard blocks checksum")
+}
+
+#<<<--- add_analog("Text_Checksum","DWORD", PV_DESC="Text lists checksum")
+record(ai, "KG-GTA:ODH-PLC-01:Text_Checksum")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/24 T=UINT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Text lists checksum")
+}
+
+
+#################################
+#CPU modules
+#<<<--- add_digital("CPU_Connected",       PV_DESC="ODH CPU Connected",       PV_ONAM="Connected",  PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:CPU_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/28 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH CPU Connected")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("CPU_Status",          PV_DESC="ODH CPU Status",          PV_ONAM="OK",         PV_ZNAM="NOK")
+record(bi, "KG-GTA:ODH-PLC-01:CPU_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/28 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "ODH CPU Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK")
+}
+
+
+#################################
+#RIO1 Connection
+#<<<--- add_digital("RIO1_IM_Connected",     PV_DESC="RIO Interface Module Connection", PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_IM_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/28 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO Interface Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO1_DI1_Connected",    PV_DESC="RIO DI1 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_DI1_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/28 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI1 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO1_DI2_Connected",    PV_DESC="RIO DI2 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_DI2_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/28 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI2 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO1_DI3_Connected",    PV_DESC="RIO DI3 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_DI3_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/28 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI3 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO1_DI4_Connected",    PV_DESC="RIO DI4 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_DI4_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/28 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI4 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO1_DI5_Connected",    PV_DESC="RIO DI5 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_DI5_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/28 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI5 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO1_AI1_Connected",    PV_DESC="RIO AI1 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_AI1_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/28 T=UINT16 B=8")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO AI1 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO1_AI2_Connected",    PV_DESC="RIO AI2 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_AI2_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/28 T=UINT16 B=9")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO AI2 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO1_AI3_Connected",    PV_DESC="RIO AI3 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_AI3_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/28 T=UINT16 B=10")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO AI3 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO1_AI4_Connected",    PV_DESC="RIO AI4 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_AI4_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/28 T=UINT16 B=11")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO AI4 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO1_DO1_Connected",    PV_DESC="RIO DO1 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_DO1_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/28 T=UINT16 B=12")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DO1 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO1_DO2_Connected",    PV_DESC="RIO DO2 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_DO2_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/28 T=UINT16 B=13")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DO2 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO1_DO3_Connected",    PV_DESC="RIO DO3 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_DO3_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/28 T=UINT16 B=14")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DO3 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO1_SvrMod_Connected", PV_DESC="RIO Server Module Connection",    PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_SvrMod_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/28 T=UINT16 B=15")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO Server Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+
+#RIO1 Status
+#<<<--- add_digital("RIO1_IM_Status",     PV_DESC="RIO Interface Module Status", PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_IM_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/30 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO Interface Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO1_DI1_Status",    PV_DESC="RIO DI1 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_DI1_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/30 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI1 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO1_DI2_Status",    PV_DESC="RIO DI2 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_DI2_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/30 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI2 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO1_DI3_Status",    PV_DESC="RIO DI3 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_DI3_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/30 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI3 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO1_DI4_Status",    PV_DESC="RIO DI4 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_DI4_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/30 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI4 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO1_DI5_Status",    PV_DESC="RIO DI5 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_DI5_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/30 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI5 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO1_AI1_Status",    PV_DESC="RIO AI1 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_AI1_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/30 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO AI1 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO1_AI2_Status",    PV_DESC="RIO AI2 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_AI2_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/30 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO AI2 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO1_AI3_Status",    PV_DESC="RIO AI3 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_AI3_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/30 T=UINT16 B=8")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO AI3 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO1_AI4_Status",    PV_DESC="RIO AI4 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_AI4_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/30 T=UINT16 B=9")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO AI4 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO1_DO1_Status",    PV_DESC="RIO DO1 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_DO1_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/30 T=UINT16 B=10")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DO1 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO1_DO2_Status",    PV_DESC="RIO DO2 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_DO2_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/30 T=UINT16 B=11")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DO2 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO1_DO3_Status",    PV_DESC="RIO DO3 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_DO3_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/30 T=UINT16 B=12")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DO3 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO1_SvrMod_Status", PV_DESC="RIO Server Module Status",    PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO1_SvrMod_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/30 T=UINT16 B=13")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO Server Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+
+#################################
+#RIO2 Connection
+#<<<--- add_digital("RIO2_IM_Connected",     PV_DESC="RIO Interface Module Connection", PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_IM_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/30 T=UINT16 B=14")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO Interface Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO2_DI1_Connected",    PV_DESC="RIO DI1 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_DI1_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/30 T=UINT16 B=15")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI1 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO2_DI2_Connected",    PV_DESC="RIO DI2 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_DI2_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/32 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI2 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO2_DI3_Connected",    PV_DESC="RIO DI3 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_DI3_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/32 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI3 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO2_DI4_Connected",    PV_DESC="RIO DI4 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_DI4_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/32 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI4 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO2_DI5_Connected",    PV_DESC="RIO DI5 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_DI5_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/32 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI5 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO2_AI1_Connected",    PV_DESC="RIO AI1 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_AI1_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/32 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO AI1 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO2_AI2_Connected",    PV_DESC="RIO AI2 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_AI2_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/32 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO AI2 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO2_AI3_Connected",    PV_DESC="RIO AI3 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_AI3_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/32 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO AI3 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO2_AI4_Connected",    PV_DESC="RIO AI4 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_AI4_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/32 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO AI4 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO2_DO1_Connected",    PV_DESC="RIO DO1 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_DO1_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/32 T=UINT16 B=8")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DO1 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO2_DO2_Connected",    PV_DESC="RIO DO2 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_DO2_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/32 T=UINT16 B=9")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DO2 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO2_DO3_Connected",    PV_DESC="RIO DO3 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_DO3_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/32 T=UINT16 B=10")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DO3 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO2_SvrMod_Connected", PV_DESC="RIO Server Module Connection",    PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_SvrMod_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/32 T=UINT16 B=11")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO Server Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+
+#RIO2 Status
+#<<<--- add_digital("RIO2_IM_Status",     PV_DESC="RIO Interface Module Status", PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_IM_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/32 T=UINT16 B=12")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO Interface Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO2_DI1_Status",    PV_DESC="RIO DI1 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_DI1_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/32 T=UINT16 B=13")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI1 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO2_DI2_Status",    PV_DESC="RIO DI2 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_DI2_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/32 T=UINT16 B=14")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI2 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO2_DI3_Status",    PV_DESC="RIO DI3 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_DI3_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/32 T=UINT16 B=15")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI3 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO2_DI4_Status",    PV_DESC="RIO DI4 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_DI4_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/34 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI4 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO2_DI5_Status",    PV_DESC="RIO DI5 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_DI5_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/34 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI5 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO2_AI1_Status",    PV_DESC="RIO AI1 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_AI1_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/34 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO AI1 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO2_AI2_Status",    PV_DESC="RIO AI2 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_AI2_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/34 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO AI2 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO2_AI3_Status",    PV_DESC="RIO AI3 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_AI3_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/34 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO AI3 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO2_AI4_Status",    PV_DESC="RIO AI4 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_AI4_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/34 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO AI4 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO2_DO1_Status",    PV_DESC="RIO DO1 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_DO1_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/34 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DO1 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO2_DO2_Status",    PV_DESC="RIO DO2 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_DO2_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/34 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DO2 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO2_DO3_Status",    PV_DESC="RIO DO3 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_DO3_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/34 T=UINT16 B=8")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DO3 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO2_SvrMod_Status", PV_DESC="RIO Server Module Status",    PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO2_SvrMod_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/34 T=UINT16 B=9")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO Server Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+
+
+#################################
+#RIO3 Connection
+#<<<--- add_digital("RIO3_IM_Connected",     PV_DESC="RIO Interface Module Connection", PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_IM_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/34 T=UINT16 B=10")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO Interface Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO3_DI1_Connected",    PV_DESC="RIO DI1 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_DI1_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/34 T=UINT16 B=11")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI1 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO3_DI2_Connected",    PV_DESC="RIO DI2 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_DI2_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/34 T=UINT16 B=12")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI2 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO3_DI3_Connected",    PV_DESC="RIO DI3 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_DI3_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/34 T=UINT16 B=13")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI3 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO3_DI4_Connected",    PV_DESC="RIO DI4 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_DI4_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/34 T=UINT16 B=14")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI4 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO3_DI5_Connected",    PV_DESC="RIO DI5 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_DI5_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/34 T=UINT16 B=15")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI5 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO3_AI1_Connected",    PV_DESC="RIO AI1 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_AI1_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/36 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO AI1 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO3_AI2_Connected",    PV_DESC="RIO AI2 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_AI2_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/36 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO AI2 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO3_AI3_Connected",    PV_DESC="RIO AI3 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_AI3_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/36 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO AI3 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO3_AI4_Connected",    PV_DESC="RIO AI4 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_AI4_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/36 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO AI4 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO3_DO1_Connected",    PV_DESC="RIO DO1 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_DO1_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/36 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DO1 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO3_DO2_Connected",    PV_DESC="RIO DO2 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_DO2_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/36 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DO2 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO3_DO3_Connected",    PV_DESC="RIO DO3 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_DO3_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/36 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DO3 Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("RIO3_SvrMod_Connected", PV_DESC="RIO Server Module Connection",    PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_SvrMod_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/36 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO Server Module Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+
+#RIO3 Status
+#<<<--- add_digital("RIO3_IM_Status",     PV_DESC="RIO Interface Module Status", PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_IM_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/36 T=UINT16 B=8")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO Interface Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO3_DI1_Status",    PV_DESC="RIO DI1 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_DI1_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/36 T=UINT16 B=9")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI1 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO3_DI2_Status",    PV_DESC="RIO DI2 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_DI2_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/36 T=UINT16 B=10")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI2 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO3_DI3_Status",    PV_DESC="RIO DI3 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_DI3_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/36 T=UINT16 B=11")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI3 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO3_DI4_Status",    PV_DESC="RIO DI4 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_DI4_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/36 T=UINT16 B=12")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI4 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO3_DI5_Status",    PV_DESC="RIO DI5 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_DI5_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/36 T=UINT16 B=13")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DI5 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO3_AI1_Status",    PV_DESC="RIO AI1 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_AI1_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/36 T=UINT16 B=14")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO AI1 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO3_AI2_Status",    PV_DESC="RIO AI2 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_AI2_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/36 T=UINT16 B=15")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO AI2 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO3_AI3_Status",    PV_DESC="RIO AI3 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_AI3_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/38 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO AI3 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO3_AI4_Status",    PV_DESC="RIO AI4 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_AI4_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/38 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO AI4 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO3_DO1_Status",    PV_DESC="RIO DO1 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_DO1_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/38 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DO1 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO3_DO2_Status",    PV_DESC="RIO DO2 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_DO2_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/38 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DO2 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO3_DO3_Status",    PV_DESC="RIO DO3 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_DO3_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/38 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO DO3 Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("RIO3_SvrMod_Status", PV_DESC="RIO Server Module Status",    PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:RIO3_SvrMod_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/38 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "RIO Server Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+
+
+
+##########
+########## CTLG-CS:ODH-Area ##########
+##########
+########## StatusWordsLength: 1
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## CTLG-CS:ODH-Area PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_digital("Alarm",                           PV_DESC="Alarm devices are On in the building",            PV_ONAM="True",    PV_ZNAM="False")
+record(bi, "CTLG-CS:ODH-Area:Alarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/40 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Alarm devices are On in the building")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("WarmUp",                          PV_DESC="All monitors finished WarmedUp process",          PV_ONAM="True",    PV_ZNAM="False")
+record(bi, "CTLG-CS:ODH-Area:WarmUp")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/40 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "All monitors finished WarmedUp process")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_major_alarm("ConnLost", "Lost Connection", PV_DESC="At least 2 monitors lost communication",          PV_ONAM="True",    PV_ZNAM="False")
+record(bi, "CTLG-CS:ODH-Area:ConnLost")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/40 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "At least 2 monitors lost communication")
+	field(ONAM, "True")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "False")
+}
+
+
+
+
+##########
+########## CXB-CXH:ODH-Area ##########
+##########
+########## StatusWordsLength: 1
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## CXB-CXH:ODH-Area PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_digital("Alarm",                           PV_DESC="Alarm devices are On in the building",            PV_ONAM="True",    PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-Area:Alarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/42 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Alarm devices are On in the building")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("WarmUp",                          PV_DESC="All monitors finished WarmedUp process",          PV_ONAM="True",    PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-Area:WarmUp")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/42 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "All monitors finished WarmedUp process")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_major_alarm("ConnLost", "Lost Connection", PV_DESC="At least 2 monitors lost communication",          PV_ONAM="True",    PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-Area:ConnLost")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/42 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "At least 2 monitors lost communication")
+	field(ONAM, "True")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "False")
+}
+
+
+
+
+##########
+########## HCB-ACH:ODH-Area ##########
+##########
+########## StatusWordsLength: 1
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-ACH:ODH-Area PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_digital("Alarm",                           PV_DESC="Alarm devices are On in the building",            PV_ONAM="True",    PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-Area:Alarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/44 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Alarm devices are On in the building")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("WarmUp",                          PV_DESC="All monitors finished WarmedUp process",          PV_ONAM="True",    PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-Area:WarmUp")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/44 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "All monitors finished WarmedUp process")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_major_alarm("ConnLost", "Lost Connection", PV_DESC="At least 2 monitors lost communication",          PV_ONAM="True",    PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-Area:ConnLost")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/44 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "At least 2 monitors lost communication")
+	field(ONAM, "True")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "False")
+}
+
+
+
+
+##########
+########## CTLG-CS:ODH-O2iM-20 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## CTLG-CS:ODH-O2iM-20 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+record(ai, "CTLG-CS:ODH-O2iM-20:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/46 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Level of Oxygen in percent")
+}
+
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CTLG-CS:ODH-O2iM-20:ODHAlarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/50 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 19.5%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CTLG-CS:ODH-O2iM-20:ODHWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/50 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 18%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
+record(bi, "CTLG-CS:ODH-O2iM-20:MonitHealthy")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/50 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CTLG-CS:ODH-O2iM-20:Maint")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/50 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor is in maintenance mode")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CTLG-CS:ODH-O2iM-20:MonitWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/50 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Fault in ODH monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CTLG-CS:ODH-O2iM-20:SysOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/50 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CTLG-CS:ODH-O2iM-20:WarmUp")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/50 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor has warmed-up")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CTLG-CS:ODH-O2iM-20:ConnLost")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/50 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Lost communication with monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+
+
+
+##########
+########## CTLG-CS:ODH-O2iM-21 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## CTLG-CS:ODH-O2iM-21 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+record(ai, "CTLG-CS:ODH-O2iM-21:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/52 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Level of Oxygen in percent")
+}
+
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CTLG-CS:ODH-O2iM-21:ODHAlarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/56 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 19.5%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CTLG-CS:ODH-O2iM-21:ODHWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/56 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 18%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
+record(bi, "CTLG-CS:ODH-O2iM-21:MonitHealthy")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/56 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CTLG-CS:ODH-O2iM-21:Maint")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/56 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor is in maintenance mode")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CTLG-CS:ODH-O2iM-21:MonitWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/56 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Fault in ODH monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CTLG-CS:ODH-O2iM-21:SysOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/56 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CTLG-CS:ODH-O2iM-21:WarmUp")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/56 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor has warmed-up")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CTLG-CS:ODH-O2iM-21:ConnLost")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/56 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Lost communication with monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+
+
+
+##########
+########## CTLG-CS:ODH-O2iM-22 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## CTLG-CS:ODH-O2iM-22 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+record(ai, "CTLG-CS:ODH-O2iM-22:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/58 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Level of Oxygen in percent")
+}
+
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CTLG-CS:ODH-O2iM-22:ODHAlarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/62 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 19.5%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CTLG-CS:ODH-O2iM-22:ODHWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/62 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 18%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
+record(bi, "CTLG-CS:ODH-O2iM-22:MonitHealthy")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/62 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CTLG-CS:ODH-O2iM-22:Maint")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/62 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor is in maintenance mode")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CTLG-CS:ODH-O2iM-22:MonitWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/62 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Fault in ODH monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CTLG-CS:ODH-O2iM-22:SysOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/62 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CTLG-CS:ODH-O2iM-22:WarmUp")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/62 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor has warmed-up")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CTLG-CS:ODH-O2iM-22:ConnLost")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/62 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Lost communication with monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+
+
+
+##########
+########## CXB-CXH:ODH-O2iM-13 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## CXB-CXH:ODH-O2iM-13 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+record(ai, "CXB-CXH:ODH-O2iM-13:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/64 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Level of Oxygen in percent")
+}
+
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-13:ODHAlarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/68 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 19.5%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-13:ODHWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/68 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 18%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
+record(bi, "CXB-CXH:ODH-O2iM-13:MonitHealthy")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/68 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-13:Maint")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/68 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor is in maintenance mode")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-13:MonitWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/68 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Fault in ODH monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-13:SysOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/68 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-13:WarmUp")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/68 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor has warmed-up")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-13:ConnLost")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/68 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Lost communication with monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+
+
+
+##########
+########## CXB-CXH:ODH-O2iM-14 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## CXB-CXH:ODH-O2iM-14 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+record(ai, "CXB-CXH:ODH-O2iM-14:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/70 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Level of Oxygen in percent")
+}
+
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-14:ODHAlarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/74 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 19.5%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-14:ODHWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/74 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 18%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
+record(bi, "CXB-CXH:ODH-O2iM-14:MonitHealthy")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/74 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-14:Maint")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/74 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor is in maintenance mode")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-14:MonitWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/74 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Fault in ODH monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-14:SysOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/74 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-14:WarmUp")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/74 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor has warmed-up")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-14:ConnLost")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/74 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Lost communication with monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+
+
+
+##########
+########## CXB-CXH:ODH-O2iM-15 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## CXB-CXH:ODH-O2iM-15 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+record(ai, "CXB-CXH:ODH-O2iM-15:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/76 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Level of Oxygen in percent")
+}
+
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-15:ODHAlarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/80 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 19.5%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-15:ODHWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/80 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 18%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
+record(bi, "CXB-CXH:ODH-O2iM-15:MonitHealthy")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/80 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-15:Maint")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/80 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor is in maintenance mode")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-15:MonitWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/80 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Fault in ODH monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-15:SysOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/80 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-15:WarmUp")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/80 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor has warmed-up")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-15:ConnLost")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/80 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Lost communication with monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+
+
+
+##########
+########## CXB-CXH:ODH-O2iM-16 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## CXB-CXH:ODH-O2iM-16 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+record(ai, "CXB-CXH:ODH-O2iM-16:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/82 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Level of Oxygen in percent")
+}
+
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-16:ODHAlarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/86 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 19.5%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-16:ODHWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/86 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 18%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
+record(bi, "CXB-CXH:ODH-O2iM-16:MonitHealthy")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/86 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-16:Maint")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/86 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor is in maintenance mode")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-16:MonitWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/86 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Fault in ODH monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-16:SysOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/86 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-16:WarmUp")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/86 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor has warmed-up")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-16:ConnLost")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/86 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Lost communication with monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+
+
+
+##########
+########## CXB-CXH:ODH-O2iM-17 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## CXB-CXH:ODH-O2iM-17 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+record(ai, "CXB-CXH:ODH-O2iM-17:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/88 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Level of Oxygen in percent")
+}
+
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-17:ODHAlarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/92 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 19.5%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-17:ODHWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/92 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 18%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
+record(bi, "CXB-CXH:ODH-O2iM-17:MonitHealthy")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/92 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-17:Maint")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/92 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor is in maintenance mode")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-17:MonitWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/92 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Fault in ODH monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-17:SysOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/92 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-17:WarmUp")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/92 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor has warmed-up")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-17:ConnLost")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/92 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Lost communication with monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+
+
+
+##########
+########## CXB-CXH:ODH-O2iM-18 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## CXB-CXH:ODH-O2iM-18 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+record(ai, "CXB-CXH:ODH-O2iM-18:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/94 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Level of Oxygen in percent")
+}
+
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-18:ODHAlarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/98 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 19.5%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-18:ODHWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/98 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 18%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
+record(bi, "CXB-CXH:ODH-O2iM-18:MonitHealthy")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/98 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-18:Maint")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/98 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor is in maintenance mode")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-18:MonitWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/98 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Fault in ODH monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-18:SysOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/98 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-18:WarmUp")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/98 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor has warmed-up")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-18:ConnLost")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/98 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Lost communication with monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+
+
+
+##########
+########## CXB-CXH:ODH-O2iM-19 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## CXB-CXH:ODH-O2iM-19 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+record(ai, "CXB-CXH:ODH-O2iM-19:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/100 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Level of Oxygen in percent")
+}
+
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-19:ODHAlarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/104 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 19.5%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-19:ODHWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/104 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 18%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
+record(bi, "CXB-CXH:ODH-O2iM-19:MonitHealthy")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/104 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-19:Maint")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/104 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor is in maintenance mode")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-19:MonitWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/104 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Fault in ODH monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-19:SysOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/104 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "CXB-CXH:ODH-O2iM-19:WarmUp")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/104 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor has warmed-up")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-19:ConnLost")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/104 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Lost communication with monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+
+
+
+##########
+########## HCB-ACH:ODH-O2iM-1 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-ACH:ODH-O2iM-1 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+record(ai, "HCB-ACH:ODH-O2iM-1:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/106 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Level of Oxygen in percent")
+}
+
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-O2iM-1:ODHAlarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/110 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 19.5%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-O2iM-1:ODHWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/110 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 18%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
+record(bi, "HCB-ACH:ODH-O2iM-1:MonitHealthy")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/110 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-O2iM-1:Maint")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/110 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor is in maintenance mode")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-O2iM-1:MonitWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/110 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Fault in ODH monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-O2iM-1:SysOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/110 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-O2iM-1:WarmUp")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/110 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor has warmed-up")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-O2iM-1:ConnLost")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/110 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Lost communication with monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+
+
+
+##########
+########## HCB-ACH:ODH-O2iM-2 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-ACH:ODH-O2iM-2 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+record(ai, "HCB-ACH:ODH-O2iM-2:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/112 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Level of Oxygen in percent")
+}
+
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-O2iM-2:ODHAlarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/116 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 19.5%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-O2iM-2:ODHWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/116 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 18%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
+record(bi, "HCB-ACH:ODH-O2iM-2:MonitHealthy")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/116 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-O2iM-2:Maint")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/116 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor is in maintenance mode")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-O2iM-2:MonitWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/116 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Fault in ODH monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-O2iM-2:SysOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/116 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-O2iM-2:WarmUp")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/116 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor has warmed-up")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-O2iM-2:ConnLost")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/116 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Lost communication with monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+
+
+
+##########
+########## HCB-ACH:ODH-O2iM-3 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-ACH:ODH-O2iM-3 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+record(ai, "HCB-ACH:ODH-O2iM-3:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/118 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Level of Oxygen in percent")
+}
+
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-O2iM-3:ODHAlarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/122 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 19.5%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-O2iM-3:ODHWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/122 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 18%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
+record(bi, "HCB-ACH:ODH-O2iM-3:MonitHealthy")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/122 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-O2iM-3:Maint")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/122 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor is in maintenance mode")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-O2iM-3:MonitWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/122 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Fault in ODH monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-O2iM-3:SysOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/122 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-O2iM-3:WarmUp")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/122 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor has warmed-up")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-O2iM-3:ConnLost")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/122 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Lost communication with monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+
+
+
+##########
+########## HCB-ACH:ODH-O2iM-4 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-ACH:ODH-O2iM-4 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+record(ai, "HCB-ACH:ODH-O2iM-4:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/124 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Level of Oxygen in percent")
+}
+
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-O2iM-4:ODHAlarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/128 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 19.5%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-O2iM-4:ODHWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/128 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 18%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
+record(bi, "HCB-ACH:ODH-O2iM-4:MonitHealthy")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/128 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-O2iM-4:Maint")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/128 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor is in maintenance mode")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-O2iM-4:MonitWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/128 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Fault in ODH monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-O2iM-4:SysOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/128 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-O2iM-4:WarmUp")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/128 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor has warmed-up")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-O2iM-4:ConnLost")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/128 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Lost communication with monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+
+
+
+##########
+########## HCB-ACH:ODH-O2iM-5 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-ACH:ODH-O2iM-5 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+record(ai, "HCB-ACH:ODH-O2iM-5:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/130 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Level of Oxygen in percent")
+}
+
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-O2iM-5:ODHAlarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/134 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 19.5%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-O2iM-5:ODHWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/134 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 18%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
+record(bi, "HCB-ACH:ODH-O2iM-5:MonitHealthy")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/134 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-O2iM-5:Maint")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/134 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor is in maintenance mode")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-O2iM-5:MonitWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/134 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Fault in ODH monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-O2iM-5:SysOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/134 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-ACH:ODH-O2iM-5:WarmUp")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/134 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor has warmed-up")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-O2iM-5:ConnLost")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/134 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Lost communication with monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+
+
+
+##########
+########## HCB-DogSh:ODH-O2iM-12 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-DogSh:ODH-O2iM-12 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+record(ai, "HCB-DogSh:ODH-O2iM-12:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/136 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Level of Oxygen in percent")
+}
+
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-DogSh:ODH-O2iM-12:ODHAlarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/140 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 19.5%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-DogSh:ODH-O2iM-12:ODHWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/140 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 18%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
+record(bi, "HCB-DogSh:ODH-O2iM-12:MonitHealthy")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/140 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-DogSh:ODH-O2iM-12:Maint")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/140 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor is in maintenance mode")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-DogSh:ODH-O2iM-12:MonitWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/140 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Fault in ODH monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-DogSh:ODH-O2iM-12:SysOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/140 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-DogSh:ODH-O2iM-12:WarmUp")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/140 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor has warmed-up")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-DogSh:ODH-O2iM-12:ConnLost")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/140 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Lost communication with monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+
+
+
+##########
+########## HCB-HPGS:ODH-O2iM-10 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-HPGS:ODH-O2iM-10 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+record(ai, "HCB-HPGS:ODH-O2iM-10:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/142 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Level of Oxygen in percent")
+}
+
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-HPGS:ODH-O2iM-10:ODHAlarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/146 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 19.5%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-HPGS:ODH-O2iM-10:ODHWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/146 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 18%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
+record(bi, "HCB-HPGS:ODH-O2iM-10:MonitHealthy")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/146 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-HPGS:ODH-O2iM-10:Maint")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/146 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor is in maintenance mode")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-HPGS:ODH-O2iM-10:MonitWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/146 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Fault in ODH monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-HPGS:ODH-O2iM-10:SysOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/146 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-HPGS:ODH-O2iM-10:WarmUp")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/146 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor has warmed-up")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-HPGS:ODH-O2iM-10:ConnLost")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/146 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Lost communication with monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+
+
+
+##########
+########## HCB-HPGS:ODH-O2iM-11 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-HPGS:ODH-O2iM-11 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+record(ai, "HCB-HPGS:ODH-O2iM-11:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/148 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Level of Oxygen in percent")
+}
+
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-HPGS:ODH-O2iM-11:ODHAlarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/152 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 19.5%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-HPGS:ODH-O2iM-11:ODHWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/152 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 18%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
+record(bi, "HCB-HPGS:ODH-O2iM-11:MonitHealthy")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/152 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-HPGS:ODH-O2iM-11:Maint")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/152 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor is in maintenance mode")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-HPGS:ODH-O2iM-11:MonitWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/152 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Fault in ODH monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-HPGS:ODH-O2iM-11:SysOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/152 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-HPGS:ODH-O2iM-11:WarmUp")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/152 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor has warmed-up")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-HPGS:ODH-O2iM-11:ConnLost")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/152 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Lost communication with monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+
+
+
+##########
+########## HCB-TCH:ODH-O2iM-6 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-TCH:ODH-O2iM-6 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+record(ai, "HCB-TCH:ODH-O2iM-6:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/154 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Level of Oxygen in percent")
+}
+
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-TCH:ODH-O2iM-6:ODHAlarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/158 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 19.5%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-TCH:ODH-O2iM-6:ODHWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/158 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 18%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
+record(bi, "HCB-TCH:ODH-O2iM-6:MonitHealthy")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/158 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-TCH:ODH-O2iM-6:Maint")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/158 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor is in maintenance mode")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-TCH:ODH-O2iM-6:MonitWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/158 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Fault in ODH monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-TCH:ODH-O2iM-6:SysOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/158 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-TCH:ODH-O2iM-6:WarmUp")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/158 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor has warmed-up")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-TCH:ODH-O2iM-6:ConnLost")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/158 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Lost communication with monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+
+
+
+##########
+########## HCB-TCH:ODH-O2iM-7 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-TCH:ODH-O2iM-7 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+record(ai, "HCB-TCH:ODH-O2iM-7:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/160 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Level of Oxygen in percent")
+}
+
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-TCH:ODH-O2iM-7:ODHAlarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/164 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 19.5%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-TCH:ODH-O2iM-7:ODHWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/164 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 18%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
+record(bi, "HCB-TCH:ODH-O2iM-7:MonitHealthy")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/164 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-TCH:ODH-O2iM-7:Maint")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/164 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor is in maintenance mode")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-TCH:ODH-O2iM-7:MonitWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/164 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Fault in ODH monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-TCH:ODH-O2iM-7:SysOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/164 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-TCH:ODH-O2iM-7:WarmUp")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/164 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor has warmed-up")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-TCH:ODH-O2iM-7:ConnLost")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/164 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Lost communication with monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+
+
+
+##########
+########## HCB-TCH:ODH-O2iM-8 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-TCH:ODH-O2iM-8 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+record(ai, "HCB-TCH:ODH-O2iM-8:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/166 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Level of Oxygen in percent")
+}
+
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-TCH:ODH-O2iM-8:ODHAlarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/170 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 19.5%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-TCH:ODH-O2iM-8:ODHWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/170 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 18%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
+record(bi, "HCB-TCH:ODH-O2iM-8:MonitHealthy")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/170 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-TCH:ODH-O2iM-8:Maint")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/170 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor is in maintenance mode")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-TCH:ODH-O2iM-8:MonitWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/170 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Fault in ODH monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-TCH:ODH-O2iM-8:SysOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/170 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-TCH:ODH-O2iM-8:WarmUp")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/170 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor has warmed-up")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-TCH:ODH-O2iM-8:ConnLost")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/170 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Lost communication with monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+
+
+
+##########
+########## HCB-TCH:ODH-O2iM-9 ##########
+##########
+########## StatusWordsLength: 3
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-TCH:ODH-O2iM-9 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+record(ai, "HCB-TCH:ODH-O2iM-9:O2Level")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/172 T=FLOAT32")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Level of Oxygen in percent")
+}
+
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-TCH:ODH-O2iM-9:ODHAlarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/176 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 19.5%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-TCH:ODH-O2iM-9:ODHWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/176 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Oxygen concentration < 18%")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
+record(bi, "HCB-TCH:ODH-O2iM-9:MonitHealthy")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/176 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-TCH:ODH-O2iM-9:Maint")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/176 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor is in maintenance mode")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-TCH:ODH-O2iM-9:MonitWarning")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/176 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Fault in ODH monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MINOR")
+	field(ZNAM, "OK")
+}
+
+#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-TCH:ODH-O2iM-9:SysOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/176 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Done self check without internal fault")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+record(bi, "HCB-TCH:ODH-O2iM-9:WarmUp")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/176 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Monitor has warmed-up")
+	field(ONAM, "True")
+	field(ZNAM, "False")
+}
+
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-TCH:ODH-O2iM-9:ConnLost")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/176 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Lost communication with monitor")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+
+
+
+##########
+########## CXB-CXH:ODH-RIO-2 ##########
+##########
+########## StatusWordsLength: 1
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## CXB-CXH:ODH-RIO-2 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_digital("SurgeArrOK",                PV_DESC="Rack surge arrestor is healthy",                PV_ONAM="OK",      PV_ZNAM="NOK!")
+record(bi, "CXB-CXH:ODH-RIO-2:SurgeArrOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/178 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Rack surge arrestor is healthy")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("PS24vOK",                   PV_DESC="Rack power supply is healthy",                  PV_ONAM="OK",      PV_ZNAM="NOK!")
+record(bi, "CXB-CXH:ODH-RIO-2:PS24vOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/178 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Rack power supply is healthy")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("UPSBatOK",                  PV_DESC="Rack UPS battery is healthy",                   PV_ONAM="OK",      PV_ZNAM="NOK!")
+record(bi, "CXB-CXH:ODH-RIO-2:UPSBatOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/178 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Rack UPS battery is healthy")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("UPS24vOK",                  PV_DESC="Rack UPS 24VDC is healthy",                     PV_ONAM="OK",      PV_ZNAM="NOK!")
+record(bi, "CXB-CXH:ODH-RIO-2:UPS24vOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/178 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Rack UPS 24VDC is healthy")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("UPSBuffReady",              PV_DESC="Rack UPS is ready to buffer",                   PV_ONAM="OK",      PV_ZNAM="NOK!")
+record(bi, "CXB-CXH:ODH-RIO-2:UPSBuffReady")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/178 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Rack UPS is ready to buffer")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("UPSBatt85",                 PV_DESC="Rack UPS battery > 85% charge",                 PV_ONAM="OK",      PV_ZNAM="NOK!")
+record(bi, "CXB-CXH:ODH-RIO-2:UPSBatt85")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/178 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Rack UPS battery > 85% charge")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_major_alarm("UPSAlarm", "UPS Alarm", PV_DESC="Rack UPS has an alarm",                         PV_ONAM="NOK!",    PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-RIO-2:UPSAlarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/178 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Rack UPS has an alarm")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+
+
+
+##########
+########## HCB-ACH:ODH-RIO-1 ##########
+##########
+########## StatusWordsLength: 1
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## HCB-ACH:ODH-RIO-1 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_digital("SurgeArrOK",                PV_DESC="Rack surge arrestor is healthy",                PV_ONAM="OK",      PV_ZNAM="NOK!")
+record(bi, "HCB-ACH:ODH-RIO-1:SurgeArrOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/180 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Rack surge arrestor is healthy")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("PS24vOK",                   PV_DESC="Rack power supply is healthy",                  PV_ONAM="OK",      PV_ZNAM="NOK!")
+record(bi, "HCB-ACH:ODH-RIO-1:PS24vOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/180 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Rack power supply is healthy")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("UPSBatOK",                  PV_DESC="Rack UPS battery is healthy",                   PV_ONAM="OK",      PV_ZNAM="NOK!")
+record(bi, "HCB-ACH:ODH-RIO-1:UPSBatOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/180 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Rack UPS battery is healthy")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("UPS24vOK",                  PV_DESC="Rack UPS 24VDC is healthy",                     PV_ONAM="OK",      PV_ZNAM="NOK!")
+record(bi, "HCB-ACH:ODH-RIO-1:UPS24vOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/180 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Rack UPS 24VDC is healthy")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("UPSBuffReady",              PV_DESC="Rack UPS is ready to buffer",                   PV_ONAM="OK",      PV_ZNAM="NOK!")
+record(bi, "HCB-ACH:ODH-RIO-1:UPSBuffReady")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/180 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Rack UPS is ready to buffer")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("UPSBatt85",                 PV_DESC="Rack UPS battery > 85% charge",                 PV_ONAM="OK",      PV_ZNAM="NOK!")
+record(bi, "HCB-ACH:ODH-RIO-1:UPSBatt85")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/180 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Rack UPS battery > 85% charge")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_major_alarm("UPSAlarm", "UPS Alarm", PV_DESC="Rack UPS has an alarm",                         PV_ONAM="NOK!",    PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-RIO-1:UPSAlarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/180 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Rack UPS has an alarm")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+
+
+
+##########
+########## TS2-020Row:CnPw-U-001 ##########
+##########
+########## StatusWordsLength: 1
+##########
+
+############################ ODH Detection System   ##############################
+############################
+#STATUS BLOCK
+############################
+#<<<--- define_status_block()
+
+##########
+########## TS2-020Row:CnPw-U-001 PLC   -> EPICS status   ##########
+##########
+
+#<<<--- add_digital("SurgeArrOK",                PV_DESC="Rack surge arrestor is healthy",                PV_ONAM="OK",      PV_ZNAM="NOK!")
+record(bi, "TS2-020Row:CnPw-U-001:SurgeArrOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/182 T=UINT16 B=0")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Rack surge arrestor is healthy")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("PS24vOK",                   PV_DESC="Rack power supply is healthy",                  PV_ONAM="OK",      PV_ZNAM="NOK!")
+record(bi, "TS2-020Row:CnPw-U-001:PS24vOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/182 T=UINT16 B=1")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Rack power supply is healthy")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("UPSBatOK",                  PV_DESC="Rack UPS battery is healthy",                   PV_ONAM="OK",      PV_ZNAM="NOK!")
+record(bi, "TS2-020Row:CnPw-U-001:UPSBatOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/182 T=UINT16 B=2")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Rack UPS battery is healthy")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("UPS24vOK",                  PV_DESC="Rack UPS 24VDC is healthy",                     PV_ONAM="OK",      PV_ZNAM="NOK!")
+record(bi, "TS2-020Row:CnPw-U-001:UPS24vOK")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/182 T=UINT16 B=3")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Rack UPS 24VDC is healthy")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("UPSBuffReady",              PV_DESC="Rack UPS is ready to buffer",                   PV_ONAM="OK",      PV_ZNAM="NOK!")
+record(bi, "TS2-020Row:CnPw-U-001:UPSBuffReady")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/182 T=UINT16 B=4")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Rack UPS is ready to buffer")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_digital("UPSBatt85",                 PV_DESC="Rack UPS battery > 85% charge",                 PV_ONAM="OK",      PV_ZNAM="NOK!")
+record(bi, "TS2-020Row:CnPw-U-001:UPSBatt85")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/182 T=UINT16 B=5")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Rack UPS battery > 85% charge")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+#<<<--- add_major_alarm("UPSAlarm", "UPS Alarm", PV_DESC="Rack UPS has an alarm",                         PV_ONAM="NOK!",    PV_ZNAM="OK")
+record(bi, "TS2-020Row:CnPw-U-001:UPSAlarm")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/182 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Rack UPS has an alarm")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
+}
+
+
+
+
+record(fanout, "KG-GTA:ODH-PLC-01:UploadParametersS") {
+}

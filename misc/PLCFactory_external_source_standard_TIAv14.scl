@@ -1,0 +1,433 @@
+FUNCTION "UTIL_P_TRIG" : Void
+TITLE = Positive Edge Detection Pulse
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      "i_Input Bit" : Bool;
+   END_VAR
+
+   VAR_IN_OUT 
+      "iq_Trigger Bit" : Bool;
+      "iq_Pulse Bit" : Bool;
+   END_VAR
+
+BEGIN
+	//Prositive edge generator for SCL
+	
+	IF #"i_Input Bit" AND #"iq_Trigger Bit"
+	THEN
+	    #"iq_Pulse Bit" := FALSE;
+	ELSIF #"i_Input Bit"
+	    THEN
+	        #"iq_Pulse Bit" := TRUE;
+	        #"iq_Trigger Bit" := TRUE;
+	    ELSE
+	        #"iq_Pulse Bit" := FALSE;
+	        #"iq_Trigger Bit" := FALSE;
+	END_IF;
+END_FUNCTION
+FUNCTION_BLOCK "_UtilitiesFB"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      CPUSytemMemoryBits : Byte;   // Address of system memory byte
+      CPUClockMemoryBits : Byte;   // Address of clock memory byte
+      StartupDelaySP : Time;   // Delay before startup delay bit turned on
+   END_VAR
+
+   VAR 
+      AlwaysOn : Bool;   // Bit always TRUE
+      AlwaysTrue : Bool;   // Bit always TRUE
+      AlwaysOff : Bool;   // Bit always FALSE
+      AlwaysFalse : Bool;   // Bit always FALSE
+      FirstScan : Bool;   // Bit TRUE for only the first scan of the PLC
+      StartupDelayDn : Bool;   // Bit initially FALSE, turning TRUE after preset delay
+      StartupDelayTmr {OriginalPartName := 'IEC_TIMER'; LibVersion := '1.0'} : IEC_TIMER;
+      Square_100ms : Bool;   // Bit FALSE/TRUE based on square wave (100 ms frequency)
+      Square_100msONS : Bool;
+      Pulse_100ms : Bool;   // Bit TRUE every 100 ms for one PLC scan
+      Square_200ms : Bool;   // Bit FALSE/TRUE based on square wave (200 ms frequency)
+      Square_200msONS : Bool;
+      Pulse_200ms : Bool;   // Bit TRUE every 200 ms for one PLC scan
+      Square_400ms : Bool;   // Bit FALSE/TRUE based on square wave (400 ms frequency)
+      Square_400msONS : Bool;
+      Pulse_400ms : Bool;   // Bit TRUE every 400 ms for one PLC scan
+      Square_500ms : Bool;   // Bit FALSE/TRUE based on square wave (500 ms frequency)
+      Square_500msONS : Bool;
+      Pulse_500ms : Bool;   // Bit TRUE every 500 ms for one PLC scan
+      Square_800ms : Bool;   // Bit FALSE/TRUE based on square wave (800 ms frequency)
+      Square_800msONS : Bool;
+      Pulse_800ms : Bool;   // Bit TRUE every 800 ms for one PLC scan
+      Square_1s : Bool;   // Bit FALSE/TRUE based on square wave (1 s frequency)
+      Square_1sONS : Bool;
+      Pulse_1s : Bool;   // Bit TRUE every 1 s for one PLC scan
+      Square_1600ms : Bool;   // Bit FALSE/TRUE based on square wave (1600 ms frequency)
+      Square_1600msONS : Bool;
+      Pulse_1600ms : Bool;   // Bit TRUE every 1600 ms for one PLC scan
+      Square_2s : Bool;   // Bit FALSE/TRUE based on square wave (2 s frequency)
+      Square_2sONS : Bool;
+      Pulse_2s : Bool;   // Bit TRUE every 2 s for one PLC scan
+      TestInProgress : Bool;   // Indicates which caller FC is used
+   END_VAR
+
+BEGIN
+	//This block provides standard "Utilities" tags that can be used in the rest OF the PLC code such
+	//as:
+	//* Always On
+	//* Always Off
+	//* Startup Delay
+	//* Pulses (different frequences)
+	//* etc.
+	
+	//When using This block in your program, name the instance DB "Utilities" AND THEN you will be able TO use tags like "Utilities.AlwaysOn" in the rest OF your program.
+	
+	//This block relies On information provided BY the CPU. This needs TO be enabled in the CPU hardware configuration under System AND Clock Memory.
+	//Enable both functions AND pick memory bytes you'd like TO use (defauls are %MB1 AND %MB0 respectively).
+	//THEN connect the selected Byte TO the inputs OF This block.
+	//
+	
+	//Bit TRUE for only the first scan of the PLC
+	#FirstScan := #CPUSytemMemoryBits.%X0;
+	
+	//Bit always TRUE
+	#AlwaysOn := #CPUSytemMemoryBits.%X2;
+	#AlwaysTrue := #CPUSytemMemoryBits.%X2;
+	
+	//Bit always FALSE
+	#AlwaysOff := #CPUSytemMemoryBits.%X3;
+	#AlwaysFalse := #CPUSytemMemoryBits.%X3;
+	
+	//Bit initially FALSE, turning TRUE after preset delay
+	#StartupDelayTmr.TON(IN := #AlwaysTrue,
+	                     PT := #StartupDelaySP,
+	                     Q => #StartupDelayDn);
+	
+	//Bit TRUE every 100 ms FOR one PLC scan
+	#Square_100ms := #CPUClockMemoryBits.%X0;
+	"UTIL_P_TRIG"("i_Input Bit" := #Square_100ms,
+	              "iq_Trigger Bit" := #Square_100msONS,
+	              "iq_Pulse Bit" := #Pulse_100ms);
+	
+	//Bit TRUE every 200 ms FOR one PLC scan
+	#Square_200ms := #CPUClockMemoryBits.%X1;
+	"UTIL_P_TRIG"("i_Input Bit" := #Square_200ms,
+	              "iq_Trigger Bit" := #Square_200msONS,
+	              "iq_Pulse Bit" := #Pulse_200ms);
+	
+	//Bit TRUE every 400 ms FOR one PLC scan
+	#Square_400ms := #CPUClockMemoryBits.%X2;
+	"UTIL_P_TRIG"("i_Input Bit" := #Square_400ms,
+	              "iq_Trigger Bit" := #Square_400msONS,
+	              "iq_Pulse Bit" := #Pulse_400ms);
+	
+	//Bit TRUE every 500 ms FOR one PLC scan
+	#Square_500ms := #CPUClockMemoryBits.%X3;
+	"UTIL_P_TRIG"("i_Input Bit" := #Square_500ms,
+	              "iq_Trigger Bit" := #Square_500msONS,
+	              "iq_Pulse Bit" := #Pulse_500ms);
+	
+	//Bit TRUE every 800 ms FOR one PLC scan
+	#Square_800ms := #CPUClockMemoryBits.%X4;
+	"UTIL_P_TRIG"("i_Input Bit" := #Square_800ms,
+	              "iq_Trigger Bit" := #Square_800msONS,
+	              "iq_Pulse Bit" := #Pulse_800ms);
+	
+	//Bit TRUE every 1 s FOR one PLC scan
+	#Square_1s := #CPUClockMemoryBits.%X5;
+	"UTIL_P_TRIG"("i_Input Bit" := #Square_1s,
+	              "iq_Trigger Bit" := #Square_1sONS,
+	              "iq_Pulse Bit" := #Pulse_1s);
+	
+	//Bit TRUE every 1600 ms FOR one PLC scan
+	#Square_1600ms := #CPUClockMemoryBits.%X6;
+	"UTIL_P_TRIG"("i_Input Bit" := #Square_1600ms,
+	              "iq_Trigger Bit" := #Square_1600msONS,
+	              "iq_Pulse Bit" := #Pulse_1600ms);
+	
+	//Bit TRUE every 2s FOR one PLC scan
+	#Square_2s := #CPUClockMemoryBits.%X7;
+	"UTIL_P_TRIG"("i_Input Bit" := #Square_2s,
+	              "iq_Trigger Bit" := #Square_2sONS,
+	              "iq_Pulse Bit" := #Pulse_2s);
+	
+END_FUNCTION_BLOCK
+DATA_BLOCK "Utilities"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+NON_RETAIN
+"_UtilitiesFB"
+
+BEGIN
+
+END_DATA_BLOCK
+DATA_BLOCK "EPICSToPLC"
+{ S7_Optimized_Access := 'FALSE' }
+VERSION : 0.1
+NON_RETAIN
+//########## EPICS->PLC datablock ##########
+   STRUCT 
+      "Word" : Array[0..10] of Word;
+   END_STRUCT;
+
+BEGIN
+
+END_DATA_BLOCK	
+DATA_BLOCK "PLCToEPICS"
+{ S7_Optimized_Access := 'FALSE' }
+VERSION : 0.1
+NON_RETAIN
+//########## PLC->EPICS datablock ##########
+   STRUCT 
+      "Word" : Array[0..10] of Word;
+   END_STRUCT;
+
+BEGIN
+
+END_DATA_BLOCK
+FUNCTION "_CommsEPICSDataMappingFBFactory" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+//This blocks maps data to/from PLC/EPICS data exchange block
+   VAR_INPUT 
+      EPICSToPLCLength : Int;   // Length of device command register array (in words)
+      EPICSToPLCDataBlockOffset : Int;   // Offset in EPICS->PLC comms block where this device data resides (in words)
+      EPICSToPLCParametersStart : Int;   // The border offset between the Command and the Parameter area
+      PLCToEPICSLength : Int;   // Length of device status register array (in words)
+      PLCToEPICSDataBlockOffset : Int;   // Offset in PLC->EPICS comms block where this device data resides (in words)
+   END_VAR
+
+   VAR_IN_OUT 
+      EPICSToPLCCommandRegisters : Variant;   // Pointer to device command registers (header of the array of words)
+      PLCToEPICSStatusRegisters : Variant;   // Pointer to device status registers (header of the array of words)
+      EPICSToPLCDataBlock : Variant;   // Pointer to EPICS->PLC data exchange block (header of the array of words)
+      PLCToEPICSDataBlock : Variant;   // Pointer to PLC->EPICS data exchange block (header of the array of words)
+   END_VAR
+
+   VAR_TEMP 
+      temp : Int;
+      ZeroWord : Word;
+      LoopCounter : Int;
+   END_VAR
+
+BEGIN
+	(*
+	  Author:       Nick Levchenko
+	  Modified:     Miklos Boros
+	  
+	  Description:  This function maps the the data between any device and PLC/EPICS communication blocks.
+	                Every device data that needs to be communicated to EPICS needs to have so called "communication registers".
+	                They should be implemented inside the device FB as:
+	                CommandReg  Array [0..x] of Word
+	                StatusReg   Array [0..x] of Word
+	                Parameters  Array [0..x] of Word
+	                To map device data to PLC/EPICS data exchange blocks call this function and provide pointers to device communication registers,
+	                their lengths, pointers to PLC/EPICS data exchange blocks and offsets in those block where this device data should go.
+	                
+	                Status registers are simply copied from device to data exchange block.
+	                Command registers are copied from data exchange blocks to device and CLEARED. This is to accept commands only once. 
+	                Parameter registers are copied from data exchange blocks to device WITHOUT clearing. This means this are can be used for SetPoints and other parameters.
+	*)
+	
+	// Map command/parameter registers
+	IF #EPICSToPLCLength > 0 THEN
+	    
+	    #temp := MOVE_BLK_VARIANT(
+	                              SRC := #EPICSToPLCDataBlock,
+	                              COUNT := INT_TO_UDINT(#EPICSToPLCLength),
+	                              SRC_INDEX := #EPICSToPLCDataBlockOffset,
+	                              DEST_INDEX := 0,
+	                              DEST => #EPICSToPLCCommandRegisters);
+	    
+	    IF (NOT "Utilities".TestInProgress) THEN
+	    
+	        //Clear commands, but leave parameters unchanged (loop through all command registers AND write 0 TO them)    
+	        #ZeroWord := 0;
+	        IF (#EPICSToPLCParametersStart = #EPICSToPLCLength) THEN
+	            FOR #LoopCounter := 0 TO (#EPICSToPLCLength - 1) DO
+	                
+	                #temp := MOVE_BLK_VARIANT(SRC := #ZeroWord,
+	                                          COUNT := 1,
+	                                          SRC_INDEX := 0,
+	                                          DEST_INDEX := #EPICSToPLCDataBlockOffset + #LoopCounter,
+	                                          DEST => #EPICSToPLCDataBlock);
+	            END_FOR;
+	        ELSE
+	            IF (#EPICSToPLCParametersStart > 0) THEN
+	                FOR #LoopCounter := 0 TO (#EPICSToPLCParametersStart - 1) DO
+	                    
+	                    #temp := MOVE_BLK_VARIANT(SRC := #ZeroWord,
+	                                              COUNT := 1,
+	                                              SRC_INDEX := 0,
+	                                              DEST_INDEX := #EPICSToPLCDataBlockOffset + #LoopCounter,
+	                                              DEST => #EPICSToPLCDataBlock);
+	                END_FOR;
+	            END_IF;
+	        END_IF;
+	    END_IF;
+	END_IF;
+	
+	
+	// Map status registers
+	IF #PLCToEPICSLength > 0 THEN
+	    #temp := MOVE_BLK_VARIANT(
+	                              SRC := #PLCToEPICSStatusRegisters,
+	                              COUNT := INT_TO_UDINT(#PLCToEPICSLength),
+	                              SRC_INDEX := 0,
+	                              DEST_INDEX := #PLCToEPICSDataBlockOffset,
+	                              DEST => #PLCToEPICSDataBlock);
+	END_IF;
+	
+END_FUNCTION
+	FUNCTION "_CommsEPICSDataMap" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_TEMP 
+      Hash : DInt;
+   END_VAR
+
+BEGIN
+	        //Comms data generation hash
+	        #Hash := DInt#104734097;
+	        "PLCToEPICS"."Word"[1] := DINT_TO_WORD(#Hash);
+	        "PLCToEPICS"."Word"[0] := DINT_TO_WORD(SHR(IN := #Hash, N := 16));
+	        
+END_FUNCTION
+FUNCTION_BLOCK "_CommsPLC_EPICS"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      Enable : Bool;   // Enable all comms
+      SendTrigger : Bool;   // Trigger for PLC->EPICS data send (should be quick and cyclic)
+      BytesToSend : Int;   // Number of bytes for PLC->EPICS data send
+      InterfaceID : HW_ANY;   // Hardware identifier of Ethernet port to be used (see under device configuration)
+      S7ConnectionID : Int := 256;   // Connection ID for EPICS s7plc driver connection
+      MBConnectionID : Int := 255;   // Connection ID for EPICS modbus driver connection
+      S7Port : Int := 2000;   // PLC port for EPICS s7plc driver connection
+      MBPort : Int := 502;   // PLC port for EPICS modbus driver connection
+   END_VAR
+
+   VAR_OUTPUT 
+      SendDone : Bool;
+      SendBusy : Bool;
+      SendError : Bool;
+      SendStatus : Word;
+      RcvNewDataReady : Bool;
+      RcvDataRead : Bool;
+      RcvError : Bool;
+      RcvStatus : Word;
+   END_VAR
+
+   VAR_IN_OUT 
+      PLCToEPICSData : Variant;   // Pointer to PLC->EPICS data exchange block (header of the array of words)
+      EPICSToPLCData : Variant;   // Pointer to EPICS->PLC data exchange block (header of the array of words)
+   END_VAR
+
+   VAR 
+      SendConnData {OriginalPartName := 'TCON_IP_v4'; LibVersion := '1.0'} : TCON_IP_v4;   // Connection parameters
+      RcvConnData {OriginalPartName := 'TCON_IP_v4'; LibVersion := '1.0'} : TCON_IP_v4;   // Connection parameters
+      TSEND_C_DB {OriginalPartName := 'TSENDC'; LibVersion := '3.2'} : TSEND_C;
+      MB_SERVER_DB {OriginalPartName := 'MBSERVER'; LibVersion := '4.2'} : MB_SERVER;
+   END_VAR
+
+
+BEGIN
+	//This function block performs send/recieve communication between the PLC AND EPICS using:
+	//1. Open user communication (s7plc driver in EPICS)
+	//2. Modbus TCP (Modbus driver in EPICS)
+	//
+	//The block is fully self-contained, i.e. you should be able TO simple insert it in your program (AND call it OF course) AND provide some inputs TO it
+	//
+	
+	//Set up connections (Ethernet port ID)
+	#SendConnData.InterfaceId := #InterfaceID;
+	#RcvConnData.InterfaceId := #InterfaceID;
+	
+	//Set up connections (Connection ID) (separate connections for s7 and Modbus)
+	#SendConnData.ID := INT_TO_WORD(IN:= #S7ConnectionID);
+	#RcvConnData.ID := INT_TO_WORD(IN := #MBConnectionID);
+	
+	//Set up connections (Connection type)
+	#SendConnData.ConnectionType := 11;
+	#RcvConnData.ConnectionType := 11;
+	
+	//Set up connections (Active connection establishment)
+	IF NOT #SendConnData.ActiveEstablished THEN
+	    #RcvConnData.ActiveEstablished := false;
+	END_IF;
+	
+	//Set up connections (Local port)
+	#SendConnData.LocalPort := INT_TO_UINT(IN:= #S7Port);
+	#RcvConnData.LocalPort := INT_TO_UINT(IN := #MBPort);
+	
+	//PLC -> EPICS communication. Data is sent using open user communication (s7plc driver in EPICS)
+	#TSEND_C_DB(REQ:=#SendTrigger,
+	            CONT:=TRUE,
+	            LEN:=INT_TO_UINT(IN:=#BytesToSend),
+	            DONE=>#SendDone,
+	            BUSY=>#SendBusy,
+	            ERROR=>#SendError,
+	            STATUS=>#SendStatus,
+	            CONNECT:=#SendConnData,
+	            DATA:=#PLCToEPICSData);
+	
+	//EPICS <- EPICS communication. Data is received using modbus server on the PLC (modbus driver in EPICS)
+	#MB_SERVER_DB(DISCONNECT:=NOT #Enable,
+	              NDR=>#RcvNewDataReady,
+	              DR=>#RcvDataRead,
+	              ERROR=>#RcvError,
+	              STATUS=>#RcvStatus,
+	              MB_HOLD_REG:=#EPICSToPLCData,
+	              CONNECT:=#RcvConnData);
+	
+END_FUNCTION_BLOCK
+DATA_BLOCK "_CommsPLC_EPICS_DB"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+NON_RETAIN
+"_CommsPLC_EPICS"
+
+BEGIN
+
+END_DATA_BLOCK
+FUNCTION "_CommsEPICS" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+BEGIN
+	//Heartbeat PLC->EPICS
+	IF "Utilities".Pulse_1s THEN
+	    "PLCToEPICS"."Word"[2] := "PLCToEPICS"."Word"[2] + 1;
+	    IF "PLCToEPICS"."Word"[2] >= 32000 THEN
+	        "PLCToEPICS"."Word"[2] := 0;
+	    END_IF;
+	END_IF;
+	
+	// Call the comms block to provide PLC<->EPICS comms
+	"_CommsPLC_EPICS_DB"(Enable := "Utilities".AlwaysOn,
+	                     SendTrigger := "Utilities".Pulse_200ms,
+	                     BytesToSend := 10,
+	                     InterfaceID := 64,
+	                     S7ConnectionID := 256,
+	                     MBConnectionID := 255,
+	                     S7Port := 2000,
+	                     MBPort := 502,
+	                     PLCToEPICSData := "PLCToEPICS"."Word",
+	                     EPICSToPLCData := "EPICSToPLC"."Word");
+	
+	
+	//Map all devices command and status registers to EPICS->PLC and PLC->EPICS data exchange blocks
+	"_CommsEPICSDataMap"();
+	
+END_FUNCTION
+FUNCTION "_Comms" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+BEGIN
+	//This is an aggregator function, it will call all the other comms functions required:
+	//1. PLC/EPICS
+	//2. Any other comms
+	
+	"_CommsEPICS"();
+	
+END_FUNCTION

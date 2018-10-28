@@ -1,0 +1,23 @@
+<svg width="150" height="120" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="122" width="152" y="-1" x="-1"/>
+  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+  <g transform="rotate(-90, 80, 39.002)" id="svg_24">
+   <g transform="matrix(0.666667, 0, 0, 0.666667, 0, 0)" id="svg_22" fill="black">
+    <path id="svg_23" d="m149.5,33.001007l-4.699982,-11.399996l-6.300018,-10.300003l-7.800018,-9.100006l-9.099983,-7.800003l-10.299988,-6.299988l-11.400024,-4.700012l-12.299988,-2.899994l-13.100006,-1l0,-11.999998l14.899994,1.100004l14.200012,3.399994l13.099976,5.399994l11.900032,7.300003l10.599976,9l9,10.600006l7.300018,11.900009l5.399994,13.100006l3.400024,14.199984l1.199982,15l-1.199982,14.899994l-3.400024,14.200012l-5.399994,13.099976l-7.300018,11.900024l-9,10.599976l-10.599976,9l-11.900032,7.300018l-13.099976,5.399994l-14.200012,3.400024l-14.899994,1.199982l0,-12l13.100006,-1.100006l12.299988,-2.899994l11.400024,-4.699982l10.299988,-6.300018l9.099983,-7.800018l7.800018,-9.099976l6.300018,-10.299988l4.699982,-11.400024l2.899994,-12.299988l1.100006,-13.100006l-1.100006,-13.199982l-2.899994,-12.300018z"/>
+   </g>
+  </g>
+  <line stroke-linecap="null" stroke-linejoin="null" id="svg_25" y2="67" x2="140" y1="67" x1="19.5" fill-opacity="null" stroke-opacity="null" stroke-width="8" stroke="#000" fill="none"/>
+  <line stroke-linecap="null" stroke-linejoin="null" id="svg_26" y2="113" x2="80.5" y1="68" x1="80.5" fill-opacity="null" stroke-opacity="null" stroke-width="8" stroke="#000" fill="none"/>
+  <path id="svg_27" d="m-196.5,10" opacity="0.5" fill-opacity="null" stroke-opacity="null" stroke-width="8" stroke="#000" fill="none"/>
+ </g>
+</svg>

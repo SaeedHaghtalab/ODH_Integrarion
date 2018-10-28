@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<display version="2.0.0">
+  <name>ODH Monitor</name>
+  <width>300</width>
+  <height>410</height>
+  <widget type="group" version="2.0.0">
+    <name>Monitors Panel</name>
+    <x>10</x>
+    <y>10</y>
+    <width>280</width>
+    <height>390</height>
+    <style>3</style>
+    <background_color>
+      <color name="BACKGROUND" red="220" green="225" blue="221">
+      </color>
+    </background_color>
+    <widget type="rectangle" version="2.0.0">
+      <name>BGGrey03-titlebar_1</name>
+      <width>280</width>
+      <height>390</height>
+      <line_width>0</line_width>
+      <background_color>
+        <color name="GROUP-BORDER" red="150" green="155" blue="151">
+        </color>
+      </background_color>
+      <corner_width>10</corner_width>
+      <corner_height>10</corner_height>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Monitor</name>
+      <x>10</x>
+      <y>50</y>
+      <width>260</width>
+      <height>330</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="rectangle" version="2.0.0">
+        <name>BGGrey03-background_1</name>
+        <width>260</width>
+        <height>330</height>
+        <line_width>0</line_width>
+        <background_color>
+          <color name="GROUP-BACKGROUND" red="200" green="205" blue="201">
+          </color>
+        </background_color>
+        <corner_width>5</corner_width>
+        <corner_height>5</corner_height>
+      </widget>
+      <widget type="group" version="2.0.0">
+        <name>Signals</name>
+        <x>10</x>
+        <y>10</y>
+        <width>240</width>
+        <height>310</height>
+        <style>3</style>
+        <widget type="led" version="2.0.0">
+          <name>LED_LA</name>
+          <pv_name>$(P):ODHAlarm</pv_name>
+          <x>24</x>
+          <y>78</y>
+          <off_color>
+            <color name="Grid" red="169" green="169" blue="169">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_LB</name>
+          <pv_name>$(P):ODHWarning</pv_name>
+          <x>24</x>
+          <y>105</y>
+          <off_color>
+            <color name="Grid" red="169" green="169" blue="169">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-ORANGE-ON" red="255" green="175" blue="81">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_OK</name>
+          <pv_name>$(P):MonitHealthy</pv_name>
+          <x>24</x>
+          <y>132</y>
+          <off_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_WARNING</name>
+          <pv_name>$(P):Maint</pv_name>
+          <x>24</x>
+          <y>160</y>
+          <off_color>
+            <color name="Grid" red="169" green="169" blue="169">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-YELLOW-ON" red="255" green="235" blue="17">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_ALARM</name>
+          <pv_name>$(P):MonitWarning</pv_name>
+          <x>24</x>
+          <y>187</y>
+          <off_color>
+            <color name="Grid" red="169" green="169" blue="169">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_LA</name>
+          <text>ODH Alarm (18%)</text>
+          <x>72</x>
+          <y>78</y>
+          <width>116</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_LB</name>
+          <text>ODH Warning (19.5%)</text>
+          <x>72</x>
+          <y>105</y>
+          <width>160</width>
+          <vertical_alignment>1</vertical_alignment>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_OK</name>
+          <text>Monitor Healthy</text>
+          <x>72</x>
+          <y>132</y>
+          <width>108</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_WARNING</name>
+          <text>Maintenance</text>
+          <x>72</x>
+          <y>160</y>
+          <vertical_alignment>1</vertical_alignment>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_ALARM</name>
+          <text>Monitor Warning</text>
+          <x>72</x>
+          <y>187</y>
+          <width>150</width>
+          <vertical_alignment>1</vertical_alignment>
+        </widget>
+        <widget type="textupdate" version="2.0.0">
+          <name>Text Update_O2Level</name>
+          <pv_name>$(P):O2Level</pv_name>
+          <x>148</x>
+          <y>20</y>
+          <width>52</width>
+          <precision>1</precision>
+          <wrap_words>false</wrap_words>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_O2LEVEL</name>
+          <text>Oxygen Level:</text>
+          <x>20</x>
+          <y>20</y>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_ALARM_1</name>
+          <pv_name>$(P):WarmUp</pv_name>
+          <x>24</x>
+          <y>215</y>
+          <off_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_ALARM_1</name>
+          <text>Warm-Up Status</text>
+          <x>72</x>
+          <y>215</y>
+          <width>110</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_ALARM_2</name>
+          <pv_name>$(P):SysOK</pv_name>
+          <x>24</x>
+          <y>242</y>
+          <off_color>
+            <color name="Grid" red="169" green="169" blue="169">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_ALARM_2</name>
+          <text>SysOK</text>
+          <x>72</x>
+          <y>242</y>
+          <width>43</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_ALARM_3</name>
+          <pv_name>$(P):ConnLost</pv_name>
+          <x>24</x>
+          <y>268</y>
+          <off_color>
+            <color name="Grid" red="169" green="169" blue="169">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="MAJOR" red="252" green="13" blue="27">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_ALARM_3</name>
+          <text>Lost Communication</text>
+          <x>72</x>
+          <y>268</y>
+          <width>140</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="rectangle" version="2.0.0">
+          <name>Rectangle_3</name>
+          <x>20</x>
+          <y>58</y>
+          <width>200</width>
+          <height>1</height>
+          <line_width>1</line_width>
+          <line_color>
+            <color name="Grid" red="169" green="169" blue="169">
+            </color>
+          </line_color>
+          <background_color>
+            <color name="Grid" red="169" green="169" blue="169">
+            </color>
+          </background_color>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_LA_2</name>
+          <text>%</text>
+          <x>209</x>
+          <y>20</y>
+          <width>14</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+      </widget>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>BGGrey03-title</name>
+      <text>ODH Monitor #$(R)</text>
+      <width>280</width>
+      <height>50</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD_ITALIC" size="20.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="TEXT-LIGHT" red="230" green="230" blue="230">
+        </color>
+      </foreground_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+  </widget>
+</display>

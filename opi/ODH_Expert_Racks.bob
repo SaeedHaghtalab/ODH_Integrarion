@@ -1,0 +1,710 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<display version="2.0.0">
+  <name>ODH Racks</name>
+  <width>870</width>
+  <height>370</height>
+  <widget type="group" version="2.0.0">
+    <name>Racks Panel_1</name>
+    <x>10</x>
+    <y>10</y>
+    <width>842</width>
+    <height>340</height>
+    <style>3</style>
+    <background_color>
+      <color name="BACKGROUND" red="220" green="225" blue="221">
+      </color>
+    </background_color>
+    <widget type="rectangle" version="2.0.0">
+      <name>BGGrey03-titlebar</name>
+      <width>842</width>
+      <height>340</height>
+      <line_width>0</line_width>
+      <background_color>
+        <color name="GROUP-BORDER" red="150" green="155" blue="151">
+        </color>
+      </background_color>
+      <corner_width>10</corner_width>
+      <corner_height>10</corner_height>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Rack_1</name>
+      <macros>
+        <P>TS2-020Row:CnPw-U-001</P>
+      </macros>
+      <x>14</x>
+      <y>50</y>
+      <width>260</width>
+      <height>276</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="rectangle" version="2.0.0">
+        <name>BGGrey03-background</name>
+        <width>260</width>
+        <height>276</height>
+        <line_width>0</line_width>
+        <background_color>
+          <color name="GROUP-BACKGROUND" red="200" green="205" blue="201">
+          </color>
+        </background_color>
+        <corner_width>5</corner_width>
+        <corner_height>5</corner_height>
+      </widget>
+      <widget type="group" version="2.0.0">
+        <name>Signals_1</name>
+        <x>10</x>
+        <y>42</y>
+        <width>240</width>
+        <height>222</height>
+        <style>3</style>
+        <widget type="label" version="2.0.0">
+          <name>LB_LA_6</name>
+          <text>UPS Alarm</text>
+          <x>83</x>
+          <y>17</y>
+          <width>71</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_LA_6</name>
+          <pv_name>$(P):UPSAlarm</pv_name>
+          <x>25</x>
+          <y>17</y>
+          <off_color>
+            <color name="LED-RED-OFF" red="110" green="101" blue="90">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_OK_2</name>
+          <text>UPS Battery &gt; 85%</text>
+          <x>82</x>
+          <y>186</y>
+          <width>124</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_LB_1</name>
+          <text>UPS Ready to Buffer</text>
+          <x>82</x>
+          <y>158</y>
+          <width>134</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_LA_1</name>
+          <text>UPS 24V OK</text>
+          <x>82</x>
+          <y>130</y>
+          <width>79</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_OK_1</name>
+          <pv_name>$(P):UPSBatt85</pv_name>
+          <x>25</x>
+          <y>186</y>
+          <off_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_LB_1</name>
+          <pv_name>$(P):UPSBuffReady</pv_name>
+          <x>25</x>
+          <y>158</y>
+          <off_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_LA_1</name>
+          <pv_name>$(P):UPS24vOK</pv_name>
+          <x>25</x>
+          <y>130</y>
+          <off_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_OK_1</name>
+          <text>UPS Battery OK</text>
+          <x>82</x>
+          <y>102</y>
+          <width>104</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_LB</name>
+          <text>Power Supply OK</text>
+          <x>82</x>
+          <y>74</y>
+          <width>116</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_LA</name>
+          <text>Surge Arrester OK</text>
+          <x>82</x>
+          <y>46</y>
+          <width>119</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_OK</name>
+          <pv_name>$(P):UPSBatOK</pv_name>
+          <x>25</x>
+          <y>102</y>
+          <off_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_LB</name>
+          <pv_name>$(P):PS24vOK</pv_name>
+          <x>25</x>
+          <y>74</y>
+          <off_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_LA</name>
+          <pv_name>$(P):SurgeArrOK</pv_name>
+          <x>25</x>
+          <y>46</y>
+          <off_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+            </color>
+          </on_color>
+        </widget>
+      </widget>
+      <widget type="label" version="2.0.0">
+        <name>LGGrey02-title</name>
+        <text>@ TS2</text>
+        <width>260</width>
+        <height>40</height>
+        <font>
+          <font family="Source Sans Pro" style="BOLD_ITALIC" size="18.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color name="GROUP-TEXT" red="25" green="25" blue="25">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color name="RED-BORDER" red="150" green="8" blue="16">
+          </color>
+        </background_color>
+        <horizontal_alignment>1</horizontal_alignment>
+        <vertical_alignment>1</vertical_alignment>
+        <wrap_words>false</wrap_words>
+      </widget>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>BGGrey03-title</name>
+      <text>ODH Electrical Racks</text>
+      <x>20</x>
+      <width>806</width>
+      <height>50</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD_ITALIC" size="24.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="TEXT-LIGHT" red="230" green="230" blue="230">
+        </color>
+      </foreground_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Rack_2</name>
+      <macros>
+        <P>CXB-CXH:ODH-RIO-2</P>
+      </macros>
+      <x>290</x>
+      <y>50</y>
+      <width>260</width>
+      <height>276</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="rectangle" version="2.0.0">
+        <name>BGGrey03-background_4</name>
+        <width>260</width>
+        <height>276</height>
+        <line_width>0</line_width>
+        <background_color>
+          <color name="GROUP-BACKGROUND" red="200" green="205" blue="201">
+          </color>
+        </background_color>
+        <corner_width>5</corner_width>
+        <corner_height>5</corner_height>
+      </widget>
+      <widget type="group" version="2.0.0">
+        <name>Signals_2</name>
+        <x>10</x>
+        <y>42</y>
+        <width>240</width>
+        <height>222</height>
+        <style>3</style>
+        <widget type="label" version="2.0.0">
+          <name>LB_LA_22</name>
+          <text>UPS Alarm</text>
+          <x>83</x>
+          <y>17</y>
+          <width>71</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_LA_22</name>
+          <pv_name>$(P):UPSAlarm</pv_name>
+          <x>25</x>
+          <y>17</y>
+          <off_color>
+            <color name="LED-RED-OFF" red="110" green="101" blue="90">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_OK_13</name>
+          <text>UPS Battery &gt; 85%</text>
+          <x>82</x>
+          <y>186</y>
+          <width>124</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_LB_12</name>
+          <text>UPS Ready to Buffer</text>
+          <x>82</x>
+          <y>158</y>
+          <width>134</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_LA_23</name>
+          <text>UPS 24V OK</text>
+          <x>82</x>
+          <y>130</y>
+          <width>79</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_OK_12</name>
+          <pv_name>$(P):UPSBatt85</pv_name>
+          <x>25</x>
+          <y>186</y>
+          <off_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_LB_12</name>
+          <pv_name>$(P):UPSBuffReady</pv_name>
+          <x>25</x>
+          <y>158</y>
+          <off_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_LA_23</name>
+          <pv_name>$(P):UPS24vOK</pv_name>
+          <x>25</x>
+          <y>130</y>
+          <off_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_OK_14</name>
+          <text>UPS Battery OK</text>
+          <x>82</x>
+          <y>102</y>
+          <width>104</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_LB_13</name>
+          <text>Power Supply OK</text>
+          <x>82</x>
+          <y>74</y>
+          <width>116</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_LA_24</name>
+          <text>Surge Arrester OK</text>
+          <x>82</x>
+          <y>46</y>
+          <width>119</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_OK_13</name>
+          <pv_name>$(P):UPSBatOK</pv_name>
+          <x>25</x>
+          <y>102</y>
+          <off_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_LB_13</name>
+          <pv_name>$(P):PS24vOK</pv_name>
+          <x>25</x>
+          <y>74</y>
+          <off_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_LA_24</name>
+          <pv_name>$(P):SurgeArrOK</pv_name>
+          <x>25</x>
+          <y>46</y>
+          <off_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+            </color>
+          </on_color>
+        </widget>
+      </widget>
+      <widget type="label" version="2.0.0">
+        <name>LGGrey02-title_4</name>
+        <text>@ CXB</text>
+        <width>260</width>
+        <height>40</height>
+        <font>
+          <font family="Source Sans Pro" style="BOLD_ITALIC" size="18.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color name="GROUP-TEXT" red="25" green="25" blue="25">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color name="RED-BORDER" red="150" green="8" blue="16">
+          </color>
+        </background_color>
+        <horizontal_alignment>1</horizontal_alignment>
+        <vertical_alignment>1</vertical_alignment>
+        <wrap_words>false</wrap_words>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Rack_3</name>
+      <macros>
+        <P>HCB-ACH:ODH-RIO-1</P>
+      </macros>
+      <x>566</x>
+      <y>50</y>
+      <width>260</width>
+      <height>276</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="rectangle" version="2.0.0">
+        <name>BGGrey03-background_5</name>
+        <width>260</width>
+        <height>276</height>
+        <line_width>0</line_width>
+        <background_color>
+          <color name="GROUP-BACKGROUND" red="200" green="205" blue="201">
+          </color>
+        </background_color>
+        <corner_width>5</corner_width>
+        <corner_height>5</corner_height>
+      </widget>
+      <widget type="group" version="2.0.0">
+        <name>Signals_3</name>
+        <x>10</x>
+        <y>42</y>
+        <width>240</width>
+        <height>222</height>
+        <style>3</style>
+        <widget type="label" version="2.0.0">
+          <name>LB_LA_25</name>
+          <text>UPS Alarm</text>
+          <x>83</x>
+          <y>17</y>
+          <width>71</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_LA_25</name>
+          <pv_name>$(P):UPSAlarm</pv_name>
+          <x>25</x>
+          <y>17</y>
+          <off_color>
+            <color name="LED-RED-OFF" red="110" green="101" blue="90">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_OK_15</name>
+          <text>UPS Battery &gt; 85%</text>
+          <x>82</x>
+          <y>186</y>
+          <width>124</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_LB_14</name>
+          <text>UPS Ready to Buffer</text>
+          <x>82</x>
+          <y>158</y>
+          <width>134</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_LA_26</name>
+          <text>UPS 24V OK</text>
+          <x>82</x>
+          <y>130</y>
+          <width>79</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_OK_14</name>
+          <pv_name>$(P):UPSBatt85</pv_name>
+          <x>25</x>
+          <y>186</y>
+          <off_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_LB_14</name>
+          <pv_name>$(P):UPSBuffReady</pv_name>
+          <x>25</x>
+          <y>158</y>
+          <off_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_LA_26</name>
+          <pv_name>$(P):UPS24vOK</pv_name>
+          <x>25</x>
+          <y>130</y>
+          <off_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_OK_16</name>
+          <text>UPS Battery OK</text>
+          <x>82</x>
+          <y>102</y>
+          <width>104</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_LB_15</name>
+          <text>Power Supply OK</text>
+          <x>82</x>
+          <y>74</y>
+          <width>116</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_LA_27</name>
+          <text>Surge Arrester OK</text>
+          <x>82</x>
+          <y>46</y>
+          <width>119</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_OK_15</name>
+          <pv_name>$(P):UPSBatOK</pv_name>
+          <x>25</x>
+          <y>102</y>
+          <off_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_LB_15</name>
+          <pv_name>$(P):PS24vOK</pv_name>
+          <x>25</x>
+          <y>74</y>
+          <off_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_LA_27</name>
+          <pv_name>$(P):SurgeArrOK</pv_name>
+          <x>25</x>
+          <y>46</y>
+          <off_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+            </color>
+          </on_color>
+        </widget>
+      </widget>
+      <widget type="label" version="2.0.0">
+        <name>LGGrey02-title_5</name>
+        <text>@ HCB</text>
+        <width>260</width>
+        <height>40</height>
+        <font>
+          <font family="Source Sans Pro" style="BOLD_ITALIC" size="18.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color name="GROUP-TEXT" red="25" green="25" blue="25">
+          </color>
+        </foreground_color>
+        <background_color>
+          <color name="RED-BORDER" red="150" green="8" blue="16">
+          </color>
+        </background_color>
+        <horizontal_alignment>1</horizontal_alignment>
+        <vertical_alignment>1</vertical_alignment>
+        <wrap_words>false</wrap_words>
+      </widget>
+    </widget>
+  </widget>
+</display>

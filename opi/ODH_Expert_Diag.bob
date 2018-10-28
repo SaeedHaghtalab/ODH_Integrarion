@@ -1,0 +1,4513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<display version="2.0.0">
+  <name>ODH Diagnostics</name>
+  <macros>
+    <PLC>KG-GTA:ODH-PLC-01</PLC>
+  </macros>
+  <width>1900</width>
+  <height>900</height>
+  <widget type="rectangle" version="2.0.0">
+    <name>Rectangle Template</name>
+    <width>1900</width>
+    <height>50</height>
+    <line_width>0</line_width>
+    <line_color>
+      <color name="IO Line" red="0" green="32" blue="92">
+      </color>
+    </line_color>
+    <background_color>
+      <color name="PRIMARY-HEADER-BACKGROUND" red="151" green="188" blue="202">
+      </color>
+    </background_color>
+    <actions>
+    </actions>
+    <tooltip>$(pv_name)
+$(pv_value)</tooltip>
+  </widget>
+  <widget type="picture" version="2.0.0">
+    <name>Picture_12</name>
+    <file>symbols/diagnostics/ODH_RIO1.PNG</file>
+    <x>40</x>
+    <y>580</y>
+    <width>590</width>
+    <height>290</height>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>Label</name>
+    <class>TITLE</class>
+    <text>ODH PLC Diagnostics</text>
+    <x use_class="true">20</x>
+    <y use_class="true">0</y>
+    <width>550</width>
+    <height use_class="true">50</height>
+    <font use_class="true">
+      <font name="Header 1" family="Source Sans Pro" style="BOLD_ITALIC" size="36.0">
+      </font>
+    </font>
+    <foreground_color use_class="true">
+      <color name="HEADER-TEXT" red="0" green="0" blue="0">
+      </color>
+    </foreground_color>
+    <transparent use_class="true">true</transparent>
+    <horizontal_alignment use_class="true">0</horizontal_alignment>
+    <vertical_alignment use_class="true">1</vertical_alignment>
+    <wrap_words use_class="true">false</wrap_words>
+  </widget>
+  <widget type="picture" version="2.0.0">
+    <name>Picture_4</name>
+    <file>symbols/diagnostics/ODH_RIO1.PNG</file>
+    <x>1270</x>
+    <y>580</y>
+    <width>590</width>
+    <height>290</height>
+  </widget>
+  <widget type="picture" version="2.0.0">
+    <name>Picture_6</name>
+    <file>symbols/diagnostics/ODH_CPU.PNG</file>
+    <x>627</x>
+    <y>100</y>
+    <width>249</width>
+    <height>210</height>
+  </widget>
+  <widget type="picture" version="2.0.0">
+    <name>Picture_8</name>
+    <file>symbols/diagnostics/ODH_Switch.PNG</file>
+    <x>1068</x>
+    <y>110</y>
+    <width>120</width>
+    <height>230</height>
+  </widget>
+  <widget type="picture" version="2.0.0">
+    <name>Picture_9</name>
+    <file>symbols/diagnostics/ODH_Switch.PNG</file>
+    <x>1228</x>
+    <y>110</y>
+    <width>120</width>
+    <height>230</height>
+  </widget>
+  <widget type="picture" version="2.0.0">
+    <name>Picture_10</name>
+    <file>symbols/diagnostics/ODH_Switch.PNG</file>
+    <x>1378</x>
+    <y>110</y>
+    <width>120</width>
+    <height>230</height>
+  </widget>
+  <widget type="picture" version="2.0.0">
+    <name>Picture_11</name>
+    <file>symbols/diagnostics/ODH_RIO1.PNG</file>
+    <x>650</x>
+    <y>580</y>
+    <width>590</width>
+    <height>290</height>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>Group</name>
+    <macros>
+      <P>$(PLC):RIO1</P>
+    </macros>
+    <x>67</x>
+    <y>770</y>
+    <width>536</width>
+    <height>76</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <widget type="group" version="2.0.0">
+      <name>Group_20</name>
+      <macros>
+        <P>$(P)_IM</P>
+      </macros>
+      <x>44</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_73</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_74</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_75</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_21</name>
+      <macros>
+        <P>$(P)_DI1</P>
+      </macros>
+      <x>85</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_76</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_77</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_78</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_22</name>
+      <macros>
+        <P>$(P)_DI2</P>
+      </macros>
+      <x>123</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_79</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_80</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_81</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_23</name>
+      <macros>
+        <P>$(P)_DI3</P>
+      </macros>
+      <x>161</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_82</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_83</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_84</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_24</name>
+      <macros>
+        <P>$(P)_DI4</P>
+      </macros>
+      <x>199</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_85</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_86</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_87</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_25</name>
+      <macros>
+        <P>$(P)_DI5</P>
+      </macros>
+      <x>238</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_88</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_89</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_90</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_26</name>
+      <macros>
+        <P>$(P)_AI1</P>
+      </macros>
+      <x>276</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_91</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_92</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_93</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_27</name>
+      <macros>
+        <P>$(P)_AI2</P>
+      </macros>
+      <x>314</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_94</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_95</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_96</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_28</name>
+      <macros>
+        <P>$(P)_AI3</P>
+      </macros>
+      <x>352</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_97</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_98</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_99</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_29</name>
+      <macros>
+        <P>$(P)_AI4</P>
+      </macros>
+      <x>391</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_100</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_101</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_102</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_30</name>
+      <macros>
+        <P>$(P)_DO1</P>
+      </macros>
+      <x>429</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_103</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_104</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_105</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_31</name>
+      <macros>
+        <P>$(P)_DO2</P>
+      </macros>
+      <x>467</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_106</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_107</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_108</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_32</name>
+      <macros>
+        <P>$(P)_DO3</P>
+      </macros>
+      <x>506</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_109</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_110</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_111</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>Group_63</name>
+    <macros>
+      <P>$(PLC):RIO2</P>
+    </macros>
+    <x>677</x>
+    <y>770</y>
+    <width>536</width>
+    <height>76</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <widget type="group" version="2.0.0">
+      <name>Group_64</name>
+      <macros>
+        <P>$(P)_IM</P>
+      </macros>
+      <x>44</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_196</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_197</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_198</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_65</name>
+      <macros>
+        <P>$(P)_DI1</P>
+      </macros>
+      <x>85</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_199</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_200</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_201</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_66</name>
+      <macros>
+        <P>$(P)_DI2</P>
+      </macros>
+      <x>123</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_202</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_203</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_204</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_67</name>
+      <macros>
+        <P>$(P)_DI3</P>
+      </macros>
+      <x>161</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_205</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_206</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_207</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_68</name>
+      <macros>
+        <P>$(P)_DI4</P>
+      </macros>
+      <x>199</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_208</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_209</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_210</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_69</name>
+      <macros>
+        <P>$(P)_DI5</P>
+      </macros>
+      <x>238</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_211</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_212</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_213</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_70</name>
+      <macros>
+        <P>$(P)_AI1</P>
+      </macros>
+      <x>276</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_214</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_215</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_216</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_71</name>
+      <macros>
+        <P>$(P)_AI2</P>
+      </macros>
+      <x>314</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_217</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_218</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_219</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_72</name>
+      <macros>
+        <P>$(P)_AI3</P>
+      </macros>
+      <x>352</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_220</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_221</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_222</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_73</name>
+      <macros>
+        <P>$(P)_AI4</P>
+      </macros>
+      <x>391</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_223</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_224</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_225</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_74</name>
+      <macros>
+        <P>$(P)_DO1</P>
+      </macros>
+      <x>429</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_226</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_227</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_228</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_75</name>
+      <macros>
+        <P>$(P)_DO2</P>
+      </macros>
+      <x>467</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_229</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_230</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_231</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_76</name>
+      <macros>
+        <P>$(P)_DO3</P>
+      </macros>
+      <x>506</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_232</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_233</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_234</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>Group_77</name>
+    <macros>
+      <P>$(PLC):RIO3</P>
+    </macros>
+    <x>1297</x>
+    <y>770</y>
+    <width>536</width>
+    <height>76</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <widget type="group" version="2.0.0">
+      <name>Group_78</name>
+      <macros>
+        <P>$(P)_IM</P>
+      </macros>
+      <x>44</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_235</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_236</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_237</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_79</name>
+      <macros>
+        <P>$(P)_DI1</P>
+      </macros>
+      <x>85</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_238</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_239</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_240</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_80</name>
+      <macros>
+        <P>$(P)_DI2</P>
+      </macros>
+      <x>123</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_241</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_242</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_243</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_81</name>
+      <macros>
+        <P>$(P)_DI3</P>
+      </macros>
+      <x>161</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_244</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_245</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_246</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_82</name>
+      <macros>
+        <P>$(P)_DI4</P>
+      </macros>
+      <x>199</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_247</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_248</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_249</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_83</name>
+      <macros>
+        <P>$(P)_DI5</P>
+      </macros>
+      <x>238</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_250</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_251</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_252</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_84</name>
+      <macros>
+        <P>$(P)_AI1</P>
+      </macros>
+      <x>276</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_253</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_254</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_255</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_85</name>
+      <macros>
+        <P>$(P)_AI2</P>
+      </macros>
+      <x>314</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_256</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_257</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_258</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_86</name>
+      <macros>
+        <P>$(P)_AI3</P>
+      </macros>
+      <x>352</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_259</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_260</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_261</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_87</name>
+      <macros>
+        <P>$(P)_AI4</P>
+      </macros>
+      <x>391</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_262</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_263</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_264</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_88</name>
+      <macros>
+        <P>$(P)_DO1</P>
+      </macros>
+      <x>429</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_265</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_266</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_267</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_89</name>
+      <macros>
+        <P>$(P)_DO2</P>
+      </macros>
+      <x>467</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_268</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_269</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_270</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Group_90</name>
+      <macros>
+        <P>$(P)_DO3</P>
+      </macros>
+      <x>506</x>
+      <width>30</width>
+      <height>76</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_271</name>
+        <file>symbols/custom/ConnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>false</value>
+            </exp>
+            <pv_name>${PVConnected}</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is connected</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_272</name>
+        <file>symbols/custom/warning.svg</file>
+        <y>46</y>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Status</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+      </widget>
+      <widget type="picture" version="2.0.0">
+        <name>WID_IOErrorIcon_273</name>
+        <file>symbols/custom/DisconnectedPNG.png</file>
+        <width>30</width>
+        <height>30</height>
+        <rules>
+          <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 == true">
+              <value>false</value>
+            </exp>
+            <exp bool_exp="pv0 == false">
+              <value>true</value>
+            </exp>
+            <pv_name>$(P)_Connected</pv_name>
+          </rule>
+        </rules>
+        <tooltip>Module is not connected!</tooltip>
+      </widget>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>Group_91</name>
+    <macros>
+      <P>$(PLC):SCL1</P>
+    </macros>
+    <x>1113</x>
+    <y>150</y>
+    <width>30</width>
+    <height>76</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <widget type="picture" version="2.0.0">
+      <name>WID_IOErrorIcon_274</name>
+      <file>symbols/custom/ConnectedPNG.png</file>
+      <width>30</width>
+      <height>30</height>
+      <rules>
+        <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+          <exp bool_exp="pv0 == true">
+            <value>true</value>
+          </exp>
+          <exp bool_exp="pv0 == false">
+            <value>false</value>
+          </exp>
+          <pv_name>${PVConnected}</pv_name>
+        </rule>
+      </rules>
+      <tooltip>Module is connected</tooltip>
+    </widget>
+    <widget type="picture" version="2.0.0">
+      <name>WID_IOErrorIcon_275</name>
+      <file>symbols/custom/warning.svg</file>
+      <y>46</y>
+      <width>30</width>
+      <height>30</height>
+      <rules>
+        <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+          <exp bool_exp="pv0 == true">
+            <value>false</value>
+          </exp>
+          <exp bool_exp="pv0 == false">
+            <value>true</value>
+          </exp>
+          <pv_name>$(P)_Status</pv_name>
+        </rule>
+      </rules>
+      <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+    </widget>
+    <widget type="picture" version="2.0.0">
+      <name>WID_IOErrorIcon_276</name>
+      <file>symbols/custom/DisconnectedPNG.png</file>
+      <width>30</width>
+      <height>30</height>
+      <rules>
+        <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+          <exp bool_exp="pv0 == true">
+            <value>false</value>
+          </exp>
+          <exp bool_exp="pv0 == false">
+            <value>true</value>
+          </exp>
+          <pv_name>$(P)_Connected</pv_name>
+        </rule>
+      </rules>
+      <tooltip>Module is not connected!</tooltip>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>Group_92</name>
+    <macros>
+      <P>$(PLC):SCL2</P>
+    </macros>
+    <x>1273</x>
+    <y>150</y>
+    <width>30</width>
+    <height>76</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <widget type="picture" version="2.0.0">
+      <name>WID_IOErrorIcon_277</name>
+      <file>symbols/custom/ConnectedPNG.png</file>
+      <width>30</width>
+      <height>30</height>
+      <rules>
+        <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+          <exp bool_exp="pv0 == true">
+            <value>true</value>
+          </exp>
+          <exp bool_exp="pv0 == false">
+            <value>false</value>
+          </exp>
+          <pv_name>${PVConnected}</pv_name>
+        </rule>
+      </rules>
+      <tooltip>Module is connected</tooltip>
+    </widget>
+    <widget type="picture" version="2.0.0">
+      <name>WID_IOErrorIcon_278</name>
+      <file>symbols/custom/warning.svg</file>
+      <y>46</y>
+      <width>30</width>
+      <height>30</height>
+      <rules>
+        <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+          <exp bool_exp="pv0 == true">
+            <value>false</value>
+          </exp>
+          <exp bool_exp="pv0 == false">
+            <value>true</value>
+          </exp>
+          <pv_name>$(P)_Status</pv_name>
+        </rule>
+      </rules>
+      <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+    </widget>
+    <widget type="picture" version="2.0.0">
+      <name>WID_IOErrorIcon_279</name>
+      <file>symbols/custom/DisconnectedPNG.png</file>
+      <width>30</width>
+      <height>30</height>
+      <rules>
+        <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+          <exp bool_exp="pv0 == true">
+            <value>false</value>
+          </exp>
+          <exp bool_exp="pv0 == false">
+            <value>true</value>
+          </exp>
+          <pv_name>$(P)_Connected</pv_name>
+        </rule>
+      </rules>
+      <tooltip>Module is not connected!</tooltip>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>Group_93</name>
+    <macros>
+      <P>$(PLC):SCL3</P>
+    </macros>
+    <x>1423</x>
+    <y>150</y>
+    <width>30</width>
+    <height>76</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <widget type="picture" version="2.0.0">
+      <name>WID_IOErrorIcon_280</name>
+      <file>symbols/custom/ConnectedPNG.png</file>
+      <width>30</width>
+      <height>30</height>
+      <rules>
+        <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+          <exp bool_exp="pv0 == true">
+            <value>true</value>
+          </exp>
+          <exp bool_exp="pv0 == false">
+            <value>false</value>
+          </exp>
+          <pv_name>${PVConnected}</pv_name>
+        </rule>
+      </rules>
+      <tooltip>Module is connected</tooltip>
+    </widget>
+    <widget type="picture" version="2.0.0">
+      <name>WID_IOErrorIcon_281</name>
+      <file>symbols/custom/warning.svg</file>
+      <y>46</y>
+      <width>30</width>
+      <height>30</height>
+      <rules>
+        <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+          <exp bool_exp="pv0 == true">
+            <value>false</value>
+          </exp>
+          <exp bool_exp="pv0 == false">
+            <value>true</value>
+          </exp>
+          <pv_name>$(P)_Status</pv_name>
+        </rule>
+      </rules>
+      <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+    </widget>
+    <widget type="picture" version="2.0.0">
+      <name>WID_IOErrorIcon_282</name>
+      <file>symbols/custom/DisconnectedPNG.png</file>
+      <width>30</width>
+      <height>30</height>
+      <rules>
+        <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+          <exp bool_exp="pv0 == true">
+            <value>false</value>
+          </exp>
+          <exp bool_exp="pv0 == false">
+            <value>true</value>
+          </exp>
+          <pv_name>$(P)_Connected</pv_name>
+        </rule>
+      </rules>
+      <tooltip>Module is not connected!</tooltip>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>Group_94</name>
+    <macros>
+      <P>$(PLC):CPU</P>
+    </macros>
+    <x>676</x>
+    <y>164</y>
+    <width>30</width>
+    <height>76</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <widget type="picture" version="2.0.0">
+      <name>WID_IOErrorIcon_283</name>
+      <file>symbols/custom/ConnectedPNG.png</file>
+      <width>30</width>
+      <height>30</height>
+      <rules>
+        <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+          <exp bool_exp="pv0 == true">
+            <value>true</value>
+          </exp>
+          <exp bool_exp="pv0 == false">
+            <value>false</value>
+          </exp>
+          <pv_name>${PVConnected}</pv_name>
+        </rule>
+      </rules>
+      <tooltip>Module is connected</tooltip>
+    </widget>
+    <widget type="picture" version="2.0.0">
+      <name>WID_IOErrorIcon_284</name>
+      <file>symbols/custom/warning.svg</file>
+      <y>34</y>
+      <width>30</width>
+      <height>30</height>
+      <rules>
+        <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+          <exp bool_exp="pv0 == true">
+            <value>false</value>
+          </exp>
+          <exp bool_exp="pv0 == false">
+            <value>true</value>
+          </exp>
+          <pv_name>$(P)_Status</pv_name>
+        </rule>
+      </rules>
+      <tooltip>Siemens card error! Open TIA Portal!</tooltip>
+    </widget>
+    <widget type="picture" version="2.0.0">
+      <name>WID_IOErrorIcon_285</name>
+      <file>symbols/custom/DisconnectedPNG.png</file>
+      <width>30</width>
+      <height>30</height>
+      <rules>
+        <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+          <exp bool_exp="pv0 == true">
+            <value>false</value>
+          </exp>
+          <exp bool_exp="pv0 == false">
+            <value>true</value>
+          </exp>
+          <pv_name>$(P)_Connected</pv_name>
+        </rule>
+      </rules>
+      <tooltip>Module is not connected!</tooltip>
+    </widget>
+  </widget>
+  <widget type="polyline" version="2.0.0">
+    <name>Polyline</name>
+    <x>73</x>
+    <y>450</y>
+    <width>1380</width>
+    <height>1</height>
+    <line_color>
+      <color name="GREEN-BORDER" red="40" green="140" blue="40">
+      </color>
+    </line_color>
+    <points>
+      <point x="1380.757167865718" y="0.6437978192794276">
+      </point>
+      <point x="0.0" y="0.0">
+      </point>
+    </points>
+  </widget>
+  <widget type="polygon" version="2.0.0">
+    <name>Polygon</name>
+    <x>678</x>
+    <y>310</y>
+    <width>1</width>
+    <height>140</height>
+    <line_color>
+      <color name="GREEN-BORDER" red="40" green="140" blue="40">
+      </color>
+    </line_color>
+    <points>
+      <point x="0.0" y="0.0">
+      </point>
+      <point x="1.2723388671875" y="140.319118829747">
+      </point>
+    </points>
+  </widget>
+  <widget type="polygon" version="2.0.0">
+    <name>Polygon_1</name>
+    <x>679</x>
+    <y>451</y>
+    <width>1</width>
+    <height>129</height>
+    <line_color>
+      <color name="GREEN-BORDER" red="40" green="140" blue="40">
+      </color>
+    </line_color>
+    <background_color>
+      <color name="GREEN-BORDER" red="40" green="140" blue="40">
+      </color>
+    </background_color>
+    <points>
+      <point x="0.0" y="0.0">
+      </point>
+      <point x="1.2723388671875" y="130.2963246276222">
+      </point>
+    </points>
+  </widget>
+  <widget type="polygon" version="2.0.0">
+    <name>Polygon_2</name>
+    <x>1143</x>
+    <y>335</y>
+    <width>1</width>
+    <height>111</height>
+    <line_color>
+      <color name="GREEN-BORDER" red="40" green="140" blue="40">
+      </color>
+    </line_color>
+    <background_color>
+      <color name="GREEN-BORDER" red="40" green="140" blue="40">
+      </color>
+    </background_color>
+    <points>
+      <point x="0.0" y="0.0">
+      </point>
+      <point x="1.2723388671875" y="115.26213332443501">
+      </point>
+    </points>
+  </widget>
+  <widget type="polygon" version="2.0.0">
+    <name>Polygon_3</name>
+    <x>1303</x>
+    <y>335</y>
+    <width>1</width>
+    <height>111</height>
+    <line_color>
+      <color name="GREEN-BORDER" red="40" green="140" blue="40">
+      </color>
+    </line_color>
+    <background_color>
+      <color name="GREEN-BORDER" red="40" green="140" blue="40">
+      </color>
+    </background_color>
+    <points>
+      <point x="0.0" y="0.0">
+      </point>
+      <point x="1.2723388671875" y="115.26213332443501">
+      </point>
+    </points>
+  </widget>
+  <widget type="polygon" version="2.0.0">
+    <name>Polygon_4</name>
+    <x>1453</x>
+    <y>335</y>
+    <width>1</width>
+    <height>111</height>
+    <line_color>
+      <color name="GREEN-BORDER" red="40" green="140" blue="40">
+      </color>
+    </line_color>
+    <background_color>
+      <color name="GREEN-BORDER" red="40" green="140" blue="40">
+      </color>
+    </background_color>
+    <points>
+      <point x="0.0" y="0.0">
+      </point>
+      <point x="1.2723388671875" y="115.26213332443501">
+      </point>
+    </points>
+  </widget>
+  <widget type="polygon" version="2.0.0">
+    <name>Polygon_5</name>
+    <x>1304</x>
+    <y>451</y>
+    <width>1</width>
+    <height>129</height>
+    <line_color>
+      <color name="GREEN-BORDER" red="40" green="140" blue="40">
+      </color>
+    </line_color>
+    <background_color>
+      <color name="GREEN-BORDER" red="40" green="140" blue="40">
+      </color>
+    </background_color>
+    <points>
+      <point x="0.0" y="0.0">
+      </point>
+      <point x="1.2723388671875" y="130.2963246276222">
+      </point>
+    </points>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>Diagnostics</name>
+    <macros>
+      <P>CXB-CXH:ODH-RIO-2</P>
+    </macros>
+    <x>73</x>
+    <y>100</y>
+    <width>370</width>
+    <height>300</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <widget type="rectangle" version="2.0.0">
+      <name>BGGrey03-background_5</name>
+      <width>370</width>
+      <height>300</height>
+      <line_width>0</line_width>
+      <background_color>
+        <color name="GROUP-BACKGROUND" red="200" green="205" blue="201">
+        </color>
+      </background_color>
+      <corner_width>5</corner_width>
+      <corner_height>5</corner_height>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>EPICS</name>
+      <x>10</x>
+      <y>42</y>
+      <width>349</width>
+      <height>128</height>
+      <style>3</style>
+      <widget type="label" version="2.0.0">
+        <name>Label_22</name>
+        <text>ModbusConnected:</text>
+        <x>20</x>
+        <y>10</y>
+        <width>159</width>
+        <height>30</height>
+        <font>
+          <font name="NORMAL-SANS-BOLD" family="Source Sans Pro" style="BOLD" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color name="PRIMARY-DARK" red="31" green="83" blue="102">
+          </color>
+        </foreground_color>
+        <horizontal_alignment>2</horizontal_alignment>
+      </widget>
+      <widget type="label" version="2.0.0">
+        <name>Label_23</name>
+        <text>S7Connected:</text>
+        <x>20</x>
+        <y>30</y>
+        <width>159</width>
+        <height>30</height>
+        <font>
+          <font name="NORMAL-SANS-BOLD" family="Source Sans Pro" style="BOLD" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color name="PRIMARY-DARK" red="31" green="83" blue="102">
+          </color>
+        </foreground_color>
+        <horizontal_alignment>2</horizontal_alignment>
+      </widget>
+      <widget type="label" version="2.0.0">
+        <name>Label_24</name>
+        <text>IOC Connected:</text>
+        <x>20</x>
+        <y>50</y>
+        <width>159</width>
+        <height>30</height>
+        <font>
+          <font name="NORMAL-SANS-BOLD" family="Source Sans Pro" style="BOLD" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color name="PRIMARY-DARK" red="31" green="83" blue="102">
+          </color>
+        </foreground_color>
+        <horizontal_alignment>2</horizontal_alignment>
+      </widget>
+      <widget type="label" version="2.0.0">
+        <name>Label_25</name>
+        <text>PLC hash OK:</text>
+        <x>20</x>
+        <y>70</y>
+        <width>159</width>
+        <height>30</height>
+        <font>
+          <font name="NORMAL-SANS-BOLD" family="Source Sans Pro" style="BOLD" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color name="PRIMARY-DARK" red="31" green="83" blue="102">
+          </color>
+        </foreground_color>
+        <horizontal_alignment>2</horizontal_alignment>
+      </widget>
+      <widget type="label" version="2.0.0">
+        <name>Label_26</name>
+        <text>Alive:</text>
+        <x>20</x>
+        <y>90</y>
+        <width>159</width>
+        <height>30</height>
+        <font>
+          <font name="NORMAL-SANS-BOLD" family="Source Sans Pro" style="BOLD" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color name="PRIMARY-DARK" red="31" green="83" blue="102">
+          </color>
+        </foreground_color>
+        <horizontal_alignment>2</horizontal_alignment>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>Text Update_9</name>
+        <pv_name>$(PLC):AliveR</pv_name>
+        <x>190</x>
+        <y>96</y>
+        <width>140</width>
+        <height>18</height>
+        <foreground_color>
+          <color name="ORANGE-BORDER" red="153" green="117" blue="49">
+          </color>
+        </foreground_color>
+        <transparent>true</transparent>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>Text Update_10</name>
+        <pv_name>$(PLC):PLCHashCorrectR</pv_name>
+        <x>190</x>
+        <y>76</y>
+        <width>140</width>
+        <height>18</height>
+        <foreground_color>
+          <color name="ORANGE-BORDER" red="153" green="117" blue="49">
+          </color>
+        </foreground_color>
+        <transparent>true</transparent>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>Text Update_11</name>
+        <pv_name>$(PLC):ConnectedR</pv_name>
+        <x>190</x>
+        <y>56</y>
+        <width>140</width>
+        <height>18</height>
+        <foreground_color>
+          <color name="ORANGE-BORDER" red="153" green="117" blue="49">
+          </color>
+        </foreground_color>
+        <transparent>true</transparent>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>Text Update_12</name>
+        <pv_name>$(PLC):S7ConnectedR</pv_name>
+        <x>190</x>
+        <y>36</y>
+        <width>140</width>
+        <height>18</height>
+        <foreground_color>
+          <color name="ORANGE-BORDER" red="153" green="117" blue="49">
+          </color>
+        </foreground_color>
+        <transparent>true</transparent>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>Text Update_13</name>
+        <pv_name>$(PLC):ModbusConnectedR</pv_name>
+        <x>190</x>
+        <y>16</y>
+        <width>140</width>
+        <height>18</height>
+        <foreground_color>
+          <color name="ORANGE-BORDER" red="153" green="117" blue="49">
+          </color>
+        </foreground_color>
+        <transparent>true</transparent>
+      </widget>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_4</name>
+      <text>EPICS Communication</text>
+      <width>370</width>
+      <height>40</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD_ITALIC" size="18.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Checksum</name>
+      <x>10</x>
+      <y>220</y>
+      <width>349</width>
+      <height>70</height>
+      <style>3</style>
+      <widget type="label" version="2.0.0">
+        <name>Label_27</name>
+        <text>Software Checksum:</text>
+        <x>20</x>
+        <y>10</y>
+        <width>159</width>
+        <height>30</height>
+        <font>
+          <font name="NORMAL-SANS-BOLD" family="Source Sans Pro" style="BOLD" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color name="PRIMARY-DARK" red="31" green="83" blue="102">
+          </color>
+        </foreground_color>
+        <horizontal_alignment>2</horizontal_alignment>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>Text Update_14</name>
+        <pv_name>$(PLC):SW_Checksum</pv_name>
+        <x>190</x>
+        <y>16</y>
+        <width>140</width>
+        <height>18</height>
+        <foreground_color>
+          <color name="ORANGE-BORDER" red="153" green="117" blue="49">
+          </color>
+        </foreground_color>
+        <transparent>true</transparent>
+      </widget>
+      <widget type="label" version="2.0.0">
+        <name>Label_28</name>
+        <text>TextList Checksum:</text>
+        <x>20</x>
+        <y>33</y>
+        <width>159</width>
+        <height>30</height>
+        <font>
+          <font name="NORMAL-SANS-BOLD" family="Source Sans Pro" style="BOLD" size="16.0">
+          </font>
+        </font>
+        <foreground_color>
+          <color name="PRIMARY-DARK" red="31" green="83" blue="102">
+          </color>
+        </foreground_color>
+        <horizontal_alignment>2</horizontal_alignment>
+      </widget>
+      <widget type="textupdate" version="2.0.0">
+        <name>Text Update_15</name>
+        <pv_name>$(PLC):Text_Checksum</pv_name>
+        <x>190</x>
+        <y>39</y>
+        <width>140</width>
+        <height>18</height>
+        <foreground_color>
+          <color name="ORANGE-BORDER" red="153" green="117" blue="49">
+          </color>
+        </foreground_color>
+        <transparent>true</transparent>
+      </widget>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_5</name>
+      <text>PLC Code Chechsum</text>
+      <y>180</y>
+      <width>370</width>
+      <height>40</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD_ITALIC" size="18.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <wrap_words>false</wrap_words>
+    </widget>
+  </widget>
+  <widget type="polygon" version="2.0.0">
+    <name>Polygon_6</name>
+    <x>73</x>
+    <y>450</y>
+    <width>1</width>
+    <height>129</height>
+    <line_color>
+      <color name="GREEN-BORDER" red="40" green="140" blue="40">
+      </color>
+    </line_color>
+    <background_color>
+      <color name="GREEN-BORDER" red="40" green="140" blue="40">
+      </color>
+    </background_color>
+    <points>
+      <point x="0.0" y="0.0">
+      </point>
+      <point x="1.2723388671875" y="130.2963246276222">
+      </point>
+    </points>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>LGGrey02-title_6</name>
+    <text>CPU</text>
+    <x>650</x>
+    <y>60</y>
+    <width>200</width>
+    <height>40</height>
+    <font>
+      <font family="Source Sans Pro" style="BOLD_ITALIC" size="18.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color name="GROUP-TEXT" red="25" green="25" blue="25">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color name="RED-BORDER" red="150" green="8" blue="16">
+      </color>
+    </background_color>
+    <vertical_alignment>1</vertical_alignment>
+    <wrap_words>false</wrap_words>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>LGGrey02-title_7</name>
+    <text>Scalance 1</text>
+    <x>1068</x>
+    <y>80</y>
+    <width>120</width>
+    <height>40</height>
+    <font>
+      <font family="Source Sans Pro" style="BOLD_ITALIC" size="18.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color name="GROUP-TEXT" red="25" green="25" blue="25">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color name="RED-BORDER" red="150" green="8" blue="16">
+      </color>
+    </background_color>
+    <vertical_alignment>1</vertical_alignment>
+    <wrap_words>false</wrap_words>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>LGGrey02-title_8</name>
+    <text>Scalance 2</text>
+    <x>1228</x>
+    <y>80</y>
+    <width>120</width>
+    <height>40</height>
+    <font>
+      <font family="Source Sans Pro" style="BOLD_ITALIC" size="18.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color name="GROUP-TEXT" red="25" green="25" blue="25">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color name="RED-BORDER" red="150" green="8" blue="16">
+      </color>
+    </background_color>
+    <vertical_alignment>1</vertical_alignment>
+    <wrap_words>false</wrap_words>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>LGGrey02-title_9</name>
+    <text>Scalance 3</text>
+    <x>1378</x>
+    <y>80</y>
+    <width>120</width>
+    <height>40</height>
+    <font>
+      <font family="Source Sans Pro" style="BOLD_ITALIC" size="18.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color name="GROUP-TEXT" red="25" green="25" blue="25">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color name="RED-BORDER" red="150" green="8" blue="16">
+      </color>
+    </background_color>
+    <vertical_alignment>1</vertical_alignment>
+    <wrap_words>false</wrap_words>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>LGGrey02-title_10</name>
+    <text>Remote IO 3</text>
+    <x>1320</x>
+    <y>550</y>
+    <width>94</width>
+    <height>24</height>
+    <font>
+      <font family="Source Sans Pro" style="BOLD_ITALIC" size="18.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color name="GROUP-TEXT" red="25" green="25" blue="25">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color name="RED-BORDER" red="150" green="8" blue="16">
+      </color>
+    </background_color>
+    <vertical_alignment>1</vertical_alignment>
+    <auto_size>true</auto_size>
+    <wrap_words>false</wrap_words>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>PLC Modules Caption_3</name>
+    <x>1348</x>
+    <y>659</y>
+    <width>484</width>
+    <height>30</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_12</name>
+      <text>DI2</text>
+      <x>76</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_13</name>
+      <text>DI3</text>
+      <x>114</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_14</name>
+      <text>DI4</text>
+      <x>152</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_15</name>
+      <text>DI5</text>
+      <x>191</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_16</name>
+      <text>AI1</text>
+      <x>229</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_17</name>
+      <text>AI2</text>
+      <x>267</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_18</name>
+      <text>AI3</text>
+      <x>305</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_19</name>
+      <text>AI4</text>
+      <x>344</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_20</name>
+      <text>DQ1</text>
+      <x>379</x>
+      <width>28</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_21</name>
+      <text>DQ2</text>
+      <x>417</x>
+      <width>28</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_22</name>
+      <text>DQ3</text>
+      <x>456</x>
+      <width>28</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_11</name>
+      <text>DI1</text>
+      <x>38</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_23</name>
+      <text>IM</text>
+      <width>16</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>PLC Modules Caption_2</name>
+    <x>728</x>
+    <y>659</y>
+    <width>484</width>
+    <height>30</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_24</name>
+      <text>DI2</text>
+      <x>76</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_25</name>
+      <text>DI3</text>
+      <x>114</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_26</name>
+      <text>DI4</text>
+      <x>152</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_27</name>
+      <text>DI5</text>
+      <x>191</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_28</name>
+      <text>AI1</text>
+      <x>229</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_29</name>
+      <text>AI2</text>
+      <x>267</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_30</name>
+      <text>AI3</text>
+      <x>305</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_31</name>
+      <text>AI4</text>
+      <x>344</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_32</name>
+      <text>DQ1</text>
+      <x>379</x>
+      <width>28</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_33</name>
+      <text>DQ2</text>
+      <x>417</x>
+      <width>28</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_34</name>
+      <text>DQ3</text>
+      <x>456</x>
+      <width>28</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_35</name>
+      <text>DI1</text>
+      <x>38</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_36</name>
+      <text>IM</text>
+      <width>16</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+  </widget>
+  <widget type="group" version="2.0.0">
+    <name>PLC Modules Caption_1</name>
+    <x>118</x>
+    <y>659</y>
+    <width>484</width>
+    <height>30</height>
+    <style>3</style>
+    <transparent>true</transparent>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_37</name>
+      <text>DI2</text>
+      <x>76</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_38</name>
+      <text>DI3</text>
+      <x>114</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_39</name>
+      <text>DI4</text>
+      <x>152</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_40</name>
+      <text>DI5</text>
+      <x>191</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_41</name>
+      <text>AI1</text>
+      <x>229</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_42</name>
+      <text>AI2</text>
+      <x>267</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_43</name>
+      <text>AI3</text>
+      <x>305</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_44</name>
+      <text>AI4</text>
+      <x>344</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_45</name>
+      <text>DQ1</text>
+      <x>379</x>
+      <width>28</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_46</name>
+      <text>DQ2</text>
+      <x>417</x>
+      <width>28</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_47</name>
+      <text>DQ3</text>
+      <x>456</x>
+      <width>28</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_48</name>
+      <text>DI1</text>
+      <x>38</x>
+      <width>22</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>LGGrey02-title_49</name>
+      <text>IM</text>
+      <width>16</width>
+      <height>30</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD" size="15.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="GROUP-TEXT" red="25" green="25" blue="25">
+        </color>
+      </foreground_color>
+      <background_color>
+        <color name="RED-BORDER" red="150" green="8" blue="16">
+        </color>
+      </background_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <rotation_step>1</rotation_step>
+      <wrap_words>false</wrap_words>
+    </widget>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>LGGrey02-title_50</name>
+    <text>Remote IO 1</text>
+    <x>83</x>
+    <y>550</y>
+    <width>94</width>
+    <height>24</height>
+    <font>
+      <font family="Source Sans Pro" style="BOLD_ITALIC" size="18.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color name="GROUP-TEXT" red="25" green="25" blue="25">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color name="RED-BORDER" red="150" green="8" blue="16">
+      </color>
+    </background_color>
+    <vertical_alignment>1</vertical_alignment>
+    <auto_size>true</auto_size>
+    <wrap_words>false</wrap_words>
+  </widget>
+  <widget type="label" version="2.0.0">
+    <name>LGGrey02-title_51</name>
+    <text>Remote IO 2</text>
+    <x>690</x>
+    <y>550</y>
+    <width>94</width>
+    <height>24</height>
+    <font>
+      <font family="Source Sans Pro" style="BOLD_ITALIC" size="18.0">
+      </font>
+    </font>
+    <foreground_color>
+      <color name="GROUP-TEXT" red="25" green="25" blue="25">
+      </color>
+    </foreground_color>
+    <background_color>
+      <color name="RED-BORDER" red="150" green="8" blue="16">
+      </color>
+    </background_color>
+    <vertical_alignment>1</vertical_alignment>
+    <auto_size>true</auto_size>
+    <wrap_words>false</wrap_words>
+  </widget>
+</display>
