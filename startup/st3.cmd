@@ -14,7 +14,6 @@ epicsEnvSet("PLCNAME","kg-gta_odh-plc-01")
 epicsEnvSet("IPADDR","172.16.49.12")
 epicsEnvSet("INSIZE","184")
 
-epicsEnvSet("MODBUSDRVPORT","502")
 epicsEnvSet("$(PLCNAME)_CONFIGURE_MODBUS_READ","#")
 
 loadIocsh("iocStats.iocsh", "IOCNAME=$(IOC)")
