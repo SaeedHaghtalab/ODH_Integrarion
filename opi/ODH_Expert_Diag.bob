@@ -104,7 +104,7 @@ $(pv_value)</tooltip>
   <widget type="group" version="2.0.0">
     <name>Group</name>
     <macros>
-      <P>$(PLC):RIO1</P>
+      <RIO>$(PLC):RIO1</RIO>
     </macros>
     <x>67</x>
     <y>770</y>
@@ -115,7 +115,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_20</name>
       <macros>
-        <P>$(P)_IM</P>
+        <Mod>$(RIO)_IM</Mod>
       </macros>
       <x>44</x>
       <width>30</width>
@@ -135,7 +135,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -154,7 +154,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -172,7 +172,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -181,7 +181,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_21</name>
       <macros>
-        <P>$(P)_DI1</P>
+        <Mod>$(RIO)_DI1</Mod>
       </macros>
       <x>85</x>
       <width>30</width>
@@ -201,7 +201,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -220,7 +220,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -238,7 +238,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -247,7 +247,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_22</name>
       <macros>
-        <P>$(P)_DI2</P>
+        <Mod>$(RIO)_DI2</Mod>
       </macros>
       <x>123</x>
       <width>30</width>
@@ -267,7 +267,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -286,7 +286,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -304,7 +304,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -313,7 +313,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_23</name>
       <macros>
-        <P>$(P)_DI3</P>
+        <Mod>$(RIO)_DI3</Mod>
       </macros>
       <x>161</x>
       <width>30</width>
@@ -333,7 +333,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -352,7 +352,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -370,7 +370,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -379,7 +379,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_24</name>
       <macros>
-        <P>$(P)_DI4</P>
+        <Mod>$(RIO)_DI4</Mod>
       </macros>
       <x>199</x>
       <width>30</width>
@@ -399,7 +399,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -418,7 +418,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -436,7 +436,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -445,7 +445,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_25</name>
       <macros>
-        <P>$(P)_DI5</P>
+        <Mod>$(RIO)_DI5</Mod>
       </macros>
       <x>238</x>
       <width>30</width>
@@ -465,7 +465,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -484,7 +484,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -502,7 +502,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -511,7 +511,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_26</name>
       <macros>
-        <P>$(P)_AI1</P>
+        <Mod>$(RIO)_AI1</Mod>
       </macros>
       <x>276</x>
       <width>30</width>
@@ -531,7 +531,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -550,7 +550,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -568,7 +568,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -577,7 +577,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_27</name>
       <macros>
-        <P>$(P)_AI2</P>
+        <Mod>$(RIO)_AI2</Mod>
       </macros>
       <x>314</x>
       <width>30</width>
@@ -597,7 +597,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -616,7 +616,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -634,7 +634,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -643,7 +643,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_28</name>
       <macros>
-        <P>$(P)_AI3</P>
+        <Mod>$(RIO)_AI3</Mod>
       </macros>
       <x>352</x>
       <width>30</width>
@@ -663,7 +663,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -682,7 +682,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -700,7 +700,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -709,7 +709,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_29</name>
       <macros>
-        <P>$(P)_AI4</P>
+        <Mod>$(RIO)_AI4</Mod>
       </macros>
       <x>391</x>
       <width>30</width>
@@ -729,7 +729,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -748,7 +748,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -766,7 +766,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -775,7 +775,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_30</name>
       <macros>
-        <P>$(P)_DO1</P>
+        <Mod>$(RIO)_DO1</Mod>
       </macros>
       <x>429</x>
       <width>30</width>
@@ -795,7 +795,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -814,7 +814,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -832,7 +832,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -841,7 +841,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_31</name>
       <macros>
-        <P>$(P)_DO2</P>
+        <Mod>$(RIO)_DO2</Mod>
       </macros>
       <x>467</x>
       <width>30</width>
@@ -861,7 +861,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -880,7 +880,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -898,7 +898,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -907,7 +907,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_32</name>
       <macros>
-        <P>$(P)_DO3</P>
+        <Mod>$(RIO)_DO3</Mod>
       </macros>
       <x>506</x>
       <width>30</width>
@@ -927,7 +927,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -946,7 +946,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -964,7 +964,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -974,7 +974,7 @@ $(pv_value)</tooltip>
   <widget type="group" version="2.0.0">
     <name>Group_63</name>
     <macros>
-      <P>$(PLC):RIO2</P>
+      <RIO>$(PLC):RIO2</RIO>
     </macros>
     <x>677</x>
     <y>770</y>
@@ -985,7 +985,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_64</name>
       <macros>
-        <P>$(P)_IM</P>
+        <Mod>$(RIO)_IM</Mod>
       </macros>
       <x>44</x>
       <width>30</width>
@@ -1005,7 +1005,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -1024,7 +1024,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -1042,7 +1042,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -1051,7 +1051,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_65</name>
       <macros>
-        <P>$(P)_DI1</P>
+        <Mod>$(RIO)_DI1</Mod>
       </macros>
       <x>85</x>
       <width>30</width>
@@ -1071,7 +1071,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -1090,7 +1090,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -1108,7 +1108,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -1117,7 +1117,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_66</name>
       <macros>
-        <P>$(P)_DI2</P>
+        <Mod>$(RIO)_DI2</Mod>
       </macros>
       <x>123</x>
       <width>30</width>
@@ -1137,7 +1137,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -1156,7 +1156,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -1174,7 +1174,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -1183,7 +1183,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_67</name>
       <macros>
-        <P>$(P)_DI3</P>
+        <Mod>$(RIO)_DI3</Mod>
       </macros>
       <x>161</x>
       <width>30</width>
@@ -1203,7 +1203,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -1222,7 +1222,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -1240,7 +1240,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -1249,7 +1249,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_68</name>
       <macros>
-        <P>$(P)_DI4</P>
+        <Mod>$(RIO)_DI4</Mod>
       </macros>
       <x>199</x>
       <width>30</width>
@@ -1269,7 +1269,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -1288,7 +1288,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -1306,7 +1306,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -1315,7 +1315,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_69</name>
       <macros>
-        <P>$(P)_DI5</P>
+        <Mod>$(RIO)_DI5</Mod>
       </macros>
       <x>238</x>
       <width>30</width>
@@ -1335,7 +1335,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -1354,7 +1354,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -1372,7 +1372,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -1381,7 +1381,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_70</name>
       <macros>
-        <P>$(P)_AI1</P>
+        <Mod>$(RIO)_AI1</Mod>
       </macros>
       <x>276</x>
       <width>30</width>
@@ -1401,7 +1401,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -1420,7 +1420,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -1438,7 +1438,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -1447,7 +1447,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_71</name>
       <macros>
-        <P>$(P)_AI2</P>
+        <Mod>$(RIO)_AI2</Mod>
       </macros>
       <x>314</x>
       <width>30</width>
@@ -1467,7 +1467,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -1486,7 +1486,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -1504,7 +1504,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -1513,7 +1513,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_72</name>
       <macros>
-        <P>$(P)_AI3</P>
+        <Mod>$(RIO)_AI3</Mod>
       </macros>
       <x>352</x>
       <width>30</width>
@@ -1533,7 +1533,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -1552,7 +1552,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -1570,7 +1570,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -1579,7 +1579,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_73</name>
       <macros>
-        <P>$(P)_AI4</P>
+        <Mod>$(RIO)_AI4</Mod>
       </macros>
       <x>391</x>
       <width>30</width>
@@ -1599,7 +1599,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -1618,7 +1618,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -1636,7 +1636,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -1645,7 +1645,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_74</name>
       <macros>
-        <P>$(P)_DO1</P>
+        <Mod>$(RIO)_DO1</Mod>
       </macros>
       <x>429</x>
       <width>30</width>
@@ -1665,7 +1665,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -1684,7 +1684,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -1702,7 +1702,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -1711,7 +1711,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_75</name>
       <macros>
-        <P>$(P)_DO2</P>
+        <Mod>$(RIO)_DO2</Mod>
       </macros>
       <x>467</x>
       <width>30</width>
@@ -1731,7 +1731,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -1750,7 +1750,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -1768,7 +1768,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -1777,7 +1777,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_76</name>
       <macros>
-        <P>$(P)_DO3</P>
+        <Mod>$(RIO)_DO3</Mod>
       </macros>
       <x>506</x>
       <width>30</width>
@@ -1797,7 +1797,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -1816,7 +1816,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -1834,7 +1834,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -1844,7 +1844,7 @@ $(pv_value)</tooltip>
   <widget type="group" version="2.0.0">
     <name>Group_77</name>
     <macros>
-      <P>$(PLC):RIO3</P>
+      <RIO>$(PLC):RIO3</RIO>
     </macros>
     <x>1297</x>
     <y>770</y>
@@ -1855,7 +1855,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_78</name>
       <macros>
-        <P>$(P)_IM</P>
+        <Mod>$(RIO)_IM</Mod>
       </macros>
       <x>44</x>
       <width>30</width>
@@ -1875,7 +1875,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -1894,7 +1894,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -1912,7 +1912,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -1921,7 +1921,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_79</name>
       <macros>
-        <P>$(P)_DI1</P>
+        <Mod>$(RIO)_DI1</Mod>
       </macros>
       <x>85</x>
       <width>30</width>
@@ -1941,7 +1941,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -1960,7 +1960,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -1978,7 +1978,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -1987,7 +1987,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_80</name>
       <macros>
-        <P>$(P)_DI2</P>
+        <Mod>$(RIO)_DI2</Mod>
       </macros>
       <x>123</x>
       <width>30</width>
@@ -2007,7 +2007,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -2026,7 +2026,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -2044,7 +2044,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -2053,7 +2053,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_81</name>
       <macros>
-        <P>$(P)_DI3</P>
+        <Mod>$(RIO)_DI3</Mod>
       </macros>
       <x>161</x>
       <width>30</width>
@@ -2073,7 +2073,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -2092,7 +2092,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -2110,7 +2110,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -2119,7 +2119,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_82</name>
       <macros>
-        <P>$(P)_DI4</P>
+        <Mod>$(RIO)_DI4</Mod>
       </macros>
       <x>199</x>
       <width>30</width>
@@ -2139,7 +2139,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -2158,7 +2158,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -2176,7 +2176,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -2185,7 +2185,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_83</name>
       <macros>
-        <P>$(P)_DI5</P>
+        <Mod>$(RIO)_DI5</Mod>
       </macros>
       <x>238</x>
       <width>30</width>
@@ -2205,7 +2205,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -2224,7 +2224,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -2242,7 +2242,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -2251,7 +2251,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_84</name>
       <macros>
-        <P>$(P)_AI1</P>
+        <Mod>$(RIO)_AI1</Mod>
       </macros>
       <x>276</x>
       <width>30</width>
@@ -2271,7 +2271,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -2290,7 +2290,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -2308,7 +2308,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -2317,7 +2317,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_85</name>
       <macros>
-        <P>$(P)_AI2</P>
+        <Mod>$(RIO)_AI2</Mod>
       </macros>
       <x>314</x>
       <width>30</width>
@@ -2337,7 +2337,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -2356,7 +2356,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -2374,7 +2374,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -2383,7 +2383,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_86</name>
       <macros>
-        <P>$(P)_AI3</P>
+        <Mod>$(RIO)_AI3</Mod>
       </macros>
       <x>352</x>
       <width>30</width>
@@ -2403,7 +2403,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -2422,7 +2422,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -2440,7 +2440,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -2449,7 +2449,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_87</name>
       <macros>
-        <P>$(P)_AI4</P>
+        <Mod>$(RIO)_AI4</Mod>
       </macros>
       <x>391</x>
       <width>30</width>
@@ -2469,7 +2469,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -2488,7 +2488,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -2506,7 +2506,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -2515,7 +2515,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_88</name>
       <macros>
-        <P>$(P)_DO1</P>
+        <Mod>$(RIO)_DO1</Mod>
       </macros>
       <x>429</x>
       <width>30</width>
@@ -2535,7 +2535,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -2554,7 +2554,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -2572,7 +2572,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -2581,7 +2581,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_89</name>
       <macros>
-        <P>$(P)_DO2</P>
+        <Mod>$(RIO)_DO2</Mod>
       </macros>
       <x>467</x>
       <width>30</width>
@@ -2601,7 +2601,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -2620,7 +2620,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -2638,7 +2638,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -2647,7 +2647,7 @@ $(pv_value)</tooltip>
     <widget type="group" version="2.0.0">
       <name>Group_90</name>
       <macros>
-        <P>$(P)_DO3</P>
+        <Mod>$(RIO)_DO3</Mod>
       </macros>
       <x>506</x>
       <width>30</width>
@@ -2667,7 +2667,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>false</value>
             </exp>
-            <pv_name>${PVConnected}</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is connected</tooltip>
@@ -2686,7 +2686,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Status</pv_name>
+            <pv_name>$(Mod)_Status</pv_name>
           </rule>
         </rules>
         <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -2704,7 +2704,7 @@ $(pv_value)</tooltip>
             <exp bool_exp="pv0 == false">
               <value>true</value>
             </exp>
-            <pv_name>$(P)_Connected</pv_name>
+            <pv_name>$(Mod)_Connected</pv_name>
           </rule>
         </rules>
         <tooltip>Module is not connected!</tooltip>
@@ -2714,7 +2714,7 @@ $(pv_value)</tooltip>
   <widget type="group" version="2.0.0">
     <name>Group_91</name>
     <macros>
-      <P>$(PLC):SCL1</P>
+      <Mod>$(PLC):SCL1</Mod>
     </macros>
     <x>1113</x>
     <y>150</y>
@@ -2735,7 +2735,7 @@ $(pv_value)</tooltip>
           <exp bool_exp="pv0 == false">
             <value>false</value>
           </exp>
-          <pv_name>${PVConnected}</pv_name>
+          <pv_name>$(Mod)_Connected</pv_name>
         </rule>
       </rules>
       <tooltip>Module is connected</tooltip>
@@ -2754,7 +2754,7 @@ $(pv_value)</tooltip>
           <exp bool_exp="pv0 == false">
             <value>true</value>
           </exp>
-          <pv_name>$(P)_Status</pv_name>
+          <pv_name>$(Mod)_Status</pv_name>
         </rule>
       </rules>
       <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -2772,7 +2772,7 @@ $(pv_value)</tooltip>
           <exp bool_exp="pv0 == false">
             <value>true</value>
           </exp>
-          <pv_name>$(P)_Connected</pv_name>
+          <pv_name>$(Mod)_Connected</pv_name>
         </rule>
       </rules>
       <tooltip>Module is not connected!</tooltip>
@@ -2781,7 +2781,7 @@ $(pv_value)</tooltip>
   <widget type="group" version="2.0.0">
     <name>Group_92</name>
     <macros>
-      <P>$(PLC):SCL2</P>
+      <Mod>$(PLC):SCL2</Mod>
     </macros>
     <x>1273</x>
     <y>150</y>
@@ -2802,7 +2802,7 @@ $(pv_value)</tooltip>
           <exp bool_exp="pv0 == false">
             <value>false</value>
           </exp>
-          <pv_name>${PVConnected}</pv_name>
+          <pv_name>$(Mod)_Connected</pv_name>
         </rule>
       </rules>
       <tooltip>Module is connected</tooltip>
@@ -2821,7 +2821,7 @@ $(pv_value)</tooltip>
           <exp bool_exp="pv0 == false">
             <value>true</value>
           </exp>
-          <pv_name>$(P)_Status</pv_name>
+          <pv_name>$(Mod)_Status</pv_name>
         </rule>
       </rules>
       <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -2839,7 +2839,7 @@ $(pv_value)</tooltip>
           <exp bool_exp="pv0 == false">
             <value>true</value>
           </exp>
-          <pv_name>$(P)_Connected</pv_name>
+          <pv_name>$(Mod)_Connected</pv_name>
         </rule>
       </rules>
       <tooltip>Module is not connected!</tooltip>
@@ -2848,7 +2848,7 @@ $(pv_value)</tooltip>
   <widget type="group" version="2.0.0">
     <name>Group_93</name>
     <macros>
-      <P>$(PLC):SCL3</P>
+      <Mod>$(PLC):SCL3</Mod>
     </macros>
     <x>1423</x>
     <y>150</y>
@@ -2869,7 +2869,7 @@ $(pv_value)</tooltip>
           <exp bool_exp="pv0 == false">
             <value>false</value>
           </exp>
-          <pv_name>${PVConnected}</pv_name>
+          <pv_name>$(Mod)_Connected</pv_name>
         </rule>
       </rules>
       <tooltip>Module is connected</tooltip>
@@ -2888,7 +2888,7 @@ $(pv_value)</tooltip>
           <exp bool_exp="pv0 == false">
             <value>true</value>
           </exp>
-          <pv_name>$(P)_Status</pv_name>
+          <pv_name>$(Mod)_Status</pv_name>
         </rule>
       </rules>
       <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -2906,7 +2906,7 @@ $(pv_value)</tooltip>
           <exp bool_exp="pv0 == false">
             <value>true</value>
           </exp>
-          <pv_name>$(P)_Connected</pv_name>
+          <pv_name>$(Mod)_Connected</pv_name>
         </rule>
       </rules>
       <tooltip>Module is not connected!</tooltip>
@@ -2915,7 +2915,7 @@ $(pv_value)</tooltip>
   <widget type="group" version="2.0.0">
     <name>Group_94</name>
     <macros>
-      <P>$(PLC):CPU</P>
+      <Mod>$(PLC):CPU</Mod>
     </macros>
     <x>676</x>
     <y>164</y>
@@ -2936,7 +2936,7 @@ $(pv_value)</tooltip>
           <exp bool_exp="pv0 == false">
             <value>false</value>
           </exp>
-          <pv_name>${PVConnected}</pv_name>
+          <pv_name>$(Mod)_Connected</pv_name>
         </rule>
       </rules>
       <tooltip>Module is connected</tooltip>
@@ -2955,7 +2955,7 @@ $(pv_value)</tooltip>
           <exp bool_exp="pv0 == false">
             <value>true</value>
           </exp>
-          <pv_name>$(P)_Status</pv_name>
+          <pv_name>$(Mod)_Status</pv_name>
         </rule>
       </rules>
       <tooltip>Siemens card error! Open TIA Portal!</tooltip>
@@ -2973,7 +2973,7 @@ $(pv_value)</tooltip>
           <exp bool_exp="pv0 == false">
             <value>true</value>
           </exp>
-          <pv_name>$(P)_Connected</pv_name>
+          <pv_name>$(Mod)_Connected</pv_name>
         </rule>
       </rules>
       <tooltip>Module is not connected!</tooltip>
@@ -3237,7 +3237,7 @@ $(pv_value)</tooltip>
         <name>Text Update_9</name>
         <pv_name>$(PLC):AliveR</pv_name>
         <x>190</x>
-        <y>96</y>
+        <y>91</y>
         <width>140</width>
         <height>18</height>
         <foreground_color>
@@ -3250,7 +3250,7 @@ $(pv_value)</tooltip>
         <name>Text Update_10</name>
         <pv_name>$(PLC):PLCHashCorrectR</pv_name>
         <x>190</x>
-        <y>76</y>
+        <y>71</y>
         <width>140</width>
         <height>18</height>
         <foreground_color>
@@ -3263,7 +3263,7 @@ $(pv_value)</tooltip>
         <name>Text Update_11</name>
         <pv_name>$(PLC):ConnectedR</pv_name>
         <x>190</x>
-        <y>56</y>
+        <y>50</y>
         <width>140</width>
         <height>18</height>
         <foreground_color>
@@ -3276,7 +3276,7 @@ $(pv_value)</tooltip>
         <name>Text Update_12</name>
         <pv_name>$(PLC):S7ConnectedR</pv_name>
         <x>190</x>
-        <y>36</y>
+        <y>30</y>
         <width>140</width>
         <height>18</height>
         <foreground_color>
@@ -3289,7 +3289,7 @@ $(pv_value)</tooltip>
         <name>Text Update_13</name>
         <pv_name>$(PLC):ModbusConnectedR</pv_name>
         <x>190</x>
-        <y>16</y>
+        <y>10</y>
         <width>140</width>
         <height>18</height>
         <foreground_color>
@@ -3348,7 +3348,7 @@ $(pv_value)</tooltip>
         <name>Text Update_14</name>
         <pv_name>$(PLC):SW_Checksum</pv_name>
         <x>190</x>
-        <y>16</y>
+        <y>11</y>
         <width>140</width>
         <height>18</height>
         <foreground_color>
@@ -3378,7 +3378,7 @@ $(pv_value)</tooltip>
         <name>Text Update_15</name>
         <pv_name>$(PLC):Text_Checksum</pv_name>
         <x>190</x>
-        <y>39</y>
+        <y>34</y>
         <width>140</width>
         <height>18</height>
         <foreground_color>

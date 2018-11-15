@@ -1,8 +1,15 @@
 
 record(stringin, "KG-GTA:ODH-PLC-01:ModVersionR") {
-	field(DISP, "1")
-	field(VAL,  "$(MODVERSION=N/A)")
-	field(PINI, "YES")
+	field(DISP,	"1")
+	field(VAL,	"$(MODVERSION=N/A)")
+	field(PINI,	"YES")
+}
+
+record(stringin, "KG-GTA:ODH-PLC-01:PLCFCommitR") {
+	field(DISP,	"1")
+#2c8b3e8cce5defd5230443c47f44c8ed48616a58
+	field(VAL,	"2c8b3e8cce5defd5230443c47f44c8ed48616a5")
+	field(PINI,	"YES")
 }
 
 #########################################################
@@ -82,7 +89,7 @@ record(bo, "KG-GTA:ODH-PLC-01:iKickAlive") {
 record(ao, "KG-GTA:ODH-PLC-01:iCommsHashToPLC") {
 	field(DISP,	"1")
 	field(PINI,	"YES")
-	field(VAL,	"718980072")
+	field(VAL,	"259823548")
 }
 record(ao, "KG-GTA:ODH-PLC-01:CommsHashToPLCS") {
 	field(DESC,	"Sends comms hash to PLC")
@@ -1396,6 +1403,99 @@ record(bi, "KG-GTA:ODH-PLC-01:RIO3_SvrMod_Status")
 	field(DISV, "0")
 	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
 	field(DESC, "RIO Server Module Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+
+#################################
+#Scalance Switch 1
+#<<<--- add_digital("SCL1_Connected",     PV_DESC="Scalance Switch Connection", PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:SCL1_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/38 T=UINT16 B=6")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Scalance Switch Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("SCL1_Status",        PV_DESC="Scalance Switch Status",     PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:SCL1_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/38 T=UINT16 B=7")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Scalance Switch Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+
+#################################
+#Scalance Switch 2
+#<<<--- add_digital("SCL2_Connected",     PV_DESC="Scalance Switch Connection", PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:SCL2_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/38 T=UINT16 B=8")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Scalance Switch Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("SCL2_Status",        PV_DESC="Scalance Switch Status",     PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:SCL2_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/38 T=UINT16 B=9")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Scalance Switch Status")
+	field(ONAM, "OK")
+	field(ZNAM, "NOK!")
+}
+
+
+#################################
+#Scalance Switch 3
+#<<<--- add_digital("SCL3_Connected",     PV_DESC="Scalance Switch Connection", PV_ONAM="Connected", PV_ZNAM="Disconnected")
+record(bi, "KG-GTA:ODH-PLC-01:SCL3_Connected")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/38 T=UINT16 B=10")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Scalance Switch Connection")
+	field(ONAM, "Connected")
+	field(ZNAM, "Disconnected")
+}
+
+#<<<--- add_digital("SCL3_Status",        PV_DESC="Scalance Switch Status",     PV_ONAM="OK",        PV_ZNAM="NOK!")
+record(bi, "KG-GTA:ODH-PLC-01:SCL3_Status")
+{
+	field(SCAN, "I/O Intr")
+	field(DTYP, "S7plc")
+	field(INP,  "@$(PLCNAME)/38 T=UINT16 B=11")
+	field(DISS, "INVALID")
+	field(DISV, "0")
+	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
+	field(DESC, "Scalance Switch Status")
 	field(ONAM, "OK")
 	field(ZNAM, "NOK!")
 }

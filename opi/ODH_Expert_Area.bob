@@ -59,7 +59,7 @@
           <x>20</x>
           <y>20</y>
           <off_color>
-            <color name="LED-RED-OFF" red="110" green="101" blue="90">
+            <color name="GRAY" red="169" green="169" blue="169">
             </color>
           </off_color>
           <on_color>
@@ -87,7 +87,7 @@
           <x>20</x>
           <y>74</y>
           <off_color>
-            <color name="LED-RED-OFF" red="110" green="101" blue="90">
+            <color name="GRAY" red="169" green="169" blue="169">
             </color>
           </off_color>
           <on_color>

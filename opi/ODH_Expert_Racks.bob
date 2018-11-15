@@ -72,7 +72,7 @@
           <x>25</x>
           <y>17</y>
           <off_color>
-            <color name="LED-RED-OFF" red="110" green="101" blue="90">
+            <color name="Grid" red="169" green="169" blue="169">
             </color>
           </off_color>
           <on_color>
@@ -310,7 +310,7 @@
           <x>25</x>
           <y>17</y>
           <off_color>
-            <color name="LED-RED-OFF" red="110" green="101" blue="90">
+            <color name="Grid" red="169" green="169" blue="169">
             </color>
           </off_color>
           <on_color>
@@ -531,7 +531,7 @@
           <x>25</x>
           <y>17</y>
           <off_color>
-            <color name="LED-RED-OFF" red="110" green="101" blue="90">
+            <color name="Grid" red="169" green="169" blue="169">
             </color>
           </off_color>
           <on_color>
