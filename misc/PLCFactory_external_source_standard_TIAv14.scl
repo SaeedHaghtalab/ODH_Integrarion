@@ -184,114 +184,6 @@ NON_RETAIN
 BEGIN
 
 END_DATA_BLOCK
-FUNCTION "_CommsEPICSDataMappingFBFactory" : Void
-{ S7_Optimized_Access := 'TRUE' }
-VERSION : 0.1
-//This blocks maps data to/from PLC/EPICS data exchange block
-   VAR_INPUT 
-      EPICSToPLCLength : Int;   // Length of device command register array (in words)
-      EPICSToPLCDataBlockOffset : Int;   // Offset in EPICS->PLC comms block where this device data resides (in words)
-      EPICSToPLCParametersStart : Int;   // The border offset between the Command and the Parameter area
-      PLCToEPICSLength : Int;   // Length of device status register array (in words)
-      PLCToEPICSDataBlockOffset : Int;   // Offset in PLC->EPICS comms block where this device data resides (in words)
-   END_VAR
-
-   VAR_IN_OUT 
-      EPICSToPLCCommandRegisters : Variant;   // Pointer to device command registers (header of the array of words)
-      PLCToEPICSStatusRegisters : Variant;   // Pointer to device status registers (header of the array of words)
-      EPICSToPLCDataBlock : Variant;   // Pointer to EPICS->PLC data exchange block (header of the array of words)
-      PLCToEPICSDataBlock : Variant;   // Pointer to PLC->EPICS data exchange block (header of the array of words)
-   END_VAR
-
-   VAR_TEMP 
-      temp : Int;
-      ZeroWord : Word;
-      LoopCounter : Int;
-   END_VAR
-
-BEGIN
-	(*
-	  Author:       Nick Levchenko
-	  Modified:     Miklos Boros
-	  
-	  Description:  This function maps the the data between any device and PLC/EPICS communication blocks.
-	                Every device data that needs to be communicated to EPICS needs to have so called "communication registers".
-	                They should be implemented inside the device FB as:
-	                CommandReg  Array [0..x] of Word
-	                StatusReg   Array [0..x] of Word
-	                Parameters  Array [0..x] of Word
-	                To map device data to PLC/EPICS data exchange blocks call this function and provide pointers to device communication registers,
-	                their lengths, pointers to PLC/EPICS data exchange blocks and offsets in those block where this device data should go.
-	                
-	                Status registers are simply copied from device to data exchange block.
-	                Command registers are copied from data exchange blocks to device and CLEARED. This is to accept commands only once. 
-	                Parameter registers are copied from data exchange blocks to device WITHOUT clearing. This means this are can be used for SetPoints and other parameters.
-	*)
-	
-	// Map command/parameter registers
-	IF #EPICSToPLCLength > 0 THEN
-	    
-	    #temp := MOVE_BLK_VARIANT(
-	                              SRC := #EPICSToPLCDataBlock,
-	                              COUNT := INT_TO_UDINT(#EPICSToPLCLength),
-	                              SRC_INDEX := #EPICSToPLCDataBlockOffset,
-	                              DEST_INDEX := 0,
-	                              DEST => #EPICSToPLCCommandRegisters);
-	    
-	    IF (NOT "Utilities".TestInProgress) THEN
-	    
-	        //Clear commands, but leave parameters unchanged (loop through all command registers AND write 0 TO them)    
-	        #ZeroWord := 0;
-	        IF (#EPICSToPLCParametersStart = #EPICSToPLCLength) THEN
-	            FOR #LoopCounter := 0 TO (#EPICSToPLCLength - 1) DO
-	                
-	                #temp := MOVE_BLK_VARIANT(SRC := #ZeroWord,
-	                                          COUNT := 1,
-	                                          SRC_INDEX := 0,
-	                                          DEST_INDEX := #EPICSToPLCDataBlockOffset + #LoopCounter,
-	                                          DEST => #EPICSToPLCDataBlock);
-	            END_FOR;
-	        ELSE
-	            IF (#EPICSToPLCParametersStart > 0) THEN
-	                FOR #LoopCounter := 0 TO (#EPICSToPLCParametersStart - 1) DO
-	                    
-	                    #temp := MOVE_BLK_VARIANT(SRC := #ZeroWord,
-	                                              COUNT := 1,
-	                                              SRC_INDEX := 0,
-	                                              DEST_INDEX := #EPICSToPLCDataBlockOffset + #LoopCounter,
-	                                              DEST => #EPICSToPLCDataBlock);
-	                END_FOR;
-	            END_IF;
-	        END_IF;
-	    END_IF;
-	END_IF;
-	
-	
-	// Map status registers
-	IF #PLCToEPICSLength > 0 THEN
-	    #temp := MOVE_BLK_VARIANT(
-	                              SRC := #PLCToEPICSStatusRegisters,
-	                              COUNT := INT_TO_UDINT(#PLCToEPICSLength),
-	                              SRC_INDEX := 0,
-	                              DEST_INDEX := #PLCToEPICSDataBlockOffset,
-	                              DEST => #PLCToEPICSDataBlock);
-	END_IF;
-	
-END_FUNCTION
-	FUNCTION "_CommsEPICSDataMap" : Void
-{ S7_Optimized_Access := 'TRUE' }
-VERSION : 0.1
-   VAR_TEMP 
-      Hash : DInt;
-   END_VAR
-
-BEGIN
-	        //Comms data generation hash
-	        #Hash := DInt#104734097;
-	        "PLCToEPICS"."Word"[1] := DINT_TO_WORD(#Hash);
-	        "PLCToEPICS"."Word"[0] := DINT_TO_WORD(SHR(IN := #Hash, N := 16));
-	        
-END_FUNCTION
 FUNCTION_BLOCK "_CommsPLC_EPICS"
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
@@ -414,9 +306,6 @@ BEGIN
 	                     PLCToEPICSData := "PLCToEPICS"."Word",
 	                     EPICSToPLCData := "EPICSToPLC"."Word");
 	
-	
-	//Map all devices command and status registers to EPICS->PLC and PLC->EPICS data exchange blocks
-	"_CommsEPICSDataMap"();
 	
 END_FUNCTION
 FUNCTION "_Comms" : Void

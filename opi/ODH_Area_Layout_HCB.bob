@@ -1,0 +1,1539 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<display version="2.0.0">
+  <name>Display</name>
+  <width>1040</width>
+  <height>830</height>
+  <widget type="group" version="2.0.0">
+    <name>Area Panel</name>
+    <x>10</x>
+    <y>10</y>
+    <width>1010</width>
+    <height>800</height>
+    <style>3</style>
+    <background_color>
+      <color name="BACKGROUND" red="220" green="225" blue="221">
+      </color>
+    </background_color>
+    <widget type="rectangle" version="2.0.0">
+      <name>BGGrey03-titlebar_1</name>
+      <width>1010</width>
+      <height>800</height>
+      <line_width>0</line_width>
+      <background_color>
+        <color name="GROUP-BORDER" red="150" green="155" blue="151">
+        </color>
+      </background_color>
+      <corner_width>10</corner_width>
+      <corner_height>10</corner_height>
+    </widget>
+    <widget type="group" version="2.0.0">
+      <name>Area</name>
+      <x>10</x>
+      <y>50</y>
+      <width>990</width>
+      <height>740</height>
+      <style>3</style>
+      <transparent>true</transparent>
+      <widget type="rectangle" version="2.0.0">
+        <name>BGGrey03-background_1</name>
+        <width>990</width>
+        <height>740</height>
+        <line_width>0</line_width>
+        <background_color>
+          <color name="GROUP-BACKGROUND" red="200" green="205" blue="201">
+          </color>
+        </background_color>
+        <corner_width>5</corner_width>
+        <corner_height>5</corner_height>
+      </widget>
+      <widget type="group" version="2.0.0">
+        <name>Signals</name>
+        <x>740</x>
+        <y>10</y>
+        <width>240</width>
+        <height>110</height>
+        <style>3</style>
+        <widget type="led" version="2.0.0">
+          <name>LED_LA</name>
+          <pv_name>$(P):Alarm</pv_name>
+          <x>20</x>
+          <y>20</y>
+          <off_color>
+            <color name="GRAY" red="169" green="169" blue="169">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_LB</name>
+          <pv_name>$(P):WarmUp</pv_name>
+          <x>20</x>
+          <y>47</y>
+          <off_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="led" version="2.0.0">
+          <name>LED_OK</name>
+          <pv_name>$(P):ConnLost</pv_name>
+          <x>20</x>
+          <y>74</y>
+          <off_color>
+            <color name="GRAY" red="169" green="169" blue="169">
+            </color>
+          </off_color>
+          <on_color>
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            </color>
+          </on_color>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_LA</name>
+          <text>Alarms On</text>
+          <x>71</x>
+          <y>20</y>
+          <vertical_alignment>1</vertical_alignment>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_LB</name>
+          <text>Warmed Up</text>
+          <x>71</x>
+          <y>47</y>
+          <vertical_alignment>1</vertical_alignment>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>LB_OK</name>
+          <text>Lost Communication</text>
+          <x>71</x>
+          <y>74</y>
+          <width>140</width>
+          <height>21</height>
+          <vertical_alignment>1</vertical_alignment>
+          <auto_size>true</auto_size>
+        </widget>
+      </widget>
+      <widget type="group" version="2.0.0">
+        <name>Signals_1</name>
+        <x>10</x>
+        <y>130</y>
+        <width>970</width>
+        <height>600</height>
+        <style>3</style>
+        <widget type="picture" version="2.0.0">
+          <name>Picture_2</name>
+          <file>symbols/AreaLayout_HCB.png</file>
+          <x>10</x>
+          <y>10</y>
+          <width>950</width>
+          <height>570</height>
+        </widget>
+        <widget type="group" version="2.0.0">
+          <name>O2iM_2</name>
+          <macros>
+            <P>HCB-ACH:ODH-O2iM-$(R)</P>
+            <R>2</R>
+          </macros>
+          <x>366</x>
+          <y>422</y>
+          <width>83</width>
+          <height>54</height>
+          <style>3</style>
+          <transparent>true</transparent>
+          <widget type="action_button" version="3.0.0">
+            <name>OpenExpert_4</name>
+            <actions>
+              <action type="open_display">
+                <file>ODH_Expert_Monit.bob</file>
+                <target>standalone</target>
+                <description>O2iM  $(R)</description>
+              </action>
+            </actions>
+            <width>52</width>
+            <height>52</height>
+            <tooltip>Open Monitor Panel</tooltip>
+          </widget>
+          <widget type="led" version="2.0.0">
+            <name>ODH Alarm_Warning_4</name>
+            <x>60</x>
+            <y>2</y>
+            <off_color>
+              <color name="GRAY" red="169" green="169" blue="169">
+              </color>
+            </off_color>
+            <on_color>
+              <color name="LED-RED-ON" red="255" green="60" blue="46">
+              </color>
+            </on_color>
+            <rules>
+              <rule name="Color" prop_id="off_color" out_exp="false">
+                <exp bool_exp="pv0 == false &amp;&amp; pv1 == false">
+                  <value>
+                    <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+                    </color>
+                  </value>
+                </exp>
+                <exp bool_exp="pv0 == true">
+                  <value>
+                    <color name="MAJOR" red="252" green="13" blue="27">
+                    </color>
+                  </value>
+                </exp>
+                <exp bool_exp="pv1 == true">
+                  <value>
+                    <color name="WARNING" red="252" green="242" blue="17">
+                    </color>
+                  </value>
+                </exp>
+                <pv_name>$(P):ODHAlarm</pv_name>
+                <pv_name>$(P):ODHWarning</pv_name>
+              </rule>
+              <rule name="ToolTip" prop_id="tooltip" out_exp="false">
+                <exp bool_exp="pv0 == false &amp;&amp; pv1 == false">
+                  <value>Monitor OK</value>
+                </exp>
+                <exp bool_exp="pv0 == true">
+                  <value>Monitor Alarm!</value>
+                </exp>
+                <exp bool_exp="pv1 == true">
+                  <value>Monitor Warning</value>
+                </exp>
+                <pv_name>$(P):ODHAlarm</pv_name>
+                <pv_name>$(P):ODHWarning</pv_name>
+              </rule>
+            </rules>
+          </widget>
+          <widget type="picture" version="2.0.0">
+            <name>MonitHealthy_OK_4</name>
+            <file>symbols/custom/ConnectedPNG.png</file>
+            <x>58</x>
+            <y>28</y>
+            <width>25</width>
+            <height>25</height>
+            <rules>
+              <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+                <exp bool_exp="pv0 == true">
+                  <value>false</value>
+                </exp>
+                <exp bool_exp="pv0 == false">
+                  <value>true</value>
+                </exp>
+                <pv_name>$(P):MonitHealthyErr</pv_name>
+              </rule>
+            </rules>
+            <tooltip>Monitor Healthy OK</tooltip>
+          </widget>
+          <widget type="picture" version="2.0.0">
+            <name>MonitHealthy_Err_4</name>
+            <file>symbols/custom/error.svg</file>
+            <x>59</x>
+            <y>29</y>
+            <width>22</width>
+            <height>22</height>
+            <rules>
+              <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+                <exp bool_exp="pv0 == true">
+                  <value>true</value>
+                </exp>
+                <exp bool_exp="pv0 == false">
+                  <value>false</value>
+                </exp>
+                <pv_name>$(P):MonitHealthyErr</pv_name>
+              </rule>
+            </rules>
+            <tooltip>Monitor Healthy Error!</tooltip>
+          </widget>
+        </widget>
+        <widget type="group" version="2.0.0">
+          <name>O2iM_3</name>
+          <macros>
+            <P>HCB-ACH:ODH-O2iM-$(R)</P>
+            <R>3</R>
+          </macros>
+          <x>366</x>
+          <y>273</y>
+          <width>83</width>
+          <height>54</height>
+          <style>3</style>
+          <transparent>true</transparent>
+          <widget type="action_button" version="3.0.0">
+            <name>OpenExpert_12</name>
+            <actions>
+              <action type="open_display">
+                <file>ODH_Expert_Monit.bob</file>
+                <target>standalone</target>
+                <description>O2iM  $(R)</description>
+              </action>
+            </actions>
+            <width>52</width>
+            <height>52</height>
+            <tooltip>Open Monitor Panel</tooltip>
+          </widget>
+          <widget type="led" version="2.0.0">
+            <name>ODH Alarm_Warning_12</name>
+            <x>60</x>
+            <y>2</y>
+            <off_color>
+              <color name="GRAY" red="169" green="169" blue="169">
+              </color>
+            </off_color>
+            <on_color>
+              <color name="LED-RED-ON" red="255" green="60" blue="46">
+              </color>
+            </on_color>
+            <rules>
+              <rule name="Color" prop_id="off_color" out_exp="false">
+                <exp bool_exp="pv0 == false &amp;&amp; pv1 == false">
+                  <value>
+                    <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+                    </color>
+                  </value>
+                </exp>
+                <exp bool_exp="pv0 == true">
+                  <value>
+                    <color name="MAJOR" red="252" green="13" blue="27">
+                    </color>
+                  </value>
+                </exp>
+                <exp bool_exp="pv1 == true">
+                  <value>
+                    <color name="WARNING" red="252" green="242" blue="17">
+                    </color>
+                  </value>
+                </exp>
+                <pv_name>$(P):ODHAlarm</pv_name>
+                <pv_name>$(P):ODHWarning</pv_name>
+              </rule>
+              <rule name="ToolTip" prop_id="tooltip" out_exp="false">
+                <exp bool_exp="pv0 == false &amp;&amp; pv1 == false">
+                  <value>Monitor OK</value>
+                </exp>
+                <exp bool_exp="pv0 == true">
+                  <value>Monitor Alarm!</value>
+                </exp>
+                <exp bool_exp="pv1 == true">
+                  <value>Monitor Warning</value>
+                </exp>
+                <pv_name>$(P):ODHAlarm</pv_name>
+                <pv_name>$(P):ODHWarning</pv_name>
+              </rule>
+            </rules>
+          </widget>
+          <widget type="picture" version="2.0.0">
+            <name>MonitHealthy_OK_12</name>
+            <file>symbols/custom/ConnectedPNG.png</file>
+            <x>58</x>
+            <y>28</y>
+            <width>25</width>
+            <height>25</height>
+            <rules>
+              <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+                <exp bool_exp="pv0 == true">
+                  <value>false</value>
+                </exp>
+                <exp bool_exp="pv0 == false">
+                  <value>true</value>
+                </exp>
+                <pv_name>$(P):MonitHealthyErr</pv_name>
+              </rule>
+            </rules>
+            <tooltip>Monitor Healthy OK</tooltip>
+          </widget>
+          <widget type="picture" version="2.0.0">
+            <name>MonitHealthy_Err_12</name>
+            <file>symbols/custom/error.svg</file>
+            <x>59</x>
+            <y>29</y>
+            <width>22</width>
+            <height>22</height>
+            <rules>
+              <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+                <exp bool_exp="pv0 == true">
+                  <value>true</value>
+                </exp>
+                <exp bool_exp="pv0 == false">
+                  <value>false</value>
+                </exp>
+                <pv_name>$(P):MonitHealthyErr</pv_name>
+              </rule>
+            </rules>
+            <tooltip>Monitor Healthy Error!</tooltip>
+          </widget>
+        </widget>
+        <widget type="group" version="2.0.0">
+          <name>O2iM_4</name>
+          <macros>
+            <P>HCB-ACH:ODH-O2iM-$(R)</P>
+            <R>4</R>
+          </macros>
+          <x>366</x>
+          <y>89</y>
+          <width>83</width>
+          <height>54</height>
+          <style>3</style>
+          <transparent>true</transparent>
+          <widget type="action_button" version="3.0.0">
+            <name>OpenExpert_13</name>
+            <actions>
+              <action type="open_display">
+                <file>ODH_Expert_Monit.bob</file>
+                <target>standalone</target>
+                <description>O2iM  $(R)</description>
+              </action>
+            </actions>
+            <width>52</width>
+            <height>52</height>
+            <tooltip>Open Monitor Panel</tooltip>
+          </widget>
+          <widget type="led" version="2.0.0">
+            <name>ODH Alarm_Warning_13</name>
+            <x>60</x>
+            <y>2</y>
+            <off_color>
+              <color name="GRAY" red="169" green="169" blue="169">
+              </color>
+            </off_color>
+            <on_color>
+              <color name="LED-RED-ON" red="255" green="60" blue="46">
+              </color>
+            </on_color>
+            <rules>
+              <rule name="Color" prop_id="off_color" out_exp="false">
+                <exp bool_exp="pv0 == false &amp;&amp; pv1 == false">
+                  <value>
+                    <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+                    </color>
+                  </value>
+                </exp>
+                <exp bool_exp="pv0 == true">
+                  <value>
+                    <color name="MAJOR" red="252" green="13" blue="27">
+                    </color>
+                  </value>
+                </exp>
+                <exp bool_exp="pv1 == true">
+                  <value>
+                    <color name="WARNING" red="252" green="242" blue="17">
+                    </color>
+                  </value>
+                </exp>
+                <pv_name>$(P):ODHAlarm</pv_name>
+                <pv_name>$(P):ODHWarning</pv_name>
+              </rule>
+              <rule name="ToolTip" prop_id="tooltip" out_exp="false">
+                <exp bool_exp="pv0 == false &amp;&amp; pv1 == false">
+                  <value>Monitor OK</value>
+                </exp>
+                <exp bool_exp="pv0 == true">
+                  <value>Monitor Alarm!</value>
+                </exp>
+                <exp bool_exp="pv1 == true">
+                  <value>Monitor Warning</value>
+                </exp>
+                <pv_name>$(P):ODHAlarm</pv_name>
+                <pv_name>$(P):ODHWarning</pv_name>
+              </rule>
+            </rules>
+          </widget>
+          <widget type="picture" version="2.0.0">
+            <name>MonitHealthy_OK_13</name>
+            <file>symbols/custom/ConnectedPNG.png</file>
+            <x>58</x>
+            <y>28</y>
+            <width>25</width>
+            <height>25</height>
+            <rules>
+              <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+                <exp bool_exp="pv0 == true">
+                  <value>false</value>
+                </exp>
+                <exp bool_exp="pv0 == false">
+                  <value>true</value>
+                </exp>
+                <pv_name>$(P):MonitHealthyErr</pv_name>
+              </rule>
+            </rules>
+            <tooltip>Monitor Healthy OK</tooltip>
+          </widget>
+          <widget type="picture" version="2.0.0">
+            <name>MonitHealthy_Err_13</name>
+            <file>symbols/custom/error.svg</file>
+            <x>59</x>
+            <y>29</y>
+            <width>22</width>
+            <height>22</height>
+            <rules>
+              <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+                <exp bool_exp="pv0 == true">
+                  <value>true</value>
+                </exp>
+                <exp bool_exp="pv0 == false">
+                  <value>false</value>
+                </exp>
+                <pv_name>$(P):MonitHealthyErr</pv_name>
+              </rule>
+            </rules>
+            <tooltip>Monitor Healthy Error!</tooltip>
+          </widget>
+        </widget>
+        <widget type="group" version="2.0.0">
+          <name>O2iM_9</name>
+          <macros>
+            <P>HCB-TCH:ODH-O2iM-$(R)</P>
+            <R>9</R>
+          </macros>
+          <x>34</x>
+          <y>217</y>
+          <width>83</width>
+          <height>54</height>
+          <style>3</style>
+          <transparent>true</transparent>
+          <widget type="action_button" version="3.0.0">
+            <name>OpenExpert_8</name>
+            <actions>
+              <action type="open_display">
+                <file>ODH_Expert_Monit.bob</file>
+                <target>standalone</target>
+                <description>O2iM  $(R)</description>
+              </action>
+            </actions>
+            <width>52</width>
+            <height>52</height>
+            <tooltip>Open Monitor Panel</tooltip>
+          </widget>
+          <widget type="led" version="2.0.0">
+            <name>ODH Alarm_Warning_8</name>
+            <x>60</x>
+            <y>2</y>
+            <off_color>
+              <color name="GRAY" red="169" green="169" blue="169">
+              </color>
+            </off_color>
+            <on_color>
+              <color name="LED-RED-ON" red="255" green="60" blue="46">
+              </color>
+            </on_color>
+            <rules>
+              <rule name="Color" prop_id="off_color" out_exp="false">
+                <exp bool_exp="pv0 == false &amp;&amp; pv1 == false">
+                  <value>
+                    <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+                    </color>
+                  </value>
+                </exp>
+                <exp bool_exp="pv0 == true">
+                  <value>
+                    <color name="MAJOR" red="252" green="13" blue="27">
+                    </color>
+                  </value>
+                </exp>
+                <exp bool_exp="pv1 == true">
+                  <value>
+                    <color name="WARNING" red="252" green="242" blue="17">
+                    </color>
+                  </value>
+                </exp>
+                <pv_name>$(P):ODHAlarm</pv_name>
+                <pv_name>$(P):ODHWarning</pv_name>
+              </rule>
+              <rule name="ToolTip" prop_id="tooltip" out_exp="false">
+                <exp bool_exp="pv0 == false &amp;&amp; pv1 == false">
+                  <value>Monitor OK</value>
+                </exp>
+                <exp bool_exp="pv0 == true">
+                  <value>Monitor Alarm!</value>
+                </exp>
+                <exp bool_exp="pv1 == true">
+                  <value>Monitor Warning</value>
+                </exp>
+                <pv_name>$(P):ODHAlarm</pv_name>
+                <pv_name>$(P):ODHWarning</pv_name>
+              </rule>
+            </rules>
+          </widget>
+          <widget type="picture" version="2.0.0">
+            <name>MonitHealthy_OK_8</name>
+            <file>symbols/custom/ConnectedPNG.png</file>
+            <x>58</x>
+            <y>28</y>
+            <width>25</width>
+            <height>25</height>
+            <rules>
+              <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+                <exp bool_exp="pv0 == true">
+                  <value>false</value>
+                </exp>
+                <exp bool_exp="pv0 == false">
+                  <value>true</value>
+                </exp>
+                <pv_name>$(P):MonitHealthyErr</pv_name>
+              </rule>
+            </rules>
+            <tooltip>Monitor Healthy OK</tooltip>
+          </widget>
+          <widget type="picture" version="2.0.0">
+            <name>MonitHealthy_Err_8</name>
+            <file>symbols/custom/error.svg</file>
+            <x>59</x>
+            <y>29</y>
+            <width>22</width>
+            <height>22</height>
+            <rules>
+              <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+                <exp bool_exp="pv0 == true">
+                  <value>true</value>
+                </exp>
+                <exp bool_exp="pv0 == false">
+                  <value>false</value>
+                </exp>
+                <pv_name>$(P):MonitHealthyErr</pv_name>
+              </rule>
+            </rules>
+            <tooltip>Monitor Healthy Error!</tooltip>
+          </widget>
+        </widget>
+        <widget type="group" version="2.0.0">
+          <name>O2iM_11</name>
+          <macros>
+            <P>HCB-HPGS:ODH-O2iM-$(R)</P>
+            <R>11</R>
+          </macros>
+          <x>80</x>
+          <y>65</y>
+          <width>83</width>
+          <height>54</height>
+          <style>3</style>
+          <transparent>true</transparent>
+          <widget type="action_button" version="3.0.0">
+            <name>OpenExpert_10</name>
+            <actions>
+              <action type="open_display">
+                <file>ODH_Expert_Monit.bob</file>
+                <target>standalone</target>
+                <description>O2iM  $(R)</description>
+              </action>
+            </actions>
+            <width>52</width>
+            <height>52</height>
+            <tooltip>Open Monitor Panel</tooltip>
+          </widget>
+          <widget type="led" version="2.0.0">
+            <name>ODH Alarm_Warning_10</name>
+            <x>60</x>
+            <y>2</y>
+            <off_color>
+              <color name="GRAY" red="169" green="169" blue="169">
+              </color>
+            </off_color>
+            <on_color>
+              <color name="LED-RED-ON" red="255" green="60" blue="46">
+              </color>
+            </on_color>
+            <rules>
+              <rule name="Color" prop_id="off_color" out_exp="false">
+                <exp bool_exp="pv0 == false &amp;&amp; pv1 == false">
+                  <value>
+                    <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+                    </color>
+                  </value>
+                </exp>
+                <exp bool_exp="pv0 == true">
+                  <value>
+                    <color name="MAJOR" red="252" green="13" blue="27">
+                    </color>
+                  </value>
+                </exp>
+                <exp bool_exp="pv1 == true">
+                  <value>
+                    <color name="WARNING" red="252" green="242" blue="17">
+                    </color>
+                  </value>
+                </exp>
+                <pv_name>$(P):ODHAlarm</pv_name>
+                <pv_name>$(P):ODHWarning</pv_name>
+              </rule>
+              <rule name="ToolTip" prop_id="tooltip" out_exp="false">
+                <exp bool_exp="pv0 == false &amp;&amp; pv1 == false">
+                  <value>Monitor OK</value>
+                </exp>
+                <exp bool_exp="pv0 == true">
+                  <value>Monitor Alarm!</value>
+                </exp>
+                <exp bool_exp="pv1 == true">
+                  <value>Monitor Warning</value>
+                </exp>
+                <pv_name>$(P):ODHAlarm</pv_name>
+                <pv_name>$(P):ODHWarning</pv_name>
+              </rule>
+            </rules>
+          </widget>
+          <widget type="picture" version="2.0.0">
+            <name>MonitHealthy_OK_10</name>
+            <file>symbols/custom/ConnectedPNG.png</file>
+            <x>58</x>
+            <y>28</y>
+            <width>25</width>
+            <height>25</height>
+            <rules>
+              <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+                <exp bool_exp="pv0 == true">
+                  <value>false</value>
+                </exp>
+                <exp bool_exp="pv0 == false">
+                  <value>true</value>
+                </exp>
+                <pv_name>$(P):MonitHealthyErr</pv_name>
+              </rule>
+            </rules>
+            <tooltip>Monitor Healthy OK</tooltip>
+          </widget>
+          <widget type="picture" version="2.0.0">
+            <name>MonitHealthy_Err_10</name>
+            <file>symbols/custom/error.svg</file>
+            <x>59</x>
+            <y>29</y>
+            <width>22</width>
+            <height>22</height>
+            <rules>
+              <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+                <exp bool_exp="pv0 == true">
+                  <value>true</value>
+                </exp>
+                <exp bool_exp="pv0 == false">
+                  <value>false</value>
+                </exp>
+                <pv_name>$(P):MonitHealthyErr</pv_name>
+              </rule>
+            </rules>
+            <tooltip>Monitor Healthy Error!</tooltip>
+          </widget>
+        </widget>
+        <widget type="group" version="2.0.0">
+          <name>O2iM_7</name>
+          <macros>
+            <P>HCB-TCH:ODH-O2iM-$(R)</P>
+            <R>7</R>
+          </macros>
+          <x>34</x>
+          <y>463</y>
+          <width>83</width>
+          <height>54</height>
+          <style>3</style>
+          <transparent>true</transparent>
+          <widget type="action_button" version="3.0.0">
+            <name>OpenExpert_6</name>
+            <actions>
+              <action type="open_display">
+                <file>ODH_Expert_Monit.bob</file>
+                <target>standalone</target>
+                <description>O2iM  $(R)</description>
+              </action>
+            </actions>
+            <width>52</width>
+            <height>52</height>
+            <tooltip>Open Monitor Panel</tooltip>
+          </widget>
+          <widget type="led" version="2.0.0">
+            <name>ODH Alarm_Warning_6</name>
+            <x>60</x>
+            <y>2</y>
+            <off_color>
+              <color name="GRAY" red="169" green="169" blue="169">
+              </color>
+            </off_color>
+            <on_color>
+              <color name="LED-RED-ON" red="255" green="60" blue="46">
+              </color>
+            </on_color>
+            <rules>
+              <rule name="Color" prop_id="off_color" out_exp="false">
+                <exp bool_exp="pv0 == false &amp;&amp; pv1 == false">
+                  <value>
+                    <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+                    </color>
+                  </value>
+                </exp>
+                <exp bool_exp="pv0 == true">
+                  <value>
+                    <color name="MAJOR" red="252" green="13" blue="27">
+                    </color>
+                  </value>
+                </exp>
+                <exp bool_exp="pv1 == true">
+                  <value>
+                    <color name="WARNING" red="252" green="242" blue="17">
+                    </color>
+                  </value>
+                </exp>
+                <pv_name>$(P):ODHAlarm</pv_name>
+                <pv_name>$(P):ODHWarning</pv_name>
+              </rule>
+              <rule name="ToolTip" prop_id="tooltip" out_exp="false">
+                <exp bool_exp="pv0 == false &amp;&amp; pv1 == false">
+                  <value>Monitor OK</value>
+                </exp>
+                <exp bool_exp="pv0 == true">
+                  <value>Monitor Alarm!</value>
+                </exp>
+                <exp bool_exp="pv1 == true">
+                  <value>Monitor Warning</value>
+                </exp>
+                <pv_name>$(P):ODHAlarm</pv_name>
+                <pv_name>$(P):ODHWarning</pv_name>
+              </rule>
+            </rules>
+          </widget>
+          <widget type="picture" version="2.0.0">
+            <name>MonitHealthy_OK_6</name>
+            <file>symbols/custom/ConnectedPNG.png</file>
+            <x>58</x>
+            <y>28</y>
+            <width>25</width>
+            <height>25</height>
+            <rules>
+              <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+                <exp bool_exp="pv0 == true">
+                  <value>false</value>
+                </exp>
+                <exp bool_exp="pv0 == false">
+                  <value>true</value>
+                </exp>
+                <pv_name>$(P):MonitHealthyErr</pv_name>
+              </rule>
+            </rules>
+            <tooltip>Monitor Healthy OK</tooltip>
+          </widget>
+          <widget type="picture" version="2.0.0">
+            <name>MonitHealthy_Err_6</name>
+            <file>symbols/custom/error.svg</file>
+            <x>59</x>
+            <y>29</y>
+            <width>22</width>
+            <height>22</height>
+            <rules>
+              <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+                <exp bool_exp="pv0 == true">
+                  <value>true</value>
+                </exp>
+                <exp bool_exp="pv0 == false">
+                  <value>false</value>
+                </exp>
+                <pv_name>$(P):MonitHealthyErr</pv_name>
+              </rule>
+            </rules>
+            <tooltip>Monitor Healthy Error!</tooltip>
+          </widget>
+        </widget>
+        <widget type="group" version="2.0.0">
+          <name>O2iM_8</name>
+          <macros>
+            <P>HCB-TCH:ODH-O2iM-$(R)</P>
+            <R>8</R>
+          </macros>
+          <x>33</x>
+          <y>328</y>
+          <width>83</width>
+          <height>54</height>
+          <style>3</style>
+          <transparent>true</transparent>
+          <widget type="action_button" version="3.0.0">
+            <name>OpenExpert_7</name>
+            <actions>
+              <action type="open_display">
+                <file>ODH_Expert_Monit.bob</file>
+                <target>standalone</target>
+                <description>O2iM  $(R)</description>
+              </action>
+            </actions>
+            <width>52</width>
+            <height>52</height>
+            <tooltip>Open Monitor Panel</tooltip>
+          </widget>
+          <widget type="led" version="2.0.0">
+            <name>ODH Alarm_Warning_7</name>
+            <x>60</x>
+            <y>2</y>
+            <off_color>
+              <color name="GRAY" red="169" green="169" blue="169">
+              </color>
+            </off_color>
+            <on_color>
+              <color name="LED-RED-ON" red="255" green="60" blue="46">
+              </color>
+            </on_color>
+            <rules>
+              <rule name="Color" prop_id="off_color" out_exp="false">
+                <exp bool_exp="pv0 == false &amp;&amp; pv1 == false">
+                  <value>
+                    <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+                    </color>
+                  </value>
+                </exp>
+                <exp bool_exp="pv0 == true">
+                  <value>
+                    <color name="MAJOR" red="252" green="13" blue="27">
+                    </color>
+                  </value>
+                </exp>
+                <exp bool_exp="pv1 == true">
+                  <value>
+                    <color name="WARNING" red="252" green="242" blue="17">
+                    </color>
+                  </value>
+                </exp>
+                <pv_name>$(P):ODHAlarm</pv_name>
+                <pv_name>$(P):ODHWarning</pv_name>
+              </rule>
+              <rule name="ToolTip" prop_id="tooltip" out_exp="false">
+                <exp bool_exp="pv0 == false &amp;&amp; pv1 == false">
+                  <value>Monitor OK</value>
+                </exp>
+                <exp bool_exp="pv0 == true">
+                  <value>Monitor Alarm!</value>
+                </exp>
+                <exp bool_exp="pv1 == true">
+                  <value>Monitor Warning</value>
+                </exp>
+                <pv_name>$(P):ODHAlarm</pv_name>
+                <pv_name>$(P):ODHWarning</pv_name>
+              </rule>
+            </rules>
+          </widget>
+          <widget type="picture" version="2.0.0">
+            <name>MonitHealthy_OK_7</name>
+            <file>symbols/custom/ConnectedPNG.png</file>
+            <x>58</x>
+            <y>28</y>
+            <width>25</width>
+            <height>25</height>
+            <rules>
+              <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+                <exp bool_exp="pv0 == true">
+                  <value>false</value>
+                </exp>
+                <exp bool_exp="pv0 == false">
+                  <value>true</value>
+                </exp>
+                <pv_name>$(P):MonitHealthyErr</pv_name>
+              </rule>
+            </rules>
+            <tooltip>Monitor Healthy OK</tooltip>
+          </widget>
+          <widget type="picture" version="2.0.0">
+            <name>MonitHealthy_Err_7</name>
+            <file>symbols/custom/error.svg</file>
+            <x>59</x>
+            <y>29</y>
+            <width>22</width>
+            <height>22</height>
+            <rules>
+              <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+                <exp bool_exp="pv0 == true">
+                  <value>true</value>
+                </exp>
+                <exp bool_exp="pv0 == false">
+                  <value>false</value>
+                </exp>
+                <pv_name>$(P):MonitHealthyErr</pv_name>
+              </rule>
+            </rules>
+            <tooltip>Monitor Healthy Error!</tooltip>
+          </widget>
+        </widget>
+        <widget type="group" version="2.0.0">
+          <name>O2iM_6</name>
+          <macros>
+            <P>HCB-TCH:ODH-O2iM-$(R)</P>
+            <R>6</R>
+          </macros>
+          <x>256</x>
+          <y>422</y>
+          <width>83</width>
+          <height>54</height>
+          <style>3</style>
+          <transparent>true</transparent>
+          <widget type="action_button" version="3.0.0">
+            <name>OpenExpert_5</name>
+            <actions>
+              <action type="open_display">
+                <file>ODH_Expert_Monit.bob</file>
+                <target>standalone</target>
+                <description>O2iM  $(R)</description>
+              </action>
+            </actions>
+            <x>30</x>
+            <width>52</width>
+            <height>52</height>
+            <tooltip>Open Monitor Panel</tooltip>
+          </widget>
+          <widget type="led" version="2.0.0">
+            <name>ODH Alarm_Warning_5</name>
+            <y>2</y>
+            <off_color>
+              <color name="GRAY" red="169" green="169" blue="169">
+              </color>
+            </off_color>
+            <on_color>
+              <color name="LED-RED-ON" red="255" green="60" blue="46">
+              </color>
+            </on_color>
+            <rules>
+              <rule name="Color" prop_id="off_color" out_exp="false">
+                <exp bool_exp="pv0 == false &amp;&amp; pv1 == false">
+                  <value>
+                    <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+                    </color>
+                  </value>
+                </exp>
+                <exp bool_exp="pv0 == true">
+                  <value>
+                    <color name="MAJOR" red="252" green="13" blue="27">
+                    </color>
+                  </value>
+                </exp>
+                <exp bool_exp="pv1 == true">
+                  <value>
+                    <color name="WARNING" red="252" green="242" blue="17">
+                    </color>
+                  </value>
+                </exp>
+                <pv_name>$(P):ODHAlarm</pv_name>
+                <pv_name>$(P):ODHWarning</pv_name>
+              </rule>
+              <rule name="ToolTip" prop_id="tooltip" out_exp="false">
+                <exp bool_exp="pv0 == false &amp;&amp; pv1 == false">
+                  <value>Monitor OK</value>
+                </exp>
+                <exp bool_exp="pv0 == true">
+                  <value>Monitor Alarm!</value>
+                </exp>
+                <exp bool_exp="pv1 == true">
+                  <value>Monitor Warning</value>
+                </exp>
+                <pv_name>$(P):ODHAlarm</pv_name>
+                <pv_name>$(P):ODHWarning</pv_name>
+              </rule>
+            </rules>
+          </widget>
+          <widget type="picture" version="2.0.0">
+            <name>MonitHealthy_OK_5</name>
+            <file>symbols/custom/ConnectedPNG.png</file>
+            <y>28</y>
+            <width>25</width>
+            <height>25</height>
+            <rules>
+              <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+                <exp bool_exp="pv0 == true">
+                  <value>false</value>
+                </exp>
+                <exp bool_exp="pv0 == false">
+                  <value>true</value>
+                </exp>
+                <pv_name>$(P):MonitHealthyErr</pv_name>
+              </rule>
+            </rules>
+            <tooltip>Monitor Healthy OK</tooltip>
+          </widget>
+          <widget type="picture" version="2.0.0">
+            <name>MonitHealthy_Err_5</name>
+            <file>symbols/custom/error.svg</file>
+            <y>29</y>
+            <width>22</width>
+            <height>22</height>
+            <rules>
+              <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+                <exp bool_exp="pv0 == true">
+                  <value>true</value>
+                </exp>
+                <exp bool_exp="pv0 == false">
+                  <value>false</value>
+                </exp>
+                <pv_name>$(P):MonitHealthyErr</pv_name>
+              </rule>
+            </rules>
+            <tooltip>Monitor Healthy Error!</tooltip>
+          </widget>
+        </widget>
+        <widget type="group" version="2.0.0">
+          <name>O2iM_10</name>
+          <macros>
+            <P>HCB-HPGS:ODH-O2iM-$(R)</P>
+            <R>10</R>
+          </macros>
+          <x>211</x>
+          <y>66</y>
+          <width>83</width>
+          <height>54</height>
+          <style>3</style>
+          <transparent>true</transparent>
+          <widget type="action_button" version="3.0.0">
+            <name>OpenExpert_9</name>
+            <actions>
+              <action type="open_display">
+                <file>ODH_Expert_Monit.bob</file>
+                <target>standalone</target>
+                <description>O2iM  $(R)</description>
+              </action>
+            </actions>
+            <x>30</x>
+            <width>52</width>
+            <height>52</height>
+            <tooltip>Open Monitor Panel</tooltip>
+          </widget>
+          <widget type="led" version="2.0.0">
+            <name>ODH Alarm_Warning_9</name>
+            <y>2</y>
+            <off_color>
+              <color name="GRAY" red="169" green="169" blue="169">
+              </color>
+            </off_color>
+            <on_color>
+              <color name="LED-RED-ON" red="255" green="60" blue="46">
+              </color>
+            </on_color>
+            <rules>
+              <rule name="Color" prop_id="off_color" out_exp="false">
+                <exp bool_exp="pv0 == false &amp;&amp; pv1 == false">
+                  <value>
+                    <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+                    </color>
+                  </value>
+                </exp>
+                <exp bool_exp="pv0 == true">
+                  <value>
+                    <color name="MAJOR" red="252" green="13" blue="27">
+                    </color>
+                  </value>
+                </exp>
+                <exp bool_exp="pv1 == true">
+                  <value>
+                    <color name="WARNING" red="252" green="242" blue="17">
+                    </color>
+                  </value>
+                </exp>
+                <pv_name>$(P):ODHAlarm</pv_name>
+                <pv_name>$(P):ODHWarning</pv_name>
+              </rule>
+              <rule name="ToolTip" prop_id="tooltip" out_exp="false">
+                <exp bool_exp="pv0 == false &amp;&amp; pv1 == false">
+                  <value>Monitor OK</value>
+                </exp>
+                <exp bool_exp="pv0 == true">
+                  <value>Monitor Alarm!</value>
+                </exp>
+                <exp bool_exp="pv1 == true">
+                  <value>Monitor Warning</value>
+                </exp>
+                <pv_name>$(P):ODHAlarm</pv_name>
+                <pv_name>$(P):ODHWarning</pv_name>
+              </rule>
+            </rules>
+          </widget>
+          <widget type="picture" version="2.0.0">
+            <name>MonitHealthy_OK_9</name>
+            <file>symbols/custom/ConnectedPNG.png</file>
+            <y>28</y>
+            <width>25</width>
+            <height>25</height>
+            <rules>
+              <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+                <exp bool_exp="pv0 == true">
+                  <value>false</value>
+                </exp>
+                <exp bool_exp="pv0 == false">
+                  <value>true</value>
+                </exp>
+                <pv_name>$(P):MonitHealthyErr</pv_name>
+              </rule>
+            </rules>
+            <tooltip>Monitor Healthy OK</tooltip>
+          </widget>
+          <widget type="picture" version="2.0.0">
+            <name>MonitHealthy_Err_9</name>
+            <file>symbols/custom/error.svg</file>
+            <y>29</y>
+            <width>22</width>
+            <height>22</height>
+            <rules>
+              <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+                <exp bool_exp="pv0 == true">
+                  <value>true</value>
+                </exp>
+                <exp bool_exp="pv0 == false">
+                  <value>false</value>
+                </exp>
+                <pv_name>$(P):MonitHealthyErr</pv_name>
+              </rule>
+            </rules>
+            <tooltip>Monitor Healthy Error!</tooltip>
+          </widget>
+        </widget>
+        <widget type="group" version="2.0.0">
+          <name>O2iM_1</name>
+          <macros>
+            <P>HCB-ACH:ODH-O2iM-$(R)</P>
+            <R>1</R>
+          </macros>
+          <x>755</x>
+          <y>337</y>
+          <width>83</width>
+          <height>54</height>
+          <style>3</style>
+          <transparent>true</transparent>
+          <widget type="action_button" version="3.0.0">
+            <name>OpenExpert</name>
+            <actions>
+              <action type="open_display">
+                <file>ODH_Expert_Monit.bob</file>
+                <target>standalone</target>
+                <description>O2iM  $(R)</description>
+              </action>
+            </actions>
+            <x>30</x>
+            <width>52</width>
+            <height>52</height>
+            <tooltip>Open Monitor Panel</tooltip>
+          </widget>
+          <widget type="led" version="2.0.0">
+            <name>ODH Alarm_Warning</name>
+            <y>2</y>
+            <off_color>
+              <color name="GRAY" red="169" green="169" blue="169">
+              </color>
+            </off_color>
+            <on_color>
+              <color name="LED-RED-ON" red="255" green="60" blue="46">
+              </color>
+            </on_color>
+            <rules>
+              <rule name="Color" prop_id="off_color" out_exp="false">
+                <exp bool_exp="pv0 == false &amp;&amp; pv1 == false">
+                  <value>
+                    <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+                    </color>
+                  </value>
+                </exp>
+                <exp bool_exp="pv0 == true">
+                  <value>
+                    <color name="MAJOR" red="252" green="13" blue="27">
+                    </color>
+                  </value>
+                </exp>
+                <exp bool_exp="pv1 == true">
+                  <value>
+                    <color name="WARNING" red="252" green="242" blue="17">
+                    </color>
+                  </value>
+                </exp>
+                <pv_name>$(P):ODHAlarm</pv_name>
+                <pv_name>$(P):ODHWarning</pv_name>
+              </rule>
+              <rule name="ToolTip" prop_id="tooltip" out_exp="false">
+                <exp bool_exp="pv0 == false &amp;&amp; pv1 == false">
+                  <value>Monitor OK</value>
+                </exp>
+                <exp bool_exp="pv0 == true">
+                  <value>Monitor Alarm!</value>
+                </exp>
+                <exp bool_exp="pv1 == true">
+                  <value>Monitor Warning</value>
+                </exp>
+                <pv_name>$(P):ODHAlarm</pv_name>
+                <pv_name>$(P):ODHWarning</pv_name>
+              </rule>
+            </rules>
+          </widget>
+          <widget type="picture" version="2.0.0">
+            <name>MonitHealthy_OK</name>
+            <file>symbols/custom/ConnectedPNG.png</file>
+            <y>28</y>
+            <width>25</width>
+            <height>25</height>
+            <rules>
+              <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+                <exp bool_exp="pv0 == true">
+                  <value>false</value>
+                </exp>
+                <exp bool_exp="pv0 == false">
+                  <value>true</value>
+                </exp>
+                <pv_name>$(P):MonitHealthyErr</pv_name>
+              </rule>
+            </rules>
+            <tooltip>Monitor Healthy OK</tooltip>
+          </widget>
+          <widget type="picture" version="2.0.0">
+            <name>MonitHealthy_Err</name>
+            <file>symbols/custom/error.svg</file>
+            <y>29</y>
+            <width>22</width>
+            <height>22</height>
+            <rules>
+              <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+                <exp bool_exp="pv0 == true">
+                  <value>true</value>
+                </exp>
+                <exp bool_exp="pv0 == false">
+                  <value>false</value>
+                </exp>
+                <pv_name>$(P):MonitHealthyErr</pv_name>
+              </rule>
+            </rules>
+            <tooltip>Monitor Healthy Error!</tooltip>
+          </widget>
+        </widget>
+        <widget type="group" version="2.0.0">
+          <name>O2iM_12</name>
+          <macros>
+            <P>HCB-DogSh:ODH-O2iM-$(R)</P>
+            <R>12</R>
+          </macros>
+          <x>858</x>
+          <y>442</y>
+          <width>83</width>
+          <height>54</height>
+          <style>3</style>
+          <transparent>true</transparent>
+          <widget type="action_button" version="3.0.0">
+            <name>OpenExpert_11</name>
+            <actions>
+              <action type="open_display">
+                <file>ODH_Expert_Monit.bob</file>
+                <target>standalone</target>
+                <description>O2iM  $(R)</description>
+              </action>
+            </actions>
+            <x>30</x>
+            <width>52</width>
+            <height>52</height>
+            <tooltip>Open Monitor Panel</tooltip>
+          </widget>
+          <widget type="led" version="2.0.0">
+            <name>ODH Alarm_Warning_11</name>
+            <y>2</y>
+            <off_color>
+              <color name="GRAY" red="169" green="169" blue="169">
+              </color>
+            </off_color>
+            <on_color>
+              <color name="LED-RED-ON" red="255" green="60" blue="46">
+              </color>
+            </on_color>
+            <rules>
+              <rule name="Color" prop_id="off_color" out_exp="false">
+                <exp bool_exp="pv0 == false &amp;&amp; pv1 == false">
+                  <value>
+                    <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+                    </color>
+                  </value>
+                </exp>
+                <exp bool_exp="pv0 == true">
+                  <value>
+                    <color name="MAJOR" red="252" green="13" blue="27">
+                    </color>
+                  </value>
+                </exp>
+                <exp bool_exp="pv1 == true">
+                  <value>
+                    <color name="WARNING" red="252" green="242" blue="17">
+                    </color>
+                  </value>
+                </exp>
+                <pv_name>$(P):ODHAlarm</pv_name>
+                <pv_name>$(P):ODHWarning</pv_name>
+              </rule>
+              <rule name="ToolTip" prop_id="tooltip" out_exp="false">
+                <exp bool_exp="pv0 == false &amp;&amp; pv1 == false">
+                  <value>Monitor OK</value>
+                </exp>
+                <exp bool_exp="pv0 == true">
+                  <value>Monitor Alarm!</value>
+                </exp>
+                <exp bool_exp="pv1 == true">
+                  <value>Monitor Warning</value>
+                </exp>
+                <pv_name>$(P):ODHAlarm</pv_name>
+                <pv_name>$(P):ODHWarning</pv_name>
+              </rule>
+            </rules>
+          </widget>
+          <widget type="picture" version="2.0.0">
+            <name>MonitHealthy_OK_11</name>
+            <file>symbols/custom/ConnectedPNG.png</file>
+            <y>28</y>
+            <width>25</width>
+            <height>25</height>
+            <rules>
+              <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+                <exp bool_exp="pv0 == true">
+                  <value>false</value>
+                </exp>
+                <exp bool_exp="pv0 == false">
+                  <value>true</value>
+                </exp>
+                <pv_name>$(P):MonitHealthyErr</pv_name>
+              </rule>
+            </rules>
+            <tooltip>Monitor Healthy OK</tooltip>
+          </widget>
+          <widget type="picture" version="2.0.0">
+            <name>MonitHealthy_Err_11</name>
+            <file>symbols/custom/error.svg</file>
+            <y>29</y>
+            <width>22</width>
+            <height>22</height>
+            <rules>
+              <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+                <exp bool_exp="pv0 == true">
+                  <value>true</value>
+                </exp>
+                <exp bool_exp="pv0 == false">
+                  <value>false</value>
+                </exp>
+                <pv_name>$(P):MonitHealthyErr</pv_name>
+              </rule>
+            </rules>
+            <tooltip>Monitor Healthy Error!</tooltip>
+          </widget>
+        </widget>
+        <widget type="group" version="2.0.0">
+          <name>O2iM_5</name>
+          <macros>
+            <P>HCB-ACH:ODH-O2iM-$(R)</P>
+            <R>5</R>
+          </macros>
+          <x>755</x>
+          <y>164</y>
+          <width>83</width>
+          <height>54</height>
+          <style>3</style>
+          <transparent>true</transparent>
+          <widget type="action_button" version="3.0.0">
+            <name>OpenExpert_14</name>
+            <actions>
+              <action type="open_display">
+                <file>ODH_Expert_Monit.bob</file>
+                <target>standalone</target>
+                <description>O2iM  $(R)</description>
+              </action>
+            </actions>
+            <x>30</x>
+            <width>52</width>
+            <height>52</height>
+            <tooltip>Open Monitor Panel</tooltip>
+          </widget>
+          <widget type="led" version="2.0.0">
+            <name>ODH Alarm_Warning_14</name>
+            <y>2</y>
+            <off_color>
+              <color name="GRAY" red="169" green="169" blue="169">
+              </color>
+            </off_color>
+            <on_color>
+              <color name="LED-RED-ON" red="255" green="60" blue="46">
+              </color>
+            </on_color>
+            <rules>
+              <rule name="Color" prop_id="off_color" out_exp="false">
+                <exp bool_exp="pv0 == false &amp;&amp; pv1 == false">
+                  <value>
+                    <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+                    </color>
+                  </value>
+                </exp>
+                <exp bool_exp="pv0 == true">
+                  <value>
+                    <color name="MAJOR" red="252" green="13" blue="27">
+                    </color>
+                  </value>
+                </exp>
+                <exp bool_exp="pv1 == true">
+                  <value>
+                    <color name="WARNING" red="252" green="242" blue="17">
+                    </color>
+                  </value>
+                </exp>
+                <pv_name>$(P):ODHAlarm</pv_name>
+                <pv_name>$(P):ODHWarning</pv_name>
+              </rule>
+              <rule name="ToolTip" prop_id="tooltip" out_exp="false">
+                <exp bool_exp="pv0 == false &amp;&amp; pv1 == false">
+                  <value>Monitor OK</value>
+                </exp>
+                <exp bool_exp="pv0 == true">
+                  <value>Monitor Alarm!</value>
+                </exp>
+                <exp bool_exp="pv1 == true">
+                  <value>Monitor Warning</value>
+                </exp>
+                <pv_name>$(P):ODHAlarm</pv_name>
+                <pv_name>$(P):ODHWarning</pv_name>
+              </rule>
+            </rules>
+          </widget>
+          <widget type="picture" version="2.0.0">
+            <name>MonitHealthy_OK_14</name>
+            <file>symbols/custom/ConnectedPNG.png</file>
+            <y>28</y>
+            <width>25</width>
+            <height>25</height>
+            <rules>
+              <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+                <exp bool_exp="pv0 == true">
+                  <value>false</value>
+                </exp>
+                <exp bool_exp="pv0 == false">
+                  <value>true</value>
+                </exp>
+                <pv_name>$(P):MonitHealthyErr</pv_name>
+              </rule>
+            </rules>
+            <tooltip>Monitor Healthy OK</tooltip>
+          </widget>
+          <widget type="picture" version="2.0.0">
+            <name>MonitHealthy_Err_14</name>
+            <file>symbols/custom/error.svg</file>
+            <y>29</y>
+            <width>22</width>
+            <height>22</height>
+            <rules>
+              <rule name="VisibilityRule" prop_id="visible" out_exp="false">
+                <exp bool_exp="pv0 == true">
+                  <value>true</value>
+                </exp>
+                <exp bool_exp="pv0 == false">
+                  <value>false</value>
+                </exp>
+                <pv_name>$(P):MonitHealthyErr</pv_name>
+              </rule>
+            </rules>
+            <tooltip>Monitor Healthy Error!</tooltip>
+          </widget>
+        </widget>
+      </widget>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>BGGrey03-title</name>
+      <text>$(LOC)</text>
+      <width>1010</width>
+      <height>50</height>
+      <font>
+        <font family="Source Sans Pro" style="BOLD_ITALIC" size="20.0">
+        </font>
+      </font>
+      <foreground_color>
+        <color name="TEXT-LIGHT" red="230" green="230" blue="230">
+        </color>
+      </foreground_color>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+    </widget>
+  </widget>
+</display>

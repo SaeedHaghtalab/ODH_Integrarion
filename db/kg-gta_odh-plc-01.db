@@ -7,8 +7,8 @@ record(stringin, "KG-GTA:ODH-PLC-01:ModVersionR") {
 
 record(stringin, "KG-GTA:ODH-PLC-01:PLCFCommitR") {
 	field(DISP,	"1")
-#2c8b3e8cce5defd5230443c47f44c8ed48616a58
-	field(VAL,	"2c8b3e8cce5defd5230443c47f44c8ed48616a5")
+#a585ba87f07398edd84014e386d598bcb13c9557
+	field(VAL,	"a585ba87f07398edd84014e386d598bcb13c955")
 	field(PINI,	"YES")
 }
 
@@ -89,7 +89,7 @@ record(bo, "KG-GTA:ODH-PLC-01:iKickAlive") {
 record(ao, "KG-GTA:ODH-PLC-01:iCommsHashToPLC") {
 	field(DISP,	"1")
 	field(PINI,	"YES")
-	field(VAL,	"259823548")
+	field(VAL,	"-328369184")
 }
 record(ao, "KG-GTA:ODH-PLC-01:CommsHashToPLCS") {
 	field(DESC,	"Sends comms hash to PLC")
@@ -1705,7 +1705,7 @@ record(bi, "HCB-ACH:ODH-Area:ConnLost")
 ########## CTLG-CS:ODH-O2iM-20 PLC   -> EPICS status   ##########
 ##########
 
-#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+#<<<--- add_analog("O2Level","REAL",                                    PV_DESC="Level of Oxygen in percent")
 record(ai, "CTLG-CS:ODH-O2iM-20:O2Level")
 {
 	field(SCAN, "I/O Intr")
@@ -1717,7 +1717,7 @@ record(ai, "CTLG-CS:ODH-O2iM-20:O2Level")
 	field(DESC, "Level of Oxygen in percent")
 }
 
-#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",                        PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CTLG-CS:ODH-O2iM-20:ODHAlarm")
 {
 	field(SCAN, "I/O Intr")
@@ -1732,7 +1732,7 @@ record(bi, "CTLG-CS:ODH-O2iM-20:ODHAlarm")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",                    PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CTLG-CS:ODH-O2iM-20:ODHWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -1747,8 +1747,8 @@ record(bi, "CTLG-CS:ODH-O2iM-20:ODHWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
-record(bi, "CTLG-CS:ODH-O2iM-20:MonitHealthy")
+#<<<--- add_major_alarm("MonitHealthyErr", "ODH Monitor Healthy Error", PV_DESC="Done self check with internal fault",      PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CTLG-CS:ODH-O2iM-20:MonitHealthyErr")
 {
 	field(SCAN, "I/O Intr")
 	field(DTYP, "S7plc")
@@ -1756,12 +1756,13 @@ record(bi, "CTLG-CS:ODH-O2iM-20:MonitHealthy")
 	field(DISS, "INVALID")
 	field(DISV, "0")
 	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
-	field(DESC, "Done self check without internal fault")
-	field(ONAM, "OK")
-	field(ZNAM, "NOK!")
+	field(DESC, "Done self check with internal fault")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("Maint",                                            PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CTLG-CS:ODH-O2iM-20:Maint")
 {
 	field(SCAN, "I/O Intr")
@@ -1775,7 +1776,7 @@ record(bi, "CTLG-CS:ODH-O2iM-20:Maint")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning",              PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CTLG-CS:ODH-O2iM-20:MonitWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -1790,7 +1791,7 @@ record(bi, "CTLG-CS:ODH-O2iM-20:MonitWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("SysOK",                                            PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CTLG-CS:ODH-O2iM-20:SysOK")
 {
 	field(SCAN, "I/O Intr")
@@ -1804,7 +1805,7 @@ record(bi, "CTLG-CS:ODH-O2iM-20:SysOK")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("WarmUp",                                           PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CTLG-CS:ODH-O2iM-20:WarmUp")
 {
 	field(SCAN, "I/O Intr")
@@ -1818,7 +1819,7 @@ record(bi, "CTLG-CS:ODH-O2iM-20:WarmUp")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",                  PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CTLG-CS:ODH-O2iM-20:ConnLost")
 {
 	field(SCAN, "I/O Intr")
@@ -1852,7 +1853,7 @@ record(bi, "CTLG-CS:ODH-O2iM-20:ConnLost")
 ########## CTLG-CS:ODH-O2iM-21 PLC   -> EPICS status   ##########
 ##########
 
-#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+#<<<--- add_analog("O2Level","REAL",                                    PV_DESC="Level of Oxygen in percent")
 record(ai, "CTLG-CS:ODH-O2iM-21:O2Level")
 {
 	field(SCAN, "I/O Intr")
@@ -1864,7 +1865,7 @@ record(ai, "CTLG-CS:ODH-O2iM-21:O2Level")
 	field(DESC, "Level of Oxygen in percent")
 }
 
-#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",                        PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CTLG-CS:ODH-O2iM-21:ODHAlarm")
 {
 	field(SCAN, "I/O Intr")
@@ -1879,7 +1880,7 @@ record(bi, "CTLG-CS:ODH-O2iM-21:ODHAlarm")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",                    PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CTLG-CS:ODH-O2iM-21:ODHWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -1894,8 +1895,8 @@ record(bi, "CTLG-CS:ODH-O2iM-21:ODHWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
-record(bi, "CTLG-CS:ODH-O2iM-21:MonitHealthy")
+#<<<--- add_major_alarm("MonitHealthyErr", "ODH Monitor Healthy Error", PV_DESC="Done self check with internal fault",      PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CTLG-CS:ODH-O2iM-21:MonitHealthyErr")
 {
 	field(SCAN, "I/O Intr")
 	field(DTYP, "S7plc")
@@ -1903,12 +1904,13 @@ record(bi, "CTLG-CS:ODH-O2iM-21:MonitHealthy")
 	field(DISS, "INVALID")
 	field(DISV, "0")
 	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
-	field(DESC, "Done self check without internal fault")
-	field(ONAM, "OK")
-	field(ZNAM, "NOK!")
+	field(DESC, "Done self check with internal fault")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("Maint",                                            PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CTLG-CS:ODH-O2iM-21:Maint")
 {
 	field(SCAN, "I/O Intr")
@@ -1922,7 +1924,7 @@ record(bi, "CTLG-CS:ODH-O2iM-21:Maint")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning",              PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CTLG-CS:ODH-O2iM-21:MonitWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -1937,7 +1939,7 @@ record(bi, "CTLG-CS:ODH-O2iM-21:MonitWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("SysOK",                                            PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CTLG-CS:ODH-O2iM-21:SysOK")
 {
 	field(SCAN, "I/O Intr")
@@ -1951,7 +1953,7 @@ record(bi, "CTLG-CS:ODH-O2iM-21:SysOK")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("WarmUp",                                           PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CTLG-CS:ODH-O2iM-21:WarmUp")
 {
 	field(SCAN, "I/O Intr")
@@ -1965,7 +1967,7 @@ record(bi, "CTLG-CS:ODH-O2iM-21:WarmUp")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",                  PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CTLG-CS:ODH-O2iM-21:ConnLost")
 {
 	field(SCAN, "I/O Intr")
@@ -1999,7 +2001,7 @@ record(bi, "CTLG-CS:ODH-O2iM-21:ConnLost")
 ########## CTLG-CS:ODH-O2iM-22 PLC   -> EPICS status   ##########
 ##########
 
-#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+#<<<--- add_analog("O2Level","REAL",                                    PV_DESC="Level of Oxygen in percent")
 record(ai, "CTLG-CS:ODH-O2iM-22:O2Level")
 {
 	field(SCAN, "I/O Intr")
@@ -2011,7 +2013,7 @@ record(ai, "CTLG-CS:ODH-O2iM-22:O2Level")
 	field(DESC, "Level of Oxygen in percent")
 }
 
-#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",                        PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CTLG-CS:ODH-O2iM-22:ODHAlarm")
 {
 	field(SCAN, "I/O Intr")
@@ -2026,7 +2028,7 @@ record(bi, "CTLG-CS:ODH-O2iM-22:ODHAlarm")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",                    PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CTLG-CS:ODH-O2iM-22:ODHWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -2041,8 +2043,8 @@ record(bi, "CTLG-CS:ODH-O2iM-22:ODHWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
-record(bi, "CTLG-CS:ODH-O2iM-22:MonitHealthy")
+#<<<--- add_major_alarm("MonitHealthyErr", "ODH Monitor Healthy Error", PV_DESC="Done self check with internal fault",      PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CTLG-CS:ODH-O2iM-22:MonitHealthyErr")
 {
 	field(SCAN, "I/O Intr")
 	field(DTYP, "S7plc")
@@ -2050,12 +2052,13 @@ record(bi, "CTLG-CS:ODH-O2iM-22:MonitHealthy")
 	field(DISS, "INVALID")
 	field(DISV, "0")
 	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
-	field(DESC, "Done self check without internal fault")
-	field(ONAM, "OK")
-	field(ZNAM, "NOK!")
+	field(DESC, "Done self check with internal fault")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("Maint",                                            PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CTLG-CS:ODH-O2iM-22:Maint")
 {
 	field(SCAN, "I/O Intr")
@@ -2069,7 +2072,7 @@ record(bi, "CTLG-CS:ODH-O2iM-22:Maint")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning",              PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CTLG-CS:ODH-O2iM-22:MonitWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -2084,7 +2087,7 @@ record(bi, "CTLG-CS:ODH-O2iM-22:MonitWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("SysOK",                                            PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CTLG-CS:ODH-O2iM-22:SysOK")
 {
 	field(SCAN, "I/O Intr")
@@ -2098,7 +2101,7 @@ record(bi, "CTLG-CS:ODH-O2iM-22:SysOK")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("WarmUp",                                           PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CTLG-CS:ODH-O2iM-22:WarmUp")
 {
 	field(SCAN, "I/O Intr")
@@ -2112,7 +2115,7 @@ record(bi, "CTLG-CS:ODH-O2iM-22:WarmUp")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",                  PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CTLG-CS:ODH-O2iM-22:ConnLost")
 {
 	field(SCAN, "I/O Intr")
@@ -2146,7 +2149,7 @@ record(bi, "CTLG-CS:ODH-O2iM-22:ConnLost")
 ########## CXB-CXH:ODH-O2iM-13 PLC   -> EPICS status   ##########
 ##########
 
-#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+#<<<--- add_analog("O2Level","REAL",                                    PV_DESC="Level of Oxygen in percent")
 record(ai, "CXB-CXH:ODH-O2iM-13:O2Level")
 {
 	field(SCAN, "I/O Intr")
@@ -2158,7 +2161,7 @@ record(ai, "CXB-CXH:ODH-O2iM-13:O2Level")
 	field(DESC, "Level of Oxygen in percent")
 }
 
-#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",                        PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-13:ODHAlarm")
 {
 	field(SCAN, "I/O Intr")
@@ -2173,7 +2176,7 @@ record(bi, "CXB-CXH:ODH-O2iM-13:ODHAlarm")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",                    PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-13:ODHWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -2188,8 +2191,8 @@ record(bi, "CXB-CXH:ODH-O2iM-13:ODHWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
-record(bi, "CXB-CXH:ODH-O2iM-13:MonitHealthy")
+#<<<--- add_major_alarm("MonitHealthyErr", "ODH Monitor Healthy Error", PV_DESC="Done self check with internal fault",      PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-13:MonitHealthyErr")
 {
 	field(SCAN, "I/O Intr")
 	field(DTYP, "S7plc")
@@ -2197,12 +2200,13 @@ record(bi, "CXB-CXH:ODH-O2iM-13:MonitHealthy")
 	field(DISS, "INVALID")
 	field(DISV, "0")
 	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
-	field(DESC, "Done self check without internal fault")
-	field(ONAM, "OK")
-	field(ZNAM, "NOK!")
+	field(DESC, "Done self check with internal fault")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("Maint",                                            PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CXB-CXH:ODH-O2iM-13:Maint")
 {
 	field(SCAN, "I/O Intr")
@@ -2216,7 +2220,7 @@ record(bi, "CXB-CXH:ODH-O2iM-13:Maint")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning",              PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-13:MonitWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -2231,7 +2235,7 @@ record(bi, "CXB-CXH:ODH-O2iM-13:MonitWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("SysOK",                                            PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CXB-CXH:ODH-O2iM-13:SysOK")
 {
 	field(SCAN, "I/O Intr")
@@ -2245,7 +2249,7 @@ record(bi, "CXB-CXH:ODH-O2iM-13:SysOK")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("WarmUp",                                           PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CXB-CXH:ODH-O2iM-13:WarmUp")
 {
 	field(SCAN, "I/O Intr")
@@ -2259,7 +2263,7 @@ record(bi, "CXB-CXH:ODH-O2iM-13:WarmUp")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",                  PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-13:ConnLost")
 {
 	field(SCAN, "I/O Intr")
@@ -2293,7 +2297,7 @@ record(bi, "CXB-CXH:ODH-O2iM-13:ConnLost")
 ########## CXB-CXH:ODH-O2iM-14 PLC   -> EPICS status   ##########
 ##########
 
-#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+#<<<--- add_analog("O2Level","REAL",                                    PV_DESC="Level of Oxygen in percent")
 record(ai, "CXB-CXH:ODH-O2iM-14:O2Level")
 {
 	field(SCAN, "I/O Intr")
@@ -2305,7 +2309,7 @@ record(ai, "CXB-CXH:ODH-O2iM-14:O2Level")
 	field(DESC, "Level of Oxygen in percent")
 }
 
-#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",                        PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-14:ODHAlarm")
 {
 	field(SCAN, "I/O Intr")
@@ -2320,7 +2324,7 @@ record(bi, "CXB-CXH:ODH-O2iM-14:ODHAlarm")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",                    PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-14:ODHWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -2335,8 +2339,8 @@ record(bi, "CXB-CXH:ODH-O2iM-14:ODHWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
-record(bi, "CXB-CXH:ODH-O2iM-14:MonitHealthy")
+#<<<--- add_major_alarm("MonitHealthyErr", "ODH Monitor Healthy Error", PV_DESC="Done self check with internal fault",      PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-14:MonitHealthyErr")
 {
 	field(SCAN, "I/O Intr")
 	field(DTYP, "S7plc")
@@ -2344,12 +2348,13 @@ record(bi, "CXB-CXH:ODH-O2iM-14:MonitHealthy")
 	field(DISS, "INVALID")
 	field(DISV, "0")
 	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
-	field(DESC, "Done self check without internal fault")
-	field(ONAM, "OK")
-	field(ZNAM, "NOK!")
+	field(DESC, "Done self check with internal fault")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("Maint",                                            PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CXB-CXH:ODH-O2iM-14:Maint")
 {
 	field(SCAN, "I/O Intr")
@@ -2363,7 +2368,7 @@ record(bi, "CXB-CXH:ODH-O2iM-14:Maint")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning",              PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-14:MonitWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -2378,7 +2383,7 @@ record(bi, "CXB-CXH:ODH-O2iM-14:MonitWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("SysOK",                                            PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CXB-CXH:ODH-O2iM-14:SysOK")
 {
 	field(SCAN, "I/O Intr")
@@ -2392,7 +2397,7 @@ record(bi, "CXB-CXH:ODH-O2iM-14:SysOK")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("WarmUp",                                           PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CXB-CXH:ODH-O2iM-14:WarmUp")
 {
 	field(SCAN, "I/O Intr")
@@ -2406,7 +2411,7 @@ record(bi, "CXB-CXH:ODH-O2iM-14:WarmUp")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",                  PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-14:ConnLost")
 {
 	field(SCAN, "I/O Intr")
@@ -2440,7 +2445,7 @@ record(bi, "CXB-CXH:ODH-O2iM-14:ConnLost")
 ########## CXB-CXH:ODH-O2iM-15 PLC   -> EPICS status   ##########
 ##########
 
-#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+#<<<--- add_analog("O2Level","REAL",                                    PV_DESC="Level of Oxygen in percent")
 record(ai, "CXB-CXH:ODH-O2iM-15:O2Level")
 {
 	field(SCAN, "I/O Intr")
@@ -2452,7 +2457,7 @@ record(ai, "CXB-CXH:ODH-O2iM-15:O2Level")
 	field(DESC, "Level of Oxygen in percent")
 }
 
-#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",                        PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-15:ODHAlarm")
 {
 	field(SCAN, "I/O Intr")
@@ -2467,7 +2472,7 @@ record(bi, "CXB-CXH:ODH-O2iM-15:ODHAlarm")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",                    PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-15:ODHWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -2482,8 +2487,8 @@ record(bi, "CXB-CXH:ODH-O2iM-15:ODHWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
-record(bi, "CXB-CXH:ODH-O2iM-15:MonitHealthy")
+#<<<--- add_major_alarm("MonitHealthyErr", "ODH Monitor Healthy Error", PV_DESC="Done self check with internal fault",      PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-15:MonitHealthyErr")
 {
 	field(SCAN, "I/O Intr")
 	field(DTYP, "S7plc")
@@ -2491,12 +2496,13 @@ record(bi, "CXB-CXH:ODH-O2iM-15:MonitHealthy")
 	field(DISS, "INVALID")
 	field(DISV, "0")
 	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
-	field(DESC, "Done self check without internal fault")
-	field(ONAM, "OK")
-	field(ZNAM, "NOK!")
+	field(DESC, "Done self check with internal fault")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("Maint",                                            PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CXB-CXH:ODH-O2iM-15:Maint")
 {
 	field(SCAN, "I/O Intr")
@@ -2510,7 +2516,7 @@ record(bi, "CXB-CXH:ODH-O2iM-15:Maint")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning",              PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-15:MonitWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -2525,7 +2531,7 @@ record(bi, "CXB-CXH:ODH-O2iM-15:MonitWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("SysOK",                                            PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CXB-CXH:ODH-O2iM-15:SysOK")
 {
 	field(SCAN, "I/O Intr")
@@ -2539,7 +2545,7 @@ record(bi, "CXB-CXH:ODH-O2iM-15:SysOK")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("WarmUp",                                           PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CXB-CXH:ODH-O2iM-15:WarmUp")
 {
 	field(SCAN, "I/O Intr")
@@ -2553,7 +2559,7 @@ record(bi, "CXB-CXH:ODH-O2iM-15:WarmUp")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",                  PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-15:ConnLost")
 {
 	field(SCAN, "I/O Intr")
@@ -2587,7 +2593,7 @@ record(bi, "CXB-CXH:ODH-O2iM-15:ConnLost")
 ########## CXB-CXH:ODH-O2iM-16 PLC   -> EPICS status   ##########
 ##########
 
-#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+#<<<--- add_analog("O2Level","REAL",                                    PV_DESC="Level of Oxygen in percent")
 record(ai, "CXB-CXH:ODH-O2iM-16:O2Level")
 {
 	field(SCAN, "I/O Intr")
@@ -2599,7 +2605,7 @@ record(ai, "CXB-CXH:ODH-O2iM-16:O2Level")
 	field(DESC, "Level of Oxygen in percent")
 }
 
-#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",                        PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-16:ODHAlarm")
 {
 	field(SCAN, "I/O Intr")
@@ -2614,7 +2620,7 @@ record(bi, "CXB-CXH:ODH-O2iM-16:ODHAlarm")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",                    PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-16:ODHWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -2629,8 +2635,8 @@ record(bi, "CXB-CXH:ODH-O2iM-16:ODHWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
-record(bi, "CXB-CXH:ODH-O2iM-16:MonitHealthy")
+#<<<--- add_major_alarm("MonitHealthyErr", "ODH Monitor Healthy Error", PV_DESC="Done self check with internal fault",      PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-16:MonitHealthyErr")
 {
 	field(SCAN, "I/O Intr")
 	field(DTYP, "S7plc")
@@ -2638,12 +2644,13 @@ record(bi, "CXB-CXH:ODH-O2iM-16:MonitHealthy")
 	field(DISS, "INVALID")
 	field(DISV, "0")
 	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
-	field(DESC, "Done self check without internal fault")
-	field(ONAM, "OK")
-	field(ZNAM, "NOK!")
+	field(DESC, "Done self check with internal fault")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("Maint",                                            PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CXB-CXH:ODH-O2iM-16:Maint")
 {
 	field(SCAN, "I/O Intr")
@@ -2657,7 +2664,7 @@ record(bi, "CXB-CXH:ODH-O2iM-16:Maint")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning",              PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-16:MonitWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -2672,7 +2679,7 @@ record(bi, "CXB-CXH:ODH-O2iM-16:MonitWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("SysOK",                                            PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CXB-CXH:ODH-O2iM-16:SysOK")
 {
 	field(SCAN, "I/O Intr")
@@ -2686,7 +2693,7 @@ record(bi, "CXB-CXH:ODH-O2iM-16:SysOK")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("WarmUp",                                           PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CXB-CXH:ODH-O2iM-16:WarmUp")
 {
 	field(SCAN, "I/O Intr")
@@ -2700,7 +2707,7 @@ record(bi, "CXB-CXH:ODH-O2iM-16:WarmUp")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",                  PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-16:ConnLost")
 {
 	field(SCAN, "I/O Intr")
@@ -2734,7 +2741,7 @@ record(bi, "CXB-CXH:ODH-O2iM-16:ConnLost")
 ########## CXB-CXH:ODH-O2iM-17 PLC   -> EPICS status   ##########
 ##########
 
-#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+#<<<--- add_analog("O2Level","REAL",                                    PV_DESC="Level of Oxygen in percent")
 record(ai, "CXB-CXH:ODH-O2iM-17:O2Level")
 {
 	field(SCAN, "I/O Intr")
@@ -2746,7 +2753,7 @@ record(ai, "CXB-CXH:ODH-O2iM-17:O2Level")
 	field(DESC, "Level of Oxygen in percent")
 }
 
-#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",                        PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-17:ODHAlarm")
 {
 	field(SCAN, "I/O Intr")
@@ -2761,7 +2768,7 @@ record(bi, "CXB-CXH:ODH-O2iM-17:ODHAlarm")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",                    PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-17:ODHWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -2776,8 +2783,8 @@ record(bi, "CXB-CXH:ODH-O2iM-17:ODHWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
-record(bi, "CXB-CXH:ODH-O2iM-17:MonitHealthy")
+#<<<--- add_major_alarm("MonitHealthyErr", "ODH Monitor Healthy Error", PV_DESC="Done self check with internal fault",      PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-17:MonitHealthyErr")
 {
 	field(SCAN, "I/O Intr")
 	field(DTYP, "S7plc")
@@ -2785,12 +2792,13 @@ record(bi, "CXB-CXH:ODH-O2iM-17:MonitHealthy")
 	field(DISS, "INVALID")
 	field(DISV, "0")
 	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
-	field(DESC, "Done self check without internal fault")
-	field(ONAM, "OK")
-	field(ZNAM, "NOK!")
+	field(DESC, "Done self check with internal fault")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("Maint",                                            PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CXB-CXH:ODH-O2iM-17:Maint")
 {
 	field(SCAN, "I/O Intr")
@@ -2804,7 +2812,7 @@ record(bi, "CXB-CXH:ODH-O2iM-17:Maint")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning",              PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-17:MonitWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -2819,7 +2827,7 @@ record(bi, "CXB-CXH:ODH-O2iM-17:MonitWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("SysOK",                                            PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CXB-CXH:ODH-O2iM-17:SysOK")
 {
 	field(SCAN, "I/O Intr")
@@ -2833,7 +2841,7 @@ record(bi, "CXB-CXH:ODH-O2iM-17:SysOK")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("WarmUp",                                           PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CXB-CXH:ODH-O2iM-17:WarmUp")
 {
 	field(SCAN, "I/O Intr")
@@ -2847,7 +2855,7 @@ record(bi, "CXB-CXH:ODH-O2iM-17:WarmUp")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",                  PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-17:ConnLost")
 {
 	field(SCAN, "I/O Intr")
@@ -2881,7 +2889,7 @@ record(bi, "CXB-CXH:ODH-O2iM-17:ConnLost")
 ########## CXB-CXH:ODH-O2iM-18 PLC   -> EPICS status   ##########
 ##########
 
-#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+#<<<--- add_analog("O2Level","REAL",                                    PV_DESC="Level of Oxygen in percent")
 record(ai, "CXB-CXH:ODH-O2iM-18:O2Level")
 {
 	field(SCAN, "I/O Intr")
@@ -2893,7 +2901,7 @@ record(ai, "CXB-CXH:ODH-O2iM-18:O2Level")
 	field(DESC, "Level of Oxygen in percent")
 }
 
-#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",                        PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-18:ODHAlarm")
 {
 	field(SCAN, "I/O Intr")
@@ -2908,7 +2916,7 @@ record(bi, "CXB-CXH:ODH-O2iM-18:ODHAlarm")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",                    PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-18:ODHWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -2923,8 +2931,8 @@ record(bi, "CXB-CXH:ODH-O2iM-18:ODHWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
-record(bi, "CXB-CXH:ODH-O2iM-18:MonitHealthy")
+#<<<--- add_major_alarm("MonitHealthyErr", "ODH Monitor Healthy Error", PV_DESC="Done self check with internal fault",      PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-18:MonitHealthyErr")
 {
 	field(SCAN, "I/O Intr")
 	field(DTYP, "S7plc")
@@ -2932,12 +2940,13 @@ record(bi, "CXB-CXH:ODH-O2iM-18:MonitHealthy")
 	field(DISS, "INVALID")
 	field(DISV, "0")
 	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
-	field(DESC, "Done self check without internal fault")
-	field(ONAM, "OK")
-	field(ZNAM, "NOK!")
+	field(DESC, "Done self check with internal fault")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("Maint",                                            PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CXB-CXH:ODH-O2iM-18:Maint")
 {
 	field(SCAN, "I/O Intr")
@@ -2951,7 +2960,7 @@ record(bi, "CXB-CXH:ODH-O2iM-18:Maint")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning",              PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-18:MonitWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -2966,7 +2975,7 @@ record(bi, "CXB-CXH:ODH-O2iM-18:MonitWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("SysOK",                                            PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CXB-CXH:ODH-O2iM-18:SysOK")
 {
 	field(SCAN, "I/O Intr")
@@ -2980,7 +2989,7 @@ record(bi, "CXB-CXH:ODH-O2iM-18:SysOK")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("WarmUp",                                           PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CXB-CXH:ODH-O2iM-18:WarmUp")
 {
 	field(SCAN, "I/O Intr")
@@ -2994,7 +3003,7 @@ record(bi, "CXB-CXH:ODH-O2iM-18:WarmUp")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",                  PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-18:ConnLost")
 {
 	field(SCAN, "I/O Intr")
@@ -3028,7 +3037,7 @@ record(bi, "CXB-CXH:ODH-O2iM-18:ConnLost")
 ########## CXB-CXH:ODH-O2iM-19 PLC   -> EPICS status   ##########
 ##########
 
-#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+#<<<--- add_analog("O2Level","REAL",                                    PV_DESC="Level of Oxygen in percent")
 record(ai, "CXB-CXH:ODH-O2iM-19:O2Level")
 {
 	field(SCAN, "I/O Intr")
@@ -3040,7 +3049,7 @@ record(ai, "CXB-CXH:ODH-O2iM-19:O2Level")
 	field(DESC, "Level of Oxygen in percent")
 }
 
-#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",                        PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-19:ODHAlarm")
 {
 	field(SCAN, "I/O Intr")
@@ -3055,7 +3064,7 @@ record(bi, "CXB-CXH:ODH-O2iM-19:ODHAlarm")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",                    PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-19:ODHWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -3070,8 +3079,8 @@ record(bi, "CXB-CXH:ODH-O2iM-19:ODHWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
-record(bi, "CXB-CXH:ODH-O2iM-19:MonitHealthy")
+#<<<--- add_major_alarm("MonitHealthyErr", "ODH Monitor Healthy Error", PV_DESC="Done self check with internal fault",      PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "CXB-CXH:ODH-O2iM-19:MonitHealthyErr")
 {
 	field(SCAN, "I/O Intr")
 	field(DTYP, "S7plc")
@@ -3079,12 +3088,13 @@ record(bi, "CXB-CXH:ODH-O2iM-19:MonitHealthy")
 	field(DISS, "INVALID")
 	field(DISV, "0")
 	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
-	field(DESC, "Done self check without internal fault")
-	field(ONAM, "OK")
-	field(ZNAM, "NOK!")
+	field(DESC, "Done self check with internal fault")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("Maint",                                            PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CXB-CXH:ODH-O2iM-19:Maint")
 {
 	field(SCAN, "I/O Intr")
@@ -3098,7 +3108,7 @@ record(bi, "CXB-CXH:ODH-O2iM-19:Maint")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning",              PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-19:MonitWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -3113,7 +3123,7 @@ record(bi, "CXB-CXH:ODH-O2iM-19:MonitWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("SysOK",                                            PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CXB-CXH:ODH-O2iM-19:SysOK")
 {
 	field(SCAN, "I/O Intr")
@@ -3127,7 +3137,7 @@ record(bi, "CXB-CXH:ODH-O2iM-19:SysOK")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("WarmUp",                                           PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "CXB-CXH:ODH-O2iM-19:WarmUp")
 {
 	field(SCAN, "I/O Intr")
@@ -3141,7 +3151,7 @@ record(bi, "CXB-CXH:ODH-O2iM-19:WarmUp")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",                  PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "CXB-CXH:ODH-O2iM-19:ConnLost")
 {
 	field(SCAN, "I/O Intr")
@@ -3175,7 +3185,7 @@ record(bi, "CXB-CXH:ODH-O2iM-19:ConnLost")
 ########## HCB-ACH:ODH-O2iM-1 PLC   -> EPICS status   ##########
 ##########
 
-#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+#<<<--- add_analog("O2Level","REAL",                                    PV_DESC="Level of Oxygen in percent")
 record(ai, "HCB-ACH:ODH-O2iM-1:O2Level")
 {
 	field(SCAN, "I/O Intr")
@@ -3187,7 +3197,7 @@ record(ai, "HCB-ACH:ODH-O2iM-1:O2Level")
 	field(DESC, "Level of Oxygen in percent")
 }
 
-#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",                        PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-ACH:ODH-O2iM-1:ODHAlarm")
 {
 	field(SCAN, "I/O Intr")
@@ -3202,7 +3212,7 @@ record(bi, "HCB-ACH:ODH-O2iM-1:ODHAlarm")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",                    PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-ACH:ODH-O2iM-1:ODHWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -3217,8 +3227,8 @@ record(bi, "HCB-ACH:ODH-O2iM-1:ODHWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
-record(bi, "HCB-ACH:ODH-O2iM-1:MonitHealthy")
+#<<<--- add_major_alarm("MonitHealthyErr", "ODH Monitor Healthy Error", PV_DESC="Done self check with internal fault",      PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-O2iM-1:MonitHealthyErr")
 {
 	field(SCAN, "I/O Intr")
 	field(DTYP, "S7plc")
@@ -3226,12 +3236,13 @@ record(bi, "HCB-ACH:ODH-O2iM-1:MonitHealthy")
 	field(DISS, "INVALID")
 	field(DISV, "0")
 	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
-	field(DESC, "Done self check without internal fault")
-	field(ONAM, "OK")
-	field(ZNAM, "NOK!")
+	field(DESC, "Done self check with internal fault")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("Maint",                                            PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-ACH:ODH-O2iM-1:Maint")
 {
 	field(SCAN, "I/O Intr")
@@ -3245,7 +3256,7 @@ record(bi, "HCB-ACH:ODH-O2iM-1:Maint")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning",              PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-ACH:ODH-O2iM-1:MonitWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -3260,7 +3271,7 @@ record(bi, "HCB-ACH:ODH-O2iM-1:MonitWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("SysOK",                                            PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-ACH:ODH-O2iM-1:SysOK")
 {
 	field(SCAN, "I/O Intr")
@@ -3274,7 +3285,7 @@ record(bi, "HCB-ACH:ODH-O2iM-1:SysOK")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("WarmUp",                                           PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-ACH:ODH-O2iM-1:WarmUp")
 {
 	field(SCAN, "I/O Intr")
@@ -3288,7 +3299,7 @@ record(bi, "HCB-ACH:ODH-O2iM-1:WarmUp")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",                  PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-ACH:ODH-O2iM-1:ConnLost")
 {
 	field(SCAN, "I/O Intr")
@@ -3322,7 +3333,7 @@ record(bi, "HCB-ACH:ODH-O2iM-1:ConnLost")
 ########## HCB-ACH:ODH-O2iM-2 PLC   -> EPICS status   ##########
 ##########
 
-#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+#<<<--- add_analog("O2Level","REAL",                                    PV_DESC="Level of Oxygen in percent")
 record(ai, "HCB-ACH:ODH-O2iM-2:O2Level")
 {
 	field(SCAN, "I/O Intr")
@@ -3334,7 +3345,7 @@ record(ai, "HCB-ACH:ODH-O2iM-2:O2Level")
 	field(DESC, "Level of Oxygen in percent")
 }
 
-#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",                        PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-ACH:ODH-O2iM-2:ODHAlarm")
 {
 	field(SCAN, "I/O Intr")
@@ -3349,7 +3360,7 @@ record(bi, "HCB-ACH:ODH-O2iM-2:ODHAlarm")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",                    PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-ACH:ODH-O2iM-2:ODHWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -3364,8 +3375,8 @@ record(bi, "HCB-ACH:ODH-O2iM-2:ODHWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
-record(bi, "HCB-ACH:ODH-O2iM-2:MonitHealthy")
+#<<<--- add_major_alarm("MonitHealthyErr", "ODH Monitor Healthy Error", PV_DESC="Done self check with internal fault",      PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-O2iM-2:MonitHealthyErr")
 {
 	field(SCAN, "I/O Intr")
 	field(DTYP, "S7plc")
@@ -3373,12 +3384,13 @@ record(bi, "HCB-ACH:ODH-O2iM-2:MonitHealthy")
 	field(DISS, "INVALID")
 	field(DISV, "0")
 	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
-	field(DESC, "Done self check without internal fault")
-	field(ONAM, "OK")
-	field(ZNAM, "NOK!")
+	field(DESC, "Done self check with internal fault")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("Maint",                                            PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-ACH:ODH-O2iM-2:Maint")
 {
 	field(SCAN, "I/O Intr")
@@ -3392,7 +3404,7 @@ record(bi, "HCB-ACH:ODH-O2iM-2:Maint")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning",              PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-ACH:ODH-O2iM-2:MonitWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -3407,7 +3419,7 @@ record(bi, "HCB-ACH:ODH-O2iM-2:MonitWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("SysOK",                                            PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-ACH:ODH-O2iM-2:SysOK")
 {
 	field(SCAN, "I/O Intr")
@@ -3421,7 +3433,7 @@ record(bi, "HCB-ACH:ODH-O2iM-2:SysOK")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("WarmUp",                                           PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-ACH:ODH-O2iM-2:WarmUp")
 {
 	field(SCAN, "I/O Intr")
@@ -3435,7 +3447,7 @@ record(bi, "HCB-ACH:ODH-O2iM-2:WarmUp")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",                  PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-ACH:ODH-O2iM-2:ConnLost")
 {
 	field(SCAN, "I/O Intr")
@@ -3469,7 +3481,7 @@ record(bi, "HCB-ACH:ODH-O2iM-2:ConnLost")
 ########## HCB-ACH:ODH-O2iM-3 PLC   -> EPICS status   ##########
 ##########
 
-#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+#<<<--- add_analog("O2Level","REAL",                                    PV_DESC="Level of Oxygen in percent")
 record(ai, "HCB-ACH:ODH-O2iM-3:O2Level")
 {
 	field(SCAN, "I/O Intr")
@@ -3481,7 +3493,7 @@ record(ai, "HCB-ACH:ODH-O2iM-3:O2Level")
 	field(DESC, "Level of Oxygen in percent")
 }
 
-#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",                        PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-ACH:ODH-O2iM-3:ODHAlarm")
 {
 	field(SCAN, "I/O Intr")
@@ -3496,7 +3508,7 @@ record(bi, "HCB-ACH:ODH-O2iM-3:ODHAlarm")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",                    PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-ACH:ODH-O2iM-3:ODHWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -3511,8 +3523,8 @@ record(bi, "HCB-ACH:ODH-O2iM-3:ODHWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
-record(bi, "HCB-ACH:ODH-O2iM-3:MonitHealthy")
+#<<<--- add_major_alarm("MonitHealthyErr", "ODH Monitor Healthy Error", PV_DESC="Done self check with internal fault",      PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-O2iM-3:MonitHealthyErr")
 {
 	field(SCAN, "I/O Intr")
 	field(DTYP, "S7plc")
@@ -3520,12 +3532,13 @@ record(bi, "HCB-ACH:ODH-O2iM-3:MonitHealthy")
 	field(DISS, "INVALID")
 	field(DISV, "0")
 	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
-	field(DESC, "Done self check without internal fault")
-	field(ONAM, "OK")
-	field(ZNAM, "NOK!")
+	field(DESC, "Done self check with internal fault")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("Maint",                                            PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-ACH:ODH-O2iM-3:Maint")
 {
 	field(SCAN, "I/O Intr")
@@ -3539,7 +3552,7 @@ record(bi, "HCB-ACH:ODH-O2iM-3:Maint")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning",              PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-ACH:ODH-O2iM-3:MonitWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -3554,7 +3567,7 @@ record(bi, "HCB-ACH:ODH-O2iM-3:MonitWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("SysOK",                                            PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-ACH:ODH-O2iM-3:SysOK")
 {
 	field(SCAN, "I/O Intr")
@@ -3568,7 +3581,7 @@ record(bi, "HCB-ACH:ODH-O2iM-3:SysOK")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("WarmUp",                                           PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-ACH:ODH-O2iM-3:WarmUp")
 {
 	field(SCAN, "I/O Intr")
@@ -3582,7 +3595,7 @@ record(bi, "HCB-ACH:ODH-O2iM-3:WarmUp")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",                  PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-ACH:ODH-O2iM-3:ConnLost")
 {
 	field(SCAN, "I/O Intr")
@@ -3616,7 +3629,7 @@ record(bi, "HCB-ACH:ODH-O2iM-3:ConnLost")
 ########## HCB-ACH:ODH-O2iM-4 PLC   -> EPICS status   ##########
 ##########
 
-#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+#<<<--- add_analog("O2Level","REAL",                                    PV_DESC="Level of Oxygen in percent")
 record(ai, "HCB-ACH:ODH-O2iM-4:O2Level")
 {
 	field(SCAN, "I/O Intr")
@@ -3628,7 +3641,7 @@ record(ai, "HCB-ACH:ODH-O2iM-4:O2Level")
 	field(DESC, "Level of Oxygen in percent")
 }
 
-#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",                        PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-ACH:ODH-O2iM-4:ODHAlarm")
 {
 	field(SCAN, "I/O Intr")
@@ -3643,7 +3656,7 @@ record(bi, "HCB-ACH:ODH-O2iM-4:ODHAlarm")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",                    PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-ACH:ODH-O2iM-4:ODHWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -3658,8 +3671,8 @@ record(bi, "HCB-ACH:ODH-O2iM-4:ODHWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
-record(bi, "HCB-ACH:ODH-O2iM-4:MonitHealthy")
+#<<<--- add_major_alarm("MonitHealthyErr", "ODH Monitor Healthy Error", PV_DESC="Done self check with internal fault",      PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-O2iM-4:MonitHealthyErr")
 {
 	field(SCAN, "I/O Intr")
 	field(DTYP, "S7plc")
@@ -3667,12 +3680,13 @@ record(bi, "HCB-ACH:ODH-O2iM-4:MonitHealthy")
 	field(DISS, "INVALID")
 	field(DISV, "0")
 	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
-	field(DESC, "Done self check without internal fault")
-	field(ONAM, "OK")
-	field(ZNAM, "NOK!")
+	field(DESC, "Done self check with internal fault")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("Maint",                                            PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-ACH:ODH-O2iM-4:Maint")
 {
 	field(SCAN, "I/O Intr")
@@ -3686,7 +3700,7 @@ record(bi, "HCB-ACH:ODH-O2iM-4:Maint")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning",              PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-ACH:ODH-O2iM-4:MonitWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -3701,7 +3715,7 @@ record(bi, "HCB-ACH:ODH-O2iM-4:MonitWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("SysOK",                                            PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-ACH:ODH-O2iM-4:SysOK")
 {
 	field(SCAN, "I/O Intr")
@@ -3715,7 +3729,7 @@ record(bi, "HCB-ACH:ODH-O2iM-4:SysOK")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("WarmUp",                                           PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-ACH:ODH-O2iM-4:WarmUp")
 {
 	field(SCAN, "I/O Intr")
@@ -3729,7 +3743,7 @@ record(bi, "HCB-ACH:ODH-O2iM-4:WarmUp")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",                  PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-ACH:ODH-O2iM-4:ConnLost")
 {
 	field(SCAN, "I/O Intr")
@@ -3763,7 +3777,7 @@ record(bi, "HCB-ACH:ODH-O2iM-4:ConnLost")
 ########## HCB-ACH:ODH-O2iM-5 PLC   -> EPICS status   ##########
 ##########
 
-#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+#<<<--- add_analog("O2Level","REAL",                                    PV_DESC="Level of Oxygen in percent")
 record(ai, "HCB-ACH:ODH-O2iM-5:O2Level")
 {
 	field(SCAN, "I/O Intr")
@@ -3775,7 +3789,7 @@ record(ai, "HCB-ACH:ODH-O2iM-5:O2Level")
 	field(DESC, "Level of Oxygen in percent")
 }
 
-#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",                        PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-ACH:ODH-O2iM-5:ODHAlarm")
 {
 	field(SCAN, "I/O Intr")
@@ -3790,7 +3804,7 @@ record(bi, "HCB-ACH:ODH-O2iM-5:ODHAlarm")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",                    PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-ACH:ODH-O2iM-5:ODHWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -3805,8 +3819,8 @@ record(bi, "HCB-ACH:ODH-O2iM-5:ODHWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
-record(bi, "HCB-ACH:ODH-O2iM-5:MonitHealthy")
+#<<<--- add_major_alarm("MonitHealthyErr", "ODH Monitor Healthy Error", PV_DESC="Done self check with internal fault",      PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-ACH:ODH-O2iM-5:MonitHealthyErr")
 {
 	field(SCAN, "I/O Intr")
 	field(DTYP, "S7plc")
@@ -3814,12 +3828,13 @@ record(bi, "HCB-ACH:ODH-O2iM-5:MonitHealthy")
 	field(DISS, "INVALID")
 	field(DISV, "0")
 	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
-	field(DESC, "Done self check without internal fault")
-	field(ONAM, "OK")
-	field(ZNAM, "NOK!")
+	field(DESC, "Done self check with internal fault")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("Maint",                                            PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-ACH:ODH-O2iM-5:Maint")
 {
 	field(SCAN, "I/O Intr")
@@ -3833,7 +3848,7 @@ record(bi, "HCB-ACH:ODH-O2iM-5:Maint")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning",              PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-ACH:ODH-O2iM-5:MonitWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -3848,7 +3863,7 @@ record(bi, "HCB-ACH:ODH-O2iM-5:MonitWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("SysOK",                                            PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-ACH:ODH-O2iM-5:SysOK")
 {
 	field(SCAN, "I/O Intr")
@@ -3862,7 +3877,7 @@ record(bi, "HCB-ACH:ODH-O2iM-5:SysOK")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("WarmUp",                                           PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-ACH:ODH-O2iM-5:WarmUp")
 {
 	field(SCAN, "I/O Intr")
@@ -3876,7 +3891,7 @@ record(bi, "HCB-ACH:ODH-O2iM-5:WarmUp")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",                  PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-ACH:ODH-O2iM-5:ConnLost")
 {
 	field(SCAN, "I/O Intr")
@@ -3910,7 +3925,7 @@ record(bi, "HCB-ACH:ODH-O2iM-5:ConnLost")
 ########## HCB-DogSh:ODH-O2iM-12 PLC   -> EPICS status   ##########
 ##########
 
-#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+#<<<--- add_analog("O2Level","REAL",                                    PV_DESC="Level of Oxygen in percent")
 record(ai, "HCB-DogSh:ODH-O2iM-12:O2Level")
 {
 	field(SCAN, "I/O Intr")
@@ -3922,7 +3937,7 @@ record(ai, "HCB-DogSh:ODH-O2iM-12:O2Level")
 	field(DESC, "Level of Oxygen in percent")
 }
 
-#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",                        PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-DogSh:ODH-O2iM-12:ODHAlarm")
 {
 	field(SCAN, "I/O Intr")
@@ -3937,7 +3952,7 @@ record(bi, "HCB-DogSh:ODH-O2iM-12:ODHAlarm")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",                    PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-DogSh:ODH-O2iM-12:ODHWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -3952,8 +3967,8 @@ record(bi, "HCB-DogSh:ODH-O2iM-12:ODHWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
-record(bi, "HCB-DogSh:ODH-O2iM-12:MonitHealthy")
+#<<<--- add_major_alarm("MonitHealthyErr", "ODH Monitor Healthy Error", PV_DESC="Done self check with internal fault",      PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-DogSh:ODH-O2iM-12:MonitHealthyErr")
 {
 	field(SCAN, "I/O Intr")
 	field(DTYP, "S7plc")
@@ -3961,12 +3976,13 @@ record(bi, "HCB-DogSh:ODH-O2iM-12:MonitHealthy")
 	field(DISS, "INVALID")
 	field(DISV, "0")
 	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
-	field(DESC, "Done self check without internal fault")
-	field(ONAM, "OK")
-	field(ZNAM, "NOK!")
+	field(DESC, "Done self check with internal fault")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("Maint",                                            PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-DogSh:ODH-O2iM-12:Maint")
 {
 	field(SCAN, "I/O Intr")
@@ -3980,7 +3996,7 @@ record(bi, "HCB-DogSh:ODH-O2iM-12:Maint")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning",              PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-DogSh:ODH-O2iM-12:MonitWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -3995,7 +4011,7 @@ record(bi, "HCB-DogSh:ODH-O2iM-12:MonitWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("SysOK",                                            PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-DogSh:ODH-O2iM-12:SysOK")
 {
 	field(SCAN, "I/O Intr")
@@ -4009,7 +4025,7 @@ record(bi, "HCB-DogSh:ODH-O2iM-12:SysOK")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("WarmUp",                                           PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-DogSh:ODH-O2iM-12:WarmUp")
 {
 	field(SCAN, "I/O Intr")
@@ -4023,7 +4039,7 @@ record(bi, "HCB-DogSh:ODH-O2iM-12:WarmUp")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",                  PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-DogSh:ODH-O2iM-12:ConnLost")
 {
 	field(SCAN, "I/O Intr")
@@ -4057,7 +4073,7 @@ record(bi, "HCB-DogSh:ODH-O2iM-12:ConnLost")
 ########## HCB-HPGS:ODH-O2iM-10 PLC   -> EPICS status   ##########
 ##########
 
-#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+#<<<--- add_analog("O2Level","REAL",                                    PV_DESC="Level of Oxygen in percent")
 record(ai, "HCB-HPGS:ODH-O2iM-10:O2Level")
 {
 	field(SCAN, "I/O Intr")
@@ -4069,7 +4085,7 @@ record(ai, "HCB-HPGS:ODH-O2iM-10:O2Level")
 	field(DESC, "Level of Oxygen in percent")
 }
 
-#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",                        PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-HPGS:ODH-O2iM-10:ODHAlarm")
 {
 	field(SCAN, "I/O Intr")
@@ -4084,7 +4100,7 @@ record(bi, "HCB-HPGS:ODH-O2iM-10:ODHAlarm")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",                    PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-HPGS:ODH-O2iM-10:ODHWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -4099,8 +4115,8 @@ record(bi, "HCB-HPGS:ODH-O2iM-10:ODHWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
-record(bi, "HCB-HPGS:ODH-O2iM-10:MonitHealthy")
+#<<<--- add_major_alarm("MonitHealthyErr", "ODH Monitor Healthy Error", PV_DESC="Done self check with internal fault",      PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-HPGS:ODH-O2iM-10:MonitHealthyErr")
 {
 	field(SCAN, "I/O Intr")
 	field(DTYP, "S7plc")
@@ -4108,12 +4124,13 @@ record(bi, "HCB-HPGS:ODH-O2iM-10:MonitHealthy")
 	field(DISS, "INVALID")
 	field(DISV, "0")
 	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
-	field(DESC, "Done self check without internal fault")
-	field(ONAM, "OK")
-	field(ZNAM, "NOK!")
+	field(DESC, "Done self check with internal fault")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("Maint",                                            PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-HPGS:ODH-O2iM-10:Maint")
 {
 	field(SCAN, "I/O Intr")
@@ -4127,7 +4144,7 @@ record(bi, "HCB-HPGS:ODH-O2iM-10:Maint")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning",              PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-HPGS:ODH-O2iM-10:MonitWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -4142,7 +4159,7 @@ record(bi, "HCB-HPGS:ODH-O2iM-10:MonitWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("SysOK",                                            PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-HPGS:ODH-O2iM-10:SysOK")
 {
 	field(SCAN, "I/O Intr")
@@ -4156,7 +4173,7 @@ record(bi, "HCB-HPGS:ODH-O2iM-10:SysOK")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("WarmUp",                                           PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-HPGS:ODH-O2iM-10:WarmUp")
 {
 	field(SCAN, "I/O Intr")
@@ -4170,7 +4187,7 @@ record(bi, "HCB-HPGS:ODH-O2iM-10:WarmUp")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",                  PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-HPGS:ODH-O2iM-10:ConnLost")
 {
 	field(SCAN, "I/O Intr")
@@ -4204,7 +4221,7 @@ record(bi, "HCB-HPGS:ODH-O2iM-10:ConnLost")
 ########## HCB-HPGS:ODH-O2iM-11 PLC   -> EPICS status   ##########
 ##########
 
-#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+#<<<--- add_analog("O2Level","REAL",                                    PV_DESC="Level of Oxygen in percent")
 record(ai, "HCB-HPGS:ODH-O2iM-11:O2Level")
 {
 	field(SCAN, "I/O Intr")
@@ -4216,7 +4233,7 @@ record(ai, "HCB-HPGS:ODH-O2iM-11:O2Level")
 	field(DESC, "Level of Oxygen in percent")
 }
 
-#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",                        PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-HPGS:ODH-O2iM-11:ODHAlarm")
 {
 	field(SCAN, "I/O Intr")
@@ -4231,7 +4248,7 @@ record(bi, "HCB-HPGS:ODH-O2iM-11:ODHAlarm")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",                    PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-HPGS:ODH-O2iM-11:ODHWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -4246,8 +4263,8 @@ record(bi, "HCB-HPGS:ODH-O2iM-11:ODHWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
-record(bi, "HCB-HPGS:ODH-O2iM-11:MonitHealthy")
+#<<<--- add_major_alarm("MonitHealthyErr", "ODH Monitor Healthy Error", PV_DESC="Done self check with internal fault",      PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-HPGS:ODH-O2iM-11:MonitHealthyErr")
 {
 	field(SCAN, "I/O Intr")
 	field(DTYP, "S7plc")
@@ -4255,12 +4272,13 @@ record(bi, "HCB-HPGS:ODH-O2iM-11:MonitHealthy")
 	field(DISS, "INVALID")
 	field(DISV, "0")
 	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
-	field(DESC, "Done self check without internal fault")
-	field(ONAM, "OK")
-	field(ZNAM, "NOK!")
+	field(DESC, "Done self check with internal fault")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("Maint",                                            PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-HPGS:ODH-O2iM-11:Maint")
 {
 	field(SCAN, "I/O Intr")
@@ -4274,7 +4292,7 @@ record(bi, "HCB-HPGS:ODH-O2iM-11:Maint")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning",              PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-HPGS:ODH-O2iM-11:MonitWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -4289,7 +4307,7 @@ record(bi, "HCB-HPGS:ODH-O2iM-11:MonitWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("SysOK",                                            PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-HPGS:ODH-O2iM-11:SysOK")
 {
 	field(SCAN, "I/O Intr")
@@ -4303,7 +4321,7 @@ record(bi, "HCB-HPGS:ODH-O2iM-11:SysOK")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("WarmUp",                                           PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-HPGS:ODH-O2iM-11:WarmUp")
 {
 	field(SCAN, "I/O Intr")
@@ -4317,7 +4335,7 @@ record(bi, "HCB-HPGS:ODH-O2iM-11:WarmUp")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",                  PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-HPGS:ODH-O2iM-11:ConnLost")
 {
 	field(SCAN, "I/O Intr")
@@ -4351,7 +4369,7 @@ record(bi, "HCB-HPGS:ODH-O2iM-11:ConnLost")
 ########## HCB-TCH:ODH-O2iM-6 PLC   -> EPICS status   ##########
 ##########
 
-#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+#<<<--- add_analog("O2Level","REAL",                                    PV_DESC="Level of Oxygen in percent")
 record(ai, "HCB-TCH:ODH-O2iM-6:O2Level")
 {
 	field(SCAN, "I/O Intr")
@@ -4363,7 +4381,7 @@ record(ai, "HCB-TCH:ODH-O2iM-6:O2Level")
 	field(DESC, "Level of Oxygen in percent")
 }
 
-#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",                        PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-TCH:ODH-O2iM-6:ODHAlarm")
 {
 	field(SCAN, "I/O Intr")
@@ -4378,7 +4396,7 @@ record(bi, "HCB-TCH:ODH-O2iM-6:ODHAlarm")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",                    PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-TCH:ODH-O2iM-6:ODHWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -4393,8 +4411,8 @@ record(bi, "HCB-TCH:ODH-O2iM-6:ODHWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
-record(bi, "HCB-TCH:ODH-O2iM-6:MonitHealthy")
+#<<<--- add_major_alarm("MonitHealthyErr", "ODH Monitor Healthy Error", PV_DESC="Done self check with internal fault",      PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-TCH:ODH-O2iM-6:MonitHealthyErr")
 {
 	field(SCAN, "I/O Intr")
 	field(DTYP, "S7plc")
@@ -4402,12 +4420,13 @@ record(bi, "HCB-TCH:ODH-O2iM-6:MonitHealthy")
 	field(DISS, "INVALID")
 	field(DISV, "0")
 	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
-	field(DESC, "Done self check without internal fault")
-	field(ONAM, "OK")
-	field(ZNAM, "NOK!")
+	field(DESC, "Done self check with internal fault")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("Maint",                                            PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-TCH:ODH-O2iM-6:Maint")
 {
 	field(SCAN, "I/O Intr")
@@ -4421,7 +4440,7 @@ record(bi, "HCB-TCH:ODH-O2iM-6:Maint")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning",              PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-TCH:ODH-O2iM-6:MonitWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -4436,7 +4455,7 @@ record(bi, "HCB-TCH:ODH-O2iM-6:MonitWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("SysOK",                                            PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-TCH:ODH-O2iM-6:SysOK")
 {
 	field(SCAN, "I/O Intr")
@@ -4450,7 +4469,7 @@ record(bi, "HCB-TCH:ODH-O2iM-6:SysOK")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("WarmUp",                                           PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-TCH:ODH-O2iM-6:WarmUp")
 {
 	field(SCAN, "I/O Intr")
@@ -4464,7 +4483,7 @@ record(bi, "HCB-TCH:ODH-O2iM-6:WarmUp")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",                  PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-TCH:ODH-O2iM-6:ConnLost")
 {
 	field(SCAN, "I/O Intr")
@@ -4498,7 +4517,7 @@ record(bi, "HCB-TCH:ODH-O2iM-6:ConnLost")
 ########## HCB-TCH:ODH-O2iM-7 PLC   -> EPICS status   ##########
 ##########
 
-#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+#<<<--- add_analog("O2Level","REAL",                                    PV_DESC="Level of Oxygen in percent")
 record(ai, "HCB-TCH:ODH-O2iM-7:O2Level")
 {
 	field(SCAN, "I/O Intr")
@@ -4510,7 +4529,7 @@ record(ai, "HCB-TCH:ODH-O2iM-7:O2Level")
 	field(DESC, "Level of Oxygen in percent")
 }
 
-#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",                        PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-TCH:ODH-O2iM-7:ODHAlarm")
 {
 	field(SCAN, "I/O Intr")
@@ -4525,7 +4544,7 @@ record(bi, "HCB-TCH:ODH-O2iM-7:ODHAlarm")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",                    PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-TCH:ODH-O2iM-7:ODHWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -4540,8 +4559,8 @@ record(bi, "HCB-TCH:ODH-O2iM-7:ODHWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
-record(bi, "HCB-TCH:ODH-O2iM-7:MonitHealthy")
+#<<<--- add_major_alarm("MonitHealthyErr", "ODH Monitor Healthy Error", PV_DESC="Done self check with internal fault",      PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-TCH:ODH-O2iM-7:MonitHealthyErr")
 {
 	field(SCAN, "I/O Intr")
 	field(DTYP, "S7plc")
@@ -4549,12 +4568,13 @@ record(bi, "HCB-TCH:ODH-O2iM-7:MonitHealthy")
 	field(DISS, "INVALID")
 	field(DISV, "0")
 	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
-	field(DESC, "Done self check without internal fault")
-	field(ONAM, "OK")
-	field(ZNAM, "NOK!")
+	field(DESC, "Done self check with internal fault")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("Maint",                                            PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-TCH:ODH-O2iM-7:Maint")
 {
 	field(SCAN, "I/O Intr")
@@ -4568,7 +4588,7 @@ record(bi, "HCB-TCH:ODH-O2iM-7:Maint")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning",              PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-TCH:ODH-O2iM-7:MonitWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -4583,7 +4603,7 @@ record(bi, "HCB-TCH:ODH-O2iM-7:MonitWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("SysOK",                                            PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-TCH:ODH-O2iM-7:SysOK")
 {
 	field(SCAN, "I/O Intr")
@@ -4597,7 +4617,7 @@ record(bi, "HCB-TCH:ODH-O2iM-7:SysOK")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("WarmUp",                                           PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-TCH:ODH-O2iM-7:WarmUp")
 {
 	field(SCAN, "I/O Intr")
@@ -4611,7 +4631,7 @@ record(bi, "HCB-TCH:ODH-O2iM-7:WarmUp")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",                  PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-TCH:ODH-O2iM-7:ConnLost")
 {
 	field(SCAN, "I/O Intr")
@@ -4645,7 +4665,7 @@ record(bi, "HCB-TCH:ODH-O2iM-7:ConnLost")
 ########## HCB-TCH:ODH-O2iM-8 PLC   -> EPICS status   ##########
 ##########
 
-#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+#<<<--- add_analog("O2Level","REAL",                                    PV_DESC="Level of Oxygen in percent")
 record(ai, "HCB-TCH:ODH-O2iM-8:O2Level")
 {
 	field(SCAN, "I/O Intr")
@@ -4657,7 +4677,7 @@ record(ai, "HCB-TCH:ODH-O2iM-8:O2Level")
 	field(DESC, "Level of Oxygen in percent")
 }
 
-#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",                        PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-TCH:ODH-O2iM-8:ODHAlarm")
 {
 	field(SCAN, "I/O Intr")
@@ -4672,7 +4692,7 @@ record(bi, "HCB-TCH:ODH-O2iM-8:ODHAlarm")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",                    PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-TCH:ODH-O2iM-8:ODHWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -4687,8 +4707,8 @@ record(bi, "HCB-TCH:ODH-O2iM-8:ODHWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
-record(bi, "HCB-TCH:ODH-O2iM-8:MonitHealthy")
+#<<<--- add_major_alarm("MonitHealthyErr", "ODH Monitor Healthy Error", PV_DESC="Done self check with internal fault",      PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-TCH:ODH-O2iM-8:MonitHealthyErr")
 {
 	field(SCAN, "I/O Intr")
 	field(DTYP, "S7plc")
@@ -4696,12 +4716,13 @@ record(bi, "HCB-TCH:ODH-O2iM-8:MonitHealthy")
 	field(DISS, "INVALID")
 	field(DISV, "0")
 	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
-	field(DESC, "Done self check without internal fault")
-	field(ONAM, "OK")
-	field(ZNAM, "NOK!")
+	field(DESC, "Done self check with internal fault")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("Maint",                                            PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-TCH:ODH-O2iM-8:Maint")
 {
 	field(SCAN, "I/O Intr")
@@ -4715,7 +4736,7 @@ record(bi, "HCB-TCH:ODH-O2iM-8:Maint")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning",              PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-TCH:ODH-O2iM-8:MonitWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -4730,7 +4751,7 @@ record(bi, "HCB-TCH:ODH-O2iM-8:MonitWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("SysOK",                                            PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-TCH:ODH-O2iM-8:SysOK")
 {
 	field(SCAN, "I/O Intr")
@@ -4744,7 +4765,7 @@ record(bi, "HCB-TCH:ODH-O2iM-8:SysOK")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("WarmUp",                                           PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-TCH:ODH-O2iM-8:WarmUp")
 {
 	field(SCAN, "I/O Intr")
@@ -4758,7 +4779,7 @@ record(bi, "HCB-TCH:ODH-O2iM-8:WarmUp")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",                  PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-TCH:ODH-O2iM-8:ConnLost")
 {
 	field(SCAN, "I/O Intr")
@@ -4792,7 +4813,7 @@ record(bi, "HCB-TCH:ODH-O2iM-8:ConnLost")
 ########## HCB-TCH:ODH-O2iM-9 PLC   -> EPICS status   ##########
 ##########
 
-#<<<--- add_analog("O2Level","REAL",                       PV_DESC="Level of Oxygen in percent")
+#<<<--- add_analog("O2Level","REAL",                                    PV_DESC="Level of Oxygen in percent")
 record(ai, "HCB-TCH:ODH-O2iM-9:O2Level")
 {
 	field(SCAN, "I/O Intr")
@@ -4804,7 +4825,7 @@ record(ai, "HCB-TCH:ODH-O2iM-9:O2Level")
 	field(DESC, "Level of Oxygen in percent")
 }
 
-#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",           PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ODHAlarm", "ODH Alarm",                        PV_DESC="Oxygen concentration < 19.5%",             PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-TCH:ODH-O2iM-9:ODHAlarm")
 {
 	field(SCAN, "I/O Intr")
@@ -4819,7 +4840,7 @@ record(bi, "HCB-TCH:ODH-O2iM-9:ODHAlarm")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",       PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("ODHWarning", "ODH Warning",                    PV_DESC="Oxygen concentration < 18%",               PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-TCH:ODH-O2iM-9:ODHWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -4834,8 +4855,8 @@ record(bi, "HCB-TCH:ODH-O2iM-9:ODHWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("MonitHealthy",                        PV_DESC="Done self check without internal fault",   PV_ONAM="OK",     PV_ZNAM="NOK!")
-record(bi, "HCB-TCH:ODH-O2iM-9:MonitHealthy")
+#<<<--- add_major_alarm("MonitHealthyErr", "ODH Monitor Healthy Error", PV_DESC="Done self check with internal fault",      PV_ONAM="NOK!",   PV_ZNAM="OK")
+record(bi, "HCB-TCH:ODH-O2iM-9:MonitHealthyErr")
 {
 	field(SCAN, "I/O Intr")
 	field(DTYP, "S7plc")
@@ -4843,12 +4864,13 @@ record(bi, "HCB-TCH:ODH-O2iM-9:MonitHealthy")
 	field(DISS, "INVALID")
 	field(DISV, "0")
 	field(SDIS, "KG-GTA:ODH-PLC-01:PLCHashCorrectR")
-	field(DESC, "Done self check without internal fault")
-	field(ONAM, "OK")
-	field(ZNAM, "NOK!")
+	field(DESC, "Done self check with internal fault")
+	field(ONAM, "NOK!")
+	field(OSV,  "MAJOR")
+	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("Maint",                               PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("Maint",                                            PV_DESC="Monitor is in maintenance mode",           PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-TCH:ODH-O2iM-9:Maint")
 {
 	field(SCAN, "I/O Intr")
@@ -4862,7 +4884,7 @@ record(bi, "HCB-TCH:ODH-O2iM-9:Maint")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning", PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_minor_alarm("MonitWarning", "Monitor Warning",              PV_DESC="Fault in ODH monitor",                     PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-TCH:ODH-O2iM-9:MonitWarning")
 {
 	field(SCAN, "I/O Intr")
@@ -4877,7 +4899,7 @@ record(bi, "HCB-TCH:ODH-O2iM-9:MonitWarning")
 	field(ZNAM, "OK")
 }
 
-#<<<--- add_digital("SysOK",                               PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("SysOK",                                            PV_DESC="Done self check without internal fault",   PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-TCH:ODH-O2iM-9:SysOK")
 {
 	field(SCAN, "I/O Intr")
@@ -4891,7 +4913,7 @@ record(bi, "HCB-TCH:ODH-O2iM-9:SysOK")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_digital("WarmUp",                              PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
+#<<<--- add_digital("WarmUp",                                           PV_DESC="Monitor has warmed-up",                    PV_ONAM="True",   PV_ZNAM="False")
 record(bi, "HCB-TCH:ODH-O2iM-9:WarmUp")
 {
 	field(SCAN, "I/O Intr")
@@ -4905,7 +4927,7 @@ record(bi, "HCB-TCH:ODH-O2iM-9:WarmUp")
 	field(ZNAM, "False")
 }
 
-#<<<--- add_major_alarm("ConnLost", "Connection Lost",     PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
+#<<<--- add_major_alarm("ConnLost", "Connection Lost",                  PV_DESC="Lost communication with monitor",          PV_ONAM="NOK!",   PV_ZNAM="OK")
 record(bi, "HCB-TCH:ODH-O2iM-9:ConnLost")
 {
 	field(SCAN, "I/O Intr")

@@ -83,15 +83,15 @@
         </widget>
         <widget type="led" version="2.0.0">
           <name>LED_OK</name>
-          <pv_name>$(P):MonitHealthy</pv_name>
+          <pv_name>$(P):MonitHealthyErr</pv_name>
           <x>24</x>
           <y>132</y>
           <off_color>
-            <color name="LED-RED-ON" red="255" green="60" blue="46">
+            <color name="LED-GREEN-ON" red="70" green="255" blue="70">
             </color>
           </off_color>
           <on_color>
-            <color name="LED-GREEN-ON" red="70" green="255" blue="70">
+            <color name="LED-RED-ON" red="255" green="60" blue="46">
             </color>
           </on_color>
         </widget>

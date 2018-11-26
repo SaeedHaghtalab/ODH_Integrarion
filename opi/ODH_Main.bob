@@ -2,7 +2,7 @@
 <display version="2.0.0">
   <name>ODH Main</name>
   <width>635</width>
-  <height>835</height>
+  <height>870</height>
   <widget type="group" version="2.0.0">
     <name>group.HeCompBuilding</name>
     <macros>
@@ -471,9 +471,9 @@ Healthy</text>
       <name>Action Button</name>
       <actions>
         <action type="open_display">
-          <file>ODH_Expert_Area.bob</file>
+          <file>ODH_Area_Layout_CTL.bob</file>
           <macros>
-            <LOC>CTLG</LOC>
+            <LOC>CTL Gallery (CTLG)</LOC>
             <P>CTLG-CS:ODH-Area</P>
           </macros>
           <target>standalone</target>
@@ -495,9 +495,9 @@ Healthy</text>
       <name>Action Button_1</name>
       <actions>
         <action type="open_display">
-          <file>ODH_Expert_Area.bob</file>
+          <file>ODH_Area_Layout_CXB.bob</file>
           <macros>
-            <LOC>CXB</LOC>
+            <LOC>ColdBox Building (CXB)</LOC>
             <P>CXB-CXH:ODH-Area</P>
           </macros>
           <target>standalone</target>
@@ -519,9 +519,9 @@ Healthy</text>
       <name>Action Button_2</name>
       <actions>
         <action type="open_display">
-          <file>ODH_Expert_Area.bob</file>
+          <file>ODH_Area_Layout_HCB.bob</file>
           <macros>
-            <LOC>Helium Compressor Building</LOC>
+            <LOC>Helium Compressor Building (HCB)</LOC>
             <P>HCB-ACH:ODH-Area</P>
           </macros>
           <target>standalone</target>
