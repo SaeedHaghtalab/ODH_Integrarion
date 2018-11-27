@@ -564,9 +564,26 @@ Healthy</text>
         </action>
       </actions>
       <x>12</x>
-      <y>18</y>
+      <y>10</y>
       <width>130</width>
-      <height>25</height>
+      <height>40</height>
+      <rules>
+        <rule name="Color" prop_id="background_color" out_exp="false">
+          <exp bool_exp="pv0 == false">
+            <value>
+              <color name="ERROR" red="252" green="13" blue="27">
+              </color>
+            </value>
+          </exp>
+          <exp bool_exp="pv0 == true">
+            <value>
+              <color name="Button_Background" red="236" green="236" blue="236">
+              </color>
+            </value>
+          </exp>
+          <pv_name>KG-GTA:ODH-PLC-01:CPU_Status</pv_name>
+        </rule>
+      </rules>
       <tooltip>$(actions)</tooltip>
     </widget>
     <widget type="led" version="2.0.0">
