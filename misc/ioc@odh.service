@@ -1,0 +1,24 @@
+[Unit]
+Description=ODH IOC
+After=network-online.target
+
+
+# Only execute IOC if st.cmd exists
+AssertPathExists=/home/ess/e3-ODH/startup
+
+[Service]
+User=ess
+ExecStartPre=/bin/mkdir -p /var/log/procServ/odh
+ExecStartPre=/bin/chown -R ess:ess /var/log/procServ/odh
+ExecStartPre=/bin/mkdir -p /var/run/procServ/odh
+ExecStartPre=/bin/chown -R ess:ess /var/run/procServ/odh
+
+# Execute StartPre with root permissions
+PermissionsStartOnly=true
+
+# Run procServ with user iocuser
+ExecStart=/usr/bin/bash /home/ess/e3-ODH/misc/start_odh_ioc.sh
+
+[Install]
+WantedBy=multi-user.target
+
