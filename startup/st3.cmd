@@ -20,6 +20,7 @@ loadIocsh("s7plc.iocsh", "PLC_NAME=$(PLCNAME),PLC_IP=$(IPADDR),INSIZE=$(INSIZE)"
 loadIocsh("modbus_s7plc.iocsh", "PLC_NAME=$(PLCNAME),PLC_IP=$(IPADDR)")
 
 dbLoadRecords("$(TOP)/db/kg-gta_odh-plc-01.db", "PLCNAME=$(PLCNAME), MODVERSION=0")
+dbLoadRecords("$(TOP)/db/Alarms.db")
 
 iocInit
 

@@ -300,6 +300,117 @@ Healthy</text>
         <width>510</width>
         <height>30</height>
       </widget>
+      <widget type="group" version="2.0.0">
+        <name>Group</name>
+        <x>128</x>
+        <y>238</y>
+        <width>286</width>
+        <height>125</height>
+        <style>3</style>
+        <transparent>true</transparent>
+        <rules>
+          <rule name="Visibility" prop_id="visible" out_exp="false">
+            <exp bool_exp="pv0 || pv1 || pv2">
+              <value>true</value>
+            </exp>
+            <exp bool_exp="true">
+              <value>false</value>
+            </exp>
+            <pv_name>KG-GTA:ODH-PLC-01:ODHAlarm</pv_name>
+            <pv_name>KG-GTA:ODH-PLC-01:MonitHealthyErr</pv_name>
+            <pv_name>KG-GTA:ODH-PLC-01:ConnLost</pv_name>
+          </rule>
+          <rule name="msgBoxClose" prop_id="visible" out_exp="false">
+            <exp bool_exp="true">
+              <value>false</value>
+            </exp>
+            <pv_name>loc://msgBoxClose</pv_name>
+          </rule>
+        </rules>
+        <widget type="rectangle" version="2.0.0">
+          <name>Rectangle</name>
+          <width>286</width>
+          <height>125</height>
+          <line_color>
+            <color name="GRAY-BORDER" red="121" green="121" blue="121">
+            </color>
+          </line_color>
+          <background_color>
+            <color name="YELLOW-BACKGROUND" red="226" green="216" blue="193">
+            </color>
+          </background_color>
+        </widget>
+        <widget type="action_button" version="3.0.0">
+          <name>Action Button_6</name>
+          <actions>
+            <action type="write_pv">
+              <pv_name>loc://msgBoxClose</pv_name>
+              <value>1</value>
+              <description>msgBoxClose</description>
+            </action>
+          </actions>
+          <text>X</text>
+          <x>252</x>
+          <y>11</y>
+          <width>25</width>
+          <height>22</height>
+          <tooltip>$(actions)</tooltip>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>Label_Header</name>
+          <text>MAJOR ALARM IN ODH</text>
+          <x>38</x>
+          <y>13</y>
+          <width>204</width>
+          <font>
+            <font name="Header 3" family="Source Sans Pro" style="BOLD_ITALIC" size="18.0">
+            </font>
+          </font>
+          <horizontal_alignment>1</horizontal_alignment>
+        </widget>
+        <widget type="label" version="2.0.0">
+          <name>Label_Msg_2</name>
+          <text>Click OK to open Alarm Table</text>
+          <x>13</x>
+          <y>46</y>
+          <width>257</width>
+          <font>
+            <font name="Comment" family="Source Sans Pro" style="ITALIC" size="16.0">
+            </font>
+          </font>
+          <horizontal_alignment>1</horizontal_alignment>
+          <vertical_alignment>1</vertical_alignment>
+        </widget>
+        <widget type="action_button" version="3.0.0">
+          <name>Action Button_5</name>
+          <actions>
+            <action type="execute">
+              <script file="EmbeddedPy">
+                <text><![CDATA[# Embedded python script
+from org.csstudio.display.builder.rcp.script import RCPUtil
+
+RCPUtil.executeEclipseCommand(
+  'org.eclipse.ui.views.showView', 
+  [ 'org.eclipse.ui.views.showView.viewId', 
+    'org.csstudio.alarm.beast.ui.alarmtable.view']
+)
+]]></text>
+              </script>
+              <description>OpenAlarm</description>
+            </action>
+          </actions>
+          <text>OK</text>
+          <x>200</x>
+          <y>81</y>
+          <width>73</width>
+          <background_color>
+            <color name="MAGENTA-BACKGROUND" red="218" green="195" blue="209">
+            </color>
+          </background_color>
+          <tooltip>$(actions)
+$(pv_name)</tooltip>
+        </widget>
+      </widget>
     </widget>
     <widget type="group" version="2.0.0">
       <name>Group_2</name>
