@@ -2,137 +2,140 @@ FUNCTION_BLOCK "DEVTYPE_PLC"
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 1.0
    VAR_INPUT
-      "SW_Checksum" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : DWORD;   //EPICS Status variable: SW_Checksum
-      "Text_Checksum" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : DWORD;   //EPICS Status variable: Text_Checksum
-      "CPU_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: CPU_Connected
-      "CPU_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: CPU_Status
-      "RIO1_IM_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_IM_Connected
-      "RIO1_DI1_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DI1_Connected
-      "RIO1_DI2_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DI2_Connected
-      "RIO1_DI3_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DI3_Connected
-      "RIO1_DI4_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DI4_Connected
-      "RIO1_DI5_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DI5_Connected
-      "RIO1_AI1_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_AI1_Connected
-      "RIO1_AI2_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_AI2_Connected
-      "RIO1_AI3_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_AI3_Connected
-      "RIO1_AI4_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_AI4_Connected
-      "RIO1_DO1_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DO1_Connected
-      "RIO1_DO2_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DO2_Connected
-      "RIO1_DO3_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DO3_Connected
-      "RIO1_SvrMod_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_SvrMod_Connected
-      "RIO1_IM_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_IM_Status
-      "RIO1_DI1_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DI1_Status
-      "RIO1_DI2_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DI2_Status
-      "RIO1_DI3_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DI3_Status
-      "RIO1_DI4_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DI4_Status
-      "RIO1_DI5_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DI5_Status
-      "RIO1_AI1_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_AI1_Status
-      "RIO1_AI2_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_AI2_Status
-      "RIO1_AI3_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_AI3_Status
-      "RIO1_AI4_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_AI4_Status
-      "RIO1_DO1_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DO1_Status
-      "RIO1_DO2_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DO2_Status
-      "RIO1_DO3_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DO3_Status
-      "RIO1_SvrMod_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_SvrMod_Status
-      "RIO2_IM_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_IM_Connected
-      "RIO2_DI1_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DI1_Connected
-      "RIO2_DI2_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DI2_Connected
-      "RIO2_DI3_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DI3_Connected
-      "RIO2_DI4_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DI4_Connected
-      "RIO2_DI5_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DI5_Connected
-      "RIO2_AI1_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_AI1_Connected
-      "RIO2_AI2_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_AI2_Connected
-      "RIO2_AI3_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_AI3_Connected
-      "RIO2_AI4_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_AI4_Connected
-      "RIO2_DO1_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DO1_Connected
-      "RIO2_DO2_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DO2_Connected
-      "RIO2_DO3_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DO3_Connected
-      "RIO2_SvrMod_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_SvrMod_Connected
-      "RIO2_IM_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_IM_Status
-      "RIO2_DI1_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DI1_Status
-      "RIO2_DI2_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DI2_Status
-      "RIO2_DI3_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DI3_Status
-      "RIO2_DI4_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DI4_Status
-      "RIO2_DI5_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DI5_Status
-      "RIO2_AI1_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_AI1_Status
-      "RIO2_AI2_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_AI2_Status
-      "RIO2_AI3_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_AI3_Status
-      "RIO2_AI4_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_AI4_Status
-      "RIO2_DO1_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DO1_Status
-      "RIO2_DO2_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DO2_Status
-      "RIO2_DO3_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DO3_Status
-      "RIO2_SvrMod_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_SvrMod_Status
-      "RIO3_IM_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_IM_Connected
-      "RIO3_DI1_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DI1_Connected
-      "RIO3_DI2_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DI2_Connected
-      "RIO3_DI3_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DI3_Connected
-      "RIO3_DI4_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DI4_Connected
-      "RIO3_DI5_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DI5_Connected
-      "RIO3_AI1_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_AI1_Connected
-      "RIO3_AI2_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_AI2_Connected
-      "RIO3_AI3_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_AI3_Connected
-      "RIO3_AI4_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_AI4_Connected
-      "RIO3_DO1_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DO1_Connected
-      "RIO3_DO2_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DO2_Connected
-      "RIO3_DO3_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DO3_Connected
-      "RIO3_SvrMod_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_SvrMod_Connected
-      "RIO3_IM_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_IM_Status
-      "RIO3_DI1_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DI1_Status
-      "RIO3_DI2_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DI2_Status
-      "RIO3_DI3_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DI3_Status
-      "RIO3_DI4_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DI4_Status
-      "RIO3_DI5_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DI5_Status
-      "RIO3_AI1_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_AI1_Status
-      "RIO3_AI2_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_AI2_Status
-      "RIO3_AI3_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_AI3_Status
-      "RIO3_AI4_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_AI4_Status
-      "RIO3_DO1_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DO1_Status
-      "RIO3_DO2_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DO2_Status
-      "RIO3_DO3_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DO3_Status
-      "RIO3_SvrMod_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_SvrMod_Status
-      "SCL1_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SCL1_Connected
-      "SCL1_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SCL1_Status
-      "SCL2_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SCL2_Connected
-      "SCL2_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SCL2_Status
-      "SCL3_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SCL3_Connected
-      "SCL3_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SCL3_Status
-   EPICSToPLCLength { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;   // Length of device command register array (in words)
-   EPICSToPLCDataBlockOffset { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;   // Offset in EPICS->PLC comms block where this device data resides (in words)
-   EPICSToPLCParametersStart { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;   // The border offset between the Command and the Parameter area
-   PLCToEPICSLength { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;   // Length of device status register array (in words)
-   PLCToEPICSDataBlockOffset { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;   // Offset in PLC->EPICS comms block where this device data resides (in words)
+      "SW_Checksum" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : STRING;   //EPICS Status variable: SW_Checksum
+      "Text_Checksum" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : STRING;   //EPICS Status variable: Text_Checksum
+      "CPU_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: CPU_Connected
+      "CPU_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: CPU_Status
+      "RIO1_IM_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_IM_Connected
+      "RIO1_DI1_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_DI1_Connected
+      "RIO1_DI2_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_DI2_Connected
+      "RIO1_DI3_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_DI3_Connected
+      "RIO1_DI4_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_DI4_Connected
+      "RIO1_DI5_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_DI5_Connected
+      "RIO1_AI1_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_AI1_Connected
+      "RIO1_AI2_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_AI2_Connected
+      "RIO1_AI3_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_AI3_Connected
+      "RIO1_AI4_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_AI4_Connected
+      "RIO1_DO1_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_DO1_Connected
+      "RIO1_DO2_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_DO2_Connected
+      "RIO1_DO3_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_DO3_Connected
+      "RIO1_SvrMod_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_SvrMod_Connected
+      "RIO1_IM_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_IM_Status
+      "RIO1_DI1_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_DI1_Status
+      "RIO1_DI2_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_DI2_Status
+      "RIO1_DI3_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_DI3_Status
+      "RIO1_DI4_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_DI4_Status
+      "RIO1_DI5_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_DI5_Status
+      "RIO1_AI1_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_AI1_Status
+      "RIO1_AI2_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_AI2_Status
+      "RIO1_AI3_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_AI3_Status
+      "RIO1_AI4_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_AI4_Status
+      "RIO1_DO1_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_DO1_Status
+      "RIO1_DO2_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_DO2_Status
+      "RIO1_DO3_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_DO3_Status
+      "RIO1_SvrMod_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO1_SvrMod_Status
+      "RIO2_IM_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_IM_Connected
+      "RIO2_DI1_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_DI1_Connected
+      "RIO2_DI2_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_DI2_Connected
+      "RIO2_DI3_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_DI3_Connected
+      "RIO2_DI4_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_DI4_Connected
+      "RIO2_DI5_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_DI5_Connected
+      "RIO2_AI1_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_AI1_Connected
+      "RIO2_AI2_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_AI2_Connected
+      "RIO2_AI3_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_AI3_Connected
+      "RIO2_AI4_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_AI4_Connected
+      "RIO2_DO1_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_DO1_Connected
+      "RIO2_DO2_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_DO2_Connected
+      "RIO2_DO3_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_DO3_Connected
+      "RIO2_SvrMod_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_SvrMod_Connected
+      "RIO2_IM_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_IM_Status
+      "RIO2_DI1_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_DI1_Status
+      "RIO2_DI2_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_DI2_Status
+      "RIO2_DI3_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_DI3_Status
+      "RIO2_DI4_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_DI4_Status
+      "RIO2_DI5_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_DI5_Status
+      "RIO2_AI1_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_AI1_Status
+      "RIO2_AI2_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_AI2_Status
+      "RIO2_AI3_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_AI3_Status
+      "RIO2_AI4_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_AI4_Status
+      "RIO2_DO1_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_DO1_Status
+      "RIO2_DO2_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_DO2_Status
+      "RIO2_DO3_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_DO3_Status
+      "RIO2_SvrMod_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO2_SvrMod_Status
+      "RIO3_IM_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_IM_Connected
+      "RIO3_DI1_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_DI1_Connected
+      "RIO3_DI2_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_DI2_Connected
+      "RIO3_DI3_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_DI3_Connected
+      "RIO3_DI4_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_DI4_Connected
+      "RIO3_DI5_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_DI5_Connected
+      "RIO3_AI1_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_AI1_Connected
+      "RIO3_AI2_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_AI2_Connected
+      "RIO3_AI3_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_AI3_Connected
+      "RIO3_AI4_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_AI4_Connected
+      "RIO3_DO1_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_DO1_Connected
+      "RIO3_DO2_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_DO2_Connected
+      "RIO3_DO3_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_DO3_Connected
+      "RIO3_SvrMod_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_SvrMod_Connected
+      "RIO3_IM_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_IM_Status
+      "RIO3_DI1_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_DI1_Status
+      "RIO3_DI2_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_DI2_Status
+      "RIO3_DI3_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_DI3_Status
+      "RIO3_DI4_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_DI4_Status
+      "RIO3_DI5_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_DI5_Status
+      "RIO3_AI1_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_AI1_Status
+      "RIO3_AI2_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_AI2_Status
+      "RIO3_AI3_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_AI3_Status
+      "RIO3_AI4_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_AI4_Status
+      "RIO3_DO1_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_DO1_Status
+      "RIO3_DO2_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_DO2_Status
+      "RIO3_DO3_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_DO3_Status
+      "RIO3_SvrMod_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: RIO3_SvrMod_Status
+      "SCL1_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: SCL1_Connected
+      "SCL1_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: SCL1_Status
+      "SCL2_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: SCL2_Connected
+      "SCL2_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: SCL2_Status
+      "SCL3_Connected" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: SCL3_Connected
+      "SCL3_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: SCL3_Status
+   EPICSToPLCLength { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Length of device command register array (in words)
+   EPICSToPLCDataBlockOffset { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Offset in EPICS->PLC comms block where this device data resides (in words)
+   EPICSToPLCParametersStart { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // The border offset between the Command and the Parameter area
+   PLCToEPICSLength { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Length of device status register array (in words)
+   PLCToEPICSDataBlockOffset { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Offset in PLC->EPICS comms block where this device data resides (in words)
    END_VAR
    VAR_OUTPUT
-      DEVICE_PARAM_OK { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : Bool;
+      DEVICE_PARAM_OK { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
    END_VAR
    VAR_IN_OUT
    END_VAR
    Var DB_SPECIFIC
-      MyWord { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : Word;
-      MyBytesinWord { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyWord : Array[0..1] of Byte;
-      MyBoolsinWord { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyWord : Array[0..15] of Bool;
-      MyDInt { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : DInt;
-      MyWordsinDint { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyDInt : Array[0..1] of Word;
-      MyReal { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : Real;
-      MyWordsinReal { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyReal : Array[0..1] of Word;
-      MyInt { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : Int;
-      MyWordinInt { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyInt : Word;
-      MyDWord { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : DWord;
-      MyWordsinDWord { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyDWord : Array[0..1] of Word;
-      MyTime { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : Time;
-      MyWordsinTime { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyTime : Array[0..1] of Word;
+      MyWord { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Word;
+      MyBytesinWord { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyWord : Array[0..1] of Byte;
+      MyBoolsinWord { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyWord : Array[0..15] of Bool;
+      MyDInt { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : DInt;
+      MyWordsinDint { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyDInt : Array[0..1] of Word;
+      MyReal { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Real;
+      MyWordsinReal { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyReal : Array[0..1] of Word;
+      MyInt { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;
+      MyWordinInt { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyInt : Word;
+      MyDWord { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : DWord;
+      MyWordsinDWord { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyDWord : Array[0..1] of Word;
+      MyTime { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Time;
+      MyWordsinTime { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyTime : Array[0..1] of Word;
+      MyString { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : String[40];
+      MyWordsinString { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyString : Array[0..20] of Word;
    END_VAR
    VAR_TEMP
       HashModbus : DInt;
       HashIFA : DInt;
       HashTIAMap : DInt;
+      i : Int;
    END_VAR
     //Author: Miklos Boros (miklos.boros@esss.se), Copyrigth 2017-2018 by European Spallation Source, Lund
     //This block was generated by PLCFactory, please don't change it MANUALLY!
-    //Input File Name: KG-GTA_ODH-PLC-01-template-IFA-20181126123230.ifa
-    //According to HASH: -328369184
+    //Input File Name: KG-GTA_ODH-PLC-01-template-IFA-20190514112048.ifa
+    //Generated: 20190514112048
+    //According to HASH: 1138177476
     //Device type: PLC
-    //Generated: 20181126123233
     //Description: This function does the variable mapping for a device. All device-variable will be linked to an interface variable defined in this block.
 
     //********************************************
@@ -144,7 +147,7 @@ VERSION : 1.0
     #MyWordsinDint[1] := "EPICSToPLC"."Word"[1];
     #HashModbus := #MyDInt; //Hash from EPICS/ModbusTCP
 
-    #HashIFA := -328369184; //Hash from Interface Factory as a constant
+    #HashIFA := 1138177476; //Hash from Interface Factory as a constant
 
     #MyWordsinDint[0] := "PLCToEPICS"."Word"[0];
     #MyWordsinDint[1] := "PLCToEPICS"."Word"[1];
@@ -163,13 +166,27 @@ VERSION : 1.0
     //********************************************
 
 
-       #MyDWord := #"SW_Checksum";    //EPICSName: SW_Checksum
-       "PLCToEPICS"."Word"[#PLCToEPICSDataBlockOffset + 0] := #MyWordsinDWord[0];
-       "PLCToEPICS"."Word"[#PLCToEPICSDataBlockOffset + 1] := #MyWordsinDWord[1];
+       // Clear the buffer of any residual data, but skip the first word as that is the actual and maximum length
+       FOR #i:=1 TO 20 DO
+            #MyWordsinString[#i] := 0;
+       END_FOR;			
+       #MyString := #"SW_Checksum";  //EPICSName: SW_Checksum
+       FOR #i:=0 TO 7 DO
+            "PLCToEPICS"."Word"[#PLCToEPICSDataBlockOffset + 0 + #i] := #MyWordsinString[#i + 1];
+       END_FOR;
+       // Terminate C-string
+       "PLCToEPICS"."Word"[#PLCToEPICSDataBlockOffset + 0 + 8] := 0;
 
-       #MyDWord := #"Text_Checksum";    //EPICSName: Text_Checksum
-       "PLCToEPICS"."Word"[#PLCToEPICSDataBlockOffset + 2] := #MyWordsinDWord[0];
-       "PLCToEPICS"."Word"[#PLCToEPICSDataBlockOffset + 3] := #MyWordsinDWord[1];
+       // Clear the buffer of any residual data, but skip the first word as that is the actual and maximum length
+       FOR #i:=1 TO 20 DO
+            #MyWordsinString[#i] := 0;
+       END_FOR;			
+       #MyString := #"Text_Checksum";  //EPICSName: Text_Checksum
+       FOR #i:=0 TO 7 DO
+            "PLCToEPICS"."Word"[#PLCToEPICSDataBlockOffset + 9 + #i] := #MyWordsinString[#i + 1];
+       END_FOR;
+       // Terminate C-string
+       "PLCToEPICS"."Word"[#PLCToEPICSDataBlockOffset + 9 + 8] := 0;
 
        #MyWord := W#0;
        #MyBoolsinWord[8] := #"CPU_Connected";    //EPICSName: CPU_Connected
@@ -188,7 +205,7 @@ VERSION : 1.0
        #MyBoolsinWord[5] := #"RIO1_DO2_Connected";    //EPICSName: RIO1_DO2_Connected
        #MyBoolsinWord[6] := #"RIO1_DO3_Connected";    //EPICSName: RIO1_DO3_Connected
        #MyBoolsinWord[7] := #"RIO1_SvrMod_Connected";    //EPICSName: RIO1_SvrMod_Connected
-       "PLCToEPICS"."Word"[#PLCToEPICSDataBlockOffset + 4] := #MyWord;
+       "PLCToEPICS"."Word"[#PLCToEPICSDataBlockOffset + 18] := #MyWord;
 
        #MyWord := W#0;
        #MyBoolsinWord[8] := #"RIO1_IM_Status";    //EPICSName: RIO1_IM_Status
@@ -207,7 +224,7 @@ VERSION : 1.0
        #MyBoolsinWord[5] := #"RIO1_SvrMod_Status";    //EPICSName: RIO1_SvrMod_Status
        #MyBoolsinWord[6] := #"RIO2_IM_Connected";    //EPICSName: RIO2_IM_Connected
        #MyBoolsinWord[7] := #"RIO2_DI1_Connected";    //EPICSName: RIO2_DI1_Connected
-       "PLCToEPICS"."Word"[#PLCToEPICSDataBlockOffset + 5] := #MyWord;
+       "PLCToEPICS"."Word"[#PLCToEPICSDataBlockOffset + 19] := #MyWord;
 
        #MyWord := W#0;
        #MyBoolsinWord[8] := #"RIO2_DI2_Connected";    //EPICSName: RIO2_DI2_Connected
@@ -226,7 +243,7 @@ VERSION : 1.0
        #MyBoolsinWord[5] := #"RIO2_DI1_Status";    //EPICSName: RIO2_DI1_Status
        #MyBoolsinWord[6] := #"RIO2_DI2_Status";    //EPICSName: RIO2_DI2_Status
        #MyBoolsinWord[7] := #"RIO2_DI3_Status";    //EPICSName: RIO2_DI3_Status
-       "PLCToEPICS"."Word"[#PLCToEPICSDataBlockOffset + 6] := #MyWord;
+       "PLCToEPICS"."Word"[#PLCToEPICSDataBlockOffset + 20] := #MyWord;
 
        #MyWord := W#0;
        #MyBoolsinWord[8] := #"RIO2_DI4_Status";    //EPICSName: RIO2_DI4_Status
@@ -245,7 +262,7 @@ VERSION : 1.0
        #MyBoolsinWord[5] := #"RIO3_DI3_Connected";    //EPICSName: RIO3_DI3_Connected
        #MyBoolsinWord[6] := #"RIO3_DI4_Connected";    //EPICSName: RIO3_DI4_Connected
        #MyBoolsinWord[7] := #"RIO3_DI5_Connected";    //EPICSName: RIO3_DI5_Connected
-       "PLCToEPICS"."Word"[#PLCToEPICSDataBlockOffset + 7] := #MyWord;
+       "PLCToEPICS"."Word"[#PLCToEPICSDataBlockOffset + 21] := #MyWord;
 
        #MyWord := W#0;
        #MyBoolsinWord[8] := #"RIO3_AI1_Connected";    //EPICSName: RIO3_AI1_Connected
@@ -264,7 +281,7 @@ VERSION : 1.0
        #MyBoolsinWord[5] := #"RIO3_DI5_Status";    //EPICSName: RIO3_DI5_Status
        #MyBoolsinWord[6] := #"RIO3_AI1_Status";    //EPICSName: RIO3_AI1_Status
        #MyBoolsinWord[7] := #"RIO3_AI2_Status";    //EPICSName: RIO3_AI2_Status
-       "PLCToEPICS"."Word"[#PLCToEPICSDataBlockOffset + 8] := #MyWord;
+       "PLCToEPICS"."Word"[#PLCToEPICSDataBlockOffset + 22] := #MyWord;
 
        #MyWord := W#0;
        #MyBoolsinWord[8] := #"RIO3_AI3_Status";    //EPICSName: RIO3_AI3_Status
@@ -279,7 +296,7 @@ VERSION : 1.0
        #MyBoolsinWord[1] := #"SCL2_Status";    //EPICSName: SCL2_Status
        #MyBoolsinWord[2] := #"SCL3_Connected";    //EPICSName: SCL3_Connected
        #MyBoolsinWord[3] := #"SCL3_Status";    //EPICSName: SCL3_Status
-       "PLCToEPICS"."Word"[#PLCToEPICSDataBlockOffset + 9] := #MyWord;
+       "PLCToEPICS"."Word"[#PLCToEPICSDataBlockOffset + 23] := #MyWord;
     Else
        #DEVICE_PARAM_OK := FALSE; //Invalid Hash
     END_IF;
@@ -288,46 +305,49 @@ FUNCTION_BLOCK "DEVTYPE_ODH_Area"
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 1.0
    VAR_INPUT
-      "Alarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Alarm
-      "WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-   EPICSToPLCLength { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;   // Length of device command register array (in words)
-   EPICSToPLCDataBlockOffset { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;   // Offset in EPICS->PLC comms block where this device data resides (in words)
-   EPICSToPLCParametersStart { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;   // The border offset between the Command and the Parameter area
-   PLCToEPICSLength { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;   // Length of device status register array (in words)
-   PLCToEPICSDataBlockOffset { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;   // Offset in PLC->EPICS comms block where this device data resides (in words)
+      "Alarm" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: Alarm
+      "WarmUp" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: WarmUp
+      "ConnLost" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: ConnLost
+   EPICSToPLCLength { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Length of device command register array (in words)
+   EPICSToPLCDataBlockOffset { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Offset in EPICS->PLC comms block where this device data resides (in words)
+   EPICSToPLCParametersStart { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // The border offset between the Command and the Parameter area
+   PLCToEPICSLength { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Length of device status register array (in words)
+   PLCToEPICSDataBlockOffset { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Offset in PLC->EPICS comms block where this device data resides (in words)
    END_VAR
    VAR_OUTPUT
-      DEVICE_PARAM_OK { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : Bool;
+      DEVICE_PARAM_OK { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
    END_VAR
    VAR_IN_OUT
    END_VAR
    Var DB_SPECIFIC
-      MyWord { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : Word;
-      MyBytesinWord { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyWord : Array[0..1] of Byte;
-      MyBoolsinWord { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyWord : Array[0..15] of Bool;
-      MyDInt { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : DInt;
-      MyWordsinDint { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyDInt : Array[0..1] of Word;
-      MyReal { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : Real;
-      MyWordsinReal { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyReal : Array[0..1] of Word;
-      MyInt { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : Int;
-      MyWordinInt { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyInt : Word;
-      MyDWord { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : DWord;
-      MyWordsinDWord { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyDWord : Array[0..1] of Word;
-      MyTime { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : Time;
-      MyWordsinTime { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyTime : Array[0..1] of Word;
+      MyWord { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Word;
+      MyBytesinWord { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyWord : Array[0..1] of Byte;
+      MyBoolsinWord { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyWord : Array[0..15] of Bool;
+      MyDInt { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : DInt;
+      MyWordsinDint { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyDInt : Array[0..1] of Word;
+      MyReal { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Real;
+      MyWordsinReal { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyReal : Array[0..1] of Word;
+      MyInt { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;
+      MyWordinInt { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyInt : Word;
+      MyDWord { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : DWord;
+      MyWordsinDWord { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyDWord : Array[0..1] of Word;
+      MyTime { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Time;
+      MyWordsinTime { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyTime : Array[0..1] of Word;
+      MyString { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : String[40];
+      MyWordsinString { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyString : Array[0..20] of Word;
    END_VAR
    VAR_TEMP
       HashModbus : DInt;
       HashIFA : DInt;
       HashTIAMap : DInt;
+      i : Int;
    END_VAR
     //Author: Miklos Boros (miklos.boros@esss.se), Copyrigth 2017-2018 by European Spallation Source, Lund
     //This block was generated by PLCFactory, please don't change it MANUALLY!
-    //Input File Name: KG-GTA_ODH-PLC-01-template-IFA-20181126123230.ifa
-    //According to HASH: -328369184
+    //Input File Name: KG-GTA_ODH-PLC-01-template-IFA-20190514112048.ifa
+    //Generated: 20190514112048
+    //According to HASH: 1138177476
     //Device type: ODH_Area
-    //Generated: 20181126123233
     //Description: This function does the variable mapping for a device. All device-variable will be linked to an interface variable defined in this block.
 
     //********************************************
@@ -339,7 +359,7 @@ VERSION : 1.0
     #MyWordsinDint[1] := "EPICSToPLC"."Word"[1];
     #HashModbus := #MyDInt; //Hash from EPICS/ModbusTCP
 
-    #HashIFA := -328369184; //Hash from Interface Factory as a constant
+    #HashIFA := 1138177476; //Hash from Interface Factory as a constant
 
     #MyWordsinDint[0] := "PLCToEPICS"."Word"[0];
     #MyWordsinDint[1] := "PLCToEPICS"."Word"[1];
@@ -371,52 +391,55 @@ FUNCTION_BLOCK "DEVTYPE_ODH_O2iM"
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 1.0
    VAR_INPUT
-      "O2Level" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : REAL;   //EPICS Status variable: O2Level
-      "ODHAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHAlarm
-      "ODHWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHWarning
-      "MonitHealthyErr" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitHealthyErr
-      "Maint" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Maint
-      "MonitWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitWarning
-      "SysOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SysOK
-      "WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-   EPICSToPLCLength { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;   // Length of device command register array (in words)
-   EPICSToPLCDataBlockOffset { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;   // Offset in EPICS->PLC comms block where this device data resides (in words)
-   EPICSToPLCParametersStart { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;   // The border offset between the Command and the Parameter area
-   PLCToEPICSLength { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;   // Length of device status register array (in words)
-   PLCToEPICSDataBlockOffset { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;   // Offset in PLC->EPICS comms block where this device data resides (in words)
+      "O2Level" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : REAL;   //EPICS Status variable: O2Level
+      "ODHWarning" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: ODHWarning
+      "ODHAlarm" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: ODHAlarm
+      "MonitHealthyErr" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: MonitHealthyErr
+      "Maint" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: Maint
+      "SysOK" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: SysOK
+      "MonitWarning" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: MonitWarning
+      "WarmUp" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: WarmUp
+      "ConnLost" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: ConnLost
+   EPICSToPLCLength { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Length of device command register array (in words)
+   EPICSToPLCDataBlockOffset { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Offset in EPICS->PLC comms block where this device data resides (in words)
+   EPICSToPLCParametersStart { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // The border offset between the Command and the Parameter area
+   PLCToEPICSLength { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Length of device status register array (in words)
+   PLCToEPICSDataBlockOffset { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Offset in PLC->EPICS comms block where this device data resides (in words)
    END_VAR
    VAR_OUTPUT
-      DEVICE_PARAM_OK { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : Bool;
+      DEVICE_PARAM_OK { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
    END_VAR
    VAR_IN_OUT
    END_VAR
    Var DB_SPECIFIC
-      MyWord { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : Word;
-      MyBytesinWord { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyWord : Array[0..1] of Byte;
-      MyBoolsinWord { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyWord : Array[0..15] of Bool;
-      MyDInt { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : DInt;
-      MyWordsinDint { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyDInt : Array[0..1] of Word;
-      MyReal { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : Real;
-      MyWordsinReal { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyReal : Array[0..1] of Word;
-      MyInt { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : Int;
-      MyWordinInt { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyInt : Word;
-      MyDWord { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : DWord;
-      MyWordsinDWord { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyDWord : Array[0..1] of Word;
-      MyTime { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : Time;
-      MyWordsinTime { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyTime : Array[0..1] of Word;
+      MyWord { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Word;
+      MyBytesinWord { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyWord : Array[0..1] of Byte;
+      MyBoolsinWord { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyWord : Array[0..15] of Bool;
+      MyDInt { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : DInt;
+      MyWordsinDint { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyDInt : Array[0..1] of Word;
+      MyReal { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Real;
+      MyWordsinReal { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyReal : Array[0..1] of Word;
+      MyInt { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;
+      MyWordinInt { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyInt : Word;
+      MyDWord { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : DWord;
+      MyWordsinDWord { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyDWord : Array[0..1] of Word;
+      MyTime { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Time;
+      MyWordsinTime { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyTime : Array[0..1] of Word;
+      MyString { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : String[40];
+      MyWordsinString { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyString : Array[0..20] of Word;
    END_VAR
    VAR_TEMP
       HashModbus : DInt;
       HashIFA : DInt;
       HashTIAMap : DInt;
+      i : Int;
    END_VAR
     //Author: Miklos Boros (miklos.boros@esss.se), Copyrigth 2017-2018 by European Spallation Source, Lund
     //This block was generated by PLCFactory, please don't change it MANUALLY!
-    //Input File Name: KG-GTA_ODH-PLC-01-template-IFA-20181126123230.ifa
-    //According to HASH: -328369184
+    //Input File Name: KG-GTA_ODH-PLC-01-template-IFA-20190514112048.ifa
+    //Generated: 20190514112048
+    //According to HASH: 1138177476
     //Device type: ODH_O2iM
-    //Generated: 20181126123233
     //Description: This function does the variable mapping for a device. All device-variable will be linked to an interface variable defined in this block.
 
     //********************************************
@@ -428,7 +451,7 @@ VERSION : 1.0
     #MyWordsinDint[1] := "EPICSToPLC"."Word"[1];
     #HashModbus := #MyDInt; //Hash from EPICS/ModbusTCP
 
-    #HashIFA := -328369184; //Hash from Interface Factory as a constant
+    #HashIFA := 1138177476; //Hash from Interface Factory as a constant
 
     #MyWordsinDint[0] := "PLCToEPICS"."Word"[0];
     #MyWordsinDint[1] := "PLCToEPICS"."Word"[1];
@@ -452,12 +475,12 @@ VERSION : 1.0
        "PLCToEPICS"."Word"[#PLCToEPICSDataBlockOffset + 1] := #MyWordsinReal[1];
 
        #MyWord := W#0;
-       #MyBoolsinWord[8] := #"ODHAlarm";    //EPICSName: ODHAlarm
-       #MyBoolsinWord[9] := #"ODHWarning";    //EPICSName: ODHWarning
+       #MyBoolsinWord[8] := #"ODHWarning";    //EPICSName: ODHWarning
+       #MyBoolsinWord[9] := #"ODHAlarm";    //EPICSName: ODHAlarm
        #MyBoolsinWord[10] := #"MonitHealthyErr";    //EPICSName: MonitHealthyErr
        #MyBoolsinWord[11] := #"Maint";    //EPICSName: Maint
-       #MyBoolsinWord[12] := #"MonitWarning";    //EPICSName: MonitWarning
-       #MyBoolsinWord[13] := #"SysOK";    //EPICSName: SysOK
+       #MyBoolsinWord[12] := #"SysOK";    //EPICSName: SysOK
+       #MyBoolsinWord[13] := #"MonitWarning";    //EPICSName: MonitWarning
        #MyBoolsinWord[14] := #"WarmUp";    //EPICSName: WarmUp
        #MyBoolsinWord[15] := #"ConnLost";    //EPICSName: ConnLost
        "PLCToEPICS"."Word"[#PLCToEPICSDataBlockOffset + 2] := #MyWord;
@@ -469,50 +492,54 @@ FUNCTION_BLOCK "DEVTYPE_ODH_Rack"
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 1.0
    VAR_INPUT
-      "SurgeArrOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SurgeArrOK
-      "PS24vOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: PS24vOK
-      "UPSBatOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: UPSBatOK
-      "UPS24vOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: UPS24vOK
-      "UPSBuffReady" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: UPSBuffReady
-      "UPSBatt85" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: UPSBatt85
-      "UPSAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: UPSAlarm
-   EPICSToPLCLength { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;   // Length of device command register array (in words)
-   EPICSToPLCDataBlockOffset { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;   // Offset in EPICS->PLC comms block where this device data resides (in words)
-   EPICSToPLCParametersStart { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;   // The border offset between the Command and the Parameter area
-   PLCToEPICSLength { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;   // Length of device status register array (in words)
-   PLCToEPICSDataBlockOffset { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Int;   // Offset in PLC->EPICS comms block where this device data resides (in words)
+      "SurgeArrOK" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: SurgeArrOK
+      "PS24vOK" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: PS24vOK
+      "UPSBatOK" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: UPSBatOK
+      "UPS24vOK" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: UPS24vOK
+      "UPSBuffReady" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: UPSBuffReady
+      "UPSBatt85" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: UPSBatt85
+      "UPSAlarm" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: UPSAlarm
+      "SMAlarm" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: SMAlarm
+   EPICSToPLCLength { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Length of device command register array (in words)
+   EPICSToPLCDataBlockOffset { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Offset in EPICS->PLC comms block where this device data resides (in words)
+   EPICSToPLCParametersStart { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // The border offset between the Command and the Parameter area
+   PLCToEPICSLength { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Length of device status register array (in words)
+   PLCToEPICSDataBlockOffset { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Offset in PLC->EPICS comms block where this device data resides (in words)
    END_VAR
    VAR_OUTPUT
-      DEVICE_PARAM_OK { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : Bool;
+      DEVICE_PARAM_OK { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
    END_VAR
    VAR_IN_OUT
    END_VAR
    Var DB_SPECIFIC
-      MyWord { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : Word;
-      MyBytesinWord { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyWord : Array[0..1] of Byte;
-      MyBoolsinWord { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyWord : Array[0..15] of Bool;
-      MyDInt { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : DInt;
-      MyWordsinDint { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyDInt : Array[0..1] of Word;
-      MyReal { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : Real;
-      MyWordsinReal { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyReal : Array[0..1] of Word;
-      MyInt { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : Int;
-      MyWordinInt { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyInt : Word;
-      MyDWord { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : DWord;
-      MyWordsinDWord { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyDWord : Array[0..1] of Word;
-      MyTime { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : Time;
-      MyWordsinTime { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} AT MyTime : Array[0..1] of Word;
+      MyWord { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Word;
+      MyBytesinWord { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyWord : Array[0..1] of Byte;
+      MyBoolsinWord { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyWord : Array[0..15] of Bool;
+      MyDInt { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : DInt;
+      MyWordsinDint { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyDInt : Array[0..1] of Word;
+      MyReal { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Real;
+      MyWordsinReal { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyReal : Array[0..1] of Word;
+      MyInt { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;
+      MyWordinInt { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyInt : Word;
+      MyDWord { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : DWord;
+      MyWordsinDWord { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyDWord : Array[0..1] of Word;
+      MyTime { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Time;
+      MyWordsinTime { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyTime : Array[0..1] of Word;
+      MyString { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : String[40];
+      MyWordsinString { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } AT MyString : Array[0..20] of Word;
    END_VAR
    VAR_TEMP
       HashModbus : DInt;
       HashIFA : DInt;
       HashTIAMap : DInt;
+      i : Int;
    END_VAR
     //Author: Miklos Boros (miklos.boros@esss.se), Copyrigth 2017-2018 by European Spallation Source, Lund
     //This block was generated by PLCFactory, please don't change it MANUALLY!
-    //Input File Name: KG-GTA_ODH-PLC-01-template-IFA-20181126123230.ifa
-    //According to HASH: -328369184
+    //Input File Name: KG-GTA_ODH-PLC-01-template-IFA-20190514112048.ifa
+    //Generated: 20190514112048
+    //According to HASH: 1138177476
     //Device type: ODH_Rack
-    //Generated: 20181126123233
     //Description: This function does the variable mapping for a device. All device-variable will be linked to an interface variable defined in this block.
 
     //********************************************
@@ -524,7 +551,7 @@ VERSION : 1.0
     #MyWordsinDint[1] := "EPICSToPLC"."Word"[1];
     #HashModbus := #MyDInt; //Hash from EPICS/ModbusTCP
 
-    #HashIFA := -328369184; //Hash from Interface Factory as a constant
+    #HashIFA := 1138177476; //Hash from Interface Factory as a constant
 
     #MyWordsinDint[0] := "PLCToEPICS"."Word"[0];
     #MyWordsinDint[1] := "PLCToEPICS"."Word"[1];
@@ -551,6 +578,7 @@ VERSION : 1.0
        #MyBoolsinWord[12] := #"UPSBuffReady";    //EPICSName: UPSBuffReady
        #MyBoolsinWord[13] := #"UPSBatt85";    //EPICSName: UPSBatt85
        #MyBoolsinWord[14] := #"UPSAlarm";    //EPICSName: UPSAlarm
+       #MyBoolsinWord[15] := #"SMAlarm";    //EPICSName: SMAlarm
        "PLCToEPICS"."Word"[#PLCToEPICSDataBlockOffset + 0] := #MyWord;
     Else
        #DEVICE_PARAM_OK := FALSE; //Invalid Hash
@@ -817,337 +845,6 @@ NON_RETAIN
 BEGIN
 END_DATA_BLOCK
 
-DATA_BLOCK "EPICS_PLC_Tester"
-{ S7_Optimized_Access := 'FALSE' }
-VERSION : 0.1
-NON_RETAIN
-   STRUCT
-      HeartBeat { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : Bool;
-      "KG-GTA:ODH-PLC-01_SW_Checksum" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : DWORD;   //EPICS Status variable: SW_Checksum
-      "KG-GTA:ODH-PLC-01_Text_Checksum" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : DWORD;   //EPICS Status variable: Text_Checksum
-      "KG-GTA:ODH-PLC-01_CPU_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: CPU_Connected
-      "KG-GTA:ODH-PLC-01_CPU_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: CPU_Status
-      "KG-GTA:ODH-PLC-01_RIO1_IM_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_IM_Connected
-      "KG-GTA:ODH-PLC-01_RIO1_DI1_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DI1_Connected
-      "KG-GTA:ODH-PLC-01_RIO1_DI2_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DI2_Connected
-      "KG-GTA:ODH-PLC-01_RIO1_DI3_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DI3_Connected
-      "KG-GTA:ODH-PLC-01_RIO1_DI4_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DI4_Connected
-      "KG-GTA:ODH-PLC-01_RIO1_DI5_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DI5_Connected
-      "KG-GTA:ODH-PLC-01_RIO1_AI1_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_AI1_Connected
-      "KG-GTA:ODH-PLC-01_RIO1_AI2_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_AI2_Connected
-      "KG-GTA:ODH-PLC-01_RIO1_AI3_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_AI3_Connected
-      "KG-GTA:ODH-PLC-01_RIO1_AI4_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_AI4_Connected
-      "KG-GTA:ODH-PLC-01_RIO1_DO1_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DO1_Connected
-      "KG-GTA:ODH-PLC-01_RIO1_DO2_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DO2_Connected
-      "KG-GTA:ODH-PLC-01_RIO1_DO3_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DO3_Connected
-      "KG-GTA:ODH-PLC-01_RIO1_SvrMod_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_SvrMod_Connected
-      "KG-GTA:ODH-PLC-01_RIO1_IM_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_IM_Status
-      "KG-GTA:ODH-PLC-01_RIO1_DI1_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DI1_Status
-      "KG-GTA:ODH-PLC-01_RIO1_DI2_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DI2_Status
-      "KG-GTA:ODH-PLC-01_RIO1_DI3_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DI3_Status
-      "KG-GTA:ODH-PLC-01_RIO1_DI4_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DI4_Status
-      "KG-GTA:ODH-PLC-01_RIO1_DI5_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DI5_Status
-      "KG-GTA:ODH-PLC-01_RIO1_AI1_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_AI1_Status
-      "KG-GTA:ODH-PLC-01_RIO1_AI2_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_AI2_Status
-      "KG-GTA:ODH-PLC-01_RIO1_AI3_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_AI3_Status
-      "KG-GTA:ODH-PLC-01_RIO1_AI4_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_AI4_Status
-      "KG-GTA:ODH-PLC-01_RIO1_DO1_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DO1_Status
-      "KG-GTA:ODH-PLC-01_RIO1_DO2_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DO2_Status
-      "KG-GTA:ODH-PLC-01_RIO1_DO3_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_DO3_Status
-      "KG-GTA:ODH-PLC-01_RIO1_SvrMod_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO1_SvrMod_Status
-      "KG-GTA:ODH-PLC-01_RIO2_IM_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_IM_Connected
-      "KG-GTA:ODH-PLC-01_RIO2_DI1_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DI1_Connected
-      "KG-GTA:ODH-PLC-01_RIO2_DI2_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DI2_Connected
-      "KG-GTA:ODH-PLC-01_RIO2_DI3_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DI3_Connected
-      "KG-GTA:ODH-PLC-01_RIO2_DI4_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DI4_Connected
-      "KG-GTA:ODH-PLC-01_RIO2_DI5_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DI5_Connected
-      "KG-GTA:ODH-PLC-01_RIO2_AI1_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_AI1_Connected
-      "KG-GTA:ODH-PLC-01_RIO2_AI2_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_AI2_Connected
-      "KG-GTA:ODH-PLC-01_RIO2_AI3_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_AI3_Connected
-      "KG-GTA:ODH-PLC-01_RIO2_AI4_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_AI4_Connected
-      "KG-GTA:ODH-PLC-01_RIO2_DO1_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DO1_Connected
-      "KG-GTA:ODH-PLC-01_RIO2_DO2_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DO2_Connected
-      "KG-GTA:ODH-PLC-01_RIO2_DO3_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DO3_Connected
-      "KG-GTA:ODH-PLC-01_RIO2_SvrMod_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_SvrMod_Connected
-      "KG-GTA:ODH-PLC-01_RIO2_IM_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_IM_Status
-      "KG-GTA:ODH-PLC-01_RIO2_DI1_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DI1_Status
-      "KG-GTA:ODH-PLC-01_RIO2_DI2_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DI2_Status
-      "KG-GTA:ODH-PLC-01_RIO2_DI3_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DI3_Status
-      "KG-GTA:ODH-PLC-01_RIO2_DI4_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DI4_Status
-      "KG-GTA:ODH-PLC-01_RIO2_DI5_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DI5_Status
-      "KG-GTA:ODH-PLC-01_RIO2_AI1_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_AI1_Status
-      "KG-GTA:ODH-PLC-01_RIO2_AI2_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_AI2_Status
-      "KG-GTA:ODH-PLC-01_RIO2_AI3_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_AI3_Status
-      "KG-GTA:ODH-PLC-01_RIO2_AI4_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_AI4_Status
-      "KG-GTA:ODH-PLC-01_RIO2_DO1_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DO1_Status
-      "KG-GTA:ODH-PLC-01_RIO2_DO2_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DO2_Status
-      "KG-GTA:ODH-PLC-01_RIO2_DO3_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_DO3_Status
-      "KG-GTA:ODH-PLC-01_RIO2_SvrMod_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO2_SvrMod_Status
-      "KG-GTA:ODH-PLC-01_RIO3_IM_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_IM_Connected
-      "KG-GTA:ODH-PLC-01_RIO3_DI1_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DI1_Connected
-      "KG-GTA:ODH-PLC-01_RIO3_DI2_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DI2_Connected
-      "KG-GTA:ODH-PLC-01_RIO3_DI3_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DI3_Connected
-      "KG-GTA:ODH-PLC-01_RIO3_DI4_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DI4_Connected
-      "KG-GTA:ODH-PLC-01_RIO3_DI5_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DI5_Connected
-      "KG-GTA:ODH-PLC-01_RIO3_AI1_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_AI1_Connected
-      "KG-GTA:ODH-PLC-01_RIO3_AI2_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_AI2_Connected
-      "KG-GTA:ODH-PLC-01_RIO3_AI3_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_AI3_Connected
-      "KG-GTA:ODH-PLC-01_RIO3_AI4_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_AI4_Connected
-      "KG-GTA:ODH-PLC-01_RIO3_DO1_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DO1_Connected
-      "KG-GTA:ODH-PLC-01_RIO3_DO2_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DO2_Connected
-      "KG-GTA:ODH-PLC-01_RIO3_DO3_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DO3_Connected
-      "KG-GTA:ODH-PLC-01_RIO3_SvrMod_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_SvrMod_Connected
-      "KG-GTA:ODH-PLC-01_RIO3_IM_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_IM_Status
-      "KG-GTA:ODH-PLC-01_RIO3_DI1_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DI1_Status
-      "KG-GTA:ODH-PLC-01_RIO3_DI2_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DI2_Status
-      "KG-GTA:ODH-PLC-01_RIO3_DI3_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DI3_Status
-      "KG-GTA:ODH-PLC-01_RIO3_DI4_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DI4_Status
-      "KG-GTA:ODH-PLC-01_RIO3_DI5_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DI5_Status
-      "KG-GTA:ODH-PLC-01_RIO3_AI1_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_AI1_Status
-      "KG-GTA:ODH-PLC-01_RIO3_AI2_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_AI2_Status
-      "KG-GTA:ODH-PLC-01_RIO3_AI3_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_AI3_Status
-      "KG-GTA:ODH-PLC-01_RIO3_AI4_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_AI4_Status
-      "KG-GTA:ODH-PLC-01_RIO3_DO1_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DO1_Status
-      "KG-GTA:ODH-PLC-01_RIO3_DO2_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DO2_Status
-      "KG-GTA:ODH-PLC-01_RIO3_DO3_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_DO3_Status
-      "KG-GTA:ODH-PLC-01_RIO3_SvrMod_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: RIO3_SvrMod_Status
-      "KG-GTA:ODH-PLC-01_SCL1_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SCL1_Connected
-      "KG-GTA:ODH-PLC-01_SCL1_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SCL1_Status
-      "KG-GTA:ODH-PLC-01_SCL2_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SCL2_Connected
-      "KG-GTA:ODH-PLC-01_SCL2_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SCL2_Status
-      "KG-GTA:ODH-PLC-01_SCL3_Connected" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SCL3_Connected
-      "KG-GTA:ODH-PLC-01_SCL3_Status" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SCL3_Status
-      "CTLG-CS:ODH-Area_Alarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Alarm
-      "CTLG-CS:ODH-Area_WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "CTLG-CS:ODH-Area_ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-      "CXB-CXH:ODH-Area_Alarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Alarm
-      "CXB-CXH:ODH-Area_WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "CXB-CXH:ODH-Area_ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-      "HCB-ACH:ODH-Area_Alarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Alarm
-      "HCB-ACH:ODH-Area_WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "HCB-ACH:ODH-Area_ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-      "CTLG-CS:ODH-O2iM-20_O2Level" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : REAL;   //EPICS Status variable: O2Level
-      "CTLG-CS:ODH-O2iM-20_ODHAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHAlarm
-      "CTLG-CS:ODH-O2iM-20_ODHWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHWarning
-      "CTLG-CS:ODH-O2iM-20_MonitHealthyErr" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitHealthyErr
-      "CTLG-CS:ODH-O2iM-20_Maint" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Maint
-      "CTLG-CS:ODH-O2iM-20_MonitWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitWarning
-      "CTLG-CS:ODH-O2iM-20_SysOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SysOK
-      "CTLG-CS:ODH-O2iM-20_WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "CTLG-CS:ODH-O2iM-20_ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-      "CTLG-CS:ODH-O2iM-21_O2Level" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : REAL;   //EPICS Status variable: O2Level
-      "CTLG-CS:ODH-O2iM-21_ODHAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHAlarm
-      "CTLG-CS:ODH-O2iM-21_ODHWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHWarning
-      "CTLG-CS:ODH-O2iM-21_MonitHealthyErr" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitHealthyErr
-      "CTLG-CS:ODH-O2iM-21_Maint" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Maint
-      "CTLG-CS:ODH-O2iM-21_MonitWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitWarning
-      "CTLG-CS:ODH-O2iM-21_SysOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SysOK
-      "CTLG-CS:ODH-O2iM-21_WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "CTLG-CS:ODH-O2iM-21_ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-      "CTLG-CS:ODH-O2iM-22_O2Level" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : REAL;   //EPICS Status variable: O2Level
-      "CTLG-CS:ODH-O2iM-22_ODHAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHAlarm
-      "CTLG-CS:ODH-O2iM-22_ODHWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHWarning
-      "CTLG-CS:ODH-O2iM-22_MonitHealthyErr" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitHealthyErr
-      "CTLG-CS:ODH-O2iM-22_Maint" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Maint
-      "CTLG-CS:ODH-O2iM-22_MonitWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitWarning
-      "CTLG-CS:ODH-O2iM-22_SysOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SysOK
-      "CTLG-CS:ODH-O2iM-22_WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "CTLG-CS:ODH-O2iM-22_ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-      "CXB-CXH:ODH-O2iM-13_O2Level" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : REAL;   //EPICS Status variable: O2Level
-      "CXB-CXH:ODH-O2iM-13_ODHAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHAlarm
-      "CXB-CXH:ODH-O2iM-13_ODHWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHWarning
-      "CXB-CXH:ODH-O2iM-13_MonitHealthyErr" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitHealthyErr
-      "CXB-CXH:ODH-O2iM-13_Maint" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Maint
-      "CXB-CXH:ODH-O2iM-13_MonitWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitWarning
-      "CXB-CXH:ODH-O2iM-13_SysOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SysOK
-      "CXB-CXH:ODH-O2iM-13_WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "CXB-CXH:ODH-O2iM-13_ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-      "CXB-CXH:ODH-O2iM-14_O2Level" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : REAL;   //EPICS Status variable: O2Level
-      "CXB-CXH:ODH-O2iM-14_ODHAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHAlarm
-      "CXB-CXH:ODH-O2iM-14_ODHWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHWarning
-      "CXB-CXH:ODH-O2iM-14_MonitHealthyErr" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitHealthyErr
-      "CXB-CXH:ODH-O2iM-14_Maint" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Maint
-      "CXB-CXH:ODH-O2iM-14_MonitWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitWarning
-      "CXB-CXH:ODH-O2iM-14_SysOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SysOK
-      "CXB-CXH:ODH-O2iM-14_WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "CXB-CXH:ODH-O2iM-14_ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-      "CXB-CXH:ODH-O2iM-15_O2Level" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : REAL;   //EPICS Status variable: O2Level
-      "CXB-CXH:ODH-O2iM-15_ODHAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHAlarm
-      "CXB-CXH:ODH-O2iM-15_ODHWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHWarning
-      "CXB-CXH:ODH-O2iM-15_MonitHealthyErr" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitHealthyErr
-      "CXB-CXH:ODH-O2iM-15_Maint" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Maint
-      "CXB-CXH:ODH-O2iM-15_MonitWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitWarning
-      "CXB-CXH:ODH-O2iM-15_SysOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SysOK
-      "CXB-CXH:ODH-O2iM-15_WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "CXB-CXH:ODH-O2iM-15_ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-      "CXB-CXH:ODH-O2iM-16_O2Level" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : REAL;   //EPICS Status variable: O2Level
-      "CXB-CXH:ODH-O2iM-16_ODHAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHAlarm
-      "CXB-CXH:ODH-O2iM-16_ODHWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHWarning
-      "CXB-CXH:ODH-O2iM-16_MonitHealthyErr" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitHealthyErr
-      "CXB-CXH:ODH-O2iM-16_Maint" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Maint
-      "CXB-CXH:ODH-O2iM-16_MonitWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitWarning
-      "CXB-CXH:ODH-O2iM-16_SysOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SysOK
-      "CXB-CXH:ODH-O2iM-16_WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "CXB-CXH:ODH-O2iM-16_ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-      "CXB-CXH:ODH-O2iM-17_O2Level" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : REAL;   //EPICS Status variable: O2Level
-      "CXB-CXH:ODH-O2iM-17_ODHAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHAlarm
-      "CXB-CXH:ODH-O2iM-17_ODHWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHWarning
-      "CXB-CXH:ODH-O2iM-17_MonitHealthyErr" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitHealthyErr
-      "CXB-CXH:ODH-O2iM-17_Maint" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Maint
-      "CXB-CXH:ODH-O2iM-17_MonitWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitWarning
-      "CXB-CXH:ODH-O2iM-17_SysOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SysOK
-      "CXB-CXH:ODH-O2iM-17_WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "CXB-CXH:ODH-O2iM-17_ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-      "CXB-CXH:ODH-O2iM-18_O2Level" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : REAL;   //EPICS Status variable: O2Level
-      "CXB-CXH:ODH-O2iM-18_ODHAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHAlarm
-      "CXB-CXH:ODH-O2iM-18_ODHWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHWarning
-      "CXB-CXH:ODH-O2iM-18_MonitHealthyErr" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitHealthyErr
-      "CXB-CXH:ODH-O2iM-18_Maint" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Maint
-      "CXB-CXH:ODH-O2iM-18_MonitWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitWarning
-      "CXB-CXH:ODH-O2iM-18_SysOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SysOK
-      "CXB-CXH:ODH-O2iM-18_WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "CXB-CXH:ODH-O2iM-18_ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-      "CXB-CXH:ODH-O2iM-19_O2Level" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : REAL;   //EPICS Status variable: O2Level
-      "CXB-CXH:ODH-O2iM-19_ODHAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHAlarm
-      "CXB-CXH:ODH-O2iM-19_ODHWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHWarning
-      "CXB-CXH:ODH-O2iM-19_MonitHealthyErr" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitHealthyErr
-      "CXB-CXH:ODH-O2iM-19_Maint" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Maint
-      "CXB-CXH:ODH-O2iM-19_MonitWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitWarning
-      "CXB-CXH:ODH-O2iM-19_SysOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SysOK
-      "CXB-CXH:ODH-O2iM-19_WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "CXB-CXH:ODH-O2iM-19_ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-      "HCB-ACH:ODH-O2iM-1_O2Level" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : REAL;   //EPICS Status variable: O2Level
-      "HCB-ACH:ODH-O2iM-1_ODHAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHAlarm
-      "HCB-ACH:ODH-O2iM-1_ODHWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHWarning
-      "HCB-ACH:ODH-O2iM-1_MonitHealthyErr" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitHealthyErr
-      "HCB-ACH:ODH-O2iM-1_Maint" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Maint
-      "HCB-ACH:ODH-O2iM-1_MonitWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitWarning
-      "HCB-ACH:ODH-O2iM-1_SysOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SysOK
-      "HCB-ACH:ODH-O2iM-1_WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "HCB-ACH:ODH-O2iM-1_ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-      "HCB-ACH:ODH-O2iM-2_O2Level" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : REAL;   //EPICS Status variable: O2Level
-      "HCB-ACH:ODH-O2iM-2_ODHAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHAlarm
-      "HCB-ACH:ODH-O2iM-2_ODHWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHWarning
-      "HCB-ACH:ODH-O2iM-2_MonitHealthyErr" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitHealthyErr
-      "HCB-ACH:ODH-O2iM-2_Maint" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Maint
-      "HCB-ACH:ODH-O2iM-2_MonitWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitWarning
-      "HCB-ACH:ODH-O2iM-2_SysOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SysOK
-      "HCB-ACH:ODH-O2iM-2_WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "HCB-ACH:ODH-O2iM-2_ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-      "HCB-ACH:ODH-O2iM-3_O2Level" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : REAL;   //EPICS Status variable: O2Level
-      "HCB-ACH:ODH-O2iM-3_ODHAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHAlarm
-      "HCB-ACH:ODH-O2iM-3_ODHWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHWarning
-      "HCB-ACH:ODH-O2iM-3_MonitHealthyErr" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitHealthyErr
-      "HCB-ACH:ODH-O2iM-3_Maint" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Maint
-      "HCB-ACH:ODH-O2iM-3_MonitWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitWarning
-      "HCB-ACH:ODH-O2iM-3_SysOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SysOK
-      "HCB-ACH:ODH-O2iM-3_WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "HCB-ACH:ODH-O2iM-3_ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-      "HCB-ACH:ODH-O2iM-4_O2Level" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : REAL;   //EPICS Status variable: O2Level
-      "HCB-ACH:ODH-O2iM-4_ODHAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHAlarm
-      "HCB-ACH:ODH-O2iM-4_ODHWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHWarning
-      "HCB-ACH:ODH-O2iM-4_MonitHealthyErr" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitHealthyErr
-      "HCB-ACH:ODH-O2iM-4_Maint" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Maint
-      "HCB-ACH:ODH-O2iM-4_MonitWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitWarning
-      "HCB-ACH:ODH-O2iM-4_SysOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SysOK
-      "HCB-ACH:ODH-O2iM-4_WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "HCB-ACH:ODH-O2iM-4_ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-      "HCB-ACH:ODH-O2iM-5_O2Level" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : REAL;   //EPICS Status variable: O2Level
-      "HCB-ACH:ODH-O2iM-5_ODHAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHAlarm
-      "HCB-ACH:ODH-O2iM-5_ODHWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHWarning
-      "HCB-ACH:ODH-O2iM-5_MonitHealthyErr" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitHealthyErr
-      "HCB-ACH:ODH-O2iM-5_Maint" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Maint
-      "HCB-ACH:ODH-O2iM-5_MonitWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitWarning
-      "HCB-ACH:ODH-O2iM-5_SysOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SysOK
-      "HCB-ACH:ODH-O2iM-5_WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "HCB-ACH:ODH-O2iM-5_ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-      "HCB-DogSh:ODH-O2iM-12_O2Level" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : REAL;   //EPICS Status variable: O2Level
-      "HCB-DogSh:ODH-O2iM-12_ODHAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHAlarm
-      "HCB-DogSh:ODH-O2iM-12_ODHWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHWarning
-      "HCB-DogSh:ODH-O2iM-12_MonitHealthyErr" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitHealthyErr
-      "HCB-DogSh:ODH-O2iM-12_Maint" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Maint
-      "HCB-DogSh:ODH-O2iM-12_MonitWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitWarning
-      "HCB-DogSh:ODH-O2iM-12_SysOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SysOK
-      "HCB-DogSh:ODH-O2iM-12_WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "HCB-DogSh:ODH-O2iM-12_ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-      "HCB-HPGS:ODH-O2iM-10_O2Level" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : REAL;   //EPICS Status variable: O2Level
-      "HCB-HPGS:ODH-O2iM-10_ODHAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHAlarm
-      "HCB-HPGS:ODH-O2iM-10_ODHWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHWarning
-      "HCB-HPGS:ODH-O2iM-10_MonitHealthyErr" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitHealthyErr
-      "HCB-HPGS:ODH-O2iM-10_Maint" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Maint
-      "HCB-HPGS:ODH-O2iM-10_MonitWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitWarning
-      "HCB-HPGS:ODH-O2iM-10_SysOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SysOK
-      "HCB-HPGS:ODH-O2iM-10_WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "HCB-HPGS:ODH-O2iM-10_ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-      "HCB-HPGS:ODH-O2iM-11_O2Level" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : REAL;   //EPICS Status variable: O2Level
-      "HCB-HPGS:ODH-O2iM-11_ODHAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHAlarm
-      "HCB-HPGS:ODH-O2iM-11_ODHWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHWarning
-      "HCB-HPGS:ODH-O2iM-11_MonitHealthyErr" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitHealthyErr
-      "HCB-HPGS:ODH-O2iM-11_Maint" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Maint
-      "HCB-HPGS:ODH-O2iM-11_MonitWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitWarning
-      "HCB-HPGS:ODH-O2iM-11_SysOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SysOK
-      "HCB-HPGS:ODH-O2iM-11_WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "HCB-HPGS:ODH-O2iM-11_ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-      "HCB-TCH:ODH-O2iM-6_O2Level" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : REAL;   //EPICS Status variable: O2Level
-      "HCB-TCH:ODH-O2iM-6_ODHAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHAlarm
-      "HCB-TCH:ODH-O2iM-6_ODHWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHWarning
-      "HCB-TCH:ODH-O2iM-6_MonitHealthyErr" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitHealthyErr
-      "HCB-TCH:ODH-O2iM-6_Maint" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Maint
-      "HCB-TCH:ODH-O2iM-6_MonitWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitWarning
-      "HCB-TCH:ODH-O2iM-6_SysOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SysOK
-      "HCB-TCH:ODH-O2iM-6_WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "HCB-TCH:ODH-O2iM-6_ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-      "HCB-TCH:ODH-O2iM-7_O2Level" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : REAL;   //EPICS Status variable: O2Level
-      "HCB-TCH:ODH-O2iM-7_ODHAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHAlarm
-      "HCB-TCH:ODH-O2iM-7_ODHWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHWarning
-      "HCB-TCH:ODH-O2iM-7_MonitHealthyErr" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitHealthyErr
-      "HCB-TCH:ODH-O2iM-7_Maint" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Maint
-      "HCB-TCH:ODH-O2iM-7_MonitWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitWarning
-      "HCB-TCH:ODH-O2iM-7_SysOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SysOK
-      "HCB-TCH:ODH-O2iM-7_WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "HCB-TCH:ODH-O2iM-7_ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-      "HCB-TCH:ODH-O2iM-8_O2Level" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : REAL;   //EPICS Status variable: O2Level
-      "HCB-TCH:ODH-O2iM-8_ODHAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHAlarm
-      "HCB-TCH:ODH-O2iM-8_ODHWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHWarning
-      "HCB-TCH:ODH-O2iM-8_MonitHealthyErr" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitHealthyErr
-      "HCB-TCH:ODH-O2iM-8_Maint" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Maint
-      "HCB-TCH:ODH-O2iM-8_MonitWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitWarning
-      "HCB-TCH:ODH-O2iM-8_SysOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SysOK
-      "HCB-TCH:ODH-O2iM-8_WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "HCB-TCH:ODH-O2iM-8_ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-      "HCB-TCH:ODH-O2iM-9_O2Level" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : REAL;   //EPICS Status variable: O2Level
-      "HCB-TCH:ODH-O2iM-9_ODHAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHAlarm
-      "HCB-TCH:ODH-O2iM-9_ODHWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ODHWarning
-      "HCB-TCH:ODH-O2iM-9_MonitHealthyErr" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitHealthyErr
-      "HCB-TCH:ODH-O2iM-9_Maint" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: Maint
-      "HCB-TCH:ODH-O2iM-9_MonitWarning" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: MonitWarning
-      "HCB-TCH:ODH-O2iM-9_SysOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SysOK
-      "HCB-TCH:ODH-O2iM-9_WarmUp" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: WarmUp
-      "HCB-TCH:ODH-O2iM-9_ConnLost" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: ConnLost
-      "CXB-CXH:ODH-RIO-2_SurgeArrOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SurgeArrOK
-      "CXB-CXH:ODH-RIO-2_PS24vOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: PS24vOK
-      "CXB-CXH:ODH-RIO-2_UPSBatOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: UPSBatOK
-      "CXB-CXH:ODH-RIO-2_UPS24vOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: UPS24vOK
-      "CXB-CXH:ODH-RIO-2_UPSBuffReady" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: UPSBuffReady
-      "CXB-CXH:ODH-RIO-2_UPSBatt85" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: UPSBatt85
-      "CXB-CXH:ODH-RIO-2_UPSAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: UPSAlarm
-      "HCB-ACH:ODH-RIO-1_SurgeArrOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SurgeArrOK
-      "HCB-ACH:ODH-RIO-1_PS24vOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: PS24vOK
-      "HCB-ACH:ODH-RIO-1_UPSBatOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: UPSBatOK
-      "HCB-ACH:ODH-RIO-1_UPS24vOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: UPS24vOK
-      "HCB-ACH:ODH-RIO-1_UPSBuffReady" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: UPSBuffReady
-      "HCB-ACH:ODH-RIO-1_UPSBatt85" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: UPSBatt85
-      "HCB-ACH:ODH-RIO-1_UPSAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: UPSAlarm
-      "TS2-020Row:CnPw-U-001_SurgeArrOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: SurgeArrOK
-      "TS2-020Row:CnPw-U-001_PS24vOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: PS24vOK
-      "TS2-020Row:CnPw-U-001_UPSBatOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: UPSBatOK
-      "TS2-020Row:CnPw-U-001_UPS24vOK" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: UPS24vOK
-      "TS2-020Row:CnPw-U-001_UPSBuffReady" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: UPSBuffReady
-      "TS2-020Row:CnPw-U-001_UPSBatt85" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: UPSBatt85
-      "TS2-020Row:CnPw-U-001_UPSAlarm" { S7_HMI_Accessible := 'False'; S7_HMI_Visible := 'False'} : BOOL;   //EPICS Status variable: UPSAlarm
-   END_STRUCT;
-BEGIN
-END_DATA_BLOCK
 FUNCTION "EPICS_device_calls" : Void
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 1.0
@@ -1187,7 +884,7 @@ VERSION : 1.0
 BEGIN
       //Author: Miklos Boros (miklos.boros@esss.se), Copyrigth 2017-2018 by European Spallation Source, Lund
       //This block was generated by PLCFactory
-      //According to HASH:-328369184
+      //According to HASH:1138177476
       //Description: Description: This function calls the devices according to the corresponding device type
 
         //DO NOT Modify the following line!!!
@@ -1202,7 +899,7 @@ BEGIN
       "DEV_KG-GTA:ODH-PLC-01_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=10,
+      PLCToEPICSLength:=24,
       PLCToEPICSDataBlockOffset:=0+10);
 
         //********************************************
@@ -1214,7 +911,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=1,
-      PLCToEPICSDataBlockOffset:=10+10);
+      PLCToEPICSDataBlockOffset:=24+10);
 
         //********************************************
         // Device name: CXB-CXH:ODH-Area
@@ -1225,7 +922,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=1,
-      PLCToEPICSDataBlockOffset:=11+10);
+      PLCToEPICSDataBlockOffset:=25+10);
 
         //********************************************
         // Device name: HCB-ACH:ODH-Area
@@ -1236,7 +933,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=1,
-      PLCToEPICSDataBlockOffset:=12+10);
+      PLCToEPICSDataBlockOffset:=26+10);
 
         //********************************************
         // Device name: CTLG-CS:ODH-O2iM-20
@@ -1247,7 +944,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=13+10);
+      PLCToEPICSDataBlockOffset:=27+10);
 
         //********************************************
         // Device name: CTLG-CS:ODH-O2iM-21
@@ -1258,7 +955,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=16+10);
+      PLCToEPICSDataBlockOffset:=30+10);
 
         //********************************************
         // Device name: CTLG-CS:ODH-O2iM-22
@@ -1269,7 +966,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=19+10);
+      PLCToEPICSDataBlockOffset:=33+10);
 
         //********************************************
         // Device name: CXB-CXH:ODH-O2iM-13
@@ -1280,7 +977,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=22+10);
+      PLCToEPICSDataBlockOffset:=36+10);
 
         //********************************************
         // Device name: CXB-CXH:ODH-O2iM-14
@@ -1291,7 +988,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=25+10);
+      PLCToEPICSDataBlockOffset:=39+10);
 
         //********************************************
         // Device name: CXB-CXH:ODH-O2iM-15
@@ -1302,7 +999,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=28+10);
+      PLCToEPICSDataBlockOffset:=42+10);
 
         //********************************************
         // Device name: CXB-CXH:ODH-O2iM-16
@@ -1313,7 +1010,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=31+10);
+      PLCToEPICSDataBlockOffset:=45+10);
 
         //********************************************
         // Device name: CXB-CXH:ODH-O2iM-17
@@ -1324,7 +1021,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=34+10);
+      PLCToEPICSDataBlockOffset:=48+10);
 
         //********************************************
         // Device name: CXB-CXH:ODH-O2iM-18
@@ -1335,7 +1032,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=37+10);
+      PLCToEPICSDataBlockOffset:=51+10);
 
         //********************************************
         // Device name: CXB-CXH:ODH-O2iM-19
@@ -1346,7 +1043,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=40+10);
+      PLCToEPICSDataBlockOffset:=54+10);
 
         //********************************************
         // Device name: HCB-ACH:ODH-O2iM-1
@@ -1357,7 +1054,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=43+10);
+      PLCToEPICSDataBlockOffset:=57+10);
 
         //********************************************
         // Device name: HCB-ACH:ODH-O2iM-2
@@ -1368,7 +1065,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=46+10);
+      PLCToEPICSDataBlockOffset:=60+10);
 
         //********************************************
         // Device name: HCB-ACH:ODH-O2iM-3
@@ -1379,7 +1076,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=49+10);
+      PLCToEPICSDataBlockOffset:=63+10);
 
         //********************************************
         // Device name: HCB-ACH:ODH-O2iM-4
@@ -1390,7 +1087,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=52+10);
+      PLCToEPICSDataBlockOffset:=66+10);
 
         //********************************************
         // Device name: HCB-ACH:ODH-O2iM-5
@@ -1401,7 +1098,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=55+10);
+      PLCToEPICSDataBlockOffset:=69+10);
 
         //********************************************
         // Device name: HCB-DogSh:ODH-O2iM-12
@@ -1412,7 +1109,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=58+10);
+      PLCToEPICSDataBlockOffset:=72+10);
 
         //********************************************
         // Device name: HCB-HPGS:ODH-O2iM-10
@@ -1423,7 +1120,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=61+10);
+      PLCToEPICSDataBlockOffset:=75+10);
 
         //********************************************
         // Device name: HCB-HPGS:ODH-O2iM-11
@@ -1434,7 +1131,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=64+10);
+      PLCToEPICSDataBlockOffset:=78+10);
 
         //********************************************
         // Device name: HCB-TCH:ODH-O2iM-6
@@ -1445,7 +1142,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=67+10);
+      PLCToEPICSDataBlockOffset:=81+10);
 
         //********************************************
         // Device name: HCB-TCH:ODH-O2iM-7
@@ -1456,7 +1153,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=70+10);
+      PLCToEPICSDataBlockOffset:=84+10);
 
         //********************************************
         // Device name: HCB-TCH:ODH-O2iM-8
@@ -1467,7 +1164,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=73+10);
+      PLCToEPICSDataBlockOffset:=87+10);
 
         //********************************************
         // Device name: HCB-TCH:ODH-O2iM-9
@@ -1478,7 +1175,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=76+10);
+      PLCToEPICSDataBlockOffset:=90+10);
 
         //********************************************
         // Device name: CXB-CXH:ODH-RIO-2
@@ -1489,7 +1186,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=1,
-      PLCToEPICSDataBlockOffset:=79+10);
+      PLCToEPICSDataBlockOffset:=93+10);
 
         //********************************************
         // Device name: HCB-ACH:ODH-RIO-1
@@ -1500,7 +1197,7 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=1,
-      PLCToEPICSDataBlockOffset:=80+10);
+      PLCToEPICSDataBlockOffset:=94+10);
 
         //********************************************
         // Device name: TS2-020Row:CnPw-U-001
@@ -1511,756 +1208,38 @@ BEGIN
       EPICSToPLCDataBlockOffset:=0+10,
       EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=1,
-      PLCToEPICSDataBlockOffset:=81+10);
+      PLCToEPICSDataBlockOffset:=95+10);
 END_FUNCTION
-FUNCTION "EPICS_device_calls_test" : Void
-{ S7_Optimized_Access := 'TRUE' }
-VERSION : 1.0
-
-   VAR_TEMP
-      "KG-GTA:ODH-PLC-01" : Bool;   // HASH codes are OK
-      "CTLG-CS:ODH-Area" : Bool;   // HASH codes are OK
-      "CXB-CXH:ODH-Area" : Bool;   // HASH codes are OK
-      "HCB-ACH:ODH-Area" : Bool;   // HASH codes are OK
-      "CTLG-CS:ODH-O2iM-20" : Bool;   // HASH codes are OK
-      "CTLG-CS:ODH-O2iM-21" : Bool;   // HASH codes are OK
-      "CTLG-CS:ODH-O2iM-22" : Bool;   // HASH codes are OK
-      "CXB-CXH:ODH-O2iM-13" : Bool;   // HASH codes are OK
-      "CXB-CXH:ODH-O2iM-14" : Bool;   // HASH codes are OK
-      "CXB-CXH:ODH-O2iM-15" : Bool;   // HASH codes are OK
-      "CXB-CXH:ODH-O2iM-16" : Bool;   // HASH codes are OK
-      "CXB-CXH:ODH-O2iM-17" : Bool;   // HASH codes are OK
-      "CXB-CXH:ODH-O2iM-18" : Bool;   // HASH codes are OK
-      "CXB-CXH:ODH-O2iM-19" : Bool;   // HASH codes are OK
-      "HCB-ACH:ODH-O2iM-1" : Bool;   // HASH codes are OK
-      "HCB-ACH:ODH-O2iM-2" : Bool;   // HASH codes are OK
-      "HCB-ACH:ODH-O2iM-3" : Bool;   // HASH codes are OK
-      "HCB-ACH:ODH-O2iM-4" : Bool;   // HASH codes are OK
-      "HCB-ACH:ODH-O2iM-5" : Bool;   // HASH codes are OK
-      "HCB-DogSh:ODH-O2iM-12" : Bool;   // HASH codes are OK
-      "HCB-HPGS:ODH-O2iM-10" : Bool;   // HASH codes are OK
-      "HCB-HPGS:ODH-O2iM-11" : Bool;   // HASH codes are OK
-      "HCB-TCH:ODH-O2iM-6" : Bool;   // HASH codes are OK
-      "HCB-TCH:ODH-O2iM-7" : Bool;   // HASH codes are OK
-      "HCB-TCH:ODH-O2iM-8" : Bool;   // HASH codes are OK
-      "HCB-TCH:ODH-O2iM-9" : Bool;   // HASH codes are OK
-      "CXB-CXH:ODH-RIO-2" : Bool;   // HASH codes are OK
-      "HCB-ACH:ODH-RIO-1" : Bool;   // HASH codes are OK
-      "TS2-020Row:CnPw-U-001" : Bool;   // HASH codes are OK
-   END_VAR
-
-BEGIN
-      //Author: Miklos Boros (miklos.boros@esss.se), Copyrigth 2017-2018 by European Spallation Source, Lund
-      //This block was generated by PLCFactory
-      //According to HASH:-328369184
-      //Description: Description: This function calls the devices according to the corresponding device type
-
-      //DO NOT Modify the following line!!!
-      "Utilities".TestInProgress := TRUE;
-
-
-      //********************************************
-      // Device name: KG-GTA:ODH-PLC-01
-      // Device type: PLC
-      //********************************************
-
-      "DEV_KG-GTA:ODH-PLC-01_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=10,
-      PLCToEPICSDataBlockOffset:=0+10,
-                                 "SW_Checksum" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_SW_Checksum",
-                                 "Text_Checksum" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_Text_Checksum",
-                                 "CPU_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_CPU_Connected",
-                                 "CPU_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_CPU_Status",
-                                 "RIO1_IM_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_IM_Connected",
-                                 "RIO1_DI1_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_DI1_Connected",
-                                 "RIO1_DI2_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_DI2_Connected",
-                                 "RIO1_DI3_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_DI3_Connected",
-                                 "RIO1_DI4_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_DI4_Connected",
-                                 "RIO1_DI5_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_DI5_Connected",
-                                 "RIO1_AI1_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_AI1_Connected",
-                                 "RIO1_AI2_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_AI2_Connected",
-                                 "RIO1_AI3_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_AI3_Connected",
-                                 "RIO1_AI4_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_AI4_Connected",
-                                 "RIO1_DO1_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_DO1_Connected",
-                                 "RIO1_DO2_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_DO2_Connected",
-                                 "RIO1_DO3_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_DO3_Connected",
-                                 "RIO1_SvrMod_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_SvrMod_Connected",
-                                 "RIO1_IM_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_IM_Status",
-                                 "RIO1_DI1_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_DI1_Status",
-                                 "RIO1_DI2_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_DI2_Status",
-                                 "RIO1_DI3_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_DI3_Status",
-                                 "RIO1_DI4_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_DI4_Status",
-                                 "RIO1_DI5_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_DI5_Status",
-                                 "RIO1_AI1_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_AI1_Status",
-                                 "RIO1_AI2_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_AI2_Status",
-                                 "RIO1_AI3_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_AI3_Status",
-                                 "RIO1_AI4_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_AI4_Status",
-                                 "RIO1_DO1_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_DO1_Status",
-                                 "RIO1_DO2_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_DO2_Status",
-                                 "RIO1_DO3_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_DO3_Status",
-                                 "RIO1_SvrMod_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO1_SvrMod_Status",
-                                 "RIO2_IM_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_IM_Connected",
-                                 "RIO2_DI1_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_DI1_Connected",
-                                 "RIO2_DI2_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_DI2_Connected",
-                                 "RIO2_DI3_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_DI3_Connected",
-                                 "RIO2_DI4_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_DI4_Connected",
-                                 "RIO2_DI5_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_DI5_Connected",
-                                 "RIO2_AI1_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_AI1_Connected",
-                                 "RIO2_AI2_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_AI2_Connected",
-                                 "RIO2_AI3_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_AI3_Connected",
-                                 "RIO2_AI4_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_AI4_Connected",
-                                 "RIO2_DO1_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_DO1_Connected",
-                                 "RIO2_DO2_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_DO2_Connected",
-                                 "RIO2_DO3_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_DO3_Connected",
-                                 "RIO2_SvrMod_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_SvrMod_Connected",
-                                 "RIO2_IM_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_IM_Status",
-                                 "RIO2_DI1_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_DI1_Status",
-                                 "RIO2_DI2_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_DI2_Status",
-                                 "RIO2_DI3_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_DI3_Status",
-                                 "RIO2_DI4_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_DI4_Status",
-                                 "RIO2_DI5_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_DI5_Status",
-                                 "RIO2_AI1_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_AI1_Status",
-                                 "RIO2_AI2_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_AI2_Status",
-                                 "RIO2_AI3_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_AI3_Status",
-                                 "RIO2_AI4_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_AI4_Status",
-                                 "RIO2_DO1_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_DO1_Status",
-                                 "RIO2_DO2_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_DO2_Status",
-                                 "RIO2_DO3_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_DO3_Status",
-                                 "RIO2_SvrMod_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO2_SvrMod_Status",
-                                 "RIO3_IM_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_IM_Connected",
-                                 "RIO3_DI1_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_DI1_Connected",
-                                 "RIO3_DI2_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_DI2_Connected",
-                                 "RIO3_DI3_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_DI3_Connected",
-                                 "RIO3_DI4_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_DI4_Connected",
-                                 "RIO3_DI5_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_DI5_Connected",
-                                 "RIO3_AI1_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_AI1_Connected",
-                                 "RIO3_AI2_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_AI2_Connected",
-                                 "RIO3_AI3_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_AI3_Connected",
-                                 "RIO3_AI4_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_AI4_Connected",
-                                 "RIO3_DO1_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_DO1_Connected",
-                                 "RIO3_DO2_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_DO2_Connected",
-                                 "RIO3_DO3_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_DO3_Connected",
-                                 "RIO3_SvrMod_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_SvrMod_Connected",
-                                 "RIO3_IM_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_IM_Status",
-                                 "RIO3_DI1_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_DI1_Status",
-                                 "RIO3_DI2_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_DI2_Status",
-                                 "RIO3_DI3_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_DI3_Status",
-                                 "RIO3_DI4_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_DI4_Status",
-                                 "RIO3_DI5_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_DI5_Status",
-                                 "RIO3_AI1_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_AI1_Status",
-                                 "RIO3_AI2_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_AI2_Status",
-                                 "RIO3_AI3_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_AI3_Status",
-                                 "RIO3_AI4_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_AI4_Status",
-                                 "RIO3_DO1_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_DO1_Status",
-                                 "RIO3_DO2_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_DO2_Status",
-                                 "RIO3_DO3_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_DO3_Status",
-                                 "RIO3_SvrMod_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_RIO3_SvrMod_Status",
-                                 "SCL1_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_SCL1_Connected",
-                                 "SCL1_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_SCL1_Status",
-                                 "SCL2_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_SCL2_Connected",
-                                 "SCL2_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_SCL2_Status",
-                                 "SCL3_Connected" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_SCL3_Connected",
-                                 "SCL3_Status" := "EPICS_PLC_Tester".#"KG-GTA:ODH-PLC-01_SCL3_Status",
-                                 DEVICE_PARAM_OK=>#"KG-GTA:ODH-PLC-01");
-
-      //********************************************
-      // Device name: CTLG-CS:ODH-Area
-      // Device type: ODH_Area
-      //********************************************
-
-      "DEV_CTLG-CS:ODH-Area_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=1,
-      PLCToEPICSDataBlockOffset:=10+10,
-                                 "Alarm" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-Area_Alarm",
-                                 "WarmUp" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-Area_WarmUp",
-                                 "ConnLost" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-Area_ConnLost",
-                                 DEVICE_PARAM_OK=>#"CTLG-CS:ODH-Area");
-
-      //********************************************
-      // Device name: CXB-CXH:ODH-Area
-      // Device type: ODH_Area
-      //********************************************
-
-      "DEV_CXB-CXH:ODH-Area_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=1,
-      PLCToEPICSDataBlockOffset:=11+10,
-                                 "Alarm" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-Area_Alarm",
-                                 "WarmUp" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-Area_WarmUp",
-                                 "ConnLost" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-Area_ConnLost",
-                                 DEVICE_PARAM_OK=>#"CXB-CXH:ODH-Area");
-
-      //********************************************
-      // Device name: HCB-ACH:ODH-Area
-      // Device type: ODH_Area
-      //********************************************
-
-      "DEV_HCB-ACH:ODH-Area_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=1,
-      PLCToEPICSDataBlockOffset:=12+10,
-                                 "Alarm" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-Area_Alarm",
-                                 "WarmUp" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-Area_WarmUp",
-                                 "ConnLost" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-Area_ConnLost",
-                                 DEVICE_PARAM_OK=>#"HCB-ACH:ODH-Area");
-
-      //********************************************
-      // Device name: CTLG-CS:ODH-O2iM-20
-      // Device type: ODH_O2iM
-      //********************************************
-
-      "DEV_CTLG-CS:ODH-O2iM-20_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=13+10,
-                                 "O2Level" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-20_O2Level",
-                                 "ODHAlarm" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-20_ODHAlarm",
-                                 "ODHWarning" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-20_ODHWarning",
-                                 "MonitHealthyErr" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-20_MonitHealthyErr",
-                                 "Maint" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-20_Maint",
-                                 "MonitWarning" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-20_MonitWarning",
-                                 "SysOK" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-20_SysOK",
-                                 "WarmUp" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-20_WarmUp",
-                                 "ConnLost" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-20_ConnLost",
-                                 DEVICE_PARAM_OK=>#"CTLG-CS:ODH-O2iM-20");
-
-      //********************************************
-      // Device name: CTLG-CS:ODH-O2iM-21
-      // Device type: ODH_O2iM
-      //********************************************
-
-      "DEV_CTLG-CS:ODH-O2iM-21_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=16+10,
-                                 "O2Level" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-21_O2Level",
-                                 "ODHAlarm" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-21_ODHAlarm",
-                                 "ODHWarning" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-21_ODHWarning",
-                                 "MonitHealthyErr" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-21_MonitHealthyErr",
-                                 "Maint" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-21_Maint",
-                                 "MonitWarning" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-21_MonitWarning",
-                                 "SysOK" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-21_SysOK",
-                                 "WarmUp" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-21_WarmUp",
-                                 "ConnLost" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-21_ConnLost",
-                                 DEVICE_PARAM_OK=>#"CTLG-CS:ODH-O2iM-21");
-
-      //********************************************
-      // Device name: CTLG-CS:ODH-O2iM-22
-      // Device type: ODH_O2iM
-      //********************************************
-
-      "DEV_CTLG-CS:ODH-O2iM-22_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=19+10,
-                                 "O2Level" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-22_O2Level",
-                                 "ODHAlarm" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-22_ODHAlarm",
-                                 "ODHWarning" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-22_ODHWarning",
-                                 "MonitHealthyErr" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-22_MonitHealthyErr",
-                                 "Maint" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-22_Maint",
-                                 "MonitWarning" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-22_MonitWarning",
-                                 "SysOK" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-22_SysOK",
-                                 "WarmUp" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-22_WarmUp",
-                                 "ConnLost" := "EPICS_PLC_Tester".#"CTLG-CS:ODH-O2iM-22_ConnLost",
-                                 DEVICE_PARAM_OK=>#"CTLG-CS:ODH-O2iM-22");
-
-      //********************************************
-      // Device name: CXB-CXH:ODH-O2iM-13
-      // Device type: ODH_O2iM
-      //********************************************
-
-      "DEV_CXB-CXH:ODH-O2iM-13_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=22+10,
-                                 "O2Level" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-13_O2Level",
-                                 "ODHAlarm" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-13_ODHAlarm",
-                                 "ODHWarning" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-13_ODHWarning",
-                                 "MonitHealthyErr" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-13_MonitHealthyErr",
-                                 "Maint" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-13_Maint",
-                                 "MonitWarning" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-13_MonitWarning",
-                                 "SysOK" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-13_SysOK",
-                                 "WarmUp" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-13_WarmUp",
-                                 "ConnLost" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-13_ConnLost",
-                                 DEVICE_PARAM_OK=>#"CXB-CXH:ODH-O2iM-13");
-
-      //********************************************
-      // Device name: CXB-CXH:ODH-O2iM-14
-      // Device type: ODH_O2iM
-      //********************************************
-
-      "DEV_CXB-CXH:ODH-O2iM-14_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=25+10,
-                                 "O2Level" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-14_O2Level",
-                                 "ODHAlarm" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-14_ODHAlarm",
-                                 "ODHWarning" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-14_ODHWarning",
-                                 "MonitHealthyErr" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-14_MonitHealthyErr",
-                                 "Maint" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-14_Maint",
-                                 "MonitWarning" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-14_MonitWarning",
-                                 "SysOK" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-14_SysOK",
-                                 "WarmUp" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-14_WarmUp",
-                                 "ConnLost" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-14_ConnLost",
-                                 DEVICE_PARAM_OK=>#"CXB-CXH:ODH-O2iM-14");
-
-      //********************************************
-      // Device name: CXB-CXH:ODH-O2iM-15
-      // Device type: ODH_O2iM
-      //********************************************
-
-      "DEV_CXB-CXH:ODH-O2iM-15_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=28+10,
-                                 "O2Level" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-15_O2Level",
-                                 "ODHAlarm" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-15_ODHAlarm",
-                                 "ODHWarning" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-15_ODHWarning",
-                                 "MonitHealthyErr" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-15_MonitHealthyErr",
-                                 "Maint" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-15_Maint",
-                                 "MonitWarning" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-15_MonitWarning",
-                                 "SysOK" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-15_SysOK",
-                                 "WarmUp" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-15_WarmUp",
-                                 "ConnLost" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-15_ConnLost",
-                                 DEVICE_PARAM_OK=>#"CXB-CXH:ODH-O2iM-15");
-
-      //********************************************
-      // Device name: CXB-CXH:ODH-O2iM-16
-      // Device type: ODH_O2iM
-      //********************************************
-
-      "DEV_CXB-CXH:ODH-O2iM-16_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=31+10,
-                                 "O2Level" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-16_O2Level",
-                                 "ODHAlarm" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-16_ODHAlarm",
-                                 "ODHWarning" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-16_ODHWarning",
-                                 "MonitHealthyErr" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-16_MonitHealthyErr",
-                                 "Maint" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-16_Maint",
-                                 "MonitWarning" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-16_MonitWarning",
-                                 "SysOK" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-16_SysOK",
-                                 "WarmUp" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-16_WarmUp",
-                                 "ConnLost" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-16_ConnLost",
-                                 DEVICE_PARAM_OK=>#"CXB-CXH:ODH-O2iM-16");
-
-      //********************************************
-      // Device name: CXB-CXH:ODH-O2iM-17
-      // Device type: ODH_O2iM
-      //********************************************
-
-      "DEV_CXB-CXH:ODH-O2iM-17_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=34+10,
-                                 "O2Level" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-17_O2Level",
-                                 "ODHAlarm" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-17_ODHAlarm",
-                                 "ODHWarning" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-17_ODHWarning",
-                                 "MonitHealthyErr" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-17_MonitHealthyErr",
-                                 "Maint" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-17_Maint",
-                                 "MonitWarning" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-17_MonitWarning",
-                                 "SysOK" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-17_SysOK",
-                                 "WarmUp" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-17_WarmUp",
-                                 "ConnLost" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-17_ConnLost",
-                                 DEVICE_PARAM_OK=>#"CXB-CXH:ODH-O2iM-17");
-
-      //********************************************
-      // Device name: CXB-CXH:ODH-O2iM-18
-      // Device type: ODH_O2iM
-      //********************************************
-
-      "DEV_CXB-CXH:ODH-O2iM-18_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=37+10,
-                                 "O2Level" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-18_O2Level",
-                                 "ODHAlarm" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-18_ODHAlarm",
-                                 "ODHWarning" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-18_ODHWarning",
-                                 "MonitHealthyErr" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-18_MonitHealthyErr",
-                                 "Maint" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-18_Maint",
-                                 "MonitWarning" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-18_MonitWarning",
-                                 "SysOK" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-18_SysOK",
-                                 "WarmUp" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-18_WarmUp",
-                                 "ConnLost" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-18_ConnLost",
-                                 DEVICE_PARAM_OK=>#"CXB-CXH:ODH-O2iM-18");
-
-      //********************************************
-      // Device name: CXB-CXH:ODH-O2iM-19
-      // Device type: ODH_O2iM
-      //********************************************
-
-      "DEV_CXB-CXH:ODH-O2iM-19_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=40+10,
-                                 "O2Level" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-19_O2Level",
-                                 "ODHAlarm" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-19_ODHAlarm",
-                                 "ODHWarning" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-19_ODHWarning",
-                                 "MonitHealthyErr" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-19_MonitHealthyErr",
-                                 "Maint" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-19_Maint",
-                                 "MonitWarning" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-19_MonitWarning",
-                                 "SysOK" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-19_SysOK",
-                                 "WarmUp" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-19_WarmUp",
-                                 "ConnLost" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-O2iM-19_ConnLost",
-                                 DEVICE_PARAM_OK=>#"CXB-CXH:ODH-O2iM-19");
-
-      //********************************************
-      // Device name: HCB-ACH:ODH-O2iM-1
-      // Device type: ODH_O2iM
-      //********************************************
-
-      "DEV_HCB-ACH:ODH-O2iM-1_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=43+10,
-                                 "O2Level" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-1_O2Level",
-                                 "ODHAlarm" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-1_ODHAlarm",
-                                 "ODHWarning" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-1_ODHWarning",
-                                 "MonitHealthyErr" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-1_MonitHealthyErr",
-                                 "Maint" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-1_Maint",
-                                 "MonitWarning" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-1_MonitWarning",
-                                 "SysOK" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-1_SysOK",
-                                 "WarmUp" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-1_WarmUp",
-                                 "ConnLost" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-1_ConnLost",
-                                 DEVICE_PARAM_OK=>#"HCB-ACH:ODH-O2iM-1");
-
-      //********************************************
-      // Device name: HCB-ACH:ODH-O2iM-2
-      // Device type: ODH_O2iM
-      //********************************************
-
-      "DEV_HCB-ACH:ODH-O2iM-2_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=46+10,
-                                 "O2Level" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-2_O2Level",
-                                 "ODHAlarm" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-2_ODHAlarm",
-                                 "ODHWarning" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-2_ODHWarning",
-                                 "MonitHealthyErr" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-2_MonitHealthyErr",
-                                 "Maint" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-2_Maint",
-                                 "MonitWarning" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-2_MonitWarning",
-                                 "SysOK" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-2_SysOK",
-                                 "WarmUp" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-2_WarmUp",
-                                 "ConnLost" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-2_ConnLost",
-                                 DEVICE_PARAM_OK=>#"HCB-ACH:ODH-O2iM-2");
-
-      //********************************************
-      // Device name: HCB-ACH:ODH-O2iM-3
-      // Device type: ODH_O2iM
-      //********************************************
-
-      "DEV_HCB-ACH:ODH-O2iM-3_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=49+10,
-                                 "O2Level" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-3_O2Level",
-                                 "ODHAlarm" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-3_ODHAlarm",
-                                 "ODHWarning" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-3_ODHWarning",
-                                 "MonitHealthyErr" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-3_MonitHealthyErr",
-                                 "Maint" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-3_Maint",
-                                 "MonitWarning" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-3_MonitWarning",
-                                 "SysOK" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-3_SysOK",
-                                 "WarmUp" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-3_WarmUp",
-                                 "ConnLost" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-3_ConnLost",
-                                 DEVICE_PARAM_OK=>#"HCB-ACH:ODH-O2iM-3");
-
-      //********************************************
-      // Device name: HCB-ACH:ODH-O2iM-4
-      // Device type: ODH_O2iM
-      //********************************************
-
-      "DEV_HCB-ACH:ODH-O2iM-4_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=52+10,
-                                 "O2Level" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-4_O2Level",
-                                 "ODHAlarm" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-4_ODHAlarm",
-                                 "ODHWarning" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-4_ODHWarning",
-                                 "MonitHealthyErr" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-4_MonitHealthyErr",
-                                 "Maint" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-4_Maint",
-                                 "MonitWarning" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-4_MonitWarning",
-                                 "SysOK" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-4_SysOK",
-                                 "WarmUp" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-4_WarmUp",
-                                 "ConnLost" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-4_ConnLost",
-                                 DEVICE_PARAM_OK=>#"HCB-ACH:ODH-O2iM-4");
-
-      //********************************************
-      // Device name: HCB-ACH:ODH-O2iM-5
-      // Device type: ODH_O2iM
-      //********************************************
-
-      "DEV_HCB-ACH:ODH-O2iM-5_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=55+10,
-                                 "O2Level" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-5_O2Level",
-                                 "ODHAlarm" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-5_ODHAlarm",
-                                 "ODHWarning" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-5_ODHWarning",
-                                 "MonitHealthyErr" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-5_MonitHealthyErr",
-                                 "Maint" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-5_Maint",
-                                 "MonitWarning" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-5_MonitWarning",
-                                 "SysOK" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-5_SysOK",
-                                 "WarmUp" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-5_WarmUp",
-                                 "ConnLost" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-O2iM-5_ConnLost",
-                                 DEVICE_PARAM_OK=>#"HCB-ACH:ODH-O2iM-5");
-
-      //********************************************
-      // Device name: HCB-DogSh:ODH-O2iM-12
-      // Device type: ODH_O2iM
-      //********************************************
-
-      "DEV_HCB-DogSh:ODH-O2iM-12_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=58+10,
-                                 "O2Level" := "EPICS_PLC_Tester".#"HCB-DogSh:ODH-O2iM-12_O2Level",
-                                 "ODHAlarm" := "EPICS_PLC_Tester".#"HCB-DogSh:ODH-O2iM-12_ODHAlarm",
-                                 "ODHWarning" := "EPICS_PLC_Tester".#"HCB-DogSh:ODH-O2iM-12_ODHWarning",
-                                 "MonitHealthyErr" := "EPICS_PLC_Tester".#"HCB-DogSh:ODH-O2iM-12_MonitHealthyErr",
-                                 "Maint" := "EPICS_PLC_Tester".#"HCB-DogSh:ODH-O2iM-12_Maint",
-                                 "MonitWarning" := "EPICS_PLC_Tester".#"HCB-DogSh:ODH-O2iM-12_MonitWarning",
-                                 "SysOK" := "EPICS_PLC_Tester".#"HCB-DogSh:ODH-O2iM-12_SysOK",
-                                 "WarmUp" := "EPICS_PLC_Tester".#"HCB-DogSh:ODH-O2iM-12_WarmUp",
-                                 "ConnLost" := "EPICS_PLC_Tester".#"HCB-DogSh:ODH-O2iM-12_ConnLost",
-                                 DEVICE_PARAM_OK=>#"HCB-DogSh:ODH-O2iM-12");
-
-      //********************************************
-      // Device name: HCB-HPGS:ODH-O2iM-10
-      // Device type: ODH_O2iM
-      //********************************************
-
-      "DEV_HCB-HPGS:ODH-O2iM-10_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=61+10,
-                                 "O2Level" := "EPICS_PLC_Tester".#"HCB-HPGS:ODH-O2iM-10_O2Level",
-                                 "ODHAlarm" := "EPICS_PLC_Tester".#"HCB-HPGS:ODH-O2iM-10_ODHAlarm",
-                                 "ODHWarning" := "EPICS_PLC_Tester".#"HCB-HPGS:ODH-O2iM-10_ODHWarning",
-                                 "MonitHealthyErr" := "EPICS_PLC_Tester".#"HCB-HPGS:ODH-O2iM-10_MonitHealthyErr",
-                                 "Maint" := "EPICS_PLC_Tester".#"HCB-HPGS:ODH-O2iM-10_Maint",
-                                 "MonitWarning" := "EPICS_PLC_Tester".#"HCB-HPGS:ODH-O2iM-10_MonitWarning",
-                                 "SysOK" := "EPICS_PLC_Tester".#"HCB-HPGS:ODH-O2iM-10_SysOK",
-                                 "WarmUp" := "EPICS_PLC_Tester".#"HCB-HPGS:ODH-O2iM-10_WarmUp",
-                                 "ConnLost" := "EPICS_PLC_Tester".#"HCB-HPGS:ODH-O2iM-10_ConnLost",
-                                 DEVICE_PARAM_OK=>#"HCB-HPGS:ODH-O2iM-10");
-
-      //********************************************
-      // Device name: HCB-HPGS:ODH-O2iM-11
-      // Device type: ODH_O2iM
-      //********************************************
-
-      "DEV_HCB-HPGS:ODH-O2iM-11_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=64+10,
-                                 "O2Level" := "EPICS_PLC_Tester".#"HCB-HPGS:ODH-O2iM-11_O2Level",
-                                 "ODHAlarm" := "EPICS_PLC_Tester".#"HCB-HPGS:ODH-O2iM-11_ODHAlarm",
-                                 "ODHWarning" := "EPICS_PLC_Tester".#"HCB-HPGS:ODH-O2iM-11_ODHWarning",
-                                 "MonitHealthyErr" := "EPICS_PLC_Tester".#"HCB-HPGS:ODH-O2iM-11_MonitHealthyErr",
-                                 "Maint" := "EPICS_PLC_Tester".#"HCB-HPGS:ODH-O2iM-11_Maint",
-                                 "MonitWarning" := "EPICS_PLC_Tester".#"HCB-HPGS:ODH-O2iM-11_MonitWarning",
-                                 "SysOK" := "EPICS_PLC_Tester".#"HCB-HPGS:ODH-O2iM-11_SysOK",
-                                 "WarmUp" := "EPICS_PLC_Tester".#"HCB-HPGS:ODH-O2iM-11_WarmUp",
-                                 "ConnLost" := "EPICS_PLC_Tester".#"HCB-HPGS:ODH-O2iM-11_ConnLost",
-                                 DEVICE_PARAM_OK=>#"HCB-HPGS:ODH-O2iM-11");
-
-      //********************************************
-      // Device name: HCB-TCH:ODH-O2iM-6
-      // Device type: ODH_O2iM
-      //********************************************
-
-      "DEV_HCB-TCH:ODH-O2iM-6_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=67+10,
-                                 "O2Level" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-6_O2Level",
-                                 "ODHAlarm" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-6_ODHAlarm",
-                                 "ODHWarning" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-6_ODHWarning",
-                                 "MonitHealthyErr" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-6_MonitHealthyErr",
-                                 "Maint" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-6_Maint",
-                                 "MonitWarning" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-6_MonitWarning",
-                                 "SysOK" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-6_SysOK",
-                                 "WarmUp" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-6_WarmUp",
-                                 "ConnLost" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-6_ConnLost",
-                                 DEVICE_PARAM_OK=>#"HCB-TCH:ODH-O2iM-6");
-
-      //********************************************
-      // Device name: HCB-TCH:ODH-O2iM-7
-      // Device type: ODH_O2iM
-      //********************************************
-
-      "DEV_HCB-TCH:ODH-O2iM-7_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=70+10,
-                                 "O2Level" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-7_O2Level",
-                                 "ODHAlarm" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-7_ODHAlarm",
-                                 "ODHWarning" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-7_ODHWarning",
-                                 "MonitHealthyErr" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-7_MonitHealthyErr",
-                                 "Maint" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-7_Maint",
-                                 "MonitWarning" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-7_MonitWarning",
-                                 "SysOK" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-7_SysOK",
-                                 "WarmUp" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-7_WarmUp",
-                                 "ConnLost" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-7_ConnLost",
-                                 DEVICE_PARAM_OK=>#"HCB-TCH:ODH-O2iM-7");
-
-      //********************************************
-      // Device name: HCB-TCH:ODH-O2iM-8
-      // Device type: ODH_O2iM
-      //********************************************
-
-      "DEV_HCB-TCH:ODH-O2iM-8_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=73+10,
-                                 "O2Level" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-8_O2Level",
-                                 "ODHAlarm" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-8_ODHAlarm",
-                                 "ODHWarning" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-8_ODHWarning",
-                                 "MonitHealthyErr" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-8_MonitHealthyErr",
-                                 "Maint" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-8_Maint",
-                                 "MonitWarning" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-8_MonitWarning",
-                                 "SysOK" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-8_SysOK",
-                                 "WarmUp" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-8_WarmUp",
-                                 "ConnLost" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-8_ConnLost",
-                                 DEVICE_PARAM_OK=>#"HCB-TCH:ODH-O2iM-8");
-
-      //********************************************
-      // Device name: HCB-TCH:ODH-O2iM-9
-      // Device type: ODH_O2iM
-      //********************************************
-
-      "DEV_HCB-TCH:ODH-O2iM-9_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=76+10,
-                                 "O2Level" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-9_O2Level",
-                                 "ODHAlarm" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-9_ODHAlarm",
-                                 "ODHWarning" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-9_ODHWarning",
-                                 "MonitHealthyErr" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-9_MonitHealthyErr",
-                                 "Maint" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-9_Maint",
-                                 "MonitWarning" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-9_MonitWarning",
-                                 "SysOK" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-9_SysOK",
-                                 "WarmUp" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-9_WarmUp",
-                                 "ConnLost" := "EPICS_PLC_Tester".#"HCB-TCH:ODH-O2iM-9_ConnLost",
-                                 DEVICE_PARAM_OK=>#"HCB-TCH:ODH-O2iM-9");
-
-      //********************************************
-      // Device name: CXB-CXH:ODH-RIO-2
-      // Device type: ODH_Rack
-      //********************************************
-
-      "DEV_CXB-CXH:ODH-RIO-2_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=1,
-      PLCToEPICSDataBlockOffset:=79+10,
-                                 "SurgeArrOK" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-RIO-2_SurgeArrOK",
-                                 "PS24vOK" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-RIO-2_PS24vOK",
-                                 "UPSBatOK" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-RIO-2_UPSBatOK",
-                                 "UPS24vOK" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-RIO-2_UPS24vOK",
-                                 "UPSBuffReady" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-RIO-2_UPSBuffReady",
-                                 "UPSBatt85" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-RIO-2_UPSBatt85",
-                                 "UPSAlarm" := "EPICS_PLC_Tester".#"CXB-CXH:ODH-RIO-2_UPSAlarm",
-                                 DEVICE_PARAM_OK=>#"CXB-CXH:ODH-RIO-2");
-
-      //********************************************
-      // Device name: HCB-ACH:ODH-RIO-1
-      // Device type: ODH_Rack
-      //********************************************
-
-      "DEV_HCB-ACH:ODH-RIO-1_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=1,
-      PLCToEPICSDataBlockOffset:=80+10,
-                                 "SurgeArrOK" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-RIO-1_SurgeArrOK",
-                                 "PS24vOK" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-RIO-1_PS24vOK",
-                                 "UPSBatOK" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-RIO-1_UPSBatOK",
-                                 "UPS24vOK" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-RIO-1_UPS24vOK",
-                                 "UPSBuffReady" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-RIO-1_UPSBuffReady",
-                                 "UPSBatt85" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-RIO-1_UPSBatt85",
-                                 "UPSAlarm" := "EPICS_PLC_Tester".#"HCB-ACH:ODH-RIO-1_UPSAlarm",
-                                 DEVICE_PARAM_OK=>#"HCB-ACH:ODH-RIO-1");
-
-      //********************************************
-      // Device name: TS2-020Row:CnPw-U-001
-      // Device type: ODH_Rack
-      //********************************************
-
-      "DEV_TS2-020Row:CnPw-U-001_iDB" (EPICSToPLCLength:=0,
-      EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
-      PLCToEPICSLength:=1,
-      PLCToEPICSDataBlockOffset:=81+10,
-                                 "SurgeArrOK" := "EPICS_PLC_Tester".#"TS2-020Row:CnPw-U-001_SurgeArrOK",
-                                 "PS24vOK" := "EPICS_PLC_Tester".#"TS2-020Row:CnPw-U-001_PS24vOK",
-                                 "UPSBatOK" := "EPICS_PLC_Tester".#"TS2-020Row:CnPw-U-001_UPSBatOK",
-                                 "UPS24vOK" := "EPICS_PLC_Tester".#"TS2-020Row:CnPw-U-001_UPS24vOK",
-                                 "UPSBuffReady" := "EPICS_PLC_Tester".#"TS2-020Row:CnPw-U-001_UPSBuffReady",
-                                 "UPSBatt85" := "EPICS_PLC_Tester".#"TS2-020Row:CnPw-U-001_UPSBatt85",
-                                 "UPSAlarm" := "EPICS_PLC_Tester".#"TS2-020Row:CnPw-U-001_UPSAlarm",
-                                 DEVICE_PARAM_OK=>#"TS2-020Row:CnPw-U-001");
-END_FUNCTION
-
-
-//########## EPICS->PLC datablock ##########
 DATA_BLOCK "EPICSToPLC"
 { S7_Optimized_Access := 'FALSE' }
 VERSION : 0.1
+//########## EPICS->PLC datablock ##########
    STRUCT
-      "Word" : Array[0..9] of Word;
+      "Word" { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Array[0..9] of Word;
    END_STRUCT;
 
-
 BEGIN
+
 END_DATA_BLOCK
 
-//########## PLC->EPICS datablock ##########
 DATA_BLOCK "PLCToEPICS"
 { S7_Optimized_Access := 'FALSE' }
 VERSION : 0.1
 NON_RETAIN
+//########## PLC->EPICS datablock ##########
    STRUCT
-      "Word" : Array[0..91] of Word;
+      "Word" { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Array[0..105] of Word;
    END_STRUCT;
 
-
 BEGIN
+
 END_DATA_BLOCK
 
 FUNCTION "_CommsEPICS" : Void
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
    VAR_TEMP
-       PLC_Hash : DInt;
+      PLC_Hash : DInt;
    END_VAR
 
 BEGIN
@@ -2272,9 +1251,9 @@ BEGIN
 	    END_IF;
 	END_IF;
 
-	// PLC Factory commit ID: a585ba87f07398edd84014e386d598bcb13c9557
+	// PLC Factory commit ID: N/A
 	// PLC Hash (Generated by PLC Factory)
-	#PLC_Hash := DINT#-328369184;
+	#PLC_Hash := DINT#1138177476;
 
 	// Send the PLC Hash to the EPICS IOC
 	"PLCToEPICS"."Word"[1] := DINT_TO_WORD(#PLC_Hash);
@@ -2283,7 +1262,7 @@ BEGIN
 	// Call the comms block to provide PLC<->EPICS comms
 	"_CommsPLC_EPICS_DB"(Enable         := "Utilities".AlwaysOn,
 	                     SendTrigger    := "Utilities".Pulse_200ms,
-	                     BytesToSend    := 184,
+	                     BytesToSend    := 212,
 	                     InterfaceID    := 72,
 	                     S7ConnectionID := 256,
 	                     MBConnectionID := 255,
@@ -2293,4 +1272,3 @@ BEGIN
 	                     EPICSToPLCData := "EPICSToPLC"."Word");
 
 END_FUNCTION
-

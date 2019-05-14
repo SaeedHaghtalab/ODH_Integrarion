@@ -12,14 +12,33 @@ epicsEnvSet("TOP","$(E3_CMD_TOP)/..")
 
 epicsEnvSet("PLCNAME","kg-gta_odh-plc-01")
 epicsEnvSet("IPADDR","172.16.49.12")
-epicsEnvSet("INSIZE","184")
+epicsEnvSet("INSIZE","212")
 
 loadIocsh("iocStats.iocsh", "IOCNAME=$(IOC)")
 loadIocsh("recsync.iocsh",  "IOCNAME=$(IOC)")
-loadIocsh("s7plc.iocsh", "PLC_NAME=$(PLCNAME),PLC_IP=$(IPADDR),INSIZE=$(INSIZE)")
-loadIocsh("modbus_s7plc.iocsh", "PLC_NAME=$(PLCNAME),PLC_IP=$(IPADDR)")
 
-dbLoadRecords("$(TOP)/db/kg-gta_odh-plc-01.db", "PLCNAME=$(PLCNAME), MODVERSION=0")
+# S7 port           : 2000
+# Input block size  : 212 bytes
+# Output block size : 0 bytes
+# Endianness        : BigEndian
+# Receive timeout   : 3000 msec
+s7plcConfigure("kg-gta_odh-plc-01", $(IPADDR), 2000, 212, 0, 1, 3000, 0)
+
+# Modbus port       : 502
+drvAsynIPPortConfigure("kg-gta_odh-plc-01", $(IPADDR):502, 0, 0, 1)
+
+# Link type         : TCP/IP (0)
+# Timeout           : 3000 msec
+modbusInterposeConfig("kg-gta_odh-plc-01", 0, 3000, 0)
+
+# Slave address     : 0
+# Function code     : 16 - Write Multiple Registers
+# Addressing        : Absolute (-1)
+# Data segment      : 2 words
+drvModbusAsynConfigure("kg-gta_odh-plc-01write", "kg-gta_odh-plc-01", 0, 16, -1, 2, 0, 0, "S7-1500")
+
+# Load plc interface database
+dbLoadRecords("$(TOP)/db/kg-gta_odh-plc-01.db", "PLCNAME=kg-gta_odh-plc-01, MODVERSION=$(e3_ODH_VERSION)")
 dbLoadRecords("$(TOP)/db/Alarms.db")
 
 iocInit

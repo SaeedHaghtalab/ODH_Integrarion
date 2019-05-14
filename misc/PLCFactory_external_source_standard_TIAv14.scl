@@ -30,44 +30,44 @@ FUNCTION_BLOCK "_UtilitiesFB"
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
    VAR_INPUT 
-      CPUSytemMemoryBits : Byte;   // Address of system memory byte
-      CPUClockMemoryBits : Byte;   // Address of clock memory byte
-      StartupDelaySP : Time;   // Delay before startup delay bit turned on
+      CPUSytemMemoryBits { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Byte;   // Address of system memory byte
+      CPUClockMemoryBits { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Byte;   // Address of clock memory byte
+      StartupDelaySP { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Time;   // Delay before startup delay bit turned on
    END_VAR
 
    VAR 
-      AlwaysOn : Bool;   // Bit always TRUE
-      AlwaysTrue : Bool;   // Bit always TRUE
-      AlwaysOff : Bool;   // Bit always FALSE
-      AlwaysFalse : Bool;   // Bit always FALSE
-      FirstScan : Bool;   // Bit TRUE for only the first scan of the PLC
-      StartupDelayDn : Bool;   // Bit initially FALSE, turning TRUE after preset delay
-      StartupDelayTmr {OriginalPartName := 'IEC_TIMER'; LibVersion := '1.0'} : IEC_TIMER;
-      Square_100ms : Bool;   // Bit FALSE/TRUE based on square wave (100 ms frequency)
-      Square_100msONS : Bool;
-      Pulse_100ms : Bool;   // Bit TRUE every 100 ms for one PLC scan
-      Square_200ms : Bool;   // Bit FALSE/TRUE based on square wave (200 ms frequency)
-      Square_200msONS : Bool;
-      Pulse_200ms : Bool;   // Bit TRUE every 200 ms for one PLC scan
-      Square_400ms : Bool;   // Bit FALSE/TRUE based on square wave (400 ms frequency)
-      Square_400msONS : Bool;
-      Pulse_400ms : Bool;   // Bit TRUE every 400 ms for one PLC scan
-      Square_500ms : Bool;   // Bit FALSE/TRUE based on square wave (500 ms frequency)
-      Square_500msONS : Bool;
-      Pulse_500ms : Bool;   // Bit TRUE every 500 ms for one PLC scan
-      Square_800ms : Bool;   // Bit FALSE/TRUE based on square wave (800 ms frequency)
-      Square_800msONS : Bool;
-      Pulse_800ms : Bool;   // Bit TRUE every 800 ms for one PLC scan
-      Square_1s : Bool;   // Bit FALSE/TRUE based on square wave (1 s frequency)
-      Square_1sONS : Bool;
-      Pulse_1s : Bool;   // Bit TRUE every 1 s for one PLC scan
-      Square_1600ms : Bool;   // Bit FALSE/TRUE based on square wave (1600 ms frequency)
-      Square_1600msONS : Bool;
-      Pulse_1600ms : Bool;   // Bit TRUE every 1600 ms for one PLC scan
-      Square_2s : Bool;   // Bit FALSE/TRUE based on square wave (2 s frequency)
-      Square_2sONS : Bool;
-      Pulse_2s : Bool;   // Bit TRUE every 2 s for one PLC scan
-      TestInProgress : Bool;   // Indicates which caller FC is used
+      AlwaysOn { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit always TRUE
+      AlwaysTrue { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit always TRUE
+      AlwaysOff { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit always FALSE
+      AlwaysFalse { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit always FALSE
+      FirstScan { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit TRUE for only the first scan of the PLC
+      StartupDelayDn { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit initially FALSE, turning TRUE after preset delay
+      StartupDelayTmr { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; OriginalPartName := 'IEC_TIMER'; LibVersion := '1.0'} : IEC_TIMER;
+      Square_100ms { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit FALSE/TRUE based on square wave (100 ms frequency)
+      Square_100msONS { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
+      Pulse_100ms { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit TRUE every 100 ms for one PLC scan
+      Square_200ms { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit FALSE/TRUE based on square wave (200 ms frequency)
+      Square_200msONS { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
+      Pulse_200ms { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit TRUE every 200 ms for one PLC scan
+      Square_400ms { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit FALSE/TRUE based on square wave (400 ms frequency)
+      Square_400msONS { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
+      Pulse_400ms { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit TRUE every 400 ms for one PLC scan
+      Square_500ms { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit FALSE/TRUE based on square wave (500 ms frequency)
+      Square_500msONS { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
+      Pulse_500ms { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit TRUE every 500 ms for one PLC scan
+      Square_800ms { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit FALSE/TRUE based on square wave (800 ms frequency)
+      Square_800msONS { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
+      Pulse_800ms { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit TRUE every 800 ms for one PLC scan
+      Square_1s { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit FALSE/TRUE based on square wave (1 s frequency)
+      Square_1sONS { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
+      Pulse_1s { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit TRUE every 1 s for one PLC scan
+      Square_1600ms { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit FALSE/TRUE based on square wave (1600 ms frequency)
+      Square_1600msONS { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
+      Pulse_1600ms { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit TRUE every 1600 ms for one PLC scan
+      Square_2s { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit FALSE/TRUE based on square wave (2 s frequency)
+      Square_2sONS { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
+      Pulse_2s { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit TRUE every 2 s for one PLC scan
+      TestInProgress { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Indicates which caller FC is used
    END_VAR
 
 BEGIN
@@ -163,10 +163,9 @@ END_DATA_BLOCK
 DATA_BLOCK "EPICSToPLC"
 { S7_Optimized_Access := 'FALSE' }
 VERSION : 0.1
-NON_RETAIN
 //########## EPICS->PLC datablock ##########
-   STRUCT 
-      "Word" : Array[0..10] of Word;
+   STRUCT
+      "Word" { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Array[0..10] of Word;
    END_STRUCT;
 
 BEGIN
@@ -177,8 +176,8 @@ DATA_BLOCK "PLCToEPICS"
 VERSION : 0.1
 NON_RETAIN
 //########## PLC->EPICS datablock ##########
-   STRUCT 
-      "Word" : Array[0..10] of Word;
+   STRUCT
+      "Word" { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Array[0..10] of Word;
    END_STRUCT;
 
 BEGIN
@@ -188,25 +187,25 @@ FUNCTION_BLOCK "_CommsPLC_EPICS"
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
    VAR_INPUT 
-      Enable : Bool;   // Enable all comms
-      SendTrigger : Bool;   // Trigger for PLC->EPICS data send (should be quick and cyclic)
-      BytesToSend : Int;   // Number of bytes for PLC->EPICS data send
-      InterfaceID : HW_ANY;   // Hardware identifier of Ethernet port to be used (see under device configuration)
-      S7ConnectionID : Int := 256;   // Connection ID for EPICS s7plc driver connection
-      MBConnectionID : Int := 255;   // Connection ID for EPICS modbus driver connection
-      S7Port : Int := 2000;   // PLC port for EPICS s7plc driver connection
-      MBPort : Int := 502;   // PLC port for EPICS modbus driver connection
+      Enable { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Enable all comms
+      SendTrigger { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Trigger for PLC->EPICS data send (should be quick and cyclic)
+      BytesToSend { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Number of bytes for PLC->EPICS data send
+      InterfaceID { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : HW_ANY;   // Hardware identifier of Ethernet port to be used (see under device configuration)
+      S7ConnectionID { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int := 256;   // Connection ID for EPICS s7plc driver connection
+      MBConnectionID { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int := 255;   // Connection ID for EPICS modbus driver connection
+      S7Port { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int := 2000;   // PLC port for EPICS s7plc driver connection
+      MBPort { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int := 502;   // PLC port for EPICS modbus driver connection
    END_VAR
 
    VAR_OUTPUT 
-      SendDone : Bool;
-      SendBusy : Bool;
-      SendError : Bool;
-      SendStatus : Word;
-      RcvNewDataReady : Bool;
-      RcvDataRead : Bool;
-      RcvError : Bool;
-      RcvStatus : Word;
+      SendDone { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
+      SendBusy { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
+      SendError { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
+      SendStatus { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Word;
+      RcvNewDataReady { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
+      RcvDataRead { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
+      RcvError { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
+      RcvStatus { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Word;
    END_VAR
 
    VAR_IN_OUT 
@@ -215,10 +214,10 @@ VERSION : 0.1
    END_VAR
 
    VAR 
-      SendConnData {OriginalPartName := 'TCON_IP_v4'; LibVersion := '1.0'} : TCON_IP_v4;   // Connection parameters
-      RcvConnData {OriginalPartName := 'TCON_IP_v4'; LibVersion := '1.0'} : TCON_IP_v4;   // Connection parameters
-      TSEND_C_DB {OriginalPartName := 'TSENDC'; LibVersion := '3.2'} : TSEND_C;
-      MB_SERVER_DB {OriginalPartName := 'MBSERVER'; LibVersion := '4.2'} : MB_SERVER;
+      SendConnData { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; OriginalPartName := 'TCON_IP_v4'; LibVersion := '1.0'} : TCON_IP_v4;   // Connection parameters
+      RcvConnData { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; OriginalPartName := 'TCON_IP_v4'; LibVersion := '1.0'} : TCON_IP_v4;   // Connection parameters
+      TSEND_C_DB { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; OriginalPartName := 'TSENDC'; LibVersion := '3.2'} : TSEND_C;
+      MB_SERVER_DB { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; OriginalPartName := 'MBSERVER'; LibVersion := '4.2'} : MB_SERVER;
    END_VAR
 
 
