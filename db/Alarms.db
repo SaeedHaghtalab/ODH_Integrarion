@@ -1,5 +1,5 @@
 record(calc, KG-GTA:ODH-PLC-01:ODHAlarm_) {
-  field(SCAN, "Passive")
+  field(SCAN, "10 second")
   field(CALC, "A||B||C||D||E||F||G||H||I||J||K||L")
   field(INPA, "HCB-ACH:ODH-O2iM-1:ODHAlarm CP")
   field(INPB, "HCB-ACH:ODH-O2iM-2:ODHAlarm CP")
@@ -9,13 +9,13 @@ record(calc, KG-GTA:ODH-PLC-01:ODHAlarm_) {
   field(INPF, "HCB-TCH:ODH-O2iM-6:ODHAlarm CP")
   field(INPG, "HCB-TCH:ODH-O2iM-7:ODHAlarm CP")
   field(INPH, "HCB-TCH:ODH-O2iM-8:ODHAlarm CP")
-  field(INPI, "HCB-ACH:ODH-O2iM-9:ODHAlarm CP")
+  field(INPI, "HCB-TCH:ODH-O2iM-9:ODHAlarm CP")
   field(INPJ, "HCB-HPGS:ODH-O2iM-10:ODHAlarm CP")
   field(INPK, "HCB-HPGS:ODH-O2iM-11:ODHAlarm CP")
   field(INPL, "HCB-DogSh:ODH-O2iM-12:ODHAlarm CP")
 }
 record(calc, KG-GTA:ODH-PLC-01:ODHAlarm) {
-  field(SCAN, "Passive")
+  field(SCAN, "10 second")
   field(CALC, "A||B||C||D||E||F||G||H||I||J||K")
   field(INPA, "KG-GTA:ODH-PLC-01:ODHAlarm_ CP")
   field(INPB, "CXB-CXH:ODH-O2iM-13:ODHAlarm CP")
@@ -31,7 +31,7 @@ record(calc, KG-GTA:ODH-PLC-01:ODHAlarm) {
 }
 
 record(calc, KG-GTA:ODH-PLC-01:MonitHealthyErr_) {
-  field(SCAN, "Passive")
+  field(SCAN, "10 second")
   field(CALC, "A||B||C||D||E||F||G||H||I||J||K||L")
   field(INPA, "HCB-ACH:ODH-O2iM-1:MonitHealthyErr CP")
   field(INPB, "HCB-ACH:ODH-O2iM-2:MonitHealthyErr CP")
@@ -41,13 +41,13 @@ record(calc, KG-GTA:ODH-PLC-01:MonitHealthyErr_) {
   field(INPF, "HCB-TCH:ODH-O2iM-6:MonitHealthyErr CP")
   field(INPG, "HCB-TCH:ODH-O2iM-7:MonitHealthyErr CP")
   field(INPH, "HCB-TCH:ODH-O2iM-8:MonitHealthyErr CP")
-  field(INPI, "HCB-ACH:ODH-O2iM-9:MonitHealthyErr CP")
+  field(INPI, "HCB-TCH:ODH-O2iM-9:MonitHealthyErr CP")
   field(INPJ, "HCB-HPGS:ODH-O2iM-10:MonitHealthyErr CP")
   field(INPK, "HCB-HPGS:ODH-O2iM-11:MonitHealthyErr CP")
   field(INPL, "HCB-DogSh:ODH-O2iM-12:MonitHealthyErr CP")
 }
 record(calc, KG-GTA:ODH-PLC-01:MonitHealthyErr) {
-  field(SCAN, "Passive")
+  field(SCAN, "10 second")
   field(CALC, "A||B||C||D||E||F||G||H||I||J||K")
   field(INPA, "KG-GTA:ODH-PLC-01:MonitHealthyErr_ CP")
   field(INPB, "CXB-CXH:ODH-O2iM-13:MonitHealthyErr CP")
@@ -64,7 +64,7 @@ record(calc, KG-GTA:ODH-PLC-01:MonitHealthyErr) {
 
 
 record(calc, KG-GTA:ODH-PLC-01:ConnLost_) {
-  field(SCAN, "Passive")
+  field(SCAN, "10 second")
   field(CALC, "A||B||C||D||E||F||G||H||I||J||K||L")
   field(INPA, "HCB-ACH:ODH-O2iM-1:ConnLost CP")
   field(INPB, "HCB-ACH:ODH-O2iM-2:ConnLost CP")
@@ -74,13 +74,13 @@ record(calc, KG-GTA:ODH-PLC-01:ConnLost_) {
   field(INPF, "HCB-TCH:ODH-O2iM-6:ConnLost CP")
   field(INPG, "HCB-TCH:ODH-O2iM-7:ConnLost CP")
   field(INPH, "HCB-TCH:ODH-O2iM-8:ConnLost CP")
-  field(INPI, "HCB-ACH:ODH-O2iM-9:ConnLost CP")
+  field(INPI, "HCB-TCH:ODH-O2iM-9:ConnLost CP")
   field(INPJ, "HCB-HPGS:ODH-O2iM-10:ConnLost CP")
   field(INPK, "HCB-HPGS:ODH-O2iM-11:ConnLost CP")
   field(INPL, "HCB-DogSh:ODH-O2iM-12:ConnLost CP")
 }
 record(calc, KG-GTA:ODH-PLC-01:ConnLost) {
-  field(SCAN, "Passive")
+  field(SCAN, "10 second")
   field(CALC, "A||B||C||D||E||F||G||H||I||J||K")
   field(INPA, "KG-GTA:ODH-PLC-01:ConnLost_ CP")
   field(INPB, "CXB-CXH:ODH-O2iM-13:ConnLost CP")

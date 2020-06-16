@@ -45,7 +45,7 @@ record(bi, "KG-GTA:ODH-PLC-01:ModbusConnectedR")
 	field(ONAM,	"Connected")
 	field(ZNAM,	"Disconnected")
 	field(ZSV,      "MAJOR")
-	field(FLNK,	"KG-GTA:ODH-PLC-01:CommsHashToPLCS")
+	field(FLNK,	"KG-GTA:ODH-PLC-01:CommsHashToPLCS.PROC CA")
 }
 record(bi, "KG-GTA:ODH-PLC-01:S7ConnectedR")
 {
