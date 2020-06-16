@@ -1,0 +1,18 @@
+############################ ODH Detection System   ##############################
+
+############################
+#  STATUS BLOCK
+############################
+
+set_defaults(ARCHIVE=True)
+
+define_status_block()
+
+add_digital("SurgeArrOK",                PV_DESC="Rack surge arrestor is healthy",                PV_ONAM="Healty",           PV_ZNAM="NOK!")
+add_digital("PS24vOK",                   PV_DESC="Rack power supply is healthy",                  PV_ONAM="Healty",           PV_ZNAM="NOK!")
+add_digital("UPSBatOK",                  PV_DESC="Rack UPS battery is healthy",                   PV_ONAM="Healty",           PV_ZNAM="NOK!")
+add_digital("UPS24vOK",                  PV_DESC="Rack UPS 24VDC is healthy",                     PV_ONAM="Healty",           PV_ZNAM="NOK!")
+add_digital("UPSBuffReady",              PV_DESC="Rack UPS is ready to buffer",                   PV_ONAM="Ready to buffer",  PV_ZNAM="NOK!")
+add_digital("UPSBatt85",                 PV_DESC="Rack UPS battery > 85% charge",                 PV_ONAM="At least 85%",     PV_ZNAM="NOK!")
+add_major_alarm("UPSAlarm", "UPS Alarm", PV_DESC="Rack UPS has an alarm",                         PV_ZNAM="Healthy")
+add_major_alarm("SMAlarm",  "SM Alarm",  PV_DESC="Selectivity module status",                     PV_ZNAM="Healthy")

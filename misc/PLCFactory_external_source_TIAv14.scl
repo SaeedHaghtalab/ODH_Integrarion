@@ -1,3 +1,138 @@
+FUNCTION_BLOCK "_UtilitiesFB"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      CPUSytemMemoryBits { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Byte;   // Address of system memory byte
+      CPUClockMemoryBits { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Byte;   // Address of clock memory byte
+      StartupDelaySP { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Time;   // Delay before startup delay bit turned on
+   END_VAR
+
+   VAR 
+      AlwaysOn { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit always TRUE
+      AlwaysTrue { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit always TRUE
+      AlwaysOff { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit always FALSE
+      AlwaysFalse { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit always FALSE
+      FirstScan { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit TRUE for only the first scan of the PLC
+      StartupDelayDn { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit initially FALSE, turning TRUE after preset delay
+      StartupDelayTmr { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; OriginalPartName := 'IEC_TIMER'; LibVersion := '1.0'} : IEC_TIMER;
+      Square_100ms { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit FALSE/TRUE based on square wave (100 ms frequency)
+      Square_100msONS { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
+      Pulse_100ms { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit TRUE every 100 ms for one PLC scan
+      Square_200ms { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit FALSE/TRUE based on square wave (200 ms frequency)
+      Square_200msONS { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
+      Pulse_200ms { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit TRUE every 200 ms for one PLC scan
+      Square_400ms { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit FALSE/TRUE based on square wave (400 ms frequency)
+      Square_400msONS { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
+      Pulse_400ms { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit TRUE every 400 ms for one PLC scan
+      Square_500ms { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit FALSE/TRUE based on square wave (500 ms frequency)
+      Square_500msONS { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
+      Pulse_500ms { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit TRUE every 500 ms for one PLC scan
+      Square_800ms { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit FALSE/TRUE based on square wave (800 ms frequency)
+      Square_800msONS { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
+      Pulse_800ms { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit TRUE every 800 ms for one PLC scan
+      Square_1s { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit FALSE/TRUE based on square wave (1 s frequency)
+      Square_1sONS { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
+      Pulse_1s { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit TRUE every 1 s for one PLC scan
+      Square_1600ms { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit FALSE/TRUE based on square wave (1600 ms frequency)
+      Square_1600msONS { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
+      Pulse_1600ms { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit TRUE every 1600 ms for one PLC scan
+      Square_2s { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit FALSE/TRUE based on square wave (2 s frequency)
+      Square_2sONS { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
+      Pulse_2s { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit TRUE every 2 s for one PLC scan
+      TestInProgress { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Indicates which caller FC is used
+      EPICS_Device_calls_precessed { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Indicates which caller FC is used
+   END_VAR
+
+BEGIN
+	//This block provides standard "Utilities" tags that can be used in the rest OF the PLC code such
+	//as:
+	//* Always On
+	//* Always Off
+	//* Startup Delay
+	//* Pulses (different frequences)
+	//* etc.
+
+	//When using This block in your program, name the instance DB "Utilities" AND THEN you will be able TO use tags like "Utilities.AlwaysOn" in the rest OF your program.
+
+	//This block relies On information provided BY the CPU. This needs TO be enabled in the CPU hardware configuration under System AND Clock Memory.
+	//Enable both functions AND pick memory bytes you'd like TO use (defauls are %MB1 AND %MB0 respectively).
+	//THEN connect the selected Byte TO the inputs OF This block.
+	//
+
+	//Bit TRUE for only the first scan of the PLC
+	#FirstScan := #CPUSytemMemoryBits.%X0;
+
+	//Bit always TRUE
+	#AlwaysOn := #CPUSytemMemoryBits.%X2;
+	#AlwaysTrue := #CPUSytemMemoryBits.%X2;
+
+	//Bit always FALSE
+	#AlwaysOff := #CPUSytemMemoryBits.%X3;
+	#AlwaysFalse := #CPUSytemMemoryBits.%X3;
+
+	//Bit initially FALSE, turning TRUE after preset delay
+	#StartupDelayTmr.TON(IN := #AlwaysTrue,
+	                     PT := #StartupDelaySP,
+	                     Q => #StartupDelayDn);
+
+	//Bit TRUE every 100 ms FOR one PLC scan
+	#Square_100ms := #CPUClockMemoryBits.%X0;
+	"UTIL_P_TRIG"("i_Input Bit" := #Square_100ms,
+	              "iq_Trigger Bit" := #Square_100msONS,
+	              "iq_Pulse Bit" := #Pulse_100ms);
+
+	//Bit TRUE every 200 ms FOR one PLC scan
+	#Square_200ms := #CPUClockMemoryBits.%X1;
+	"UTIL_P_TRIG"("i_Input Bit" := #Square_200ms,
+	              "iq_Trigger Bit" := #Square_200msONS,
+	              "iq_Pulse Bit" := #Pulse_200ms);
+
+	//Bit TRUE every 400 ms FOR one PLC scan
+	#Square_400ms := #CPUClockMemoryBits.%X2;
+	"UTIL_P_TRIG"("i_Input Bit" := #Square_400ms,
+	              "iq_Trigger Bit" := #Square_400msONS,
+	              "iq_Pulse Bit" := #Pulse_400ms);
+
+	//Bit TRUE every 500 ms FOR one PLC scan
+	#Square_500ms := #CPUClockMemoryBits.%X3;
+	"UTIL_P_TRIG"("i_Input Bit" := #Square_500ms,
+	              "iq_Trigger Bit" := #Square_500msONS,
+	              "iq_Pulse Bit" := #Pulse_500ms);
+
+	//Bit TRUE every 800 ms FOR one PLC scan
+	#Square_800ms := #CPUClockMemoryBits.%X4;
+	"UTIL_P_TRIG"("i_Input Bit" := #Square_800ms,
+	              "iq_Trigger Bit" := #Square_800msONS,
+	              "iq_Pulse Bit" := #Pulse_800ms);
+
+	//Bit TRUE every 1 s FOR one PLC scan
+	#Square_1s := #CPUClockMemoryBits.%X5;
+	"UTIL_P_TRIG"("i_Input Bit" := #Square_1s,
+	              "iq_Trigger Bit" := #Square_1sONS,
+	              "iq_Pulse Bit" := #Pulse_1s);
+
+	//Bit TRUE every 1600 ms FOR one PLC scan
+	#Square_1600ms := #CPUClockMemoryBits.%X6;
+	"UTIL_P_TRIG"("i_Input Bit" := #Square_1600ms,
+	              "iq_Trigger Bit" := #Square_1600msONS,
+	              "iq_Pulse Bit" := #Pulse_1600ms);
+
+	//Bit TRUE every 2s FOR one PLC scan
+	#Square_2s := #CPUClockMemoryBits.%X7;
+	"UTIL_P_TRIG"("i_Input Bit" := #Square_2s,
+	              "iq_Trigger Bit" := #Square_2sONS,
+	              "iq_Pulse Bit" := #Pulse_2s);
+
+END_FUNCTION_BLOCK
+DATA_BLOCK "Utilities"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+NON_RETAIN
+"_UtilitiesFB"
+
+BEGIN
+
+END_DATA_BLOCK
 FUNCTION_BLOCK "DEVTYPE_PLC"
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 1.0
@@ -98,7 +233,6 @@ VERSION : 1.0
       "SCL3_Status" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: SCL3_Status
    EPICSToPLCLength { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Length of device command register array (in words)
    EPICSToPLCDataBlockOffset { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Offset in EPICS->PLC comms block where this device data resides (in words)
-   EPICSToPLCParametersStart { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // The border offset between the Command and the Parameter area
    PLCToEPICSLength { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Length of device status register array (in words)
    PLCToEPICSDataBlockOffset { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Offset in PLC->EPICS comms block where this device data resides (in words)
    END_VAR
@@ -130,11 +264,11 @@ VERSION : 1.0
       HashTIAMap : DInt;
       i : Int;
    END_VAR
-    //Author: Miklos Boros (miklos.boros@esss.se), Copyrigth 2017-2018 by European Spallation Source, Lund
+    //Author: Miklos Boros (miklos.boros@esss.se), Copyrigth 2017-2020 by European Spallation Source, Lund
     //This block was generated by PLCFactory, please don't change it MANUALLY!
-    //Input File Name: KG-GTA_ODH-PLC-01-template-IFA-20190514112048.ifa
-    //Generated: 20190514112048
-    //According to HASH: 1138177476
+    //Input File Name: KG-GTA_ODH-PLC-01-template-IFA-20200616104928.ifa
+    //Generated: 20200616104928
+    //According to HASH: -165088913
     //Device type: PLC
     //Description: This function does the variable mapping for a device. All device-variable will be linked to an interface variable defined in this block.
 
@@ -147,7 +281,7 @@ VERSION : 1.0
     #MyWordsinDint[1] := "EPICSToPLC"."Word"[1];
     #HashModbus := #MyDInt; //Hash from EPICS/ModbusTCP
 
-    #HashIFA := 1138177476; //Hash from Interface Factory as a constant
+    #HashIFA := -165088913; //Hash from Interface Factory as a constant
 
     #MyWordsinDint[0] := "PLCToEPICS"."Word"[0];
     #MyWordsinDint[1] := "PLCToEPICS"."Word"[1];
@@ -169,7 +303,7 @@ VERSION : 1.0
        // Clear the buffer of any residual data, but skip the first word as that is the actual and maximum length
        FOR #i:=1 TO 20 DO
             #MyWordsinString[#i] := 0;
-       END_FOR;			
+       END_FOR;
        #MyString := #"SW_Checksum";  //EPICSName: SW_Checksum
        FOR #i:=0 TO 7 DO
             "PLCToEPICS"."Word"[#PLCToEPICSDataBlockOffset + 0 + #i] := #MyWordsinString[#i + 1];
@@ -180,7 +314,7 @@ VERSION : 1.0
        // Clear the buffer of any residual data, but skip the first word as that is the actual and maximum length
        FOR #i:=1 TO 20 DO
             #MyWordsinString[#i] := 0;
-       END_FOR;			
+       END_FOR;
        #MyString := #"Text_Checksum";  //EPICSName: Text_Checksum
        FOR #i:=0 TO 7 DO
             "PLCToEPICS"."Word"[#PLCToEPICSDataBlockOffset + 9 + #i] := #MyWordsinString[#i + 1];
@@ -310,7 +444,6 @@ VERSION : 1.0
       "ConnLost" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: ConnLost
    EPICSToPLCLength { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Length of device command register array (in words)
    EPICSToPLCDataBlockOffset { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Offset in EPICS->PLC comms block where this device data resides (in words)
-   EPICSToPLCParametersStart { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // The border offset between the Command and the Parameter area
    PLCToEPICSLength { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Length of device status register array (in words)
    PLCToEPICSDataBlockOffset { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Offset in PLC->EPICS comms block where this device data resides (in words)
    END_VAR
@@ -342,11 +475,11 @@ VERSION : 1.0
       HashTIAMap : DInt;
       i : Int;
    END_VAR
-    //Author: Miklos Boros (miklos.boros@esss.se), Copyrigth 2017-2018 by European Spallation Source, Lund
+    //Author: Miklos Boros (miklos.boros@esss.se), Copyrigth 2017-2020 by European Spallation Source, Lund
     //This block was generated by PLCFactory, please don't change it MANUALLY!
-    //Input File Name: KG-GTA_ODH-PLC-01-template-IFA-20190514112048.ifa
-    //Generated: 20190514112048
-    //According to HASH: 1138177476
+    //Input File Name: KG-GTA_ODH-PLC-01-template-IFA-20200616104928.ifa
+    //Generated: 20200616104928
+    //According to HASH: -165088913
     //Device type: ODH_Area
     //Description: This function does the variable mapping for a device. All device-variable will be linked to an interface variable defined in this block.
 
@@ -359,7 +492,7 @@ VERSION : 1.0
     #MyWordsinDint[1] := "EPICSToPLC"."Word"[1];
     #HashModbus := #MyDInt; //Hash from EPICS/ModbusTCP
 
-    #HashIFA := 1138177476; //Hash from Interface Factory as a constant
+    #HashIFA := -165088913; //Hash from Interface Factory as a constant
 
     #MyWordsinDint[0] := "PLCToEPICS"."Word"[0];
     #MyWordsinDint[1] := "PLCToEPICS"."Word"[1];
@@ -402,7 +535,6 @@ VERSION : 1.0
       "ConnLost" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: ConnLost
    EPICSToPLCLength { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Length of device command register array (in words)
    EPICSToPLCDataBlockOffset { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Offset in EPICS->PLC comms block where this device data resides (in words)
-   EPICSToPLCParametersStart { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // The border offset between the Command and the Parameter area
    PLCToEPICSLength { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Length of device status register array (in words)
    PLCToEPICSDataBlockOffset { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Offset in PLC->EPICS comms block where this device data resides (in words)
    END_VAR
@@ -434,11 +566,11 @@ VERSION : 1.0
       HashTIAMap : DInt;
       i : Int;
    END_VAR
-    //Author: Miklos Boros (miklos.boros@esss.se), Copyrigth 2017-2018 by European Spallation Source, Lund
+    //Author: Miklos Boros (miklos.boros@esss.se), Copyrigth 2017-2020 by European Spallation Source, Lund
     //This block was generated by PLCFactory, please don't change it MANUALLY!
-    //Input File Name: KG-GTA_ODH-PLC-01-template-IFA-20190514112048.ifa
-    //Generated: 20190514112048
-    //According to HASH: 1138177476
+    //Input File Name: KG-GTA_ODH-PLC-01-template-IFA-20200616104928.ifa
+    //Generated: 20200616104928
+    //According to HASH: -165088913
     //Device type: ODH_O2iM
     //Description: This function does the variable mapping for a device. All device-variable will be linked to an interface variable defined in this block.
 
@@ -451,7 +583,7 @@ VERSION : 1.0
     #MyWordsinDint[1] := "EPICSToPLC"."Word"[1];
     #HashModbus := #MyDInt; //Hash from EPICS/ModbusTCP
 
-    #HashIFA := 1138177476; //Hash from Interface Factory as a constant
+    #HashIFA := -165088913; //Hash from Interface Factory as a constant
 
     #MyWordsinDint[0] := "PLCToEPICS"."Word"[0];
     #MyWordsinDint[1] := "PLCToEPICS"."Word"[1];
@@ -502,7 +634,6 @@ VERSION : 1.0
       "SMAlarm" { ExternalAccessible := 'True'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : BOOL;   //EPICS Status variable: SMAlarm
    EPICSToPLCLength { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Length of device command register array (in words)
    EPICSToPLCDataBlockOffset { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Offset in EPICS->PLC comms block where this device data resides (in words)
-   EPICSToPLCParametersStart { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // The border offset between the Command and the Parameter area
    PLCToEPICSLength { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Length of device status register array (in words)
    PLCToEPICSDataBlockOffset { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Int;   // Offset in PLC->EPICS comms block where this device data resides (in words)
    END_VAR
@@ -534,11 +665,11 @@ VERSION : 1.0
       HashTIAMap : DInt;
       i : Int;
    END_VAR
-    //Author: Miklos Boros (miklos.boros@esss.se), Copyrigth 2017-2018 by European Spallation Source, Lund
+    //Author: Miklos Boros (miklos.boros@esss.se), Copyrigth 2017-2020 by European Spallation Source, Lund
     //This block was generated by PLCFactory, please don't change it MANUALLY!
-    //Input File Name: KG-GTA_ODH-PLC-01-template-IFA-20190514112048.ifa
-    //Generated: 20190514112048
-    //According to HASH: 1138177476
+    //Input File Name: KG-GTA_ODH-PLC-01-template-IFA-20200616104928.ifa
+    //Generated: 20200616104928
+    //According to HASH: -165088913
     //Device type: ODH_Rack
     //Description: This function does the variable mapping for a device. All device-variable will be linked to an interface variable defined in this block.
 
@@ -551,7 +682,7 @@ VERSION : 1.0
     #MyWordsinDint[1] := "EPICSToPLC"."Word"[1];
     #HashModbus := #MyDInt; //Hash from EPICS/ModbusTCP
 
-    #HashIFA := 1138177476; //Hash from Interface Factory as a constant
+    #HashIFA := -165088913; //Hash from Interface Factory as a constant
 
     #MyWordsinDint[0] := "PLCToEPICS"."Word"[0];
     #MyWordsinDint[1] := "PLCToEPICS"."Word"[1];
@@ -613,6 +744,15 @@ END_DATA_BLOCK
 
 
 DATA_BLOCK "DEV_HCB-ACH:ODH-Area_iDB"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 1.0
+NON_RETAIN
+"DEVTYPE_ODH_Area"
+BEGIN
+END_DATA_BLOCK
+
+
+DATA_BLOCK "DEV_HCB-DogSh:ODH-Area_iDB"
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 1.0
 NON_RETAIN
@@ -854,6 +994,7 @@ VERSION : 1.0
       "CTLG-CS:ODH-Area" : Bool;   // HASH codes are OK
       "CXB-CXH:ODH-Area" : Bool;   // HASH codes are OK
       "HCB-ACH:ODH-Area" : Bool;   // HASH codes are OK
+      "HCB-DogSh:ODH-Area" : Bool;   // HASH codes are OK
       "CTLG-CS:ODH-O2iM-20" : Bool;   // HASH codes are OK
       "CTLG-CS:ODH-O2iM-21" : Bool;   // HASH codes are OK
       "CTLG-CS:ODH-O2iM-22" : Bool;   // HASH codes are OK
@@ -882,13 +1023,14 @@ VERSION : 1.0
    END_VAR
 
 BEGIN
-      //Author: Miklos Boros (miklos.boros@esss.se), Copyrigth 2017-2018 by European Spallation Source, Lund
+      //Author: Miklos Boros (miklos.boros@esss.se), Copyrigth 2017-2020 by European Spallation Source, Lund
       //This block was generated by PLCFactory
-      //According to HASH:1138177476
+      //According to HASH:-165088913
       //Description: Description: This function calls the devices according to the corresponding device type
 
         //DO NOT Modify the following line!!!
         "Utilities".TestInProgress := FALSE;
+        "Utilities".EPICS_Device_calls_precessed := TRUE;
 
 
         //********************************************
@@ -898,7 +1040,6 @@ BEGIN
 
       "DEV_KG-GTA:ODH-PLC-01_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=24,
       PLCToEPICSDataBlockOffset:=0+10);
 
@@ -909,7 +1050,6 @@ BEGIN
 
       "DEV_CTLG-CS:ODH-Area_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=1,
       PLCToEPICSDataBlockOffset:=24+10);
 
@@ -920,7 +1060,6 @@ BEGIN
 
       "DEV_CXB-CXH:ODH-Area_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=1,
       PLCToEPICSDataBlockOffset:=25+10);
 
@@ -931,9 +1070,18 @@ BEGIN
 
       "DEV_HCB-ACH:ODH-Area_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=1,
       PLCToEPICSDataBlockOffset:=26+10);
+
+        //********************************************
+        // Device name: HCB-DogSh:ODH-Area
+        // Device type: ODH_Area
+        //********************************************
+
+      "DEV_HCB-DogSh:ODH-Area_iDB" (EPICSToPLCLength:=0,
+      EPICSToPLCDataBlockOffset:=0+10,
+      PLCToEPICSLength:=1,
+      PLCToEPICSDataBlockOffset:=27+10);
 
         //********************************************
         // Device name: CTLG-CS:ODH-O2iM-20
@@ -942,9 +1090,8 @@ BEGIN
 
       "DEV_CTLG-CS:ODH-O2iM-20_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=27+10);
+      PLCToEPICSDataBlockOffset:=28+10);
 
         //********************************************
         // Device name: CTLG-CS:ODH-O2iM-21
@@ -953,9 +1100,8 @@ BEGIN
 
       "DEV_CTLG-CS:ODH-O2iM-21_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=30+10);
+      PLCToEPICSDataBlockOffset:=31+10);
 
         //********************************************
         // Device name: CTLG-CS:ODH-O2iM-22
@@ -964,9 +1110,8 @@ BEGIN
 
       "DEV_CTLG-CS:ODH-O2iM-22_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=33+10);
+      PLCToEPICSDataBlockOffset:=34+10);
 
         //********************************************
         // Device name: CXB-CXH:ODH-O2iM-13
@@ -975,9 +1120,8 @@ BEGIN
 
       "DEV_CXB-CXH:ODH-O2iM-13_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=36+10);
+      PLCToEPICSDataBlockOffset:=37+10);
 
         //********************************************
         // Device name: CXB-CXH:ODH-O2iM-14
@@ -986,9 +1130,8 @@ BEGIN
 
       "DEV_CXB-CXH:ODH-O2iM-14_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=39+10);
+      PLCToEPICSDataBlockOffset:=40+10);
 
         //********************************************
         // Device name: CXB-CXH:ODH-O2iM-15
@@ -997,9 +1140,8 @@ BEGIN
 
       "DEV_CXB-CXH:ODH-O2iM-15_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=42+10);
+      PLCToEPICSDataBlockOffset:=43+10);
 
         //********************************************
         // Device name: CXB-CXH:ODH-O2iM-16
@@ -1008,9 +1150,8 @@ BEGIN
 
       "DEV_CXB-CXH:ODH-O2iM-16_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=45+10);
+      PLCToEPICSDataBlockOffset:=46+10);
 
         //********************************************
         // Device name: CXB-CXH:ODH-O2iM-17
@@ -1019,9 +1160,8 @@ BEGIN
 
       "DEV_CXB-CXH:ODH-O2iM-17_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=48+10);
+      PLCToEPICSDataBlockOffset:=49+10);
 
         //********************************************
         // Device name: CXB-CXH:ODH-O2iM-18
@@ -1030,9 +1170,8 @@ BEGIN
 
       "DEV_CXB-CXH:ODH-O2iM-18_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=51+10);
+      PLCToEPICSDataBlockOffset:=52+10);
 
         //********************************************
         // Device name: CXB-CXH:ODH-O2iM-19
@@ -1041,9 +1180,8 @@ BEGIN
 
       "DEV_CXB-CXH:ODH-O2iM-19_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=54+10);
+      PLCToEPICSDataBlockOffset:=55+10);
 
         //********************************************
         // Device name: HCB-ACH:ODH-O2iM-1
@@ -1052,9 +1190,8 @@ BEGIN
 
       "DEV_HCB-ACH:ODH-O2iM-1_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=57+10);
+      PLCToEPICSDataBlockOffset:=58+10);
 
         //********************************************
         // Device name: HCB-ACH:ODH-O2iM-2
@@ -1063,9 +1200,8 @@ BEGIN
 
       "DEV_HCB-ACH:ODH-O2iM-2_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=60+10);
+      PLCToEPICSDataBlockOffset:=61+10);
 
         //********************************************
         // Device name: HCB-ACH:ODH-O2iM-3
@@ -1074,9 +1210,8 @@ BEGIN
 
       "DEV_HCB-ACH:ODH-O2iM-3_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=63+10);
+      PLCToEPICSDataBlockOffset:=64+10);
 
         //********************************************
         // Device name: HCB-ACH:ODH-O2iM-4
@@ -1085,9 +1220,8 @@ BEGIN
 
       "DEV_HCB-ACH:ODH-O2iM-4_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=66+10);
+      PLCToEPICSDataBlockOffset:=67+10);
 
         //********************************************
         // Device name: HCB-ACH:ODH-O2iM-5
@@ -1096,9 +1230,8 @@ BEGIN
 
       "DEV_HCB-ACH:ODH-O2iM-5_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=69+10);
+      PLCToEPICSDataBlockOffset:=70+10);
 
         //********************************************
         // Device name: HCB-DogSh:ODH-O2iM-12
@@ -1107,9 +1240,8 @@ BEGIN
 
       "DEV_HCB-DogSh:ODH-O2iM-12_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=72+10);
+      PLCToEPICSDataBlockOffset:=73+10);
 
         //********************************************
         // Device name: HCB-HPGS:ODH-O2iM-10
@@ -1118,9 +1250,8 @@ BEGIN
 
       "DEV_HCB-HPGS:ODH-O2iM-10_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=75+10);
+      PLCToEPICSDataBlockOffset:=76+10);
 
         //********************************************
         // Device name: HCB-HPGS:ODH-O2iM-11
@@ -1129,9 +1260,8 @@ BEGIN
 
       "DEV_HCB-HPGS:ODH-O2iM-11_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=78+10);
+      PLCToEPICSDataBlockOffset:=79+10);
 
         //********************************************
         // Device name: HCB-TCH:ODH-O2iM-6
@@ -1140,9 +1270,8 @@ BEGIN
 
       "DEV_HCB-TCH:ODH-O2iM-6_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=81+10);
+      PLCToEPICSDataBlockOffset:=82+10);
 
         //********************************************
         // Device name: HCB-TCH:ODH-O2iM-7
@@ -1151,9 +1280,8 @@ BEGIN
 
       "DEV_HCB-TCH:ODH-O2iM-7_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=84+10);
+      PLCToEPICSDataBlockOffset:=85+10);
 
         //********************************************
         // Device name: HCB-TCH:ODH-O2iM-8
@@ -1162,9 +1290,8 @@ BEGIN
 
       "DEV_HCB-TCH:ODH-O2iM-8_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=87+10);
+      PLCToEPICSDataBlockOffset:=88+10);
 
         //********************************************
         // Device name: HCB-TCH:ODH-O2iM-9
@@ -1173,9 +1300,8 @@ BEGIN
 
       "DEV_HCB-TCH:ODH-O2iM-9_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=3,
-      PLCToEPICSDataBlockOffset:=90+10);
+      PLCToEPICSDataBlockOffset:=91+10);
 
         //********************************************
         // Device name: CXB-CXH:ODH-RIO-2
@@ -1184,9 +1310,8 @@ BEGIN
 
       "DEV_CXB-CXH:ODH-RIO-2_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=1,
-      PLCToEPICSDataBlockOffset:=93+10);
+      PLCToEPICSDataBlockOffset:=94+10);
 
         //********************************************
         // Device name: HCB-ACH:ODH-RIO-1
@@ -1195,9 +1320,8 @@ BEGIN
 
       "DEV_HCB-ACH:ODH-RIO-1_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=1,
-      PLCToEPICSDataBlockOffset:=94+10);
+      PLCToEPICSDataBlockOffset:=95+10);
 
         //********************************************
         // Device name: TS2-020Row:CnPw-U-001
@@ -1206,10 +1330,207 @@ BEGIN
 
       "DEV_TS2-020Row:CnPw-U-001_iDB" (EPICSToPLCLength:=0,
       EPICSToPLCDataBlockOffset:=0+10,
-      EPICSToPLCParametersStart:=0,
       PLCToEPICSLength:=1,
-      PLCToEPICSDataBlockOffset:=95+10);
+      PLCToEPICSDataBlockOffset:=96+10);
 END_FUNCTION
+DATA_BLOCK "EPICS_DebuggerResult"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+NON_RETAIN
+   VAR 
+      EPICS_Debugger_Checksum : Array[0..7] of Byte;   // Current TIA Portal Software Hash including PLC logic (this is not the EPICS IOC Hash)
+      EPICS_Debugger_UtilitiesCall : String;   // PLCFactory Utilities call status
+      EPICS_Debugger_DeviceCalls : String;   // PLCFactory DeviceCalls status
+      EPICS_Debugger_IOCHash : String;   // EPICS IOC Hash vs. PLCFactory Hash
+      EPICS_Debugger_ModBusHeartBeat : String;   // EPICS IOC Modbus (IOC->PLC) communication status
+      EPICS_Debugger_S7Connection : String;   // EPICS IOC S7 TCP (PLC->IOC) communication status
+      EPICS_Debugger_EPICS_GeneralState : String;   // Main status of the EPICS IOC communication
+      EPICS_S7Port : Int;   // Actual TCP port that has been opened by the PLC
+      EPICS_ModbusPort : Int;   // Actual ModBusTCP port that has been opened by the PLC
+      EPICS_PLC_EthernetInterface : UInt;   // The currently used HW Identifer of the Ethernet Port on the PLC dedicated to EPICS
+      EPICS_CommunicationOK : Bool;   // Overall EPICS communication is OK
+   END_VAR
+
+BEGIN
+
+END_DATA_BLOCK
+FUNCTION_BLOCK "EPICS_DebuggerFB"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR 
+      GetChecksum_Instance {OriginalPartName := 'GetChecksum_FB_807_S71500'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : GetChecksum;
+      execute { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      scope { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : UInt := 1;
+      busy { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      done { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      error { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      memErrStatus { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Word;
+      CheckUtilitiesTON {OriginalPartName := 'IEC_TIMER'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : TON_TIME;
+      UtilSquareErrorTON { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      CheckUtilitiesTON2 {OriginalPartName := 'IEC_TIMER'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : TON_TIME;
+      UtilSquareErrorTON2 { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      ModBus_TON {OriginalPartName := 'IEC_TIMER'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : TON_TIME;
+      ModBus_wordsave { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Word;
+   END_VAR
+   VAR DB_SPECIFIC
+      Helper_String { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : String;
+      Helper_String_Array { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} AT Helper_String : Struct
+         String_Maximal { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Byte;
+         String_Actual { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Byte;
+         StringValueArray { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Array[0..15] of Byte;
+      END_STRUCT;
+   END_VAR
+   VAR 
+      S7ConnTON {OriginalPartName := 'IEC_TIMER'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : TON_TIME;
+   END_VAR
+
+   VAR_TEMP 
+      AllOK { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      i : Int;
+      ModBusOK : Bool;
+      S7OK : Bool;
+   END_VAR
+
+
+BEGIN
+	//Author: Miklos Boros (miklos.boros@esss.se), Copyrigth 2017-2020 by European Spallation Source, Lund
+	//This block was generated by PLCFactory
+	//Description: This FB checks the EPICS configuration and outputs the result into EPICS_DebuggerResult.
+
+	//DO NOT Modify this block!!!
+
+	//AllOK will be evaluated in this code and passed to the EPICS_CommunicationOK signal that can be used by the PLC logic
+	#AllOK := TRUE;
+
+	#GetChecksum_Instance(Scope:=#scope,
+	                      Done=>#done,
+	                      Busy=>#busy,
+	                      Error=>#error,
+	                      Status=>#memErrStatus,
+	                      Checksum:="EPICS_DebuggerResult".EPICS_Debugger_Checksum);
+
+
+	#CheckUtilitiesTON(IN:="Utilities".Square_100ms,
+	                   PT:=T#200ms,
+	                   Q=>#UtilSquareErrorTON);
+
+	#CheckUtilitiesTON2(IN := NOT "Utilities".Square_100ms,
+	                   PT := T#200ms,
+	                   Q => #UtilSquareErrorTON2);
+
+
+	#ModBus_TON(IN := #ModBus_wordsave = "EPICSToPLC"."Word"[2],
+	            PT := T#5s);
+
+
+	IF ("Utilities".AlwaysOn = FALSE) THEN
+	    "EPICS_DebuggerResult".#EPICS_Debugger_UtilitiesCall := 'ERROR: FunctionBlock: "_UilitiesFB" is called with a wrong InstanceDB. Call it with the existing iDB named: "Utilities" AND check if the System Memory bits and the System Clock byte is enabled!';
+         #AllOK := FALSE;
+	ELSE
+	    IF (#UtilSquareErrorTON OR #UtilSquareErrorTON2) THEN
+	        "EPICS_DebuggerResult".#EPICS_Debugger_UtilitiesCall := 'ERROR: FunctionBlock: "_UilitiesFB" is called with a wrong InstanceDB. Call it with the existing iDB named: "Utilities" AND check if the System Memory bits and the System Clock byte is enabled!';
+             #AllOK := FALSE;
+	    ELSE
+	        "EPICS_DebuggerResult".#EPICS_Debugger_UtilitiesCall := 'OK: EPICS Utilities works as expected.';
+	        
+	    END_IF;
+	END_IF;
+	    
+	IF ("Utilities".EPICS_Device_calls_precessed) THEN
+	    "EPICS_DebuggerResult".#EPICS_Debugger_DeviceCalls := 'OK: "EPICS_device_calls" is called as expected.';
+	ELSE
+	    "EPICS_DebuggerResult".#EPICS_Debugger_DeviceCalls := 'ERROR: "EPICS_device_calls" is not called in OB1!';
+         #AllOK := FALSE;
+	END_IF;
+	    
+	IF (("EPICSToPLC"."Word"[0] = "PLCToEPICS"."Word"[0]) AND ("EPICSToPLC"."Word"[1] = "PLCToEPICS"."Word"[1])) THEN
+	    "EPICS_DebuggerResult".#EPICS_Debugger_IOCHash := 'OK: IOC and PLC hash are equal.';
+	ELSE    
+	    "EPICS_DebuggerResult".#EPICS_Debugger_IOCHash := 'ERROR: IOC and PLC hash are NOT equal!';
+         #AllOK := FALSE;
+	END_IF;
+
+	IF (#ModBus_TON.Q) THEN
+	    "EPICS_DebuggerResult".#EPICS_Debugger_ModBusHeartBeat := 'ERROR: The IOC is not sending any HeartBeat via ModBus!';
+         #AllOK := FALSE;
+	    #ModBusOK := FALSE;
+	ELSE
+	    "EPICS_DebuggerResult".#EPICS_Debugger_ModBusHeartBeat := 'OK: ModBus HeartBeat is received as expected.';
+	    #ModBusOK := TRUE;
+	END_IF;
+
+	#S7ConnTON(IN := NOT "_CommsPLC_EPICS_DB".SendDone, PT := T#3s);
+
+	IF ("_CommsPLC_EPICS_DB".BytesToSend > 0) THEN
+	    
+	    IF (#S7ConnTON.Q) THEN
+	        "EPICS_DebuggerResult".EPICS_Debugger_S7Connection := 'ERROR: EPICS S7 connection can not send Status variables!';
+	        #S7OK := FALSE;
+             #AllOK := FALSE;
+	    ELSE
+	        "EPICS_DebuggerResult".EPICS_Debugger_S7Connection := 'OK: EPICS S7 works as expected.';
+	        #S7OK := TRUE;
+	        
+	    END_IF;
+	ELSE
+	    "EPICS_DebuggerResult".EPICS_Debugger_S7Connection := 'OK: EPICS S7 disabled, there is no Status variable to send.';
+	    #S7OK := TRUE;
+	END_IF;
+
+	IF (#ModBusOK AND #S7OK) THEN
+	    "EPICS_DebuggerResult".EPICS_Debugger_EPICS_GeneralState := 'OK. EPICS IOC communication is ONLINE.';
+	END_IF;
+
+	IF (#ModBusOK AND NOT #S7OK) THEN
+	    "EPICS_DebuggerResult".EPICS_Debugger_EPICS_GeneralState := 'ERROR. ModBus seems to be working but S7 TCP is blocked. Try to check your PLC router IP.';
+         #AllOK := FALSE;
+	END_IF;
+
+	IF (NOT #ModBusOK AND #S7OK) THEN
+	    "EPICS_DebuggerResult".EPICS_Debugger_EPICS_GeneralState := 'ERROR. ModBus seems to be offline. Waiting for IOC to finish connecting to the PLC.';
+         #AllOK := FALSE;
+	END_IF;
+
+	IF ( NOT #ModBusOK AND NOT #S7OK) THEN
+	    "EPICS_DebuggerResult".EPICS_Debugger_EPICS_GeneralState := 'ERROR. Both ModBus and S7 TCP seems to be offline. Check if your IOC is running and if it is connected to the right PLC interface. Your HardwareID comes from CCDB!';
+         #AllOK := FALSE;
+	END_IF;
+
+	"EPICS_DebuggerResult".EPICS_ModbusPort := "_CommsPLC_EPICS_DB".MBPort;
+	"EPICS_DebuggerResult".EPICS_S7Port := "_CommsPLC_EPICS_DB".S7Port;
+	"EPICS_DebuggerResult".EPICS_PLC_EthernetInterface :=  "_CommsPLC_EPICS_DB".InterfaceID;
+
+	#ModBus_wordsave := "EPICSToPLC"."Word"[2];
+
+	//Put the Overall result to the Globl DB
+	"EPICS_DebuggerResult".EPICS_CommunicationOK := #AllOK;
+
+
+END_FUNCTION_BLOCK
+DATA_BLOCK "EPICS_DebuggerFB_iDB"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+NON_RETAIN
+"EPICS_DebuggerFB"
+
+BEGIN
+
+END_DATA_BLOCK
+ORGANIZATION_BLOCK "EPICS_DebuggerOB"
+TITLE = "Main Program Sweep (Cycle)"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+BEGIN
+	//Author: Miklos Boros (miklos.boros@esss.se), Copyrigth 2017-2020 by European Spallation Source, Lund
+	//This block was generated by PLCFactory
+	//Description: This OB is a cyclic OB called in every PLC cycle and EPICS_DebuggerFB checks the EPICS configuration.
+
+	//DO NOT Modify this block!!!
+	"EPICS_DebuggerFB_iDB"();
+
+
+END_ORGANIZATION_BLOCK
 DATA_BLOCK "EPICSToPLC"
 { S7_Optimized_Access := 'FALSE' }
 VERSION : 0.1
@@ -1228,7 +1549,7 @@ VERSION : 0.1
 NON_RETAIN
 //########## PLC->EPICS datablock ##########
    STRUCT
-      "Word" { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Array[0..105] of Word;
+      "Word" { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Array[0..106] of Word;
    END_STRUCT;
 
 BEGIN
@@ -1253,7 +1574,7 @@ BEGIN
 
 	// PLC Factory commit ID: N/A
 	// PLC Hash (Generated by PLC Factory)
-	#PLC_Hash := DINT#1138177476;
+	#PLC_Hash := DINT#-165088913;
 
 	// Send the PLC Hash to the EPICS IOC
 	"PLCToEPICS"."Word"[1] := DINT_TO_WORD(#PLC_Hash);
@@ -1262,7 +1583,7 @@ BEGIN
 	// Call the comms block to provide PLC<->EPICS comms
 	"_CommsPLC_EPICS_DB"(Enable         := "Utilities".AlwaysOn,
 	                     SendTrigger    := "Utilities".Pulse_200ms,
-	                     BytesToSend    := 212,
+	                     BytesToSend    := 214,
 	                     InterfaceID    := 72,
 	                     S7ConnectionID := 256,
 	                     MBConnectionID := 255,

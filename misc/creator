@@ -1,0 +1,6 @@
+#!/bin/sh
+
+#PLCFactory branch: master
+#PLCFactory commit: 06b82961a56e666f1107df3756c9e433fe8a5478
+
+plcfactory.py --device KG-GTA:ODH-PLC-01 --plc-interface --eee --e3 -t ARCHIVE

@@ -1,0 +1,132 @@
+############################ ODH Detection System   ##############################
+
+############################
+#  STATUS BLOCK
+############################
+
+set_defaults(ARCHIVE=True)
+
+define_status_block()
+
+add_string("SW_Checksum",   16, PV_DESC="Standard blocks checksum")
+add_string("Text_Checksum", 16, PV_DESC="Text lists checksum")
+
+#################################
+#CPU modules
+add_digital("CPU_Connected",       PV_DESC="ODH CPU Connected",       PV_ONAM="Connected",  PV_ZNAM="Disconnected")
+add_digital("CPU_Status",          PV_DESC="ODH CPU Status",          PV_ONAM="OK",         PV_ZNAM="NOK")
+
+#################################
+#RIO1 Connection
+add_digital("RIO1_IM_Connected",     PV_DESC="RIO Interface Module Connection", PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO1_DI1_Connected",    PV_DESC="RIO DI1 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO1_DI2_Connected",    PV_DESC="RIO DI2 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO1_DI3_Connected",    PV_DESC="RIO DI3 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO1_DI4_Connected",    PV_DESC="RIO DI4 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO1_DI5_Connected",    PV_DESC="RIO DI5 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO1_AI1_Connected",    PV_DESC="RIO AI1 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO1_AI2_Connected",    PV_DESC="RIO AI2 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO1_AI3_Connected",    PV_DESC="RIO AI3 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO1_AI4_Connected",    PV_DESC="RIO AI4 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO1_DO1_Connected",    PV_DESC="RIO DO1 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO1_DO2_Connected",    PV_DESC="RIO DO2 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO1_DO3_Connected",    PV_DESC="RIO DO3 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO1_SvrMod_Connected", PV_DESC="RIO Server Module Connection",    PV_ONAM="Connected", PV_ZNAM="Disconnected")
+
+#RIO1 Status
+add_digital("RIO1_IM_Status",     PV_DESC="RIO Interface Module Status", PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO1_DI1_Status",    PV_DESC="RIO DI1 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO1_DI2_Status",    PV_DESC="RIO DI2 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO1_DI3_Status",    PV_DESC="RIO DI3 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO1_DI4_Status",    PV_DESC="RIO DI4 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO1_DI5_Status",    PV_DESC="RIO DI5 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO1_AI1_Status",    PV_DESC="RIO AI1 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO1_AI2_Status",    PV_DESC="RIO AI2 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO1_AI3_Status",    PV_DESC="RIO AI3 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO1_AI4_Status",    PV_DESC="RIO AI4 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO1_DO1_Status",    PV_DESC="RIO DO1 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO1_DO2_Status",    PV_DESC="RIO DO2 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO1_DO3_Status",    PV_DESC="RIO DO3 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO1_SvrMod_Status", PV_DESC="RIO Server Module Status",    PV_ONAM="OK",        PV_ZNAM="NOK!")
+
+#################################
+#RIO2 Connection
+add_digital("RIO2_IM_Connected",     PV_DESC="RIO Interface Module Connection", PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO2_DI1_Connected",    PV_DESC="RIO DI1 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO2_DI2_Connected",    PV_DESC="RIO DI2 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO2_DI3_Connected",    PV_DESC="RIO DI3 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO2_DI4_Connected",    PV_DESC="RIO DI4 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO2_DI5_Connected",    PV_DESC="RIO DI5 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO2_AI1_Connected",    PV_DESC="RIO AI1 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO2_AI2_Connected",    PV_DESC="RIO AI2 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO2_AI3_Connected",    PV_DESC="RIO AI3 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO2_AI4_Connected",    PV_DESC="RIO AI4 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO2_DO1_Connected",    PV_DESC="RIO DO1 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO2_DO2_Connected",    PV_DESC="RIO DO2 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO2_DO3_Connected",    PV_DESC="RIO DO3 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO2_SvrMod_Connected", PV_DESC="RIO Server Module Connection",    PV_ONAM="Connected", PV_ZNAM="Disconnected")
+
+#RIO2 Status
+add_digital("RIO2_IM_Status",     PV_DESC="RIO Interface Module Status", PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO2_DI1_Status",    PV_DESC="RIO DI1 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO2_DI2_Status",    PV_DESC="RIO DI2 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO2_DI3_Status",    PV_DESC="RIO DI3 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO2_DI4_Status",    PV_DESC="RIO DI4 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO2_DI5_Status",    PV_DESC="RIO DI5 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO2_AI1_Status",    PV_DESC="RIO AI1 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO2_AI2_Status",    PV_DESC="RIO AI2 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO2_AI3_Status",    PV_DESC="RIO AI3 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO2_AI4_Status",    PV_DESC="RIO AI4 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO2_DO1_Status",    PV_DESC="RIO DO1 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO2_DO2_Status",    PV_DESC="RIO DO2 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO2_DO3_Status",    PV_DESC="RIO DO3 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO2_SvrMod_Status", PV_DESC="RIO Server Module Status",    PV_ONAM="OK",        PV_ZNAM="NOK!")
+
+
+#################################
+#RIO3 Connection
+add_digital("RIO3_IM_Connected",     PV_DESC="RIO Interface Module Connection", PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO3_DI1_Connected",    PV_DESC="RIO DI1 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO3_DI2_Connected",    PV_DESC="RIO DI2 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO3_DI3_Connected",    PV_DESC="RIO DI3 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO3_DI4_Connected",    PV_DESC="RIO DI4 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO3_DI5_Connected",    PV_DESC="RIO DI5 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO3_AI1_Connected",    PV_DESC="RIO AI1 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO3_AI2_Connected",    PV_DESC="RIO AI2 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO3_AI3_Connected",    PV_DESC="RIO AI3 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO3_AI4_Connected",    PV_DESC="RIO AI4 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO3_DO1_Connected",    PV_DESC="RIO DO1 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO3_DO2_Connected",    PV_DESC="RIO DO2 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO3_DO3_Connected",    PV_DESC="RIO DO3 Module Connection",       PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("RIO3_SvrMod_Connected", PV_DESC="RIO Server Module Connection",    PV_ONAM="Connected", PV_ZNAM="Disconnected")
+
+#RIO3 Status
+add_digital("RIO3_IM_Status",     PV_DESC="RIO Interface Module Status", PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO3_DI1_Status",    PV_DESC="RIO DI1 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO3_DI2_Status",    PV_DESC="RIO DI2 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO3_DI3_Status",    PV_DESC="RIO DI3 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO3_DI4_Status",    PV_DESC="RIO DI4 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO3_DI5_Status",    PV_DESC="RIO DI5 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO3_AI1_Status",    PV_DESC="RIO AI1 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO3_AI2_Status",    PV_DESC="RIO AI2 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO3_AI3_Status",    PV_DESC="RIO AI3 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO3_AI4_Status",    PV_DESC="RIO AI4 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO3_DO1_Status",    PV_DESC="RIO DO1 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO3_DO2_Status",    PV_DESC="RIO DO2 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO3_DO3_Status",    PV_DESC="RIO DO3 Module Status",       PV_ONAM="OK",        PV_ZNAM="NOK!")
+add_digital("RIO3_SvrMod_Status", PV_DESC="RIO Server Module Status",    PV_ONAM="OK",        PV_ZNAM="NOK!")
+
+#################################
+#Scalance Switch 1
+add_digital("SCL1_Connected",     PV_DESC="Scalance Switch Connection", PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("SCL1_Status",        PV_DESC="Scalance Switch Status",     PV_ONAM="OK",        PV_ZNAM="NOK!")
+
+#################################
+#Scalance Switch 2
+add_digital("SCL2_Connected",     PV_DESC="Scalance Switch Connection", PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("SCL2_Status",        PV_DESC="Scalance Switch Status",     PV_ONAM="OK",        PV_ZNAM="NOK!")
+
+#################################
+#Scalance Switch 3
+add_digital("SCL3_Connected",     PV_DESC="Scalance Switch Connection", PV_ONAM="Connected", PV_ZNAM="Disconnected")
+add_digital("SCL3_Status",        PV_DESC="Scalance Switch Status",     PV_ONAM="OK",        PV_ZNAM="NOK!")

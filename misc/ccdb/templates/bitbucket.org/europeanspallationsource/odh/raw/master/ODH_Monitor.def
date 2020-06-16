@@ -1,0 +1,39 @@
+############################ ODH Detection System   ##############################
+############################
+#  STATUS BLOCK
+############################
+
+set_defaults(ARCHIVE=True)
+
+define_status_block()
+
+add_analog("O2Level",               "REAL",             PV_NAME="O2Level",          PV_DESC="Level of Oxygen in percent",  PV_EGU="%")
+add_minor_alarm("ODHWarning",       "Oxygen < 19.5%",   PV_NAME="ODHWarning",       PV_DESC="Oxygen concentration < 19.5%",                                         PV_ZNAM="Oxygen > 19.5%")
+add_major_alarm("ODHAlarm",         "Oxygen < 18%",     PV_NAME="ODHAlarm",         PV_DESC="Oxygen concentration < 18%",                                           PV_ZNAM="Oxygen > 18%")
+add_major_alarm("MonitHealthyErr",  "NOT Healthy",      PV_NAME="MonitHealthyErr",  PV_DESC="Monitor health status",                    PV_ZNAM="Monitor Healthy")
+add_digital("Maint",                                    PV_NAME="Maint",            PV_DESC="Monitor is in maintenance mode",           PV_ONAM="Maintenance",      PV_ZNAM="Production")
+add_digital("SysOK",                                    PV_NAME="SysOK",            PV_DESC="Done self check without internal fault",   PV_ONAM="System OK",        PV_ZNAM="Internal Fault")
+add_minor_alarm("MonitWarning",     "Internal Fault",   PV_NAME="MonitWarning",     PV_DESC="Fault in ODH monitor",                                                 PV_ZNAM="OK")
+add_digital("WarmUp",                                   PV_NAME="WarmUp",           PV_DESC="Monitor has warmed-up",                    PV_ONAM="Warmed Up",        PV_ZNAM="False")
+add_major_alarm("ConnLost",         "Connection Lost",  PV_NAME="ConnLost",         PV_DESC="Lost communication with monitor",                                      PV_ZNAM="Communication OK")
+
+add_verbatim("""
+record(calcout, "[PLCF#INSTALLATION_SLOT]:iODHAlrmWarn")
+{
+	field(INPA, "[PLCF#INSTALLATION_SLOT]:ODHWarning CP MSS")
+	field(INPB, "[PLCF#INSTALLATION_SLOT]:ODHAlarm CP MSS")
+	field(CALC, "B ? 2 : A")
+	field(OUT,  "[PLCF#INSTALLATION_SLOT]:ODHAlrmWarn PP MSS")
+}
+record(mbbi, "[PLCF#INSTALLATION_SLOT]:ODHAlrmWarn")
+{
+	field(ZRVL, "0")
+	field(ZRST, "No alarms")
+	field(ONVL, "1")
+	field(ONST, "Oxygen < 19.5%")
+	field(ONSV, "MINOR")
+	field(TWVL, "2")
+	field(TWST, "Oxygen < 18%")
+	field(TWSV, "MAJOR")
+}
+""")

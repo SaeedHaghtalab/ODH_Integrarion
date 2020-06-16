@@ -13,7 +13,7 @@ VERSION : 0.1
 
 BEGIN
 	//Prositive edge generator for SCL
-	
+
 	IF #"i_Input Bit" AND #"iq_Trigger Bit"
 	THEN
 	    #"iq_Pulse Bit" := FALSE;
@@ -68,6 +68,7 @@ VERSION : 0.1
       Square_2sONS { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;
       Pulse_2s { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Bit TRUE every 2 s for one PLC scan
       TestInProgress { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Indicates which caller FC is used
+      EPICS_Device_calls_precessed { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'; } : Bool;   // Indicates which caller FC is used
    END_VAR
 
 BEGIN
@@ -78,78 +79,78 @@ BEGIN
 	//* Startup Delay
 	//* Pulses (different frequences)
 	//* etc.
-	
+
 	//When using This block in your program, name the instance DB "Utilities" AND THEN you will be able TO use tags like "Utilities.AlwaysOn" in the rest OF your program.
-	
+
 	//This block relies On information provided BY the CPU. This needs TO be enabled in the CPU hardware configuration under System AND Clock Memory.
 	//Enable both functions AND pick memory bytes you'd like TO use (defauls are %MB1 AND %MB0 respectively).
 	//THEN connect the selected Byte TO the inputs OF This block.
 	//
-	
+
 	//Bit TRUE for only the first scan of the PLC
 	#FirstScan := #CPUSytemMemoryBits.%X0;
-	
+
 	//Bit always TRUE
 	#AlwaysOn := #CPUSytemMemoryBits.%X2;
 	#AlwaysTrue := #CPUSytemMemoryBits.%X2;
-	
+
 	//Bit always FALSE
 	#AlwaysOff := #CPUSytemMemoryBits.%X3;
 	#AlwaysFalse := #CPUSytemMemoryBits.%X3;
-	
+
 	//Bit initially FALSE, turning TRUE after preset delay
 	#StartupDelayTmr.TON(IN := #AlwaysTrue,
 	                     PT := #StartupDelaySP,
 	                     Q => #StartupDelayDn);
-	
+
 	//Bit TRUE every 100 ms FOR one PLC scan
 	#Square_100ms := #CPUClockMemoryBits.%X0;
 	"UTIL_P_TRIG"("i_Input Bit" := #Square_100ms,
 	              "iq_Trigger Bit" := #Square_100msONS,
 	              "iq_Pulse Bit" := #Pulse_100ms);
-	
+
 	//Bit TRUE every 200 ms FOR one PLC scan
 	#Square_200ms := #CPUClockMemoryBits.%X1;
 	"UTIL_P_TRIG"("i_Input Bit" := #Square_200ms,
 	              "iq_Trigger Bit" := #Square_200msONS,
 	              "iq_Pulse Bit" := #Pulse_200ms);
-	
+
 	//Bit TRUE every 400 ms FOR one PLC scan
 	#Square_400ms := #CPUClockMemoryBits.%X2;
 	"UTIL_P_TRIG"("i_Input Bit" := #Square_400ms,
 	              "iq_Trigger Bit" := #Square_400msONS,
 	              "iq_Pulse Bit" := #Pulse_400ms);
-	
+
 	//Bit TRUE every 500 ms FOR one PLC scan
 	#Square_500ms := #CPUClockMemoryBits.%X3;
 	"UTIL_P_TRIG"("i_Input Bit" := #Square_500ms,
 	              "iq_Trigger Bit" := #Square_500msONS,
 	              "iq_Pulse Bit" := #Pulse_500ms);
-	
+
 	//Bit TRUE every 800 ms FOR one PLC scan
 	#Square_800ms := #CPUClockMemoryBits.%X4;
 	"UTIL_P_TRIG"("i_Input Bit" := #Square_800ms,
 	              "iq_Trigger Bit" := #Square_800msONS,
 	              "iq_Pulse Bit" := #Pulse_800ms);
-	
+
 	//Bit TRUE every 1 s FOR one PLC scan
 	#Square_1s := #CPUClockMemoryBits.%X5;
 	"UTIL_P_TRIG"("i_Input Bit" := #Square_1s,
 	              "iq_Trigger Bit" := #Square_1sONS,
 	              "iq_Pulse Bit" := #Pulse_1s);
-	
+
 	//Bit TRUE every 1600 ms FOR one PLC scan
 	#Square_1600ms := #CPUClockMemoryBits.%X6;
 	"UTIL_P_TRIG"("i_Input Bit" := #Square_1600ms,
 	              "iq_Trigger Bit" := #Square_1600msONS,
 	              "iq_Pulse Bit" := #Pulse_1600ms);
-	
+
 	//Bit TRUE every 2s FOR one PLC scan
 	#Square_2s := #CPUClockMemoryBits.%X7;
 	"UTIL_P_TRIG"("i_Input Bit" := #Square_2s,
 	              "iq_Trigger Bit" := #Square_2sONS,
 	              "iq_Pulse Bit" := #Pulse_2s);
-	
+
 END_FUNCTION_BLOCK
 DATA_BLOCK "Utilities"
 { S7_Optimized_Access := 'TRUE' }
@@ -170,7 +171,7 @@ VERSION : 0.1
 
 BEGIN
 
-END_DATA_BLOCK	
+END_DATA_BLOCK
 DATA_BLOCK "PLCToEPICS"
 { S7_Optimized_Access := 'FALSE' }
 VERSION : 0.1
@@ -228,28 +229,28 @@ BEGIN
 	//
 	//The block is fully self-contained, i.e. you should be able TO simple insert it in your program (AND call it OF course) AND provide some inputs TO it
 	//
-	
+
 	//Set up connections (Ethernet port ID)
 	#SendConnData.InterfaceId := #InterfaceID;
 	#RcvConnData.InterfaceId := #InterfaceID;
-	
+
 	//Set up connections (Connection ID) (separate connections for s7 and Modbus)
 	#SendConnData.ID := INT_TO_WORD(IN:= #S7ConnectionID);
 	#RcvConnData.ID := INT_TO_WORD(IN := #MBConnectionID);
-	
+
 	//Set up connections (Connection type)
 	#SendConnData.ConnectionType := 11;
 	#RcvConnData.ConnectionType := 11;
-	
+
 	//Set up connections (Active connection establishment)
 	IF NOT #SendConnData.ActiveEstablished THEN
 	    #RcvConnData.ActiveEstablished := false;
 	END_IF;
-	
+
 	//Set up connections (Local port)
 	#SendConnData.LocalPort := INT_TO_UINT(IN:= #S7Port);
 	#RcvConnData.LocalPort := INT_TO_UINT(IN := #MBPort);
-	
+
 	//PLC -> EPICS communication. Data is sent using open user communication (s7plc driver in EPICS)
 	#TSEND_C_DB(REQ:=#SendTrigger,
 	            CONT:=TRUE,
@@ -260,7 +261,7 @@ BEGIN
 	            STATUS=>#SendStatus,
 	            CONNECT:=#SendConnData,
 	            DATA:=#PLCToEPICSData);
-	
+
 	//EPICS <- EPICS communication. Data is received using modbus server on the PLC (modbus driver in EPICS)
 	#MB_SERVER_DB(DISCONNECT:=NOT #Enable,
 	              NDR=>#RcvNewDataReady,
@@ -269,7 +270,7 @@ BEGIN
 	              STATUS=>#RcvStatus,
 	              MB_HOLD_REG:=#EPICSToPLCData,
 	              CONNECT:=#RcvConnData);
-	
+
 END_FUNCTION_BLOCK
 DATA_BLOCK "_CommsPLC_EPICS_DB"
 { S7_Optimized_Access := 'TRUE' }
@@ -280,6 +281,23 @@ NON_RETAIN
 BEGIN
 
 END_DATA_BLOCK
+FUNCTION "EPICS_device_calls" : Void
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 1.0
+
+   VAR_TEMP
+   END_VAR
+
+BEGIN
+      //Author: Miklos Boros (miklos.boros@esss.se), Copyrigth 2017-2020 by European Spallation Source, Lund
+      //This block was generated by PLCFactory
+      //Description: Description: This function calls the devices according to the corresponding device type
+
+        //DO NOT Modify the following line!!!
+        "Utilities".TestInProgress := FALSE;
+        "Utilities".EPICS_Device_calls_precessed := TRUE;
+
+END_FUNCTION
 FUNCTION "_CommsEPICS" : Void
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
@@ -292,7 +310,7 @@ BEGIN
 	        "PLCToEPICS"."Word"[2] := 0;
 	    END_IF;
 	END_IF;
-	
+
 	// Call the comms block to provide PLC<->EPICS comms
 	"_CommsPLC_EPICS_DB"(Enable := "Utilities".AlwaysOn,
 	                     SendTrigger := "Utilities".Pulse_200ms,
@@ -304,9 +322,207 @@ BEGIN
 	                     MBPort := 502,
 	                     PLCToEPICSData := "PLCToEPICS"."Word",
 	                     EPICSToPLCData := "EPICSToPLC"."Word");
-	
-	
+
+
 END_FUNCTION
+DATA_BLOCK "EPICS_DebuggerResult"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+NON_RETAIN
+   VAR 
+      EPICS_Debugger_Checksum : Array[0..7] of Byte;   // Current TIA Portal Software Hash including PLC logic (this is not the EPICS IOC Hash)
+      EPICS_Debugger_UtilitiesCall : String;   // PLCFactory Utilities call status
+      EPICS_Debugger_DeviceCalls : String;   // PLCFactory DeviceCalls status
+      EPICS_Debugger_IOCHash : String;   // EPICS IOC Hash vs. PLCFactory Hash
+      EPICS_Debugger_ModBusHeartBeat : String;   // EPICS IOC Modbus (IOC->PLC) communication status
+      EPICS_Debugger_S7Connection : String;   // EPICS IOC S7 TCP (PLC->IOC) communication status
+      EPICS_Debugger_EPICS_GeneralState : String;   // Main status of the EPICS IOC communication
+      EPICS_S7Port : Int;   // Actual TCP port that has been opened by the PLC
+      EPICS_ModbusPort : Int;   // Actual ModBusTCP port that has been opened by the PLC
+      EPICS_PLC_EthernetInterface : UInt;   // The currently used HW Identifer of the Ethernet Port on the PLC dedicated to EPICS
+      EPICS_CommunicationOK : Bool;   // Overall EPICS communication is OK
+   END_VAR
+
+BEGIN
+
+END_DATA_BLOCK
+FUNCTION_BLOCK "EPICS_DebuggerFB"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR 
+      GetChecksum_Instance {OriginalPartName := 'GetChecksum_FB_807_S71500'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : GetChecksum;
+      execute { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      scope { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : UInt := 1;
+      busy { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      done { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      error { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      memErrStatus { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Word;
+      CheckUtilitiesTON {OriginalPartName := 'IEC_TIMER'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : TON_TIME;
+      UtilSquareErrorTON { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      CheckUtilitiesTON2 {OriginalPartName := 'IEC_TIMER'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : TON_TIME;
+      UtilSquareErrorTON2 { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      ModBus_TON {OriginalPartName := 'IEC_TIMER'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : TON_TIME;
+      ModBus_wordsave { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Word;
+   END_VAR
+   VAR DB_SPECIFIC
+      Helper_String { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : String;
+      Helper_String_Array { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} AT Helper_String : Struct
+         String_Maximal { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Byte;
+         String_Actual { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Byte;
+         StringValueArray { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Array[0..15] of Byte;
+      END_STRUCT;
+   END_VAR
+   VAR 
+      S7ConnTON {OriginalPartName := 'IEC_TIMER'; LibVersion := '1.0'; ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : TON_TIME;
+   END_VAR
+
+   VAR_TEMP 
+      AllOK { ExternalAccessible := 'False'; ExternalVisible := 'False'; ExternalWritable := 'False'} : Bool;
+      i : Int;
+      ModBusOK : Bool;
+      S7OK : Bool;
+   END_VAR
+
+
+BEGIN
+	//Author: Miklos Boros (miklos.boros@esss.se), Copyrigth 2017-2020 by European Spallation Source, Lund
+	//This block was generated by PLCFactory
+	//Description: This FB checks the EPICS configuration and outputs the result into EPICS_DebuggerResult.
+
+	//DO NOT Modify this block!!!
+
+	//AllOK will be evaluated in this code and passed to the EPICS_CommunicationOK signal that can be used by the PLC logic
+	#AllOK := TRUE;
+
+	#GetChecksum_Instance(Scope:=#scope,
+	                      Done=>#done,
+	                      Busy=>#busy,
+	                      Error=>#error,
+	                      Status=>#memErrStatus,
+	                      Checksum:="EPICS_DebuggerResult".EPICS_Debugger_Checksum);
+
+
+	#CheckUtilitiesTON(IN:="Utilities".Square_100ms,
+	                   PT:=T#200ms,
+	                   Q=>#UtilSquareErrorTON);
+
+	#CheckUtilitiesTON2(IN := NOT "Utilities".Square_100ms,
+	                   PT := T#200ms,
+	                   Q => #UtilSquareErrorTON2);
+
+
+	#ModBus_TON(IN := #ModBus_wordsave = "EPICSToPLC"."Word"[2],
+	            PT := T#5s);
+
+
+	IF ("Utilities".AlwaysOn = FALSE) THEN
+	    "EPICS_DebuggerResult".#EPICS_Debugger_UtilitiesCall := 'ERROR: FunctionBlock: "_UilitiesFB" is called with a wrong InstanceDB. Call it with the existing iDB named: "Utilities" AND check if the System Memory bits and the System Clock byte is enabled!';
+         #AllOK := FALSE;
+	ELSE
+	    IF (#UtilSquareErrorTON OR #UtilSquareErrorTON2) THEN
+	        "EPICS_DebuggerResult".#EPICS_Debugger_UtilitiesCall := 'ERROR: FunctionBlock: "_UilitiesFB" is called with a wrong InstanceDB. Call it with the existing iDB named: "Utilities" AND check if the System Memory bits and the System Clock byte is enabled!';
+             #AllOK := FALSE;
+	    ELSE
+	        "EPICS_DebuggerResult".#EPICS_Debugger_UtilitiesCall := 'OK: EPICS Utilities works as expected.';
+	        
+	    END_IF;
+	END_IF;
+	    
+	IF ("Utilities".EPICS_Device_calls_precessed) THEN
+	    "EPICS_DebuggerResult".#EPICS_Debugger_DeviceCalls := 'OK: "EPICS_device_calls" is called as expected.';
+	ELSE
+	    "EPICS_DebuggerResult".#EPICS_Debugger_DeviceCalls := 'ERROR: "EPICS_device_calls" is not called in OB1!';
+         #AllOK := FALSE;
+	END_IF;
+	    
+	IF (("EPICSToPLC"."Word"[0] = "PLCToEPICS"."Word"[0]) AND ("EPICSToPLC"."Word"[1] = "PLCToEPICS"."Word"[1])) THEN
+	    "EPICS_DebuggerResult".#EPICS_Debugger_IOCHash := 'OK: IOC and PLC hash are equal.';
+	ELSE    
+	    "EPICS_DebuggerResult".#EPICS_Debugger_IOCHash := 'ERROR: IOC and PLC hash are NOT equal!';
+         #AllOK := FALSE;
+	END_IF;
+
+	IF (#ModBus_TON.Q) THEN
+	    "EPICS_DebuggerResult".#EPICS_Debugger_ModBusHeartBeat := 'ERROR: The IOC is not sending any HeartBeat via ModBus!';
+         #AllOK := FALSE;
+	    #ModBusOK := FALSE;
+	ELSE
+	    "EPICS_DebuggerResult".#EPICS_Debugger_ModBusHeartBeat := 'OK: ModBus HeartBeat is received as expected.';
+	    #ModBusOK := TRUE;
+	END_IF;
+
+	#S7ConnTON(IN := NOT "_CommsPLC_EPICS_DB".SendDone, PT := T#3s);
+
+	IF ("_CommsPLC_EPICS_DB".BytesToSend > 0) THEN
+	    
+	    IF (#S7ConnTON.Q) THEN
+	        "EPICS_DebuggerResult".EPICS_Debugger_S7Connection := 'ERROR: EPICS S7 connection can not send Status variables!';
+	        #S7OK := FALSE;
+             #AllOK := FALSE;
+	    ELSE
+	        "EPICS_DebuggerResult".EPICS_Debugger_S7Connection := 'OK: EPICS S7 works as expected.';
+	        #S7OK := TRUE;
+	        
+	    END_IF;
+	ELSE
+	    "EPICS_DebuggerResult".EPICS_Debugger_S7Connection := 'OK: EPICS S7 disabled, there is no Status variable to send.';
+	    #S7OK := TRUE;
+	END_IF;
+
+	IF (#ModBusOK AND #S7OK) THEN
+	    "EPICS_DebuggerResult".EPICS_Debugger_EPICS_GeneralState := 'OK. EPICS IOC communication is ONLINE.';
+	END_IF;
+
+	IF (#ModBusOK AND NOT #S7OK) THEN
+	    "EPICS_DebuggerResult".EPICS_Debugger_EPICS_GeneralState := 'ERROR. ModBus seems to be working but S7 TCP is blocked. Try to check your PLC router IP.';
+         #AllOK := FALSE;
+	END_IF;
+
+	IF (NOT #ModBusOK AND #S7OK) THEN
+	    "EPICS_DebuggerResult".EPICS_Debugger_EPICS_GeneralState := 'ERROR. ModBus seems to be offline. Waiting for IOC to finish connecting to the PLC.';
+         #AllOK := FALSE;
+	END_IF;
+
+	IF ( NOT #ModBusOK AND NOT #S7OK) THEN
+	    "EPICS_DebuggerResult".EPICS_Debugger_EPICS_GeneralState := 'ERROR. Both ModBus and S7 TCP seems to be offline. Check if your IOC is running and if it is connected to the right PLC interface. Your HardwareID comes from CCDB!';
+         #AllOK := FALSE;
+	END_IF;
+
+	"EPICS_DebuggerResult".EPICS_ModbusPort := "_CommsPLC_EPICS_DB".MBPort;
+	"EPICS_DebuggerResult".EPICS_S7Port := "_CommsPLC_EPICS_DB".S7Port;
+	"EPICS_DebuggerResult".EPICS_PLC_EthernetInterface :=  "_CommsPLC_EPICS_DB".InterfaceID;
+
+	#ModBus_wordsave := "EPICSToPLC"."Word"[2];
+
+	//Put the Overall result to the Globl DB
+	"EPICS_DebuggerResult".EPICS_CommunicationOK := #AllOK;
+
+
+END_FUNCTION_BLOCK
+DATA_BLOCK "EPICS_DebuggerFB_iDB"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+NON_RETAIN
+"EPICS_DebuggerFB"
+
+BEGIN
+
+END_DATA_BLOCK
+ORGANIZATION_BLOCK "EPICS_DebuggerOB"
+TITLE = "Main Program Sweep (Cycle)"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+BEGIN
+	//Author: Miklos Boros (miklos.boros@esss.se), Copyrigth 2017-2020 by European Spallation Source, Lund
+	//This block was generated by PLCFactory
+	//Description: This OB is a cyclic OB called in every PLC cycle and EPICS_DebuggerFB checks the EPICS configuration.
+
+	//DO NOT Modify this block!!!
+	"EPICS_DebuggerFB_iDB"();
+
+
+END_ORGANIZATION_BLOCK
 FUNCTION "_Comms" : Void
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
@@ -315,7 +531,7 @@ BEGIN
 	//This is an aggregator function, it will call all the other comms functions required:
 	//1. PLC/EPICS
 	//2. Any other comms
-	
+
 	"_CommsEPICS"();
-	
+
 END_FUNCTION
