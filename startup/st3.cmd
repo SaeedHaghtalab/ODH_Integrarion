@@ -7,6 +7,7 @@ require modbus,2.11.0p
 
 
 epicsEnvSet("IOC", "ODH-IOC:ODH-IOC")
+epicsEnvSet("e3_ODH_VERSION", "1.0")
 
 epicsEnvSet("TOP","$(E3_CMD_TOP)/..")
 
