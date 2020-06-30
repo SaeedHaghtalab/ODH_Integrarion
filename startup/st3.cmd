@@ -4,6 +4,7 @@ require recsync,1.3.0
 require s7plc,1.4.0p
 require asyn,4.33.0
 require modbus,2.11.0p
+require calc,3.7.1
 
 
 epicsEnvSet("IOC", "ODH-IOC:ODH-IOC")
@@ -39,7 +40,7 @@ modbusInterposeConfig("kg-gta_odh-plc-01", 0, 3000, 0)
 drvModbusAsynConfigure("kg-gta_odh-plc-01write", "kg-gta_odh-plc-01", 0, 16, -1, 20, 0, 0, "S7-1500")
 
 # Load plc interface database
-dbLoadRecords("$(TOP)/db/kg-gta_odh-plc-01.db", "PLCNAME=kg-gta_odh-plc-01, MODVERSION=$(e3_ODH_VERSION)")
+dbLoadRecords("$(TOP)/db/kg-gta_odh-plc-01.db", "PLCNAME=kg-gta_odh-plc-01, MODVERSION=$(e3_ODH_VERSION), S7_PORT=2000, MODBUS_PORT=502")
 dbLoadRecords("$(TOP)/db/Alarms.db")
 
 iocInit
